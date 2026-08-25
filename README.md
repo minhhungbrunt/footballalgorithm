@@ -1,66 +1,71 @@
-# Football Edge — GitHub Pages
+# Football Edge v2 — GitHub Pages
 
-This version is specifically for **GitHub Pages**.
+## Why this version is different
 
-It contains only static files:
+The previous version tried to call FotMob directly from the browser. That is unreliable because browser CORS rules can block cross-origin API requests.
+
+This version uses **GitHub Actions as the server-side fetcher**:
+
+GitHub Actions → FotMob → `data/fixtures.json` → GitHub Pages
+
+Cloudflare documents the same underlying issue: a browser cannot freely fetch an API that does not provide the necessary CORS headers, while a server-side proxy/worker can fetch it and return CORS-enabled data. citeturn0search0
+
+## Upload
+
+Put everything in the root of your GitHub repository:
+
 - `index.html`
 - `style.css`
 - `app.js`
+- `data/fixtures.json`
+- `.github/workflows/update-data.yml`
 - `.nojekyll`
 
-There is **no PHP** and no InfinityFree/server requirement.
+## Turn on GitHub Pages
 
-## Install
+Repository → Settings → Pages
 
-Upload all files to the root of your GitHub repository.
+Source:
+`GitHub Actions`
 
-For a user site, the repository should be:
+Then run the workflow once manually:
 
-`YOUR-USERNAME.github.io`
+Actions → **Update football data** → Run workflow.
 
-GitHub Pages can publish static HTML/CSS/JavaScript directly from a repository.
+After it runs, refresh your GitHub Pages website.
 
-Go to:
+The workflow is scheduled every 15 minutes.
 
-**Settings → Pages → Build and deployment → Source**
+## What you will see
 
-Choose **Deploy from a branch**, then select:
+The page will ALWAYS show games.
 
-`main` / `/ (root)`
+If the GitHub Action has successfully fetched current data:
+`LIVE DATA · UPDATED ...`
 
-## Important data behavior
+If the data file has not been generated yet:
+`DATA FILE NOT UPDATED · DEMO`
 
-The site tries to load today's fixtures from FotMob directly in the browser.
+So you will no longer get the completely blank page from the previous version.
 
-Some public endpoints may reject browser cross-origin requests. If that happens, the site automatically switches to **Demo Fallback** instead of showing a broken page.
+## Next step
 
-The proper production architecture for unrestricted live data is:
+The fixture pipeline is now separated from the frontend. That makes it possible to add a second workflow that fetches:
 
-GitHub Pages
-→ Cloudflare Worker / other serverless proxy
-→ SofaScore/FotMob
-→ model
-→ GitHub Pages
-
-Do NOT put private API keys in `app.js` or `index.html`.
-
-## Model
-
-The starter model intentionally does not invent missing injuries, lineups or H2H data.
-
-The next production layer should add:
-- rolling last-5/10 form
+- last 5 / last 10 form
+- H2H
+- xG
 - home/away splits
-- xG for/against
-- H2H last 5/10
-- injuries and suspensions
+- injuries
+- suspensions
 - expected XI
 - confirmed XI
-- player importance/minutes
+- player importance
 - rest days
-- competition context
-- Kalshi contract price
-- model probability vs market probability
-- edge
-- backtesting
-- NO BET threshold
+
+and stores them in `data/matches/<match_id>.json`.
+
+Then the JavaScript model can calculate:
+`model probability → Kalshi price → edge → best simple contract → NO BET`
+
+Do not put private Kalshi/API credentials in GitHub Pages JavaScript.
