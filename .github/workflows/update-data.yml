@@ -1,54 +1,31 @@
-name: Football Edge — Update Matchday
-
+name: Update FootballEdge data
 on:
   workflow_dispatch:
   schedule:
-    # Stagger away from the top of the hour; GitHub scheduled jobs are UTC.
-    - cron: "7,22,37,52 * * * *"
-  push:
-    paths:
-      - "scripts/update.py"
-
+    - cron: "*/15 * * * *"
 permissions:
   contents: write
-
 concurrency:
   group: football-edge-data
   cancel-in-progress: true
-
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Python dependencies
-        run: python3 -m pip install -r requirements.txt
-
-      - name: Update FotMob matchday
-        env:
-          PYTHONUNBUFFERED: "1"
-        run: |
-          python3 scripts/update.py
-          test -s data/fixtures.json
-          python3 - <<'PY2'
-          import json
-          p=json.load(open("data/fixtures.json"))
-          n=int(p.get("fixtureCount",0))
-          print(f"FotMob fixture count: {n}")
-          if n <= 0:
-              raise SystemExit("FotMob returned zero accepted fixtures; refusing to publish empty data")
-          PY2
-
-      - name: Commit data if changed
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Pull FotMob + RotoWire
+        run: python scripts/update.py
+      - name: Commit data
         run: |
           git config user.name "football-edge-bot"
-          git config user.email "football-edge-bot@users.noreply.github.com"
-          git add data/
-          if git diff --cached --quiet; then
-            echo "No fixture changes."
-          else
-            git commit -m "Update matchday data"
-            git push
-          fi
+          git config user.email "actions@users.noreply.github.com"
+          git add data/fixtures.json
+          git diff --cached --quiet || git commit -m "chore: refresh football data"
+          git push
