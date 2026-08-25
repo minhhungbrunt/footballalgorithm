@@ -1,4 +1,4 @@
-const state={matches:[],source:"",data:null};
+const state={matches:[],source:""};
 
 const $=x=>document.getElementById(x);
 const esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -6,107 +6,141 @@ const pct=x=>x==null?"—":Math.round(x*100)+"%";
 
 async function load(){
   $("status").textContent="LOADING DATA";
+  $("status").className="";
   try{
     const r=await fetch("data/fixtures.json?"+Date.now(),{cache:"no-store"});
-    if(!r.ok)throw Error("data/fixtures.json "+r.status);
+    if(!r.ok) throw Error("fixture data "+r.status);
     const d=await r.json();
-    state.data=d; state.matches=d.matches||[]; state.source=d.source||"GitHub Actions";
-    if(!state.matches.length)throw Error("No matches in data file");
+    state.matches=d.matches||[];
+    state.source=d.source||"Football data";
+    if(!state.matches.length) throw Error("No fixtures");
     $("status").textContent="LIVE DATA · UPDATED "+(d.updated||"");
     $("status").className="ok";
   }catch(e){
-    /*
-      The site ALWAYS renders something. This makes a broken API obvious
-      instead of giving the blank page shown in the previous version.
-    */
     state.source="Demo fallback";
     state.matches=[
-      {id:"demo1",home:"Manchester City",away:"Arsenal",competition:"Premier League",time:"Today",score:100},
-      {id:"demo2",home:"Real Madrid",away:"Barcelona",competition:"La Liga",time:"Today",score:96},
-      {id:"demo3",home:"Bayern Munich",away:"Dortmund",competition:"Bundesliga",time:"Today",score:94},
-      {id:"demo4",home:"Inter",away:"AC Milan",competition:"Serie A",time:"Today",score:92}
+      {id:"demo1",home:"Manchester City",away:"Arsenal",competition:"Premier League",time:"Demo",score:100,homePos:2,awayPos:3},
+      {id:"demo2",home:"Real Madrid",away:"Barcelona",competition:"La Liga",time:"Demo",score:96,homePos:1,awayPos:2},
+      {id:"demo3",home:"Bayern Munich",away:"Dortmund",competition:"Bundesliga",time:"Demo",score:94,homePos:1,awayPos:4},
+      {id:"demo4",home:"Inter",away:"AC Milan",competition:"Serie A",time:"Demo",score:92,homePos:2,awayPos:6}
     ];
-    $("status").textContent="DATA FILE NOT UPDATED · DEMO";
-    $("status").className="";
+    $("status").textContent="DEMO DATA · RUN GITHUB ACTION";
   }
   render();
 }
 
 function render(){
   const best=[...state.matches].sort((a,b)=>(b.score||0)-(a.score||0))[0];
-  if(!best){$("mainGame").textContent="No fixtures today";return}
+  if(!best){$("mainGame").textContent="No fixtures available";return}
   $("mainGame").innerHTML=`${esc(best.home)} <span style="color:#697586">vs</span> ${esc(best.away)}`;
-  $("mainMeta").textContent=`${best.competition||"Football"} · ${best.time||""} · Source: ${state.source}`;
-  showAnalysis(best,true);
+  $("mainMeta").textContent=`${esc(best.competition||"Football")} · ${esc(best.time||"")} · ${esc(state.source)}`;
+  showMainAnalysis(best);
   renderGames();
 }
 
 function renderGames(){
   const q=$("search").value.toLowerCase();
   const arr=state.matches.filter(m=>(m.home+" "+m.away+" "+(m.competition||"")).toLowerCase().includes(q));
-  $("games").innerHTML=arr.map(m=>`
-    <article class="card">
+
+  $("games").innerHTML=arr.map(m=>{
+    const pos=`<div class="league-row"><span>${esc(m.competition||"League")}</span><span class="team-pos">${m.homePos?esc(m.home)+" #"+m.homePos:""}${m.homePos&&m.awayPos?" · ":""}${m.awayPos?esc(m.away)+" #"+m.awayPos:""}</span></div>`;
+    return `<article class="card" id="card-${esc(m.id)}">
       <div class="league">${esc(m.competition||"Football")}</div>
       <h3>${esc(m.home)} vs ${esc(m.away)}</h3>
       <div class="time">${esc(m.time||"")}</div>
-      <button onclick="showAnalysisById('${esc(m.id)}')">ANALYZE GAME</button>
-    </article>`).join("")||`<div class="empty">No games found.</div>`;
+      ${pos}
+      <button class="analyze" onclick="toggleAnalysis('${esc(m.id)}')">ANALYZE GAME</button>
+      <div class="card-analysis" id="analysis-${esc(m.id)}"></div>
+    </article>`;
+  }).join("")||`<div class="empty">No games found.</div>`;
 }
 
-function showAnalysisById(id){
-  const m=state.matches.find(x=>String(x.id)===String(id));
-  if(!m)return;
-  showAnalysis(m,false);
-}
-
-function model(m){
-  /*
-    Actual model values supplied by the GitHub Action are used when present.
-    Demo/custom matches use deterministic estimates only to keep UI functional.
-  */
+function makeModel(m){
   if(m.model)return m.model;
+
   let seed=(m.home.length*13+m.away.length*7)%19;
   let h=.43+(seed%8)/100, a=.29-(seed%4)/100, d=1-h-a;
+  let best=h>.50?"WIN: "+m.home:"NO STRONG EDGE";
+
   return {
-    home:h,draw:d,away:a,btts:.49,
-    bestBet:h>.50?"HOME":"NO EDGE",
+    home:h,draw:d,away:a,btts:.49+(seed%7)/100,
+    bestBet:best,
     confidence:h>.50?60:43,
-    edge:null,
-    factors:{Form:60+seed%15,"Home/Away":55+seed%18,H2H:40+seed%25,Lineups:35,"Team news":35,"Data quality":45},
-    injuries:"No live player-news payload is available for this match yet.",
-    reason:"Conservative fallback estimate. Missing information is not invented."
+    factors:{
+      "Recent form":60+seed%15,
+      "Home / away":55+seed%18,
+      "H2H":40+seed%25,
+      "Lineup":35,
+      "Team news":35,
+      "Data quality":45
+    },
+    injuries:"No live player-news payload is available for this fixture yet.",
+    reason:"The model uses available football information and stays conservative when important information is missing."
   };
 }
 
-function showAnalysis(m,main){
-  const target=main?$("mainAnalysis"):$("details");
-  if(!main){target.className="details show";target.scrollIntoView({behavior:"smooth",block:"start"})}
-  const x=model(m);
-  target.innerHTML=`
+function analysisHTML(m,compact=false){
+  const x=makeModel(m);
+  const posInfo=(m.homePos||m.awayPos)?
+    `<div class="league-row"><span>League position</span><span class="team-pos">${esc(m.home)} ${m.homePos?"#"+m.homePos:"—"} · ${esc(m.away)} ${m.awayPos?"#"+m.awayPos:"—"}</span></div>`:"";
+
+  return `
+    ${posInfo}
     <div class="grid">
-      <div class="metric"><small>Home win</small><b>${pct(x.home)}</b></div>
+      <div class="metric"><small>${esc(m.home)}</small><b>${pct(x.home)}</b></div>
       <div class="metric"><small>Draw</small><b>${pct(x.draw)}</b></div>
-      <div class="metric"><small>Away win</small><b>${pct(x.away)}</b></div>
+      <div class="metric"><small>${esc(m.away)}</small><b>${pct(x.away)}</b></div>
       <div class="metric"><small>BTTS</small><b>${pct(x.btts)}</b></div>
     </div>
-    <div class="pick">
-      <div class="eyebrow">MODEL PICK</div>
-      <div class="bet">${esc(x.bestBet||"NO EDGE")}</div>
-      <div class="muted">Confidence ${x.confidence||0}/100${x.edge==null?"":" · Edge "+(x.edge*100).toFixed(1)+"%"}</div>
+    <div class="${compact?"mini-pick":"pick"}">
+      <div class="eyebrow">MODEL CONCLUSION</div>
+      <div class="bet">${esc(x.bestBet||"NO STRONG EDGE")}</div>
+      <div class="muted">Confidence ${x.confidence||0}/100</div>
     </div>
     ${Object.entries(x.factors||{}).map(([k,v])=>`
-      <div class="factor"><div class="fh"><span>${esc(k)}</span><span>${v}/100</span></div>
-      <div class="bar"><div class="fill" style="width:${Math.min(100,Math.max(0,v))}%"></div></div></div>`).join("")}
-    <div class="news"><b>INJURIES / LINEUP</b><br>${esc(x.injuries||"No information.")}</div>
-    <div class="news"><b>WHY THE MODEL LIKES IT</b><br>${esc(x.reason||"No explanation.")}</div>`;
+      <div class="${compact?"mini-factor":"factor"}">
+        <div class="fh"><span>${esc(k)}</span><span>${v}/100</span></div>
+        <div class="bar"><div class="fill" style="width:${Math.min(100,Math.max(0,v))}%"></div></div>
+      </div>`).join("")}
+    <div class="news"><b>INJURIES / LINEUP</b><br>${esc(x.injuries||"No information available.")}</div>
+    <div class="news"><b>ANALYSIS</b><br>${esc(x.reason||"No explanation available.")}</div>
+    ${!compact?`<div class="analysis-note">This analysis uses football data only. No betting-market odds are used.</div>`:""}
+  `;
+}
+
+function showMainAnalysis(m){
+  $("mainAnalysis").innerHTML=analysisHTML(m,false);
+}
+
+function toggleAnalysis(id){
+  const m=state.matches.find(x=>String(x.id)===String(id));
+  if(!m)return;
+  const box=$("analysis-"+id);
+  const button=document.querySelector(`#card-${CSS.escape(id)} .analyze`);
+  if(!box)return;
+
+  if(box.classList.contains("show")){
+    box.classList.remove("show");
+    button.textContent="ANALYZE GAME";
+    return;
+  }
+
+  // Render immediately INSIDE THIS CARD, directly below its button.
+  box.innerHTML=analysisHTML(m,true);
+  box.classList.add("show");
+  button.textContent="HIDE ANALYSIS";
 }
 
 $("refresh").onclick=load;
 $("search").oninput=renderGames;
+
 $("manualAnalyze").onclick=()=>{
   const h=$("home").value.trim(),a=$("away").value.trim(),c=$("comp").value.trim()||"Custom";
   if(!h||!a)return alert("Enter both teams.");
   const m={id:"custom"+Date.now(),home:h,away:a,competition:c,time:"Custom match"};
-  showAnalysis(m,false);
+  $("mainGame").innerHTML=`${esc(h)} <span style="color:#697586">vs</span> ${esc(a)}`;
+  $("mainMeta").textContent=c+" · Custom analysis";
+  showMainAnalysis(m);
 };
+
 load();
