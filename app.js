@@ -85,7 +85,11 @@ const App=(()=>{
     const a=filtered();
     renderFeatured(a);
     $("matchday").innerHTML="";
-    if(!a.length){$("matchday").innerHTML='<div class="empty">No fixtures match this filter.</div>';return}
+    if(!a.length){
+      $("featuredContent").innerHTML='<div class="empty">Waiting for the automatic FotMob matchday update.</div>';
+      $("matchday").innerHTML='<div class="empty"><b>No current fixtures loaded yet.</b><br><br>Run <b>Actions → Football Edge — Update Matchday → Run workflow</b> once. After that GitHub will refresh the fixture file automatically every 15 minutes.</div>';
+      return;
+    }
     const groups={};
     a.forEach(m=>(groups[m.competition]??=[]).push(m));
     Object.entries(groups).forEach(([league,g])=>{

@@ -59,3 +59,20 @@ The update workflow runs every 15 minutes.
 `pages.yml` deploys the site after commits to `main`.
 
 No private API key is placed in browser JavaScript.
+
+
+## If you see "Waiting for GitHub Action"
+
+That is intentional for a brand-new repository: the repository no longer ships fake fixtures.
+
+Run:
+
+**Actions → Football Edge — Update Matchday → Run workflow**
+
+The updater uses FotMob's daily matches endpoint:
+
+`https://www.fotmob.com/api/matches?date=YYYYMMDD`
+
+FotMob's documented daily response is grouped by league and contains all matches for that date. citeturn0search2
+
+After the Action commits `data/fixtures.json`, GitHub Pages deploys the real matchday automatically.
