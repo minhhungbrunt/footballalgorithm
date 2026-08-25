@@ -66,19 +66,22 @@ The fixture pipeline is now separated from the frontend. That makes it possible 
 and stores them in `data/matches/<match_id>.json`.
 
 Then the JavaScript model can calculate:
-`football data → probability → confidence → conclusion`
+`model probability → Kalshi price → edge → best simple contract → NO BET`
 
-This version intentionally does **not** use Kalshi prices or betting-market odds.
+Do not put private Kalshi/API credentials in GitHub Pages JavaScript.
 
-The analysis UI shows:
-- team names instead of generic "Home/Away"
-- competition / league
-- league position when available
-- recent form
-- home/away performance
-- H2H
-- lineup/team-news availability
-- data quality
-- model conclusion
 
-Analysis for each game opens directly inside that game's card, immediately below the Analyze button.
+## Current dashboard scope
+
+The fixture list is intentionally condensed to seven domestic leagues:
+- Premier League
+- La Liga
+- Bundesliga
+- Serie A
+- Ligue 1
+- Eredivisie
+- Primeira Liga
+
+Each game card shows league position when available. Clicking **Analyze Game** expands the analysis directly inside that card instead of moving to a separate section at the bottom.
+
+The model display uses team names, not generic Home/Away labels, and does not use Kalshi or betting-market odds.
