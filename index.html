@@ -7,51 +7,32 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <div class="logo">FOOTBALL<span>EDGE</span></div>
-  <div id="status" class="status">READY</div>
-</header>
-
+<header><div class="logo">FOOTBALL<span>EDGE</span></div><div id="status">LOADING DATA</div></header>
 <main>
   <section class="top">
-    <div>
-      <div class="eyebrow">MATCH INTELLIGENCE</div>
-      <h1>Today's Football Edge</h1>
-      <p>Form · H2H · xG · injuries · lineups · market edge</p>
-    </div>
-    <button class="refresh" id="refreshBtn">↻ Refresh</button>
+    <div><div class="eyebrow">FOOTBALL INTELLIGENCE</div><h1>Today's Football Edge</h1><p>Form · H2H · xG · injuries · lineups · market edge</p></div>
+    <button id="refresh">↻ Refresh</button>
   </section>
 
-  <section class="searchbar">
-    <input id="homeTeam" placeholder="Home team">
-    <input id="awayTeam" placeholder="Away team">
-    <input id="competition" placeholder="Competition">
-    <button id="customBtn">Analyze teams</button>
+  <section class="manual">
+    <input id="home" placeholder="Home team">
+    <input id="away" placeholder="Away team">
+    <input id="comp" placeholder="Competition">
+    <button id="manualAnalyze">Analyze</button>
   </section>
 
   <section class="hero">
-    <div class="heroHead">
-      <div>
-        <div class="eyebrow">★ MAIN GAME</div>
-        <div id="mainMatch" class="mainMatch">Loading today's fixtures...</div>
-      </div>
-      <div id="mainTime" class="muted"></div>
-    </div>
+    <div class="eyebrow">★ MAIN GAME</div>
+    <div id="mainGame" class="mainGame">Finding today's best game…</div>
+    <div id="mainMeta" class="muted"></div>
     <div id="mainAnalysis"></div>
   </section>
 
-  <div class="sectionTitle">
-    <h2>Today's games</h2>
-    <input id="filter" placeholder="Filter teams or competition">
-  </div>
+  <div class="heading"><h2>Today's games</h2><input id="search" placeholder="Search teams…"></div>
   <section id="games" class="games"></section>
+  <section id="details" class="details"></section>
 
-  <section id="analysis" class="analysis"></section>
-
-  <footer>
-    <span>Football Edge</span>
-    <span>Model output is statistical, not guaranteed.</span>
-  </footer>
+  <footer>Football Edge · Probability estimates are not guarantees.</footer>
 </main>
 <script src="app.js"></script>
 </body>
