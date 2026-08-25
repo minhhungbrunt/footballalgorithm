@@ -98,3 +98,35 @@ After the Action commits `data/fixtures.json`, GitHub Pages deploys the real mat
 
 ### Competition source
 FotMob's daily matches response includes `primaryId`, league name and the full list of matches; the updater uses that structure instead of assuming the first league or first match is Premier League. See the FotMob API documentation for the daily matches and league-directory structures.
+
+
+### Cup division handling
+For cup and European fixtures, the displayed **Competition** is the match competition (for example EFL Cup), but **Current division** comes from each team's primary domestic league/table via FotMob's team endpoint. A cup name is never used as a club's division or strength tier. The cache is versioned so older misclassified team data is discarded on the next Action run.
+
+
+## Model V3 — evidence-driven
+The updater hydrates upcoming/live matches with FotMob `matchDetails`, including available xG, lineup status, starting-player counts/ratings, and H2H fields when FotMob supplies them. It also samples each team's recent results from the FotMob team feed. The frontend model then combines:
+1. current domestic division strength;
+2. current domestic table position;
+3. last-five form;
+4. available lineup quality/availability;
+5. limited H2H;
+6. a small home-field adjustment.
+
+A cup's competition is never used as the team's domestic division. Missing data is shown as unavailable rather than fabricated.
+
+FotMob documents `matches` as the daily fixture feed and `matchDetails` as the comprehensive endpoint for lineups, xG and match statistics. citeturn2view0
+
+## Deep analysis V4
+The match analyzer now combines:
+- FotMob match details: lineups, formations, player ratings, xG, H2H and availability when supplied.
+- RotoWire predicted/confirmed lineup supplement for supported leagues, matched by both team names.
+- Current domestic division and table position for cup/European ties.
+- Last-five team form from FotMob team fixtures.
+- Starting-XI quality from FotMob match ratings.
+- Player season rating and transfer value when FotMob exposes them; these are secondary signals, not the main driver.
+- Player-weighted lineup/availability evidence and a data-completeness score.
+
+RotoWire lineup pages provide predicted/confirmed XIs, formations and injury/team-news information; FotMob provides predicted lineups before matches and confirmed lineups around kickoff, plus player ratings and match analytics.
+
+The site does not use bookmaker or Kalshi odds in the model.
