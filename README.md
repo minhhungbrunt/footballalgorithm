@@ -5,7 +5,25 @@
 This is a GitHub Pages matchday dashboard. GitHub Actions fetches the full daily FotMob feed every 15 minutes and writes `data/fixtures.json`; GitHub Pages serves the static UI.
 
 ## Included competitions
-Premier League · LaLiga · Bundesliga · Serie A · Ligue 1 · Eredivisie · Primeira Liga
+30 competition filters are included, covering:
+- Premier League, Championship, League One
+- LaLiga, LaLiga 2, Copa del Rey
+- Bundesliga, 2. Bundesliga, DFB Pokal
+- Serie A, Serie B, Coppa Italia
+- Ligue 1, Ligue 2, Coupe de France
+- Eredivisie, Eerste Divisie
+- Primeira Liga, Liga Portugal 2
+- FA Cup, EFL Cup
+- UEFA Champions League, Europa League, Conference League
+- Scottish Premiership
+- Belgian Pro League
+- Turkish Super Lig
+- Saudi Pro League
+- MLS
+- Brasileirão
+- Liga MX
+
+The updater canonicalizes FotMob's `primaryId` first and then falls back to competition-name aliases. This prevents a Premier League match from being mislabeled when FotMob changes the display wording.
 
 Major cup/European fixtures from FotMob's daily feed are also retained.
 
@@ -76,3 +94,7 @@ The updater uses FotMob's daily matches endpoint:
 FotMob's documented daily response is grouped by league and contains all matches for that date. citeturn0search2
 
 After the Action commits `data/fixtures.json`, GitHub Pages deploys the real matchday automatically.
+
+
+### Competition source
+FotMob's daily matches response includes `primaryId`, league name and the full list of matches; the updater uses that structure instead of assuming the first league or first match is Premier League. See the FotMob API documentation for the daily matches and league-directory structures.

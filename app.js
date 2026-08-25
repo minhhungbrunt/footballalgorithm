@@ -3,7 +3,7 @@ const App=(()=>{
   const $=id=>document.getElementById(id);
   const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const pct=n=>n==null?"—":Math.round(n*100)+"%";
-  const leagues=["ALL","Premier League","LaLiga","Bundesliga","Serie A","Ligue 1","Eredivisie","Primeira Liga"];
+  const leagues=["ALL","Premier League","Championship","League One","LaLiga","LaLiga 2","Copa del Rey","Bundesliga","2. Bundesliga","DFB Pokal","Serie A","Serie B","Coppa Italia","Ligue 1","Ligue 2","Coupe de France","Eredivisie","Eerste Divisie","Primeira Liga","Liga Portugal 2","FA Cup","EFL Cup","UEFA Champions League","UEFA Europa League","UEFA Conference League","Scottish Premiership","Belgian Pro League","Turkish Super Lig","Saudi Pro League","MLS","Brasileirao","Liga MX"];
 
   async function init(){
     bind();
@@ -39,23 +39,112 @@ const App=(()=>{
       mk("Benfica","Sporting CP","Primeira Liga","20:15",1,2,8)
     ];
   }
-  function mk(h,a,l,t,hp,ap,id){return {id:String(id),home:h,away:a,competition:l,time:t,homePos:hp,awayPos:ap,status:"upcoming",model:quickModel(h,a,hp,ap)}}
+  function mk(h,a,l,t,hp,ap,id){return {id:String(id),home:h,away:a,competition:l,time:t,homePos:hp,awayPos:ap,status:"upcoming",model:quickModel(h,a,hp,ap,{competition:l,homeLeague:l,awayLeague:l})}}
 
-  function quickModel(h,a,hp,ap){
-    const seed=(h.length*17+a.length*11+hp*7+ap*5)%23;
-    let home=.40+(Math.max(0,ap-hp)*.008)+(seed%5)*.008;
-    let away=.30+(Math.max(0,hp-ap)*.006);
-    home=Math.min(.72,home);away=Math.min(.55,away);
-    let draw=Math.max(.12,1-home-away);
-    const s=home+draw+away;home/=s;draw/=s;away/=s;
-    const vals=[["WIN: "+h,home],["DRAW",draw],["WIN: "+a,away]];
-    vals.sort((x,y)=>y[1]-x[1]);
+  // Model v2: division-aware Elo-style baseline.
+  // Cross-division cup games use the teams' domestic league strength first;
+  // home advantage is deliberately small and form/H2H are secondary.
+  function quickModel(h,a,hp,ap,meta={}){
+    const leagueRating={
+      "Premier League":1860,"LaLiga":1840,"Bundesliga":1830,"Serie A":1810,
+      "Ligue 1":1780,"Eredivisie":1700,"Primeira Liga":1690,
+      "Championship":1640,"Scottish Premiership":1600,"Belgian Pro League":1575,
+      "Turkish Super Lig":1575,"MLS":1535,"Saudi Pro League":1530,
+      "LaLiga 2":1475,"2. Bundesliga":1475,"Serie B":1470,"Ligue 2":1450,
+      "Liga Portugal 2":1435,"League One":1395,"Eerste Divisie":1390,
+      "Brasileirao":1650,"Liga MX":1625,"League Two":1240
+    };
+    const hLeague=meta.homeLeague||meta.competition;
+    const aLeague=meta.awayLeague||meta.competition;
+    let hs=meta.homeStrength||leagueRating[hLeague]||1500;
+    let as=meta.awayStrength||leagueRating[aLeague]||1500;
+
+    // Same-division table position: useful, but never allowed to dominate.
+    // Lower rank number = stronger.
+    if(hp && ap && hLeague===aLeague){
+      hs += Math.max(-70,Math.min(70,(25-hp)*4));
+      as += Math.max(-70,Math.min(70,(25-ap)*4));
+    }
+
+    // Recent form only gets a modest adjustment. If the updater eventually
+    // supplies form scores, they can move the baseline by at most ~45 Elo.
+    if(meta.homeFormRating!=null) hs += Math.max(-45,Math.min(45,meta.homeFormRating));
+    if(meta.awayFormRating!=null) as += Math.max(-45,Math.min(45,meta.awayFormRating));
+
+    const cross=Boolean(meta.crossDivision || (hLeague&&aLeague&&hLeague!==aLeague));
+
+    // Home field is a small nudge, not a 40% starting probability.
+    // In a cross-division cup tie it is reduced further because venue cannot
+    // erase a substantial tier gap.
+    const homeAdv=cross?28:55;
+    const diff=(hs+homeAdv)-as;
+
+    // Convert strength difference into expected goals and a Poisson 1X2.
+    // This gives a real draw probability instead of forcing it from a
+    // leftover percentage.
+    const lambdaH=Math.max(0.25,1.35*Math.exp(diff/850));
+    const lambdaA=Math.max(0.25,1.05*Math.exp(-diff/850));
+    const pois=(k,l)=>Math.exp(-l)*Math.pow(l,k)/factorial(k);
+    const maxGoals=7;
+    let home=0,draw=0,away=0,btts=0;
+    for(let i=0;i<=maxGoals;i++){
+      for(let j=0;j<=maxGoals;j++){
+        const p=pois(i,lambdaH)*pois(j,lambdaA);
+        if(i>j)home+=p; else if(i===j)draw+=p; else away+=p;
+        if(i>0&&j>0)btts+=p;
+      }
+    }
+    const norm=home+draw+away;
+    home/=norm;draw/=norm;away/=norm;
+
+    // Small evidence modifiers. They cannot overturn a large division gap.
+    const h2h=Number(meta.h2hEdge||0);
+    const availability=Number(meta.availabilityEdge||0);
+    const modifier=Math.max(-0.045,Math.min(0.045,(h2h+availability)/100));
+    home=Math.max(.01,home+modifier);
+    away=Math.max(.01,away-modifier);
+    const n=home+draw+away;home/=n;draw/=n;away/=n;
+
+    const vals=[["WIN: "+h,home],["DRAW",draw],["WIN: "+a,away]].sort((x,y)=>y[1]-x[1]);
     const top=vals[0];
-    const confidence=Math.round(58+(top[1]-.34)*80);
-    return {home,draw,away,btts:.5+(seed%9-.4)/100,best:top[0],confidence:Math.max(55,Math.min(91,confidence)),score:home>away?(draw>.3?"2–1":"2–0"):(away>home?"1–2":"1–1"),
-      factors:{Form:62+seed%18,Table:Math.max(45,72-Math.min(25,Math.abs(hp-ap)*4)),HomeAway:60+seed%17,H2H:48+seed%23,xG:58+seed%19,Availability:48+seed%22},
-      note:"Fallback projection. The live updater supplies richer match data when available."};
+    const confidence=Math.round(Math.max(54,Math.min(94,50+Math.abs(top[1]-.333)*105)));
+    const score=projectedScore(lambdaH,lambdaA);
+
+    return {
+      home,draw,away,btts,
+      best:top[0],
+      confidence,
+      score,
+      factors:{
+        "Division strength":Math.round(50+Math.max(-50,Math.min(50,(hs-as)/4))),
+        "Table position":hLeague===aLeague&&hp&&ap?Math.round(50+Math.max(-40,Math.min(40,(ap-hp)*2.2))):50,
+        "Home advantage":cross?54:62,
+        "Form":meta.homeFormRating!=null||meta.awayFormRating!=null?Math.round(50+(Number(meta.homeFormRating||0)-Number(meta.awayFormRating||0))/2):50,
+        "H2H":50+Math.round(Math.max(-10,Math.min(10,h2h))),
+        "Availability":50+Math.round(Math.max(-10,Math.min(10,availability)))
+      },
+      note:cross
+        ? `Cross-division model: ${hLeague||"unknown division"} vs ${aLeague||"unknown division"}. Division strength is weighted ahead of venue.`
+        : `Same-division model: table position and form are secondary to underlying team strength.`,
+      divisionGap:Math.round(as-hs),
+      homeLeague:hLeague,
+      awayLeague:aLeague
+    };
   }
+
+  function factorial(n){let x=1;for(let i=2;i<=n;i++)x*=i;return x;}
+  function projectedScore(h,a){
+    let bh=0,ba=0,ph=0,pa=0;
+    for(let k=0;k<=7;k++){
+      const pH=Math.exp(-h)*Math.pow(h,k)/factorial(k);
+      const pA=Math.exp(-a)*Math.pow(a,k)/factorial(k);
+      ph+=k*pH;pa+=k*pA;
+    }
+    bh=Math.max(0,Math.min(5,Math.round(ph)));
+    ba=Math.max(0,Math.min(5,Math.round(pa)));
+    return `${bh}–${ba}`;
+  }
+
 
   function bind(){
     $("refreshBtn").onclick=()=>location.reload();
@@ -104,7 +193,7 @@ const App=(()=>{
 
   function row(m){
     const el=document.createElement("article");el.className="match-row"+(m.status==="live"?" live":"");el.id="match-"+m.id;
-    const model=m.model||quickModel(m.home,m.away,m.homePos||10,m.awayPos||10);
+    const model=m.model||quickModel(m.home,m.away,m.homePos,m.awayPos,m);
     el.innerHTML=`
       <div class="match-time ${m.status==="live"?"live":""}">${esc(displayTime(m))}</div>
       <div class="teams"><span class="team-home">${esc(m.home)}</span><span class="dash">vs</span><span class="team-away">${esc(m.away)}</span></div>
@@ -132,7 +221,7 @@ const App=(()=>{
   }
 
   function analysis(m){
-    const x=m.model||quickModel(m.home,m.away,m.homePos||10,m.awayPos||10);
+    const x=m.model||quickModel(m.home,m.away,m.homePos,m.awayPos,m);
     const factors=x.factors||{};
     return `<div class="analysis-grid">
       <div class="analysis-card">
@@ -148,7 +237,7 @@ const App=(()=>{
       <div class="analysis-card">
         <h3>Decision</h3>
         <div class="decision"><div class="decision-title">MODEL VERDICT</div><div class="decision-value">${esc(x.best)}</div><div class="confidence">Confidence ${esc(x.confidence)}/100</div><div class="score">Projected ${esc(x.score||"—")}</div></div>
-        <div class="news-line"><b>League:</b> ${esc(m.competition)} · <b>Position:</b> ${m.homePos?esc(m.homePos):"—"} vs ${m.awayPos?esc(m.awayPos):"—"}</div>
+        <div class="news-line"><b>Competition:</b> ${esc(m.competition)} · <b>Division:</b> ${esc(x.homeLeague||"—")} vs ${esc(x.awayLeague||"—")} · <b>Position:</b> ${m.homePos?esc(m.homePos):"—"} vs ${m.awayPos?esc(m.awayPos):"—"}</div>
       </div>
       <div class="analysis-card">
         <h3>Model factors</h3>
@@ -161,11 +250,11 @@ const App=(()=>{
   function renderFeatured(a){
     const m=a[0];
     if(!m){$("featuredContent").innerHTML='<div class="empty">No featured match.</div>';return}
-    const x=m.model||quickModel(m.home,m.away,m.homePos||10,m.awayPos||10);
+    const x=m.model||quickModel(m.home,m.away,m.homePos,m.awayPos,m);
     $("featuredContent").innerHTML=`<div class="featured-match">
-      <div class="featured-team"><div class="name">${esc(m.home)}</div><div class="pos">${m.homePos?"League #"+esc(m.homePos):m.competition}</div></div>
+      <div class="featured-team"><div class="name">${esc(m.home)}</div><div class="pos">${m.homeLeague?(m.homePos?"#"+esc(m.homePos)+" · ":"")+esc(m.homeLeague):m.competition}</div></div>
       <div class="featured-vs"><div class="time">${esc(displayTime(m))}</div><div class="vs">VS · ${esc(m.competition)}</div></div>
-      <div class="featured-team"><div class="name">${esc(m.away)}</div><div class="pos">${m.awayPos?"League #"+esc(m.awayPos):m.competition}</div></div>
+      <div class="featured-team"><div class="name">${esc(m.away)}</div><div class="pos">${m.awayLeague?(m.awayPos?"#"+esc(m.awayPos)+" · ":"")+esc(m.awayLeague):m.competition}</div></div>
     </div><div class="verdict"><span class="verdict-label">CALCULATED VERDICT</span><span class="verdict-main">${esc(x.best)}</span><span class="verdict-meta">${esc(x.confidence)}/100 · projected ${esc(x.score||"—")}</span></div>`;
   }
   return {init};
