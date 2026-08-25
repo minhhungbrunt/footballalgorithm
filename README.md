@@ -130,3 +130,16 @@ The match analyzer now combines:
 RotoWire lineup pages provide predicted/confirmed XIs, formations and injury/team-news information; FotMob provides predicted lineups before matches and confirmed lineups around kickoff, plus player ratings and match analytics.
 
 The site does not use bookmaker or Kalshi odds in the model.
+
+## Automatic updates / troubleshooting
+The fixture updater is scheduled every 15 minutes at minutes 7, 22, 37 and 52 UTC. A separate weekly heartbeat makes a repository commit so a public repository does not sit inactive long enough for GitHub to disable scheduled workflows. GitHub documents that scheduled workflows can be automatically disabled in public repositories after 60 days without repository activity. 
+
+If the site stops changing, open **Actions → Football Edge — Update Matchday** and inspect the latest run. The workflow now fails loudly if FotMob produces zero accepted fixtures instead of silently publishing an empty dataset.
+
+## Automatic FotMob refresh
+The updater runs automatically every 15 minutes at :07, :22, :37 and :52 UTC. It retries transient FotMob failures, prints the accepted fixture count, and refuses to publish an empty dataset. A weekly heartbeat commit helps keep a public repository active because GitHub can automatically disable scheduled workflows after 60 days without repository activity. See GitHub's workflow documentation for scheduled events and workflow disabling.
+
+If the Actions tab shows no runs at all, check **Settings → Actions → General** and make sure Actions are allowed, then open the workflow and choose **Enable workflow** if GitHub has disabled it. The first manual run is only a diagnostic/test; future runs are scheduled.
+
+### Data-source caveat
+FotMob's public website currently displays a notice that automated services/robots are not permitted. The project therefore treats FotMob as a best-effort source; if FotMob blocks GitHub's runner, the workflow will fail visibly instead of silently serving stale or fake fixtures. For a production/public application, use a licensed/supported football-data API.
