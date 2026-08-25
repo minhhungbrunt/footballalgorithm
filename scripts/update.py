@@ -1,9 +1,11 @@
 import os, re, json, time, math, datetime as dt
+from pathlib import Path
+from zoneinfo import ZoneInfo
 from urllib.parse import urlencode
 import requests
 from bs4 import BeautifulSoup
 
-BASE="https://www.fotmob.com"
+BASE="https://www.fotmob.com/api/data"
 HEAD={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36","Accept":"application/json,text/plain,*/*"}
 ROT="https://www.rotowire.com/soccer/lineups.php"
 HTTP_CACHE={}
@@ -61,14 +63,14 @@ def pick(d,*keys):
 
 def daily(date):
     date = date.strftime("%Y%m%d") if hasattr(date,"strftime") else str(date)
-    return get(f"{BASE}/api/matches",{"date":date,"timezone":"America/New_York"})
+    return get(f"{BASE}/matches",{"date":date,"timezone":"America/New_York"})
 
 def details(mid):
-    return get(f"{BASE}/api/matchDetails",{"matchId":mid})
+    return get(f"{BASE}/matchDetails",{"matchId":mid})
 
 def team_page(tid):
     key=str(tid)
-    if key not in TEAM_CACHE: TEAM_CACHE[key]=get(f"{BASE}/api/teams",{"id":tid})
+    if key not in TEAM_CACHE: TEAM_CACHE[key]=get(f"{BASE}/teams",{"id":tid})
     return TEAM_CACHE[key]
 
 def canonical_comp(raw,country=""):
@@ -263,14 +265,20 @@ def model(m):
     return {"verdict":verdict,"confidence":conf,"probabilities":p,"projected":"1–1" if idx==1 else "1–0" if idx==0 else "0–1","reasons":reasons,"dataCompleteness":min(100,45+sum(bool(v) for v in [h.get("division"),a.get("division"),h.get("position"),a.get("position"),h.get("form"),a.get("form")])*9)}
 
 def main():
-    today=dt.datetime.now(dt.timezone.utc).astimezone().date()
+    today=dt.datetime.now(dt.timezone.utc).astimezone(ZoneInfo("America/New_York")).date()
     dates=[today, today+dt.timedelta(days=1)]
     raw=[]; errors=[]
     for d in dates:
         try:
             x=daily(d)
-            for lg in x.get("leagues",[]):
-                for m in lg.get("matches",[]): raw.append((lg,m))
+            groups = x.get("leagues",[]) if isinstance(x,dict) else []
+            if isinstance(x,dict) and not groups:
+                groups = x.get("matches",[]) if isinstance(x.get("matches"),list) else []
+            for lg in groups:
+                if isinstance(lg,dict) and isinstance(lg.get("matches"),list):
+                    for m in lg.get("matches",[]): raw.append((lg,m))
+                elif isinstance(lg,dict) and lg.get("id") and (lg.get("home") or lg.get("homeTeam")):
+                    raw.append(({},lg))
         except Exception as e:
             errors.append(f"{d}: {e}"); print("FotMob daily failed",d,e)
     matches=[]
@@ -288,7 +296,8 @@ def main():
         comp=canonical_comp(lg.get("name") or m.get("competitionName"),lg.get("country",{}).get("name","") if isinstance(lg.get("country"),dict) else "")
         if comp not in TOP: continue
         try:d=details(mid)
-        except Exception as e:d={}
+        except Exception as e:
+            d={}; print("matchDetails failed",mid,e)
         hid=home.get("id") or m.get("homeTeamId"); aid=away.get("id") or m.get("awayTeamId")
         try:
             htp=team_page(hid) if hid else {}
@@ -305,7 +314,7 @@ def main():
         # Never use the cup competition as a club's domestic division.
         for td in (hp,ap):
             if td.get("leagueId"):
-                try: td["position"]=table_position(cached_get(f"{BASE}/api/leagues",{"id":td["leagueId"]}), td.get("id"))
+                try: td["position"]=table_position(cached_get(f"{BASE}/leagues",{"id":td["leagueId"]}), td.get("id"))
                 except Exception: pass
         hp["lineup"],hp["injuries"],rw=rotowire(hn,comp)
         ap["lineup"],ap["injuries"],rw2=rotowire(an,comp)
@@ -330,7 +339,7 @@ def main():
         if errors: print("SOURCE ERRORS:"," | ".join(errors))
         raise SystemExit(2)
     result={"updatedAt":dt.datetime.now(dt.timezone.utc).isoformat(),"fixtureCount":len(matches),
-            "sourceStatus":f"FotMob OK · RotoWire checked · {len(matches)} fixtures",
+            "sourceStatus":f"FotMob OK · RotoWire attempted · {len(matches)} fixtures",
             "sourceErrors":errors,"matches":matches}
     Path("data/fixtures.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
     print("WROTE",len(matches),"fixtures")
