@@ -1,38 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Football Edge</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Football Edge — Matchday</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><div class="logo">FOOTBALL<span>EDGE</span></div><div id="status">LOADING DATA</div></header>
+<header><div class="logo">FOOTBALL<span>EDGE</span></div><div id="status">LOADING MATCHDAY</div></header>
 <main>
   <section class="top">
-    <div><div class="eyebrow">FOOTBALL INTELLIGENCE</div><h1>Today's Football Edge</h1><p>Form · H2H · xG · injuries · lineups · league position</p></div>
+    <div><div class="eyebrow">MATCHDAY INTELLIGENCE</div><h1>Today's Football Edge</h1><p>Top 7 leagues · form · H2H · xG · table · team news</p></div>
     <button id="refresh">↻ Refresh</button>
   </section>
-
-  <section class="manual">
-    <input id="home" placeholder="Home team">
-    <input id="away" placeholder="Away team">
-    <input id="comp" placeholder="Competition">
-    <button id="manualAnalyze">Analyze</button>
-  </section>
-
-  <section class="hero">
-    <div class="eyebrow">★ MAIN GAME</div>
-    <div id="mainGame" class="mainGame">Finding today's best game…</div>
-    <div id="mainMeta" class="muted"></div>
-    <div id="mainAnalysis"></div>
-  </section>
-
-  <div class="heading"><h2>Today's games</h2><input id="search" placeholder="Search teams…"></div>
-  <section id="games" class="games"></section>
-
-  <footer>Football Edge · Probability estimates are not guarantees.</footer>
+  <section class="summary" id="summary"></section>
+  <section class="hero"><div class="eyebrow">★ MAIN GAME</div><div id="mainGame" class="mainGame">Loading…</div><div id="mainMeta" class="muted"></div><div id="mainAnalysis"></div></section>
+  <div class="heading"><h2>Matchday</h2><input id="search" placeholder="Search teams…"></div>
+  <section id="games"></section>
+  <footer>Football Edge · Data refreshes through GitHub Actions. Model output is statistical, not a guarantee.</footer>
 </main>
 <script src="app.js"></script>
-</body>
-</html>
+</body></html>

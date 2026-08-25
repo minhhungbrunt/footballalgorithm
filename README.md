@@ -1,87 +1,70 @@
-# Football Edge v2 — GitHub Pages
+# Football Edge — Current Matchday
 
-## Why this version is different
+This is the **GitHub Pages + GitHub Actions** version.
 
-The previous version tried to call FotMob directly from the browser. That is unreliable because browser CORS rules can block cross-origin API requests.
+## What it does
 
-This version uses **GitHub Actions as the server-side fetcher**:
+Every 15 minutes, GitHub Actions fetches the current day's FotMob fixture feed, keeps all active fixtures from the seven selected top leagues, and — when that set is small on a weekday — supplements the page with major European/domestic cup fixtures. It does **not** truncate the result to one game.
 
-GitHub Actions → FotMob → `data/fixtures.json` → GitHub Pages
+The seven primary leagues are:
 
-Cloudflare documents the same underlying issue: a browser cannot freely fetch an API that does not provide the necessary CORS headers, while a server-side proxy/worker can fetch it and return CORS-enabled data. citeturn0search0
-
-## Upload
-
-Put everything in the root of your GitHub repository:
-
-- `index.html`
-- `style.css`
-- `app.js`
-- `data/fixtures.json`
-- `.github/workflows/update-data.yml`
-- `.nojekyll`
-
-## Turn on GitHub Pages
-
-Repository → Settings → Pages
-
-Source:
-`GitHub Actions`
-
-Then run the workflow once manually:
-
-Actions → **Update football data** → Run workflow.
-
-After it runs, refresh your GitHub Pages website.
-
-The workflow is scheduled every 15 minutes.
-
-## What you will see
-
-The page will ALWAYS show games.
-
-If the GitHub Action has successfully fetched current data:
-`LIVE DATA · UPDATED ...`
-
-If the data file has not been generated yet:
-`DATA FILE NOT UPDATED · DEMO`
-
-So you will no longer get the completely blank page from the previous version.
-
-## Next step
-
-The fixture pipeline is now separated from the frontend. That makes it possible to add a second workflow that fetches:
-
-- last 5 / last 10 form
-- H2H
-- xG
-- home/away splits
-- injuries
-- suspensions
-- expected XI
-- confirmed XI
-- player importance
-- rest days
-
-and stores them in `data/matches/<match_id>.json`.
-
-Then the JavaScript model can calculate:
-`model probability → Kalshi price → edge → best simple contract → NO BET`
-
-Do not put private Kalshi/API credentials in GitHub Pages JavaScript.
-
-
-## Current dashboard scope
-
-The fixture list is intentionally condensed to seven domestic leagues:
 - Premier League
-- La Liga
+- LaLiga
 - Bundesliga
 - Serie A
 - Ligue 1
 - Eredivisie
 - Primeira Liga
 
-Each game card shows league position when available. Clicking **Analyze Game** expands the analysis directly inside that card instead of moving to a separate section at the bottom.
+Supplemental competitions include Champions League, Europa League, Conference League and major domestic cups when needed to make the matchday useful.
 
-The model display uses team names, not generic Home/Away labels, and does not use Kalshi or betting-market odds.
+FotMob's documented daily match route returns fixtures grouped by league, and the match ID can be used with its match-details endpoint for xG, lineups, stats and other analysis data. citeturn1view0turn1view1
+
+## Important fix from v4
+
+The old workflow relied on `lg.id`. Some FotMob responses expose the league identifier as `primaryId`. The updater now accepts both and also identifies the seven leagues by their names. This prevents the updater from silently dropping most leagues.
+
+## Automatic update
+
+`.github/workflows/update-data.yml` runs:
+
+`*/15 * * * *`
+
+It writes the current matchday to:
+
+`data/fixtures.json`
+
+Then GitHub Pages reads that JSON.
+
+GitHub scheduled workflows are not guaranteed to start exactly on the minute, but GitHub will run the workflow on its schedule when the Actions service is available.
+
+## Analysis model
+
+The current pre-match model is intentionally transparent:
+
+- league position
+- home/away context
+- recent-form availability
+- H2H availability
+- team-news availability
+- data quality
+
+It outputs a probability distribution and can say `NO STRONG EDGE` rather than forcing a selection.
+
+**No Kalshi or bookmaker odds are used.**
+
+The next model layer should fetch match details and team histories for each selected fixture and calculate actual:
+
+- last 5 / last 10 form
+- goals for/against
+- xG for/against
+- home/away splits
+- H2H last 5/10
+- injuries/suspensions
+- expected XI
+- confirmed XI
+- player ratings/importance
+- rest days
+- competition context
+
+Those values can then feed a weighted or calibrated model before the UI displays the conclusion.
