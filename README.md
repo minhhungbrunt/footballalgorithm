@@ -66,6 +66,19 @@ The fixture pipeline is now separated from the frontend. That makes it possible 
 and stores them in `data/matches/<match_id>.json`.
 
 Then the JavaScript model can calculate:
-`model probability → Kalshi price → edge → best simple contract → NO BET`
+`football data → probability → confidence → conclusion`
 
-Do not put private Kalshi/API credentials in GitHub Pages JavaScript.
+This version intentionally does **not** use Kalshi prices or betting-market odds.
+
+The analysis UI shows:
+- team names instead of generic "Home/Away"
+- competition / league
+- league position when available
+- recent form
+- home/away performance
+- H2H
+- lineup/team-news availability
+- data quality
+- model conclusion
+
+Analysis for each game opens directly inside that game's card, immediately below the Analyze button.
