@@ -6,6 +6,11 @@ from bs4 import BeautifulSoup
 BASE="https://www.fotmob.com"
 HEAD={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36","Accept":"application/json,text/plain,*/*"}
 ROT="https://www.rotowire.com/soccer/lineups.php"
+HTTP_CACHE={}
+RW_CACHE={}
+TEAM_CACHE={}
+LEAGUE_CACHE={}
+
 
 # Canonical competition map. Name alone is never trusted: country/region is also considered.
 ALIASES={
@@ -23,17 +28,24 @@ ALIASES={
 }
 TOP={v for v in ALIASES.values()}
 
-def get(url,params=None,tries=4):
+def get(url,params=None,tries=2):
     last=None
     for i in range(tries):
         try:
-            r=requests.get(url,params=params,headers=HEAD,timeout=25)
+            r=requests.get(url,params=params,headers=HEAD,timeout=12)
             if r.ok:
                 return r.json() if "json" in r.headers.get("content-type","") else r.text
             last=f"HTTP {r.status_code}"
         except Exception as e:last=str(e)
-        time.sleep(2+i*2)
+        time.sleep(1+i)
     raise RuntimeError(last or "request failed")
+
+def cached_get(url,params=None):
+    key=(url,tuple(sorted((params or {}).items())))
+    if key in HTTP_CACHE: return HTTP_CACHE[key]
+    value=get(url,params)
+    HTTP_CACHE[key]=value
+    return value
 
 def walk(obj):
     if isinstance(obj,dict):
@@ -48,13 +60,16 @@ def pick(d,*keys):
     return None
 
 def daily(date):
-    return get(f"{BASE}/api/data/matches",{"date":date,"timezone":"America/New_York"})
+    date = date.strftime("%Y%m%d") if hasattr(date,"strftime") else str(date)
+    return get(f"{BASE}/api/matches",{"date":date,"timezone":"America/New_York"})
 
 def details(mid):
-    return get(f"{BASE}/api/data/matchDetails",{"matchId":mid})
+    return get(f"{BASE}/api/matchDetails",{"matchId":mid})
 
 def team_page(tid):
-    return get(f"{BASE}/api/data/teams",{"id":tid})
+    key=str(tid)
+    if key not in TEAM_CACHE: TEAM_CACHE[key]=get(f"{BASE}/api/teams",{"id":tid})
+    return TEAM_CACHE[key]
 
 def canonical_comp(raw,country=""):
     s=str(raw or "").strip()
@@ -121,6 +136,43 @@ def extract_lineup(detail,side):
         if p["name"] not in seen: seen.add(p["name"]);out.append(p)
     return out[:11]
 
+def current_league_from_team(payload):
+    candidates=[]
+    for o in walk(payload):
+        if not isinstance(o,dict): continue
+        for k in ("mainLeague","primaryLeague","currentLeague"):
+            x=o.get(k)
+            if isinstance(x,dict) and (x.get("name") or x.get("leagueName")):
+                candidates.append(x)
+        if o.get("leagueName") and (o.get("leagueId") or o.get("id")):
+            candidates.append(o)
+    for x in candidates:
+        name=pick(x,"name","leagueName")
+        lid=pick(x,"id","leagueId")
+        if name and lid: return {"division":name,"leagueId":lid}
+    return {"division":None,"leagueId":None}
+
+def table_position(league_payload,team_id):
+    for o in walk(league_payload):
+        if isinstance(o,dict):
+            tid=o.get("id") or o.get("teamId")
+            if tid is not None and str(tid)==str(team_id):
+                pos=pick(o,"idx","position","rank")
+                if isinstance(pos,(int,float)): return int(pos)
+    return None
+
+def extract_h2h(detail):
+    for o in walk(detail):
+        if not isinstance(o,dict): continue
+        h=o.get("h2h")
+        if isinstance(h,dict):
+            summary=pick(h,"summary","results","form")
+            if isinstance(summary,list) and len(summary)>=3:
+                try:return f"H2H summary {summary[0]}–{summary[1]}–{summary[2]} (as supplied by FotMob)."
+                except: pass
+            if isinstance(summary,str): return summary
+    return "Not available from FotMob."
+
 def extract_xg(detail,side):
     for o in walk(detail):
         if isinstance(o,dict):
@@ -139,7 +191,11 @@ def rw_page(league):
 def rotowire(team,league):
     url=rw_page(league)
     try:
-        html=get(url)
+        if url in RW_CACHE:
+            html=RW_CACHE[url]
+        else:
+            html=get(url)
+            RW_CACHE[url]=html
         if not isinstance(html,str): return [],[],url
         soup=BeautifulSoup(html,"html.parser")
         text=soup.get_text("\n",strip=True)
@@ -171,20 +227,26 @@ def model(m):
       "Championship":1645,"League One":1405,"League Two":1260,"Eredivisie":1685,"Primeira Liga":1695,"MLS":1560,
       "Saudi Pro League":1610,"Brasileirão":1650,"Liga MX":1605,"Scottish Premiership":1585}
     hs=strength.get(h.get("division"),1500); as_=strength.get(a.get("division"),1500)
-    diff=(hs-as_)/12
+    diff=(hs-as_)/4
     same=h.get("division") and h.get("division")==a.get("division")
     if same and h.get("position") and a.get("position"):
         diff += (int(a["position"])-int(h["position"]))*3.2
-    diff += (h.get("formPoints") or 0-(a.get("formPoints") or 0))*5
+    diff += ((h.get("formPoints") or 0) - (a.get("formPoints") or 0))*(2.5 if not same else 4.0)
     # small venue effect only
-    diff += 7 if same else 3
+    diff += 7 if same else 2
     # lineups and injuries
-    diff += (len(h.get("lineup",[]))-len(a.get("lineup",[])))*0.8
+    diff += (len(h.get("lineup",[]))-len(a.get("lineup",[])))*0.5
     diff += (len(a.get("injuries",[]))-len(h.get("injuries",[])))*1.5
+    # H2H is deliberately capped/low-weight because old meetings can be stale.
+    hs2h=str(m.get("h2hSummary", ""))
+    nums=re.findall(r"\d+", hs2h)
+    if len(nums)>=3:
+        try: diff += (int(nums[0])-int(nums[2]))*1.5
+        except: pass
     # Draw rises when teams are close.
-    draw=0.29*math.exp(-abs(diff)/95)
+    draw=0.25 + 0.15*math.exp(-abs(diff)/60)
     wm=1-draw
-    ph=1/(1+math.exp(-diff/70))*wm
+    ph=1/(1+math.exp(-diff/55))*wm
     pa=wm-ph
     p=[ph,draw,pa];s=sum(p);p=[x/s for x in p]
     idx=max(range(3),key=lambda i:p[i])
@@ -203,15 +265,14 @@ def model(m):
 def main():
     today=dt.datetime.now(dt.timezone.utc).astimezone().date()
     dates=[today, today+dt.timedelta(days=1)]
-    raw=[]
+    raw=[]; errors=[]
     for d in dates:
         try:
-            x=daily(d.isoformat())
-            # FotMob groups matches under leagues
+            x=daily(d)
             for lg in x.get("leagues",[]):
-                for m in lg.get("matches",[]):
-                    raw.append((lg,m))
-        except Exception as e: print("FotMob daily failed",d,e)
+                for m in lg.get("matches",[]): raw.append((lg,m))
+        except Exception as e:
+            errors.append(f"{d}: {e}"); print("FotMob daily failed",d,e)
     matches=[]
     seen=set()
     for lg,m in raw:
@@ -221,32 +282,56 @@ def main():
         gen=m.get("general",m)
         home=pick(m,"homeTeam","home") or {}
         away=pick(m,"awayTeam","away") or {}
-        hn=pick(home,"name","teamName") or m.get("homeTeamName")
-        an=pick(away,"name","teamName") or m.get("awayTeamName")
+        hn=pick(home,"name","longName","teamName") or m.get("homeTeamName")
+        an=pick(away,"name","longName","teamName") or m.get("awayTeamName")
         if not hn or not an:continue
         comp=canonical_comp(lg.get("name") or m.get("competitionName"),lg.get("country",{}).get("name","") if isinstance(lg.get("country"),dict) else "")
         if comp not in TOP: continue
         try:d=details(mid)
         except Exception as e:d={}
         hid=home.get("id") or m.get("homeTeamId"); aid=away.get("id") or m.get("awayTeamId")
-        try:hp=extract_team(team_page(hid),hid) if hid else {}
-        except:hp={}
-        try:ap=extract_team(team_page(aid),aid) if aid else {}
-        except:ap={}
+        try:
+            htp=team_page(hid) if hid else {}
+            hp=extract_team(htp,hid) if hid else {}
+            hlg=current_league_from_team(htp)
+            hp.update(hlg); hp["id"]=hid
+        except Exception: hp={}
+        try:
+            atp=team_page(aid) if aid else {}
+            ap=extract_team(atp,aid) if aid else {}
+            alg=current_league_from_team(atp)
+            ap.update(alg); ap["id"]=aid
+        except Exception: ap={}
+        # Never use the cup competition as a club's domestic division.
+        for td in (hp,ap):
+            if td.get("leagueId"):
+                try: td["position"]=table_position(cached_get(f"{BASE}/api/leagues",{"id":td["leagueId"]}), td.get("id"))
+                except Exception: pass
         hp["lineup"],hp["injuries"],rw=rotowire(hn,comp)
         ap["lineup"],ap["injuries"],rw2=rotowire(an,comp)
         hp["xg"]=extract_xg(d,"home");ap["xg"]=extract_xg(d,"away")
-        out={"id":mid,"competition":comp,"competitionCode":(comp[:3]).upper(),"home":hn,"away":an,
-             "homeScore":pick(m,"homeScore") or pick(m.get("homeScore",{}),"current","display"),
-             "awayScore":pick(m,"awayScore") or pick(m.get("awayScore",{}),"current","display"),
-             "status":"LIVE" if m.get("status",{}).get("started") and not m.get("status",{}).get("finished") else "FT" if m.get("status",{}).get("finished") else "UPCOMING",
-             "kickoff":m.get("startTime") or m.get("time"),"minute":m.get("status",{}).get("period"),
+        st=m.get("status",{}) if isinstance(m.get("status",{}),dict) else {}
+        hs=pick(home,"score") if isinstance(home,dict) else None
+        aws=pick(away,"score") if isinstance(away,dict) else None
+        scorestr=pick(st,"scoreStr")
+        if (hs is None or aws is None) and isinstance(scorestr,str):
+            mm=re.match(r"\s*(\d+)\s*[-:]\s*(\d+)\s*",scorestr)
+            if mm: hs,aws=int(mm.group(1)),int(mm.group(2))
+        out={"id":mid,"competition":comp,"competitionCode":str(lg.get("ccode") or comp[:3]).upper(),"home":hn,"away":an,
+             "homeScore":hs,"awayScore":aws,
+             "status":"LIVE" if st.get("started") and not st.get("finished") else "FT" if st.get("finished") else "UPCOMING",
+             "kickoff":st.get("utcTime") or m.get("time"),"minute":pick(st,"period","reason"),
              "homeData":hp,"awayData":ap,"rotowireUrl":rw if rw!=ROT else rw2,
-             "h2hSummary":"Included from FotMob match details when available."}
+             "h2hSummary":extract_h2h(d)}
         out["model"]=model(out);matches.append(out)
     matches.sort(key=lambda x:(x["status"]!="LIVE",x.get("kickoff") or ""))
+    if not matches:
+        print("NO FIXTURES GENERATED")
+        if errors: print("SOURCE ERRORS:"," | ".join(errors))
+        raise SystemExit(2)
     result={"updatedAt":dt.datetime.now(dt.timezone.utc).isoformat(),"fixtureCount":len(matches),
-            "sourceStatus":f"FotMob OK · RotoWire checked · {len(matches)} fixtures","matches":matches}
+            "sourceStatus":f"FotMob OK · RotoWire checked · {len(matches)} fixtures",
+            "sourceErrors":errors,"matches":matches}
     Path("data/fixtures.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
     print("WROTE",len(matches),"fixtures")
 
