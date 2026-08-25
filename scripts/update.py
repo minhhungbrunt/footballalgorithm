@@ -181,8 +181,10 @@ def extract_xg(detail,side):
             if side in o and isinstance(o[side],dict):
                 x=pick(o[side],"xg","expectedGoals")
                 if x is not None:return x
-            if o.get("name","").lower() in {"expected goals","xg"}:
-                v=pick(o,side,"value")
+            name=o.get("name")
+            if isinstance(name,str) and name.strip().lower() in {"expected goals","xg"}:
+                v=o.get(side)
+                if isinstance(v,dict): v=pick(v,"value","xg","expectedGoals")
                 if v is not None:return v
     return None
 
@@ -202,7 +204,7 @@ def rotowire(team,league):
         soup=BeautifulSoup(html,"html.parser")
         text=soup.get_text("\n",strip=True)
         # Capture a conservative team block; RotoWire is supplementary and its page can change.
-        i=text.lower().find(team.lower())
+        i=text.lower().find(str(team or "").lower())
         if i<0:return [],[],url
         block=text[i:i+6000]
         injuries=[]
@@ -318,7 +320,11 @@ def main():
                 except Exception: pass
         hp["lineup"],hp["injuries"],rw=rotowire(hn,comp)
         ap["lineup"],ap["injuries"],rw2=rotowire(an,comp)
-        hp["xg"]=extract_xg(d,"home");ap["xg"]=extract_xg(d,"away")
+        # Match details can be unavailable/partially hydrated; xG is optional and must never abort the whole run.
+        try: hp["xg"]=extract_xg(d,"home")
+        except Exception as e: hp["xg"]=None; print("xG home parse skipped",mid,e)
+        try: ap["xg"]=extract_xg(d,"away")
+        except Exception as e: ap["xg"]=None; print("xG away parse skipped",mid,e)
         st=m.get("status",{}) if isinstance(m.get("status",{}),dict) else {}
         hs=pick(home,"score") if isinstance(home,dict) else None
         aws=pick(away,"score") if isinstance(away,dict) else None
