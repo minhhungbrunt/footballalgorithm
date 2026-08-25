@@ -3,74 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080b10">
-<title>Football Edge — Matchday Intelligence</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>FootballEdge</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">
-  <div class="brand"><span class="brand-mark">F</span><span>FOOTBALL <b>EDGE</b></span></div>
-  <div class="header-right">
-    <span id="dataStatus" class="status-dot"><i></i> Connecting</span>
-    <button id="refreshBtn" class="icon-btn" title="Refresh data">↻</button>
-  </div>
-</header>
-
+<header><div class="brand">FOOTBALL<span>EDGE</span></div><div id="feedStatus" class="status">LOADING FEED…</div></header>
 <main>
   <section class="hero">
     <div>
       <div class="kicker">MATCHDAY INTELLIGENCE</div>
-      <h1>Today's football, <em>calculated.</em></h1>
-      <p class="hero-sub">A data-driven read of the full matchday: fixtures, live scores, lineups and a calculated verdict.</p>
+      <h1>Today's Football</h1>
+      <p>Live scores · form · H2H · league strength · positions · injuries · RotoWire lineups · model verdict</p>
     </div>
-    <div class="updated-box">
-      <span>DATA UPDATED</span>
-      <strong id="updatedAt">—</strong>
-      <small id="fixtureCount">— fixtures</small>
-    </div>
+    <div class="updated">Updated <b id="updated">—</b><br><button id="refresh">Refresh</button></div>
   </section>
 
-  <section class="live-section"><div class="live-title"><span>LIVE SCORES</span><small>auto-refreshes from the latest data</small></div><div id="liveScores" class="live-scores"><span class="live-empty">No live matches right now</span></div></section>
-
-  <section id="featured" class="featured">
-    <div class="featured-label">★ MAIN GAME</div>
-    <div id="featuredContent"></div>
-  </section>
-
-  <section class="toolbar">
-    <div class="league-tabs" id="leagueTabs"></div>
-    <div class="toolbar-right">
-      <button class="sort-btn active" data-sort="time">TIME</button>
-      <button class="sort-btn" data-sort="model">MODEL</button>
-      <input id="searchInput" aria-label="Search matches" placeholder="Search team…">
-    </div>
-  </section>
-
-  <section id="matchday" class="matchday"></section>
-
-  <section class="method">
-    <div>
-      <div class="kicker">HOW THE MODEL THINKS</div>
-      <h2>Football data → decision</h2>
-    </div>
-    <div class="method-grid">
-      <div><b>01</b><span>Form</span><small>Recent results, goals & xG</small></div>
-      <div><b>02</b><span>Strength</span><small>Table position & home/away split</small></div>
-      <div><b>03</b><span>Matchup</span><small>H2H, style & scoring profile</small></div>
-      <div><b>04</b><span>Availability</span><small>Injuries, suspensions & XI</small></div>
-      <div><b>05</b><span>Projection</span><small>Win, draw, goals & BTTS</small></div>
-      <div><b>06</b><span>Verdict</span><small>One calculated best play</small></div>
-    </div>
-  </section>
+  <section id="liveStrip" class="live-strip"></section>
+  <nav id="filters" class="filters"></nav>
+  <section id="fixtures" class="fixtures"></section>
 </main>
-
-<footer>
-  <span>FOOTBALL EDGE</span>
-  <span>FotMob data · Model estimates · No market odds</span>
-</footer>
+<div id="toast"></div>
 <script src="app.js"></script>
 </body>
 </html>
