@@ -1,21 +1,74 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Football Edge — Matchday</title><link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b10">
+<title>Football Edge — Matchday Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><div class="logo">FOOTBALL<span>EDGE</span></div><div id="status">LOADING MATCHDAY</div></header>
+<header class="site-header">
+  <div class="brand"><span class="brand-mark">F</span><span>FOOTBALL <b>EDGE</b></span></div>
+  <div class="header-right">
+    <span id="dataStatus" class="status-dot"><i></i> Connecting</span>
+    <button id="refreshBtn" class="icon-btn" title="Refresh data">↻</button>
+  </div>
+</header>
+
 <main>
-  <section class="top">
-    <div><div class="eyebrow">MATCHDAY INTELLIGENCE</div><h1>Today's Football Edge</h1><p>Top 7 leagues · form · H2H · xG · table · team news</p></div>
-    <button id="refresh">↻ Refresh</button>
+  <section class="hero">
+    <div>
+      <div class="kicker">MATCHDAY INTELLIGENCE</div>
+      <h1>Today's football, <em>calculated.</em></h1>
+      <p class="hero-sub">A data-driven read of the biggest fixtures across Europe's top leagues.</p>
+    </div>
+    <div class="updated-box">
+      <span>DATA UPDATED</span>
+      <strong id="updatedAt">—</strong>
+      <small id="fixtureCount">— fixtures</small>
+    </div>
   </section>
-  <section class="summary" id="summary"></section>
-  <section class="hero"><div class="eyebrow">★ MAIN GAME</div><div id="mainGame" class="mainGame">Loading…</div><div id="mainMeta" class="muted"></div><div id="mainAnalysis"></div></section>
-  <div class="heading"><h2>Matchday</h2><input id="search" placeholder="Search teams…"></div>
-  <section id="games"></section>
-  <footer>Football Edge · Data refreshes through GitHub Actions. Model output is statistical, not a guarantee.</footer>
+
+  <section id="featured" class="featured">
+    <div class="featured-label">★ MAIN GAME</div>
+    <div id="featuredContent"></div>
+  </section>
+
+  <section class="toolbar">
+    <div class="league-tabs" id="leagueTabs"></div>
+    <div class="toolbar-right">
+      <button class="sort-btn active" data-sort="time">TIME</button>
+      <button class="sort-btn" data-sort="model">MODEL</button>
+      <input id="searchInput" aria-label="Search matches" placeholder="Search team…">
+    </div>
+  </section>
+
+  <section id="matchday" class="matchday"></section>
+
+  <section class="method">
+    <div>
+      <div class="kicker">HOW THE MODEL THINKS</div>
+      <h2>Football data → decision</h2>
+    </div>
+    <div class="method-grid">
+      <div><b>01</b><span>Form</span><small>Recent results, goals & xG</small></div>
+      <div><b>02</b><span>Strength</span><small>Table position & home/away split</small></div>
+      <div><b>03</b><span>Matchup</span><small>H2H, style & scoring profile</small></div>
+      <div><b>04</b><span>Availability</span><small>Injuries, suspensions & XI</small></div>
+      <div><b>05</b><span>Projection</span><small>Win, draw, goals & BTTS</small></div>
+      <div><b>06</b><span>Verdict</span><small>One calculated best play</small></div>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <span>FOOTBALL EDGE</span>
+  <span>FotMob data · Model estimates · No market odds</span>
+</footer>
 <script src="app.js"></script>
-</body></html>
+</body>
+</html>

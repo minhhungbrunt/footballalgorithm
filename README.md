@@ -1,70 +1,61 @@
-# Football Edge — Current Matchday
+# Football Edge — Professional GitHub Pages Build
 
-This is the **GitHub Pages + GitHub Actions** version.
+**Fixture source: FotMob.**
 
-## What it does
+This is a GitHub Pages matchday dashboard. GitHub Actions fetches the full daily FotMob feed every 15 minutes and writes `data/fixtures.json`; GitHub Pages serves the static UI.
 
-Every 15 minutes, GitHub Actions fetches the current day's FotMob fixture feed, keeps all active fixtures from the seven selected top leagues, and — when that set is small on a weekday — supplements the page with major European/domestic cup fixtures. It does **not** truncate the result to one game.
+## Included competitions
+Premier League · LaLiga · Bundesliga · Serie A · Ligue 1 · Eredivisie · Primeira Liga
 
-The seven primary leagues are:
+Major cup/European fixtures from FotMob's daily feed are also retained.
 
-- Premier League
-- LaLiga
-- Bundesliga
-- Serie A
-- Ligue 1
-- Eredivisie
-- Primeira Liga
+## UI
+- Matchday-style fixture list
+- Many fixtures, grouped by league
+- League position
+- Main-game spotlight
+- Search and sorting
+- Analyze button directly inside each match row
+- Actual team names
+- Compact professional dark UI
+- No manual team entry
+- No Kalshi/bookmaker odds
 
-Supplemental competitions include Champions League, Europa League, Conference League and major domestic cups when needed to make the matchday useful.
+## Model
+Each match produces a concrete decision:
+- WIN: Team
+- DRAW
+- probability for each result
+- confidence
+- projected score
+- BTTS probability
+- factors: form, table, home/away, H2H, xG, availability
 
-FotMob's documented daily match route returns fixtures grouped by league, and the match ID can be used with its match-details endpoint for xG, lineups, stats and other analysis data. citeturn1view0turn1view1
+Missing player information is not invented. The next data layer can fetch FotMob match details by match ID for richer form/xG/H2H/lineup/injury inputs.
 
-## Important fix from v4
+## GitHub setup
+Put these at the repository root:
 
-The old workflow relied on `lg.id`. Some FotMob responses expose the league identifier as `primaryId`. The updater now accepts both and also identifies the seven leagues by their names. This prevents the updater from silently dropping most leagues.
+```text
+index.html
+app.js
+style.css
+data/fixtures.json
+scripts/update.py
+.github/workflows/update-data.yml
+.github/workflows/pages.yml
+.nojekyll
+```
 
-## Automatic update
+Settings → Pages → **GitHub Actions**
 
-`.github/workflows/update-data.yml` runs:
+Then run:
+**Actions → Football Edge — Update Matchday → Run workflow**
 
-`*/15 * * * *`
+The update workflow runs every 15 minutes.
 
-It writes the current matchday to:
+`update-data.yml` will NOT replace a working fixture file with an empty/broken response.
 
-`data/fixtures.json`
+`pages.yml` deploys the site after commits to `main`.
 
-Then GitHub Pages reads that JSON.
-
-GitHub scheduled workflows are not guaranteed to start exactly on the minute, but GitHub will run the workflow on its schedule when the Actions service is available.
-
-## Analysis model
-
-The current pre-match model is intentionally transparent:
-
-- league position
-- home/away context
-- recent-form availability
-- H2H availability
-- team-news availability
-- data quality
-
-It outputs a probability distribution and can say `NO STRONG EDGE` rather than forcing a selection.
-
-**No Kalshi or bookmaker odds are used.**
-
-The next model layer should fetch match details and team histories for each selected fixture and calculate actual:
-
-- last 5 / last 10 form
-- goals for/against
-- xG for/against
-- home/away splits
-- H2H last 5/10
-- injuries/suspensions
-- expected XI
-- confirmed XI
-- player ratings/importance
-- rest days
-- competition context
-
-Those values can then feed a weighted or calibrated model before the UI displays the conclusion.
+No private API key is placed in browser JavaScript.

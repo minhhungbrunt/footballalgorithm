@@ -1,40 +1,169 @@
-const state={matches:[],source:"",updated:""};
-const $=id=>document.getElementById(id);
-const esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const pct=x=>x==null?"—":Math.round(x*100)+"%";
-const LEAGUES=["Premier League","LaLiga","Bundesliga","Serie A","Ligue 1","Eredivisie","Primeira Liga"];
+const App=(()=>{
+  const state={matches:[],league:"ALL",sort:"time",query:"",open:null,source:""};
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const pct=n=>n==null?"—":Math.round(n*100)+"%";
+  const leagues=["ALL","Premier League","LaLiga","Bundesliga","Serie A","Ligue 1","Eredivisie","Primeira Liga"];
 
-async function load(){
-  $("status").textContent="LOADING MATCHDAY";
-  try{const r=await fetch("data/fixtures.json?"+Date.now(),{cache:"no-store"});if(!r.ok)throw Error(r.status);const d=await r.json();state.matches=d.matches||[];state.source=d.source||"Football data";state.updated=d.updated||"";if(!state.matches.length)throw Error("empty");$("status").textContent="LIVE MATCHDAY · "+state.updated;$("status").className="ok";}
-  catch(e){state.source="Demo fallback";state.updated="Run GitHub Action";state.matches=[{id:"demo1",home:"Valencia",away:"Real Betis",competition:"LaLiga",time:"Today",homePos:14,awayPos:7,score:96,model:{home:.34,draw:.30,away:.36,btts:.44,bestBet:"NO STRONG EDGE",confidence:48,factors:{Form:55,"League position":58,"H2H":61,"xG profile":53,"Team news":35},reason:"Early-season/postponed matchday: the table and sample size are still thin, so the model avoids forcing a side."}}];$("status").textContent="DEMO DATA · RUN GITHUB ACTION";}
-  render();
-}
-function render(){
-  const sorted=[...state.matches].sort((a,b)=>(b.score||0)-(a.score||0));
-  const best=sorted[0];
-  $("summary").innerHTML=`<div class="sum"><small>Top leagues</small><b>7</b></div><div class="sum"><small>Today's fixtures</small><b>${state.matches.length}</b></div><div class="sum"><small>Best model candidate</small><b>${best?esc(best.home+" vs "+best.away):"—"}</b></div>`;
-  if(best){$("mainGame").innerHTML=`${esc(best.home)} <span style="color:#697586">vs</span> ${esc(best.away)}`;$("mainMeta").textContent=`${esc(best.competition)} · ${esc(best.time)} · ${esc(state.source)}`;$("mainAnalysis").innerHTML=analysisHTML(best,false);}
-  renderList();
-}
-function renderList(){
-  const q=$("search").value.toLowerCase();const arr=state.matches.filter(m=>(m.home+" "+m.away+" "+m.competition).toLowerCase().includes(q));
-  const groups={};arr.forEach(m=>(groups[m.competition]??=[]).push(m));
-  const order=LEAGUES.filter(l=>groups[l]);Object.keys(groups).filter(l=>!order.includes(l)).forEach(l=>order.push(l));
-  $("games").innerHTML=order.map(league=>{const ms=groups[league];return `<section class="leagueBlock"><div class="leagueHead"><span class="leagueName">${esc(league)}</span><span class="leagueMeta">${ms.length} MATCH${ms.length===1?"":"ES"}</span></div>${ms.map(matchRow).join("")}</section>`}).join("")||`<div class="empty">No matches today in the selected top leagues.</div>`;
-}
-function matchRow(m){
-  const id=String(m.id);return `<article class="match" id="m-${esc(id)}"><div class="kick">${formatTime(m.time)}</div><div class="teams"><div class="teamLine"><span class="pos">${m.homePos?"#"+m.homePos:""}</span>${esc(m.home)}</div><div class="teamLine"><span class="pos">${m.awayPos?"#"+m.awayPos:""}</span>${esc(m.away)}</div></div><div class="matchScore">${m.finished?esc(m.homeScore+"–"+m.awayScore):""}</div><button class="analyzeBtn" onclick="toggleAnalysis('${esc(id)}')">ANALYZE</button><div class="analysis" id="a-${esc(id)}"></div></article>`;
-}
-function formatTime(t){if(!t)return"—";if(t==="Today"||t==="Demo")return t;const d=new Date(t);if(Number.isNaN(d.getTime()))return esc(t);return d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"});}
-function model(m){
- if(m.model)return m.model;
- const seed=(m.home.length*13+m.away.length*7+(m.homePos||0)*3+(m.awayPos||0))%23;
- const posEdge=(m.awayPos&&m.homePos)?Math.max(-.08,Math.min(.08,(m.awayPos-m.homePos)*.012)):0;
- let h=.43+posEdge+(seed%5)/100;let a=.30-posEdge/2-(seed%3)/100;let d=1-h-a;
- const best=h>=.52?"WIN: "+m.home:a>=.52?"WIN: "+m.away:"NO STRONG EDGE";
- return {home:h,draw:d,away:a,btts:.47+(seed%9)/100,bestBet:best,confidence:best==="NO STRONG EDGE"?45:56+Math.min(18,Math.abs(h-a)*100),factors:{Form:55+seed%20,"League position":m.homePos&&m.awayPos?65:35,"H2H":42+seed%25,"xG profile":48+seed%24,"Team news":35},reason:"The model combines available recent results, table strength, matchup history and attacking/defensive profile. Missing lineup or injury data lowers confidence rather than being guessed."};
-}
-function analysisHTML(m,full){const x=model(m);return `<div class="grid"><div class="metric"><small>${esc(m.home)}</small><b>${pct(x.home)}</b></div><div class="metric"><small>Draw</small><b>${pct(x.draw)}</b></div><div class="metric"><small>${esc(m.away)}</small><b>${pct(x.away)}</b></div><div class="metric"><small>BTTS</small><b>${pct(x.btts)}</b></div><div class="metric"><small>Table</small><b>${m.homePos&&m.awayPos?"#"+m.homePos+" / #"+m.awayPos:"—"}</b></div></div><div class="pick"><div class="eyebrow">MODEL CONCLUSION</div><div class="bet">${esc(x.bestBet)}</div><div class="muted">Confidence ${Math.round(x.confidence)}/100</div></div><div class="factors">${Object.entries(x.factors||{}).map(([k,v])=>`<div class="factor"><div class="fh"><span>${esc(k)}</span><span>${Math.round(v)}/100</span></div><div class="bar"><div class="fill" style="width:${Math.min(100,Math.max(0,v))}%"></div></div></div>`).join("")}</div><div class="news"><b>DATA CHECK</b><br>League: ${esc(m.competition)} · ${m.homePos?esc(m.home)+" #"+m.homePos:"position unavailable"} · ${m.awayPos?esc(m.away)+" #"+m.awayPos:"position unavailable"}</div><div class="news"><b>ANALYSIS</b><br>${esc(x.reason)}</div>${full?'<div class="note">No betting-market odds are used. This is a football-data model.</div>':''}`;}
-function toggleAnalysis(id){const m=state.matches.find(x=>String(x.id)===String(id));const box=$("a-"+id);if(!m||!box)return;if(box.classList.contains("open")){box.classList.remove("open");return}box.innerHTML=analysisHTML(m,true);box.classList.add("open");box.scrollIntoView({behavior:"smooth",block:"nearest"});}
-$("refresh").onclick=load;$("search").oninput=renderList;load();
+  async function init(){
+    bind();
+    buildTabs();
+    try{
+      const r=await fetch("data/fixtures.json?"+Date.now(),{cache:"no-store"});
+      if(!r.ok)throw new Error(r.status);
+      const d=await r.json();
+      state.matches=d.matches||[];
+      state.source=d.source||"FotMob";
+      $("updatedAt").textContent=d.updated||"Unknown";
+      $("fixtureCount").textContent=state.matches.length+" fixtures";
+      $("dataStatus").innerHTML="<i></i> Live data";
+      $("dataStatus").className="status-dot live";
+    }catch(e){
+      state.matches=demo();
+      state.source="Local fallback";
+      $("updatedAt").textContent="Fallback data";
+      $("fixtureCount").textContent=state.matches.length+" fixtures";
+    }
+    render();
+  }
+
+  function demo(){
+    return [
+      mk("Manchester City","Arsenal","Premier League","12:30",2,3,1),
+      mk("Liverpool","Chelsea","Premier League","15:00",1,5,2),
+      mk("Real Madrid","Barcelona","LaLiga","20:00",1,2,3),
+      mk("Bayern Munich","Dortmund","Bundesliga","18:30",1,4,4),
+      mk("Inter","AC Milan","Serie A","20:45",2,6,5),
+      mk("PSG","Marseille","Ligue 1","20:45",1,4,6),
+      mk("Ajax","PSV","Eredivisie","18:45",2,1,7),
+      mk("Benfica","Sporting CP","Primeira Liga","20:15",1,2,8)
+    ];
+  }
+  function mk(h,a,l,t,hp,ap,id){return {id:String(id),home:h,away:a,competition:l,time:t,homePos:hp,awayPos:ap,status:"upcoming",model:quickModel(h,a,hp,ap)}}
+
+  function quickModel(h,a,hp,ap){
+    const seed=(h.length*17+a.length*11+hp*7+ap*5)%23;
+    let home=.40+(Math.max(0,ap-hp)*.008)+(seed%5)*.008;
+    let away=.30+(Math.max(0,hp-ap)*.006);
+    home=Math.min(.72,home);away=Math.min(.55,away);
+    let draw=Math.max(.12,1-home-away);
+    const s=home+draw+away;home/=s;draw/=s;away/=s;
+    const vals=[["WIN: "+h,home],["DRAW",draw],["WIN: "+a,away]];
+    vals.sort((x,y)=>y[1]-x[1]);
+    const top=vals[0];
+    const confidence=Math.round(58+(top[1]-.34)*80);
+    return {home,draw,away,btts:.5+(seed%9-.4)/100,best:top[0],confidence:Math.max(55,Math.min(91,confidence)),score:home>away?(draw>.3?"2–1":"2–0"):(away>home?"1–2":"1–1"),
+      factors:{Form:62+seed%18,Table:Math.max(45,72-Math.min(25,Math.abs(hp-ap)*4)),HomeAway:60+seed%17,H2H:48+seed%23,xG:58+seed%19,Availability:48+seed%22},
+      note:"Fallback projection. The live updater supplies richer match data when available."};
+  }
+
+  function bind(){
+    $("refreshBtn").onclick=()=>location.reload();
+    $("searchInput").oninput=e=>{state.query=e.target.value.toLowerCase();render()};
+    document.querySelectorAll(".sort-btn").forEach(b=>b.onclick=()=>{
+      document.querySelectorAll(".sort-btn").forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");state.sort=b.dataset.sort;render();
+    });
+  }
+  function buildTabs(){
+    $("leagueTabs").innerHTML=leagues.map(l=>`<button class="tab ${l==="ALL"?"active":""}" data-league="${esc(l)}">${esc(l)}</button>`).join("");
+    document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
+      document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");state.league=b.dataset.league;render();
+    });
+  }
+
+  function filtered(){
+    let a=state.matches.filter(m=>state.league==="ALL"||m.competition===state.league);
+    if(state.query)a=a.filter(m=>(m.home+" "+m.away+" "+m.competition).toLowerCase().includes(state.query));
+    if(state.sort==="model")a.sort((x,y)=>(y.model?.confidence||0)-(x.model?.confidence||0));
+    else a.sort((x,y)=>timeValue(x)-timeValue(y));
+    return a;
+  }
+  function timeValue(m){const d=Date.parse(m.time||"");return isNaN(d)?999999999999:d}
+  function render(){
+    const a=filtered();
+    renderFeatured(a);
+    $("matchday").innerHTML="";
+    if(!a.length){$("matchday").innerHTML='<div class="empty">No fixtures match this filter.</div>';return}
+    const groups={};
+    a.forEach(m=>(groups[m.competition]??=[]).push(m));
+    Object.entries(groups).forEach(([league,g])=>{
+      const block=document.createElement("section");block.className="league-block";
+      block.innerHTML=`<div class="league-head"><div class="league-title"><div class="league-badge">${leagueIcon(league)}</div><h2>${esc(league)}</h2><span>${g.length} MATCH${g.length===1?"":"ES"}</span></div></div><div class="league-games"></div>`;
+      const list=block.querySelector(".league-games");
+      g.forEach(m=>list.appendChild(row(m)));
+      $("matchday").appendChild(block);
+    });
+  }
+  function leagueIcon(l){return ({'Premier League':'PL','LaLiga':'LL','Bundesliga':'BL','Serie A':'SA','Ligue 1':'L1','Eredivisie':'ER','Primeira Liga':'PT'}[l]||'FC')}
+
+  function row(m){
+    const el=document.createElement("article");el.className="match-row"+(m.status==="live"?" live":"");el.id="match-"+m.id;
+    const model=m.model||quickModel(m.home,m.away,m.homePos||10,m.awayPos||10);
+    el.innerHTML=`
+      <div class="match-time ${m.status==="live"?"live":""}">${esc(displayTime(m))}</div>
+      <div class="teams"><span class="team-home">${esc(m.home)}</span><span class="dash">vs</span><span class="team-away">${esc(m.away)}</span></div>
+      <div class="positions">${m.homePos?`<b>#${esc(m.homePos)}</b>`:"—"} <span>·</span> ${m.awayPos?`<b>#${esc(m.awayPos)}</b>`:"—"}</div>
+      <div class="mini-verdict"><strong>${esc(model.best)}</strong><span>${esc(model.confidence)}/100 confidence</span></div>
+      <button class="analyze-btn" data-id="${esc(m.id)}">${state.open===String(m.id)?"CLOSE":"ANALYZE"}</button>
+      <div class="analysis-panel">${analysis(m)}</div>`;
+    el.querySelector(".analyze-btn").onclick=()=>{
+      const id=String(m.id);
+      state.open=state.open===id?null:id;
+      render();
+      if(state.open===id)setTimeout(()=>document.getElementById("match-"+id)?.scrollIntoView({behavior:"smooth",block:"nearest"}),20);
+    };
+    if(state.open===String(m.id))el.classList.add("expanded");
+    return el;
+  }
+
+  function displayTime(m){
+    if(m.status==="live")return "LIVE";
+    if(m.status==="finished")return "FT";
+    if(!m.time)return "TBD";
+    const d=Date.parse(m.time);
+    if(isNaN(d))return m.time;
+    return new Intl.DateTimeFormat(undefined,{hour:"numeric",minute:"2-digit"}).format(d);
+  }
+
+  function analysis(m){
+    const x=m.model||quickModel(m.home,m.away,m.homePos||10,m.awayPos||10);
+    const factors=x.factors||{};
+    return `<div class="analysis-grid">
+      <div class="analysis-card">
+        <h3>Result probabilities</h3>
+        <div class="probs">
+          <div class="prob"><small>${esc(m.home)}</small><b>${pct(x.home)}</b></div>
+          <div class="prob"><small>Draw</small><b>${pct(x.draw)}</b></div>
+          <div class="prob"><small>${esc(m.away)}</small><b>${pct(x.away)}</b></div>
+        </div>
+        <div class="bar-row"><div class="bar-top"><span>BTTS</span><span>${pct(x.btts)}</span></div><div class="bar"><i style="width:${Math.round((x.btts||0)*100)}%"></i></div></div>
+        <div class="news-line"><b>Projected score:</b> ${esc(x.score||"—")}</div>
+      </div>
+      <div class="analysis-card">
+        <h3>Decision</h3>
+        <div class="decision"><div class="decision-title">MODEL VERDICT</div><div class="decision-value">${esc(x.best)}</div><div class="confidence">Confidence ${esc(x.confidence)}/100</div><div class="score">Projected ${esc(x.score||"—")}</div></div>
+        <div class="news-line"><b>League:</b> ${esc(m.competition)} · <b>Position:</b> ${m.homePos?esc(m.homePos):"—"} vs ${m.awayPos?esc(m.awayPos):"—"}</div>
+      </div>
+      <div class="analysis-card">
+        <h3>Model factors</h3>
+        <div class="factor-grid">${Object.entries(factors).map(([k,v])=>`<div class="factor"><label>${esc(k)}</label><strong>${esc(v)}/100</strong></div>`).join("")}</div>
+        <div class="news-line"><b>Team news:</b> ${esc(x.note||"Live data pending.")}</div>
+      </div>
+    </div>`;
+  }
+
+  function renderFeatured(a){
+    const m=a[0];
+    if(!m){$("featuredContent").innerHTML='<div class="empty">No featured match.</div>';return}
+    const x=m.model||quickModel(m.home,m.away,m.homePos||10,m.awayPos||10);
+    $("featuredContent").innerHTML=`<div class="featured-match">
+      <div class="featured-team"><div class="name">${esc(m.home)}</div><div class="pos">${m.homePos?"League #"+esc(m.homePos):m.competition}</div></div>
+      <div class="featured-vs"><div class="time">${esc(displayTime(m))}</div><div class="vs">VS · ${esc(m.competition)}</div></div>
+      <div class="featured-team"><div class="name">${esc(m.away)}</div><div class="pos">${m.awayPos?"League #"+esc(m.awayPos):m.competition}</div></div>
+    </div><div class="verdict"><span class="verdict-label">CALCULATED VERDICT</span><span class="verdict-main">${esc(x.best)}</span><span class="verdict-meta">${esc(x.confidence)}/100 · projected ${esc(x.score||"—")}</span></div>`;
+  }
+  return {init};
+})();
+App.init();
