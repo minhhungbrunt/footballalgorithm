@@ -1,76 +1,58 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Football Edge</title>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#070a0f;color:#eef2f7;font:14px Arial,sans-serif}
-header{padding:18px 28px;border-bottom:1px solid #202733;background:#0b0f15;display:flex;justify-content:space-between}
-.logo{font-size:21px;font-weight:900;letter-spacing:2px}.logo b{color:#45e58a}
-main{max-width:1200px;margin:auto;padding:28px 18px 70px}h1{margin:0 0 7px;font-size:34px}p,.muted{color:#8994a3}
-.controls{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0}
-input,select,button{border:1px solid #2a3442;background:#111721;color:#fff;border-radius:8px;padding:11px 13px}
-button{cursor:pointer;font-weight:800}button.primary{background:#45e58a;color:#06100a;border:0}
-.hero,.panel,.card{background:#0d131b;border:1px solid #202a36;border-radius:14px;padding:20px}
-.hero{border-color:#294435}.tag{color:#45e58a;font-weight:900;font-size:11px;letter-spacing:1.5px}
-.match{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-top:14px}
-.teams{font-size:27px;font-weight:900}.vs{color:#697586;padding:0 9px}.time{color:#8994a3}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}.metric{background:#090e14;border:1px solid #202a36;border-radius:9px;padding:14px}.metric small{display:block;color:#778292;text-transform:uppercase;font-size:10px;margin-bottom:7px}.metric strong{font-size:22px}
-.pick{margin-top:15px;padding:15px;border-radius:9px;background:#102317;border:1px solid #285c3b}.pick strong{font-size:23px}
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:12px;margin-top:14px}.card h3{margin:7px 0}.card small{color:#707d8d}.card button{width:100%;margin-top:14px}
-.analysis{display:none;margin-top:22px}.analysis.show{display:block}.bar{height:7px;background:#1b232e;border-radius:9px;overflow:hidden}.fill{height:100%;background:#45e58a}.factor{margin:15px 0}.factorhead{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}
-.news{padding:13px;background:#111821;border-radius:8px;margin-top:18px;color:#a9b3c0;line-height:1.55}
-@media(max-width:700px){main{padding:20px 13px}.match{display:block}.teams{font-size:21px}.grid{grid-template-columns:1fr 1fr}header{padding:16px}}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><div class="logo">FOOTBALL<b>EDGE</b></div><div id="status" class="muted">CONNECTING</div></header>
+<header>
+  <div class="logo">FOOTBALL<span>EDGE</span></div>
+  <div id="status" class="status">READY</div>
+</header>
+
 <main>
-<h1>Today's Football Edge</h1><p>Form · H2H · xG · injuries · lineups · model edge</p>
-<div class="controls">
-<select id="league"><option value="all">All competitions</option><option value="england">England</option><option value="spain">Spain</option><option value="germany">Germany</option><option value="italy">Italy</option><option value="france">France</option><option value="usa">USA</option></select>
-<input id="search" placeholder="Search team">
-<button class="primary" onclick="load()">Refresh fixtures</button>
-</div>
-<section class="hero"><div class="tag">★ MAIN GAME</div><div id="main">Loading...</div></section>
-<h2>Games worth analyzing</h2><div id="games" class="games">Loading...</div>
-<section id="analysis" class="panel analysis"></section>
+  <section class="top">
+    <div>
+      <div class="eyebrow">MATCH INTELLIGENCE</div>
+      <h1>Today's Football Edge</h1>
+      <p>Form · H2H · xG · injuries · lineups · market edge</p>
+    </div>
+    <button class="refresh" id="refreshBtn">↻ Refresh</button>
+  </section>
+
+  <section class="searchbar">
+    <input id="homeTeam" placeholder="Home team">
+    <input id="awayTeam" placeholder="Away team">
+    <input id="competition" placeholder="Competition">
+    <button id="customBtn">Analyze teams</button>
+  </section>
+
+  <section class="hero">
+    <div class="heroHead">
+      <div>
+        <div class="eyebrow">★ MAIN GAME</div>
+        <div id="mainMatch" class="mainMatch">Loading today's fixtures...</div>
+      </div>
+      <div id="mainTime" class="muted"></div>
+    </div>
+    <div id="mainAnalysis"></div>
+  </section>
+
+  <div class="sectionTitle">
+    <h2>Today's games</h2>
+    <input id="filter" placeholder="Filter teams or competition">
+  </div>
+  <section id="games" class="games"></section>
+
+  <section id="analysis" class="analysis"></section>
+
+  <footer>
+    <span>Football Edge</span>
+    <span>Model output is statistical, not guaranteed.</span>
+  </footer>
 </main>
-<script>
-const API="api.php";
-let matches=[];
-const esc=x=>String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-const pct=x=>x==null?"—":Math.round(x*100)+"%";
-async function api(action,params={}){let u=new URL(API,location.href);u.searchParams.set("action",action);Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));let r=await fetch(u);if(!r.ok)throw Error("API "+r.status);return r.json()}
-async function load(){
- document.getElementById("status").textContent="LOADING";
- try{let d=await api("fixtures");matches=d.matches||[];render();document.getElementById("status").textContent="LIVE DATA"}
- catch(e){document.getElementById("status").textContent="ERROR";document.getElementById("main").innerHTML="<p>Could not load fixtures. Check api.php.</p>"}
-}
-function render(){
- if(!matches.length){document.getElementById("main").innerHTML="<p>No matches returned.</p>";return}
- let m=[...matches].sort((a,b)=>(b.featuredScore||0)-(a.featuredScore||0))[0];
- document.getElementById("main").innerHTML=`<div class="match"><div class="teams">${esc(m.home)} <span class="vs">vs</span> ${esc(m.away)}</div><div class="time">${esc(m.time||"")}</div></div><div id="mainAnalysis">Calculating...</div>`;
- analyze(m.id,true); renderCards();
-}
-function renderCards(){
- let q=document.getElementById("search").value.toLowerCase(), l=document.getElementById("league").value;
- let arr=matches.filter(m=>(!q||(m.home+" "+m.away).toLowerCase().includes(q))&&(l==="all"||!m.country||m.country.toLowerCase()===l));
- document.getElementById("games").innerHTML=arr.map(m=>`<div class="card"><small>${esc(m.competition||"Football")}</small><h3>${esc(m.home)} vs ${esc(m.away)}</h3><small>${esc(m.time||"")}</small><button onclick="analyze('${esc(m.id)}')">ANALYZE GAME</button></div>`).join("")||"<p>No matching games.</p>";
-}
-async function analyze(id,featured=false){
- let target=featured?document.getElementById("mainAnalysis"):document.getElementById("analysis");
- if(!featured){target.className="panel analysis show";target.innerHTML="<p>Pulling form, H2H, injuries and lineups...</p>";target.scrollIntoView({behavior:"smooth",block:"start"})}
- try{let d=await api("analyze",{match_id:id});draw(d,target)}catch(e){target.innerHTML="<p>Analysis failed. Check server logs.</p>"}
-}
-function draw(d,t){
- let p=d.probabilities||{},f=d.factors||{};
- t.innerHTML=`<div class="grid"><div class="metric"><small>Home</small><strong>${pct(p.home)}</strong></div><div class="metric"><small>Draw</small><strong>${pct(p.draw)}</strong></div><div class="metric"><small>Away</small><strong>${pct(p.away)}</strong></div><div class="metric"><small>BTTS</small><strong>${pct(p.btts)}</strong></div></div>
- <div class="pick"><div class="tag">MODEL PICK</div><strong>${esc(d.bestBet||"NO EDGE")}</strong><div class="muted">Confidence ${d.confidence||0}/100 · Edge ${d.edge==null?"—":(d.edge*100).toFixed(1)+"%"}</div></div>
- ${Object.entries(f).map(([k,v])=>`<div class="factor"><div class="factorhead"><span>${esc(k)}</span><span>${v}/100</span></div><div class="bar"><div class="fill" style="width:${Math.min(100,Math.max(0,v))}%"></div></div></div>`).join("")}
- <div class="news"><b>TEAM NEWS</b><br>${esc(d.injuries||"No injury/lineup notes returned.")}</div>
- <div class="news"><b>MODEL REASON</b><br>${esc(d.reason||"No explanation returned.")}</div>`;
-}
-document.getElementById("search").oninput=renderCards;document.getElementById("league").onchange=renderCards;load();
-</script>
-</body></html>
+<script src="app.js"></script>
+</body>
+</html>
