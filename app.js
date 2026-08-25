@@ -48,7 +48,11 @@ function analysisHTML(m,r){
   const p=r.probabilities||[0,0,0];
   const h=m.homeData||{},a=m.awayData||{};
   const reasons=(r.reasons||[]).map(x=>`<p>• ${esc(x)}</p>`).join("");
-  const lineup=(team,name)=>`<div><h3>${esc(name)}</h3>${(team.lineup||[]).length?(team.lineup.map(x=>`<div class="player"><small>${esc(x.position||"")}</small>${esc(x.name)}${x.rating?` · ${esc(x.rating)}`:""}</div>`).join(""):"<span class='data-note'>RotoWire lineup not posted yet.</span>"}${(team.rotowireInjuries||team.injuries||[]).map(x=>`<div class="player inj">⚠ ${esc(x.name)} — ${esc(x.status||"OUT")}</div>`).join("")}</div>`;
+  const lineup=(team,name)=>{
+    const players=(team.lineup||[]).map(x=>`<div class="player"><small>${esc(x.position||"")}</small>${esc(x.name)}${x.rating?` · ${esc(x.rating)}`:""}</div>`).join("");
+    const injuries=(team.rotowireInjuries||team.injuries||[]).map(x=>`<div class="player inj">⚠ ${esc(x.name)} — ${esc(x.status||"OUT")}</div>`).join("");
+    return `<div><h3>${esc(name)}</h3>${players||"<span class=\"data-note\">RotoWire lineup not posted yet.</span>"}${injuries}</div>`;
+  };
   return `<div class="analysis-grid">
     <div class="box">
       <div class="decision ${verdictClass(r.verdict)}"><h3>MODEL VERDICT</h3><div class="big">${esc(r.verdict)}</div><div>Confidence ${Math.round(r.confidence)}/100 · Projected ${esc(r.projected||"—")}</div></div>

@@ -28,3 +28,10 @@ Do not use a PHP/API proxy. This project is GitHub Pages + GitHub Actions only.
 
 ## Data used by the model
 FotMob match details are used for match state, xG where available, lineups/player ratings where exposed, and match context. RotoWire is separately queried for its text lineup/injury listing. Player market value is secondary and never determines the verdict by itself.
+
+
+## Local test
+Double-click `TEST.bat` on Windows. It installs dependencies, runs the real FotMob/RotoWire updater, then opens the site at `http://127.0.0.1:8765/`. If the data pull fails, the test stops instead of replacing a good fixture file with an empty one.
+
+## Important API correction
+The updater uses FotMob's current `/api/matches`, `/api/matchDetails`, `/api/teams`, and `/api/leagues` routes. The older `/api/data/...` paths are not used. Current public references document the `/api/` routes and `YYYYMMDD` date format.
