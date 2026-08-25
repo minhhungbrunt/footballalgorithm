@@ -1,3 +1,7 @@
+# FOOTBALL EDGE — FRONT PAGE / DATA PIPELINE PATCH
+
+This build is the corrected front-end + data pipeline. It is **not** a seed-only UI.
+
 # Football Edge — Professional GitHub Pages Build
 
 **Fixture source: FotMob.**
@@ -14,7 +18,7 @@ This is a GitHub Pages matchday dashboard. GitHub Actions fetches the full daily
 - Eredivisie, Eerste Divisie
 - Primeira Liga, Liga Portugal 2
 - FA Cup, EFL Cup
-- UEFA Champions League, Europa League, Conference League
+- UEFA Champions League + Champions League Qualification, Europa League + Qualification, Conference League + Qualification
 - Scottish Premiership
 - Belgian Pro League
 - Turkish Super Lig
@@ -143,3 +147,22 @@ If the Actions tab shows no runs at all, check **Settings → Actions → Genera
 
 ### Data-source caveat
 FotMob's public website currently displays a notice that automated services/robots are not permitted. The project therefore treats FotMob as a best-effort source; if FotMob blocks GitHub's runner, the workflow will fail visibly instead of silently serving stale or fake fixtures. For a production/public application, use a licensed/supported football-data API.
+
+
+## Competition classification fix
+The updater no longer uses numeric FotMob league IDs as the classifier. Domestic competitions are matched by competition name **and country**. This prevents a club in Kuwait/Azerbaijan/etc. from being labeled as the English Premier League simply because its local competition is also called “Premier League”. UEFA qualification stages are explicitly accepted and displayed separately.
+
+## V5 data behavior
+- FotMob is the primary fixture, match-detail and player-data source.
+- If FotMob returns no accepted fixtures, the updater falls back to ESPN's public scoreboard feed so the page does not stay blank.
+- Live/finished scores are cross-checked against the fallback feed and displayed on the front page.
+- The browser reloads `data/fixtures.json` every 60 seconds; GitHub Actions is still responsible for fetching fresh data.
+- The Analyze panel shows the concrete verdict, probabilities, deep evidence narrative and RotoWire XI listing. The old factor-score grid has been removed.
+
+
+## V6 model behavior
+The model treats **Draw as a first-class outcome**. It does not always select a team.
+It combines division strength, same-division table position, last-five form, goals for/against,
+lineup/season rating, squad value as a secondary signal, availability, xG, H2H and a small home
+advantage. Cross-division fixtures never compare raw league positions across divisions.
+Missing data lowers confidence instead of creating synthetic evidence.
