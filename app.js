@@ -17,7 +17,17 @@ function matchTime(m){const s=st(m);if(s==="LIVE")return `<b class="time live">L
 function score(m){return m.homeScore!=null&&m.awayScore!=null?`${esc(m.homeScore)} : ${esc(m.awayScore)}`:"— : —"}
 function fmtSigned(x){return x==null?"N/A":(Number(x)>0?"+":"")+Number(x).toFixed(1)}
 function resultNote(m){if(st(m)!=="FT"||m.homeScore==null||!m.model)return "";const [h,a]=m.model.probabilities||[.33,.34,.33],actual=m.homeScore>m.awayScore?0:m.homeScore===m.awayScore?1:2,pick=m.model.verdict?.startsWith("DRAW")?1:m.model.verdict?.includes(m.home)?0:2;const gap=Math.abs((m.model.expectedGoals?.[0]||0)-m.homeScore)+Math.abs((m.model.expectedGoals?.[1]||0)-m.awayScore);if(actual===pick&&gap<=1.5)return "🎯 MODEL NAILED IT";if(actual===pick)return "🟡 RIGHT CALL · SCORE OFF";if(Math.max(h,a,m.model.probabilities?.[1]||0)<.55)return "🔴 UPSET · MODEL GOT COOKED";return "🤡 MODEL UPDATE: WHAT WAS THAT"}
-function scorerLine(m){const arr=Array.isArray(m.scorers)?m.scorers:[];if(!arr.length)return "";return `<div class="scorers">${arr.map(g=>`<span>⚽ ${esc(g.scorer||"Goal")} ${g.minute!=null?esc(g.minute)+"'":""}${g.assist?` <small>🅰 ${esc(g.assist)}</small>`:""}</span>`).join("")}</div>`}
+function scorerLine(m){
+  const arr=Array.isArray(m.scorers)?m.scorers:[];
+  if(!arr.length)return "";
+  return `<div class="scorers">${arr.map(g=>{
+    const side=g.team==="home"?m.home:g.team==="away"?m.away:"";
+    const og=g.ownGoal?" · OG":"";
+    const min=g.minute!=null?`${esc(g.minute)}'`:"";
+    const ast=g.assist?` <small>🅰 ${esc(g.assist)}</small>`:"";
+    return `<span title="${esc(side)}">⚽ ${esc(g.scorer||"Goal")} ${min}${og}${ast}</span>`;
+  }).join("")}</div>`;
+}
 function lineup(d,name){const list=Array.isArray(d.lineup)?d.lineup:[];const bench=Array.isArray(d.bench)?d.bench:[];if(!list.length)return `<div class="lineup"><h3>${esc(name)}</h3><div class="empty-data">Lineup not published yet.</div></div>`;return `<div class="lineup"><h3>${esc(name)} <span class="rank">${d.lineupConfirmed?"CONFIRMED XI":"EXPECTED XI"}</span></h3>${d.formation?`<div class="formation">${esc(d.formation)}</div>`:""}<div class="player-list">${list.slice(0,18).map(p=>`<div class="player"><span class="pos">${esc(nice(p.position,""))}</span><span class="pname">${esc(nice(p.name,"Unknown"))}</span><span class="rating">${p.rating!=null?esc(p.rating):""}</span></div>`).join("")}</div>${bench.length?`<div class="bench"><b>Bench</b> · ${bench.slice(0,9).map(p=>esc(p.name||"Unknown")).join(", ")}</div>`:""}</div>`}
 function recentResults(d){const r=Array.isArray(d.recentResults)?d.recentResults:[];if(!r.length)return `<span class="note">No recent results returned</span>`;return `<div class="recent-results">${r.map(x=>`<div><i class="pill ${esc(x.result)}">${esc(x.result)}</i><span>${esc(x.opponent||"Opponent")}</span><b>${esc(x.gf)}-${esc(x.ga)}</b></div>`).join("")}</div>`}
 function evidence(m){const h=td(m,"home"),a=td(m,"away"),items=[];if(h.division||a.division)items.push(["DIV","Current league",`${m.home}: ${nice(h.division)} · ${m.away}: ${nice(a.division)}. Cup competition does not determine domestic division.`]);if(h.position!=null||a.position!=null)items.push(["POS","Current table",`${m.home}: ${pos(h)} · ${m.away}: ${pos(a)}${h.division!==a.division?" · cross-division positions are not directly compared":""}.`]);if(h.lastSeasonPosition!=null||a.lastSeasonPosition!=null)items.push(["25/26","Last season",`${m.home}: ${nice(h.lastSeasonPosition)} · ${m.away}: ${nice(a.lastSeasonPosition)}. Important early-season prior.`]);if(h.form||a.form)items.push(["FORM","Recent form",`${m.home}: ${nice(h.form)} (${h.formPoints||0}/15) · ${m.away}: ${nice(a.form)} (${a.formPoints||0}/15).`]);if(h.xg!=null||a.xg!=null)items.push(["xG","Expected goals",`${m.home}: ${nice(h.xg)} · ${m.away}: ${nice(a.xg)}.`]);if(h.xiRating!=null||a.xiRating!=null)items.push(["XI","Starting XI",`${m.home}: ${nice(h.xiRating)} · ${m.away}: ${nice(a.xiRating)}.`]);if(h.transferImpact!=null||a.transferImpact!=null)items.push(["TR","Squad change",`${m.home}: ${fmtSigned(h.transferImpact)} · ${m.away}: ${fmtSigned(a.transferImpact)}.`]);if(m.h2hSummary&&!/not available/i.test(m.h2hSummary))items.push(["H2H","Head-to-head",m.h2hSummary]);if(!items.length)items.push(["i","Data status","Not enough secondary evidence returned yet."]);return items.map(x=>`<div class="evidence-item"><div class="eicon">${esc(x[0])}</div><div><b>${esc(x[1])}</b><p>${esc(x[2])}</p></div></div>`).join("")}
@@ -29,6 +39,80 @@ function render(){if(!DATA){$("#fixtures").innerHTML='<div class="empty">Loading
 function toggleAnalysis(id){openId=openId===String(id)?null:String(id);render();if(openId)requestAnimationFrame(()=>document.getElementById(`m-${CSS.escape(String(id))}`)?.scrollIntoView({behavior:"smooth",block:"nearest"}))}
 function setFilter(x){filter=x;openId=null;render()}
 async function loadStatic(){try{const r=await fetch(`${DATA_URL}?v=${Date.now()}`,{cache:"no-store"});if(!r.ok)throw Error(`HTTP ${r.status}`);DATA=await r.json();lastStaticUpdate=DATA.updatedAt;render()}catch(e){if(!DATA)$("#fixtures").innerHTML=`<div class="error"><b>Football data feed unavailable.</b><br>${esc(e.message)}</div>`}}
-async function pollLive(){if(!DATA)return;const live=(DATA.matches||[]).filter(m=>st(m)==="LIVE"&&m.sofascoreEventId);if(!live.length)return;await Promise.all(live.map(async m=>{try{const [ev,inc]=await Promise.all([fetch(`https://www.sofascore.com/api/v1/event/${m.sofascoreEventId}`).then(r=>r.ok?r.json():null),fetch(`https://www.sofascore.com/api/v1/event/${m.sofascoreEventId}/incidents`).then(r=>r.ok?r.json():null)]);if(ev?.event){m.homeScore=ev.event.homeScore?.current??m.homeScore;m.awayScore=ev.event.awayScore?.current??m.awayScore;if(ev.event.status?.type==="finished")m.status="FT";const sec=ev.event.status?.period1??ev.event.status?.period2; m.minute={short:ev.event.status?.description||ev.event.status?.type||"Live"}}if(inc?.incidents){m.scorers=inc.incidents.filter(x=>x.incidentType==="goal").map(x=>({minute:x.time,added:x.addedTime,team:x.isHome?"home":"away",scorer:x.player?.name,assist:x.assist1?.name||x.assist2?.name,ownGoal:x.incidentClass==="ownGoal"}))}liveCache.set(String(m.id),Date.now())}catch(e){}}));render()}
+async function pollLive(){
+  if(!DATA)return;
+  const candidates=(DATA.matches||[]).filter(m=>
+    (st(m)==="LIVE" || st(m)==="FT") &&
+    (!Array.isArray(m.scorers)||!m.scorers.length || st(m)==="LIVE")
+  );
+  if(!candidates.length)return;
+
+  const dates=[...new Set(candidates.map(m=>{
+    const d=new Date(m.kickoff||Date.now());
+    return isNaN(d)?null:d.toISOString().slice(0,10);
+  }).filter(Boolean))];
+
+  const scheduleCache={};
+  const norm=n=>String(n||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9]/g,"").replace(/footballclub|fc$/g,"");
+
+  async function scheduled(date){
+    if(scheduleCache[date])return scheduleCache[date];
+    try{
+      const r=await fetch(`https://www.sofascore.com/api/v1/sport/football/scheduled-events/${date}`,{cache:"no-store"});
+      const j=r.ok?await r.json():{};
+      return scheduleCache[date]=Array.isArray(j.events)?j.events:[];
+    }catch(e){return scheduleCache[date]=[]}
+  }
+
+  async function findEvent(m){
+    if(m.sofascoreEventId)return m.sofascoreEventId;
+    const base=new Date(m.kickoff||Date.now());
+    if(isNaN(base))return null;
+    for(const off of [-1,0,1]){
+      const d=new Date(base); d.setUTCDate(d.getUTCDate()+off);
+      const day=d.toISOString().slice(0,10);
+      const events=await scheduled(day);
+      const hn=norm(m.home), an=norm(m.away);
+      const hit=events.find(e=>{
+        const h=norm(e?.homeTeam?.name), a=norm(e?.awayTeam?.name);
+        return (h===hn&&a===an) || h.includes(hn)||hn.includes(h) ? (a.includes(an)||an.includes(a)) : false;
+      });
+      if(hit)return hit.id;
+    }
+    return null;
+  }
+
+  await Promise.all(candidates.map(async m=>{
+    try{
+      const sid=await findEvent(m);
+      if(!sid)return;
+      m.sofascoreEventId=sid;
+
+      const requests=[fetch(`https://www.sofascore.com/api/v1/event/${sid}`,{cache:"no-store"})];
+      if(st(m)==="LIVE" || !Array.isArray(m.scorers)||!m.scorers.length)
+        requests.push(fetch(`https://www.sofascore.com/api/v1/event/${sid}/incidents`,{cache:"no-store"}));
+
+      const res=await Promise.all(requests);
+      const ev=res[0]?.ok?await res[0].json():null;
+      const inc=res[1]?.ok?await res[1].json():null;
+
+      if(ev?.event){
+        m.homeScore=ev.event.homeScore?.current??m.homeScore;
+        m.awayScore=ev.event.awayScore?.current??m.awayScore;
+        if(ev.event.status?.type==="finished")m.status="FT";
+        m.minute={short:ev.event.status?.description||ev.event.status?.type||"Live"};
+      }
+      if(inc?.incidents){
+        m.scorers=inc.incidents.filter(x=>x.incidentType==="goal").map(x=>({
+          minute:x.time,added:x.addedTime,team:x.isHome?"home":"away",
+          scorer:x.player?.name,assist:x.assist1?.name||x.assist2?.name,
+          ownGoal:x.incidentClass==="ownGoal"
+        }));
+      }
+    }catch(e){}
+  }));
+  render();
+}
 loadStatic();setInterval(loadStatic,5000);setInterval(pollLive,5000);
 window.toggleAnalysis=toggleAnalysis;window.setFilter=setFilter;
