@@ -289,23 +289,30 @@ def daily(day):
 def match_details(match_id):
     key=str(match_id)
     if key not in DETAIL_CACHE:
-        try: DETAIL_CACHE[key]=_page_match_payload(key)
-        except Exception: DETAIL_CACHE[key]=get(f"{ROOT}/api/matchDetails",{"matchId":key})
+        try: DETAIL_CACHE[key]=get(f"{ROOT}/api/data/matchDetails",{"matchId":key})
+        except Exception:
+            DETAIL_CACHE[key]=get(f"{ROOT}/api/matchDetails",{"matchId":key})
     return DETAIL_CACHE[key]
 
 def team_payload(team_id, name=""):
     key=str(team_id)
     if key not in TEAM_CACHE:
-        try: TEAM_CACHE[key]=_page_team_payload(key,name)
-        except Exception: TEAM_CACHE[key]=get(f"{ROOT}/api/teams",{"id":key})
+        try: TEAM_CACHE[key]=get(f"{ROOT}/api/data/teams",{"id":key,"ccode3":"ENG"})
+        except Exception:
+            try: TEAM_CACHE[key]=get(f"{ROOT}/api/teams",{"id":key})
+            except Exception:
+                TEAM_CACHE[key]={}
     return TEAM_CACHE[key]
 
 def league_payload(league_id, name=""):
     key=str(league_id)
     if not league_id: return {}
     if key not in LEAGUE_CACHE:
-        try: LEAGUE_CACHE[key]=_page_league_payload(key,name)
-        except Exception: LEAGUE_CACHE[key]=get(f"{ROOT}/api/leagues",{"id":key})
+        try: LEAGUE_CACHE[key]=get(f"{ROOT}/api/data/leagues",{"id":key})
+        except Exception:
+            try: LEAGUE_CACHE[key]=get(f"{ROOT}/api/leagues",{"id":key})
+            except Exception:
+                LEAGUE_CACHE[key]={}
     return LEAGUE_CACHE[key]
 
 def match_rows(day_payload):
@@ -349,6 +356,38 @@ def score(match):
     return hs, ass
 
 
+
+
+def _find_team_league(payload):
+    """Extract a team's primary/current domestic league from a FotMob payload.
+    Works with both legacy and current /api/data/teams shapes.
+    """
+    candidates=[]
+    for obj in walk(payload):
+        if not isinstance(obj,dict):
+            continue
+        lid=pick(obj,"leagueId","parentLeagueId","primaryLeagueId")
+        name=pick(obj,"leagueName","league", "name")
+        ccode=pick(obj,"ccode","countryCode","countryCode3")
+        if isinstance(name,dict):
+            lid=lid or pick(name,"id","leagueId")
+            ccode=ccode or pick(name,"ccode","countryCode")
+            name=pick(name,"name","leagueName")
+        if not lid or not name or str(name).lower() in ("international","unknown"):
+            continue
+        n=str(name).lower()
+        # Prefer domestic league-like competitions; exclude obvious cups/UEFA.
+        cup=any(k in n for k in ("cup","copa","pokal","champions","europa","conference","super cup","qualification"))
+        score=0 if cup else 10
+        if "league" in n or n in {"premier league","laliga","bundesliga","serie a","ligue 1","eredivisie","primeira liga"}:
+            score += 5
+        candidates.append((score, {"division":str(name),"leagueId":lid,"ccode":ccode}))
+    if not candidates:
+        return {"division":None,"leagueId":None,"ccode":None}
+    candidates.sort(key=lambda x:x[0], reverse=True)
+    return candidates[0][1]
+
+
 def current_league(payload):
     explicit=_find_team_league(payload)
     if explicit.get("division"): return explicit
@@ -380,7 +419,7 @@ def historical_position(league_id, team_id):
         return None
     for season in ("2025/2026", "2025"):
         try:
-            payload = get(f"{ROOT}/api/leagues", {"id": str(league_id), "season": season})
+            payload = get(f"{ROOT}/api/data/leagues", {"id": str(league_id), "season": season})
             pos = table_position(payload, team_id)
             if pos is not None:
                 return pos
@@ -731,6 +770,13 @@ def enrich_base(m, now):
     hp=TEAM_CACHE.get(str(home.get("id"))) or safe_call(f"Team {hn}",lambda:team_payload(home.get("id"),home.get("name") or home.get("longName")),{})
     ap=TEAM_CACHE.get(str(away.get("id"))) or safe_call(f"Team {an}",lambda:team_payload(away.get("id"),away.get("name") or away.get("longName")),{})
     hl,al=current_league(hp),current_league(ap)
+    # Fixture competition is a safe display fallback, but only use it as the
+    # team's division when it looks like a domestic league (not a cup/UEFA tie).
+    fixture_div=str(m.get("_league_name") or "")
+    if not hl.get("division") and fixture_div and not any(k in fixture_div.lower() for k in ("cup","copa","pokal","champions","europa","conference","qualification")):
+        hl={"division":fixture_div,"leagueId":m.get("_league_id"),"ccode":m.get("_ccode")}
+    if not al.get("division") and fixture_div and not any(k in fixture_div.lower() for k in ("cup","copa","pokal","champions","europa","conference","qualification")):
+        al={"division":fixture_div,"leagueId":m.get("_league_id"),"ccode":m.get("_ccode")}
     hleague=LEAGUE_CACHE.get(str(hl.get("leagueId"))) or (safe_call(f"League {hl.get('leagueId')}",lambda:league_payload(hl.get("leagueId"),hl.get("division")),{}) if hl.get("leagueId") else {})
     aleague=LEAGUE_CACHE.get(str(al.get("leagueId"))) or (safe_call(f"League {al.get('leagueId')}",lambda:league_payload(al.get("leagueId"),al.get("division")),{}) if al.get("leagueId") else {})
     hpos=table_position(hleague,home.get("id")) or table_position(hp,home.get("id")); apos=table_position(aleague,away.get("id")) or table_position(ap,away.get("id"))
