@@ -31,23 +31,24 @@ function verdictClass(v){return isDraw(v)?"draw":""}
 
 function lineup(d,name){
   const list=Array.isArray(d.lineup)?d.lineup:[];
-  if(!list.length)return `<div class="lineup"><h3>${esc(name)}</h3><div class="empty-data">FotMob has not published a lineup for this match yet.</div></div>`;
-  return `<div class="lineup"><h3>${esc(name)} <span class="rank">${list.length} listed</span></h3>`+
-    list.map(p=>`<div class="player"><span class="pos">${esc(nice(p.position,""))}</span><span class="pname">${esc(nice(p.name,"Unknown"))}</span><span class="rating">${p.rating!=null?esc(p.rating):""}</span></div>`).join("")+
-    `</div>`;
+  if(!list.length)return `<div class="lineup"><h3>${esc(name)}</h3><div class="empty-data">Waiting for FotMob's confirmed or predicted XI.</div></div>`;
+  const starters=list.filter(p=>p.starter!==false).slice(0,11), bench=list.filter(p=>p.starter===false).slice(0,7);
+  const rows=arr=>arr.map(p=>`<div class="player"><span class="pos">${esc(nice(p.position,""))}</span><span class="pname">${esc(nice(p.name,"Unknown"))}</span><span class="rating">${p.rating!=null?esc(p.rating):""}</span></div>`).join("");
+  return `<div class="lineup"><h3>${esc(name)} <span class="rank">${starters.length} starters${bench.length?` · ${bench.length} bench`:""}</span></h3>
+    <div class="xi-label">STARTING XI</div>${rows(starters)}${bench.length?`<div class="xi-label bench-label">BENCH</div>${rows(bench)}`:""}</div>`;
 }
-
 function evidence(m){
   const h=td(m,"home"),a=td(m,"away"),items=[];
-  if(h.division||a.division)items.push(["DIV","League context",h.division===a.division?`${m.home} and ${m.away} are in ${nice(h.division)}. Positions are comparable.`:`${nice(h.division)} vs ${nice(a.division)}. Raw positions are NOT compared across divisions.`]);
-  if(h.position!=null||a.position!=null)items.push(["POS","Current table",`${m.home}: ${pos(h)} · ${m.away}: ${pos(a)}.`]);
-  if(h.lastSeasonPosition!=null||a.lastSeasonPosition!=null)items.push(["22","Last season finish",`${m.home}: ${nice(h.lastSeasonPosition,"N/A")} · ${m.away}: ${nice(a.lastSeasonPosition,"N/A")}. Used as an early-season prior.`]);
-  if(h.form||a.form)items.push(["FORM","Recent form",`${m.home}: ${nice(h.form,"N/A")} · ${m.away}: ${nice(a.form,"N/A")}.`]);
-  if(h.xg!=null||a.xg!=null)items.push(["xG","Expected goals",`${m.home}: ${nice(h.xg)} · ${m.away}: ${nice(a.xg)}.`]);
-  if(h.transferImpact!=null||a.transferImpact!=null)items.push(["TR","Squad change",`${m.home}: ${fmtSigned(h.transferImpact)} · ${m.away}: ${fmtSigned(a.transferImpact)}. Rough transfer/squad-strength adjustment.`]);
-  if(m.h2hSummary&&!/not available/i.test(m.h2hSummary))items.push(["H2H","Head-to-head",m.h2hSummary]);
-  if(h.injuries?.length||a.injuries?.length)items.push(["AVL","Availability",`${m.home}: ${h.injuries.length} listed · ${m.away}: ${a.injuries.length} listed.`]);
-  if(!items.length)items.push(["i","Data status","FotMob has not supplied enough secondary data yet. Missing fields are not invented."]);
+  if(h.division||a.division)items.push(["DIV","Current league",h.division===a.division?`${m.home} and ${m.away}: ${nice(h.division)}. Table positions are comparable.`:`${nice(h.division)} vs ${nice(a.division)}. The model does not compare raw positions across divisions.`]);
+  if(h.position!=null||a.position!=null)items.push(["POS","Table position",`${m.home}: ${pos(h)} · ${m.away}: ${pos(a)}.`]);
+  if(h.lastSeasonPosition!=null||a.lastSeasonPosition!=null)items.push(["25","2025/26 finish",`${m.home}: ${nice(h.lastSeasonPosition,"N/A")} · ${m.away}: ${nice(a.lastSeasonPosition,"N/A")}. Stronger early-season prior than a one-game table.`]);
+  if(h.form||a.form)items.push(["FORM","Last matches",`${m.home}: ${nice(h.form,"N/A")} · ${m.away}: ${nice(a.form,"N/A")} · points ${h.formPoints??"N/A"}-${a.formPoints??"N/A"}.`]);
+  if(h.recentGF!=null||a.recentGF!=null)items.push(["G/GA","Recent scoring",`${m.home}: ${nice(h.recentGF)} scored / ${nice(h.recentGA)} allowed · ${m.away}: ${nice(a.recentGF)} / ${nice(a.recentGA)}.`]);
+  if(h.xg!=null||a.xg!=null)items.push(["xG","Expected goals",`${m.home}: ${nice(h.xg)} · ${m.away}: ${nice(a.xg)}. Used as an attacking-quality input, not as a result.`]);
+  if(h.lineupAvgRating!=null||a.lineupAvgRating!=null)items.push(["XI","XI quality",`${m.home}: ${nice(h.lineupAvgRating,"N/A")} avg rating · ${m.away}: ${nice(a.lineupAvgRating,"N/A")}.`]);
+  if(h.injuries?.length||a.injuries?.length){const names=x=>x.slice(0,4).map(z=>z.name).join(", ")||"none";items.push(["AVL","Availability",`${m.home}: ${names(h.injuries)} · ${m.away}: ${names(a.injuries)}.`]);}
+  if(m.h2h?.games)items.push(["H2H","Recent H2H",`${m.h2h.games} meetings · ${m.home} wins ${m.h2h.homeWins} · draws ${m.h2h.draws} · ${m.away} wins ${m.h2h.awayWins}.`]);
+  if(!items.length)items.push(["i","Data status","Secondary data is still unavailable. The model will not invent missing evidence."]);
   return items.map(x=>`<div class="evidence-item"><div class="eicon">${esc(x[0])}</div><div><b>${esc(x[1])}</b><p>${esc(x[2])}</p></div></div>`).join("");
 }
 function fmtSigned(x){return x==null?"N/A":(Number(x)>0?"+":"")+Number(x).toFixed(1)}
@@ -77,8 +78,10 @@ function comparison(m){
     ["Position",pos(h),pos(a)],
     ["Last season",nice(h.lastSeasonPosition),nice(a.lastSeasonPosition)],
     ["Form",nice(h.form,"N/A"),nice(a.form,"N/A")],
+    ["Goals / game",nice(h.recentGF),nice(a.recentGF)],
+    ["Goals allowed",nice(h.recentGA),nice(a.recentGA)],
     ["xG",nice(h.xg),nice(a.xg)],
-    ["Squad change",fmtSigned(h.transferImpact),fmtSigned(a.transferImpact)],
+    ["XI rating",nice(h.lineupAvgRating),nice(a.lineupAvgRating)],
     ["Injuries",h.injuries?.length??0,a.injuries?.length??0],
     ["XI",h.lineup?.length??0,a.lineup?.length??0]
   ];
@@ -155,7 +158,7 @@ function render(){
   if(!ms.length){$("#fixtures").innerHTML=`<div class="empty">No matches in this filter.</div>`;return}
   const groups={};ms.forEach(m=>(groups[m.competition]??=[]).push(m));
   $("#fixtures").innerHTML=Object.entries(groups).map(([c,arr])=>`<section class="competition">
-    <div class="comp-head"><span class="comp-logo">${esc((arr[0].competitionCode||c.slice(0,3)).toUpperCase())}</span><h2>${esc(c)}</h2><span class="count">${arr.length} MATCH${arr.length===1?"":"ES"}</span></div>
+    <div class="comp-head"><span class="comp-logo flag">${esc(arr[0].competitionFlag||"🌍")}</span><div class="comp-title"><h2>${esc(c)}</h2><span class="country-label">${esc(arr[0].competitionCountry||"International")}</span></div><span class="count">${arr.length} MATCH${arr.length===1?"":"ES"}</span></div>
     ${arr.map(matchHTML).join("")}</section>`).join("");
 }
 function toggleAnalysis(id){
@@ -163,6 +166,36 @@ function toggleAnalysis(id){
   if(openId)requestAnimationFrame(()=>document.getElementById(`m-${CSS.escape(String(id))}`)?.scrollIntoView({behavior:"smooth",block:"nearest"}));
 }
 function setFilter(x){filter=x;openId=null;render()}
+
+async function pollLiveScores(){
+  if(!DATA?.matches?.length) return;
+  const live=DATA.matches.filter(m=>status(m)==="LIVE" || m.status==="UPCOMING").slice(0,30);
+  if(!live.length) return;
+  let changed=false;
+  for(const m of live){
+    const id=encodeURIComponent(m.id);
+    const urls=[
+      `https://www.fotmob.com/api/data/match-score?matchId=${id}`,
+      `https://www.fotmob.com/api/match-score?matchId=${id}`
+    ];
+    for(const u of urls){
+      try{
+        const r=await fetch(u,{cache:"no-store",headers:{"Cache-Control":"no-cache"}});
+        if(!r.ok) continue;
+        const j=await r.json(); const x=j.match||j;
+        const hs=x.home?.score,as=x.away?.score,st=x.status||{};
+        if(hs!=null&&as!=null&&(m.homeScore!==hs||m.awayScore!==as)){m.homeScore=hs;m.awayScore=as;changed=true;}
+        if(st.started!=null){const ns=st.finished?"FT":st.started?"LIVE":"UPCOMING";if(m.status!==ns){m.status=ns;changed=true;}}
+        if(st.utcTime)m.kickoff=st.utcTime;
+        break;
+      }catch(e){/* fall back to cached fixtures.json */}
+    }
+  }
+  if(changed) render();
+  const hb=document.querySelector('.topmeta i');
+  if(hb){hb.classList.remove('beat-now');void hb.offsetWidth;hb.classList.add('beat-now');}
+}
+
 async function load(manual=false){
   const btn=$("#refresh");
   if(manual){btn.disabled=true;btn.textContent="↻ Loading…";$("#feedStatus").textContent="REFRESHING";}
@@ -183,3 +216,5 @@ async function load(manual=false){
 $("#refresh").onclick=()=>load(true);
 load();
 setInterval(()=>load(false),30000);
+setInterval(pollLiveScores,5000);
+setTimeout(pollLiveScores,1200);

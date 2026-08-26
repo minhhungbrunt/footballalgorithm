@@ -67,3 +67,6 @@ box-shadow:0 0 0 0 rgba(53,232,139,.65);animation:livePulse 1.35s infinite}
 100%{box-shadow:0 0 0 0 rgba(53,232,139,0);opacity:1}
 }
 #refresh:disabled{opacity:.65;cursor:wait;transform:none}
+.xi-label{font-size:8px;letter-spacing:.1em;color:var(--muted);font-weight:950;padding:7px 0 3px}.bench-label{margin-top:6px;border-top:1px solid #14202b}
+.beat-now{animation:topBeat .55s ease-out!important}@keyframes topBeat{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(53,232,139,.8)}50%{transform:scale(1.6);box-shadow:0 0 0 7px rgba(53,232,139,0)}100%{transform:scale(1)}}
+.live-card .live-score{letter-spacing:.03em}.comp-title h2{margin:0}.comp-title{overflow:hidden}.comp-title h2{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
