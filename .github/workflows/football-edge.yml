@@ -69,18 +69,7 @@ jobs:
           print("FEED VALIDATION PASSED")
           PY
 
-      - name: Commit refreshed data
-        run: |
-          git config user.name "football-edge-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data/fixtures.json
-          if git diff --cached --quiet; then
-            echo "No data changes to commit."
-          else
-            git commit -m "chore: refresh football data"
-            git push origin HEAD:main
-          fi
-
+    
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
