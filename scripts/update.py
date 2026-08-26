@@ -11,9 +11,12 @@ import requests
 TZ = ZoneInfo("America/New_York")
 ROOT = "https://www.fotmob.com"
 HEAD = {
-    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36",
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
     "Accept": "application/json,text/plain,*/*",
     "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.fotmob.com/",
+    "Origin": "https://www.fotmob.com",
+    "Cache-Control": "no-cache",
 }
 CACHE = {}
 TEAM_CACHE = {}
@@ -152,7 +155,28 @@ def normalize_comp(name, ccode="", country=""):
 
 
 def daily(day):
-    return get(f"{ROOT}/api/matches", {"date": day.strftime("%Y%m%d")})
+    """Fetch a FotMob daily fixture list with endpoint fallbacks.
+
+    FotMob has changed/retired API paths before. The current public route is
+    /api/matches; /api/data/matches is retained only as a compatibility fallback.
+    We never silently return an empty feed.
+    """
+    date = day.strftime("%Y%m%d")
+    attempts = [
+        (f"{ROOT}/api/matches", {"date": date, "timezone": "America/New_York"}),
+        (f"{ROOT}/api/matches", {"date": date}),
+        (f"{ROOT}/api/data/matches", {"date": date}),
+    ]
+    errors = []
+    for url, params in attempts:
+        try:
+            payload = get(url, params)
+            if isinstance(payload, dict) and payload.get("leagues") is not None:
+                return payload
+            errors.append(f"{url}: unexpected response")
+        except Exception as exc:
+            errors.append(f"{url}: {exc}")
+    raise RuntimeError("FotMob endpoints failed: " + " | ".join(errors))
 
 
 def match_details(match_id):
@@ -570,8 +594,21 @@ def main():
 
     matches.sort(key=lambda x: (x["status"] != "LIVE", x.get("kickoff") or ""))
     if not matches:
-        print("NO FIXTURES GENERATED")
+        print("NO NEW FIXTURES GENERATED")
         if errors: print("SOURCE ERRORS:", " | ".join(errors))
+        existing = Path("data/fixtures.json")
+        if existing.exists():
+            try:
+                old = json.loads(existing.read_text(encoding="utf-8"))
+                if isinstance(old.get("matches"), list) and old["matches"]:
+                    print("KEEPING LAST VALID FEED:", len(old["matches"]), "fixtures")
+                    old["sourceStatus"] = "FotMob temporarily unavailable · last valid feed retained"
+                    old["sourceErrors"] = errors
+                    old["updatedAt"] = dt.datetime.now(dt.timezone.utc).isoformat()
+                    existing.write_text(json.dumps(old, ensure_ascii=False, indent=2), encoding="utf-8")
+                    return
+            except Exception as exc:
+                print("Could not preserve previous feed:", exc)
         raise SystemExit(2)
 
     result = {
