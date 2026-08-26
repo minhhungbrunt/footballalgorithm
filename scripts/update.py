@@ -69,7 +69,7 @@ CCODE_COUNTRY = {
 }
 
 
-def get(url, params=None, timeout=8, tries=1):
+def get(url, params=None, timeout=10, tries=2):
     key = (url, tuple(sorted((params or {}).items())))
     if key in CACHE:
         return CACHE[key]
@@ -85,7 +85,7 @@ def get(url, params=None, timeout=8, tries=1):
         except Exception as exc:
             last = str(exc)
         if attempt + 1 < tries:
-            time.sleep(0.5)
+            time.sleep(0.35 + attempt * 0.35)
     raise RuntimeError(last or "request failed")
 
 
@@ -160,7 +160,7 @@ def normalize_comp(name, ccode="", country=""):
 
 
 
-def sofa_get(path, params=None, timeout=6, tries=1):
+def sofa_get(path, params=None, timeout=8, tries=2):
     url = SOFA + path
     key = (url, tuple(sorted((params or {}).items())))
     if key in SOFA_CACHE:
@@ -175,7 +175,7 @@ def sofa_get(path, params=None, timeout=6, tries=1):
         except Exception as exc:
             last = str(exc)
         if attempt + 1 < tries:
-            time.sleep(.5)
+            time.sleep(.3 + attempt*.3)
     raise RuntimeError(last or "Sofascore request failed")
 
 
@@ -620,92 +620,130 @@ def model(match):
     }
 
 
-def process_match(m, now, sofa_maps):
-    mid = str(pick(m, "id", "matchId") or "")
+
+def safe_call(label, fn, default=None):
+    try:
+        return fn()
+    except Exception as exc:
+        print(f"{label} failed: {exc}")
+        return default
+
+
+def enrich_base(m, now):
+    """Build the full non-match-detail team data while preserving every old field."""
     home, away = m.get("home") or {}, m.get("away") or {}
     hn, an = pick(home, "name", "longName"), pick(away, "name", "longName")
-    if not mid or not hn or not an:
-        return None
-    base_comp, display_comp, ctry = normalize_comp(m.get("_league_name"), m.get("_ccode"), m.get("_country"))
-    if base_comp not in SUPPORTED:
-        return None
-    try:
-        hp = team_payload(home.get("id")); ap = team_payload(away.get("id"))
-    except Exception as exc:
-        print("Team data failed", mid, exc); hp = {}; ap = {}
+    hp = safe_call(f"Team {hn}", lambda: team_payload(home.get("id")), {})
+    ap = safe_call(f"Team {an}", lambda: team_payload(away.get("id")), {})
     hl, al = current_league(hp), current_league(ap)
-    # Current team payload is the source of truth. Avoid extra historical/table calls
-    # here because they made a single match capable of blocking the whole matchday.
-    hpos = table_position(hp, home.get("id"))
-    apos = table_position(ap, away.get("id"))
+
+    hleague = safe_call(f"League {hl.get('leagueId')}", lambda: league_payload(hl.get("leagueId")), {}) if hl.get("leagueId") else {}
+    aleague = safe_call(f"League {al.get('leagueId')}", lambda: league_payload(al.get("leagueId")), {}) if al.get("leagueId") else {}
+    hpos = table_position(hleague, home.get("id")) or table_position(hp, home.get("id"))
+    apos = table_position(aleague, away.get("id")) or table_position(ap, away.get("id"))
     hlast = previous_finish(hp, home.get("id"))
     alast = previous_finish(ap, away.get("id"))
-    hd = {"id": home.get("id"), "division": hl.get("division"), "leagueId": hl.get("leagueId"),
-          "ccode": hl.get("ccode"), "position": hpos, "form": form_from_team(hp, home.get("id")),
-          "lastSeasonPosition": hlast, "transferImpact": transfer_impact(hp), "lineup": [], "injuries": []}
-    ad = {"id": away.get("id"), "division": al.get("division"), "leagueId": al.get("leagueId"),
-          "ccode": al.get("ccode"), "position": apos, "form": form_from_team(ap, away.get("id")),
-          "lastSeasonPosition": alast, "transferImpact": transfer_impact(ap), "lineup": [], "injuries": []}
+    # Keep last-season finish, but only make the extra historical call when the team payload lacks it.
+    if hlast is None:
+        hlast = safe_call(f"History {hn}", lambda: historical_position(hl.get("leagueId"), home.get("id")), None)
+    if alast is None:
+        alast = safe_call(f"History {an}", lambda: historical_position(al.get("leagueId"), away.get("id")), None)
+
+    hd = {
+        "id": home.get("id"), "division": hl.get("division"), "leagueId": hl.get("leagueId"),
+        "ccode": hl.get("ccode"), "position": hpos,
+        "form": form_from_team(hp, home.get("id")), "lastSeasonPosition": hlast,
+        "transferImpact": transfer_impact(hp), "lineup": [], "injuries": []
+    }
+    ad = {
+        "id": away.get("id"), "division": al.get("division"), "leagueId": al.get("leagueId"),
+        "ccode": al.get("ccode"), "position": apos,
+        "form": form_from_team(ap, away.get("id")), "lastSeasonPosition": alast,
+        "transferImpact": transfer_impact(ap), "lineup": [], "injuries": []
+    }
     hd["formPoints"] = sum(3 if x == "W" else 1 if x == "D" else 0 for x in hd["form"])
     ad["formPoints"] = sum(3 if x == "W" else 1 if x == "D" else 0 for x in ad["form"])
+    return hp, ap, hd, ad
 
-    h2h_summary = "Not available from FotMob."
-    # Match details are valuable but must never hold the run hostage.
+
+def sofa_for_match(m, hn, an, now):
+    """Fetch lineup + incidents independently; one failure never blocks the match."""
+    day_key = (m.get("utcTime") or "")[:10] or now.date().isoformat()
+    evmap = SOFA_EVENTS.get(day_key)
+    if evmap is None:
+        try:
+            evmap = sofa_event_map(sofa_scheduled(dt.date.fromisoformat(day_key)))
+        except Exception as exc:
+            print("Sofascore schedule failed", day_key, exc)
+            evmap = {}
+        SOFA_EVENTS[day_key] = evmap
+    event = evmap.get((norm_team_name(hn), norm_team_name(an)))
+    if not event:
+        return None, {}, {}, []
+    sid = event.get("id")
+    lh = la = {}
+    incidents = []
+    # Don't waste lineup calls on old/completed games unless the lineup is missing from FotMob; caller decides.
     try:
-        detail = match_details(mid)
-        hd["lineup"], ad["lineup"] = lineup(detail, hd["id"], ad["id"])
+        lh, la = sofa_lineups(sid)
+    except Exception as exc:
+        print("Sofascore lineup failed", sid, exc)
+    try:
+        incidents = sofa_incidents(sid)
+    except Exception as exc:
+        print("Sofascore incidents failed", sid, exc)
+    return event, lh, la, incidents
+
+
+def detail_for_match(mid):
+    return safe_call(f"Detail {mid}", lambda: match_details(mid), {})
+
+
+def apply_sofa(hd, ad, event, lh, la):
+    if not event:
+        return
+    if lh.get("players") and la.get("players"):
+        hd["lineup"] = lh["players"]; ad["lineup"] = la["players"]
+        hd["bench"] = lh.get("substitutes", []); ad["bench"] = la.get("substitutes", [])
+        hd["missingPlayers"] = lh.get("missingPlayers", []); ad["missingPlayers"] = la.get("missingPlayers", [])
+        hd["formation"] = lh.get("formation"); ad["formation"] = la.get("formation")
+        hd["lineupConfirmed"] = lh.get("confirmed", False); ad["lineupConfirmed"] = la.get("confirmed", False)
+        hd["xiRating"] = lineup_quality(lh); ad["xiRating"] = lineup_quality(la)
+
+
+def build_match(m, base, now, sofa_info):
+    mid, hn, an = base
+    hp, ap, hd, ad = enrich_base(m, now)
+    detail = detail_for_match(mid)
+    if detail:
+        fh, fa = lineup(detail, hd["id"], ad["id"])
+        if fh and fa:
+            hd["lineup"], ad["lineup"] = fh, fa
         xh, xa = xg(detail); hd["xg"], ad["xg"] = xh, xa
         h2h_summary = h2h(detail)
-    except Exception as exc:
-        print("FotMob detail skipped", mid, exc)
+    else:
         hd["xg"] = ad["xg"] = None
+        h2h_summary = "Not available from FotMob."
 
-    sofa_event = None; incidents = []; lineup_source = "FotMob" if hd.get("lineup") and ad.get("lineup") else None
-    # Only spend lineup requests where they can realistically exist: within 12h of kickoff,
-    # live, or already finished. This removes dozens of useless requests for distant fixtures.
-    try:
-        day_key = (m.get("utcTime") or "")[:10] or now.date().isoformat()
-        evmap = sofa_maps.get(day_key, {})
-        sofa_event = evmap.get((norm_team_name(hn), norm_team_name(an)))
-        if sofa_event:
-            sid = sofa_event.get("id")
-            kickoff_raw = m.get("utcTime")
-            should_fetch_lineup = True
-            try:
-                if kickoff_raw:
-                    k = dt.datetime.fromisoformat(str(kickoff_raw).replace("Z", "+00:00"))
-                    should_fetch_lineup = (k - dt.datetime.now(dt.timezone.utc)).total_seconds() <= 12 * 3600
-            except Exception:
-                pass
-            if should_fetch_lineup:
-                sofa_lh, sofa_la = sofa_lineups(sid)
-                if sofa_lh.get("players") and sofa_la.get("players"):
-                    hd["lineup"] = sofa_lh["players"]; ad["lineup"] = sofa_la["players"]
-                    hd["bench"] = sofa_lh.get("substitutes", []); ad["bench"] = sofa_la.get("substitutes", [])
-                    hd["missingPlayers"] = sofa_lh.get("missingPlayers", []); ad["missingPlayers"] = sofa_la.get("missingPlayers", [])
-                    hd["formation"] = sofa_lh.get("formation"); ad["formation"] = sofa_la.get("formation")
-                    hd["lineupConfirmed"] = sofa_lh.get("confirmed", False); ad["lineupConfirmed"] = sofa_la.get("confirmed", False)
-                    hd["xiRating"] = lineup_quality(sofa_lh); ad["xiRating"] = lineup_quality(sofa_la)
-                    lineup_source = "Sofascore"
-            # Incidents matter primarily for live/finished games; skip them for future matches.
-            if status(m) in ("LIVE", "FT"):
-                incidents = sofa_incidents(sid)
-    except Exception as exc:
-        print("Sofascore enrichment skipped", mid, exc)
-
+    sofa_event, sofa_lh, sofa_la, incidents = sofa_info
+    apply_sofa(hd, ad, sofa_event, sofa_lh, sofa_la)
     hs, ass = score(m)
     st = m.get("status") or {}
-    return {"id": mid, "competition": display_comp, "competitionName": base_comp,
-            "competitionCountry": ctry, "competitionCode": str(m.get("_ccode") or "INT").upper(),
-            "competitionFlag": flag(m.get("_ccode"), ctry), "home": hn, "away": an,
-            "homeScore": hs, "awayScore": ass, "status": status(m),
-            "kickoff": st.get("utcTime") or m.get("utcTime"),
-            "minute": {"short": pick(st, "reason", "period") or ""},
-            "homeData": hd, "awayData": ad, "h2hSummary": h2h_summary, "scorers": incidents,
-            "sofascoreEventId": sofa_event.get("id") if sofa_event else None,
-            "lineupSource": lineup_source,
-            "fotmobMatchUrl": f"{ROOT}/matches/{mid}/match-details"}
-
+    out = {
+        "id": mid, "competition": base[3], "competitionName": base[4],
+        "competitionCountry": base[5], "competitionCode": str(m.get("_ccode") or "INT").upper(),
+        "competitionFlag": flag(m.get("_ccode"), base[5]),
+        "home": hn, "away": an, "homeScore": hs, "awayScore": ass, "status": status(m),
+        "kickoff": st.get("utcTime") or m.get("utcTime"),
+        "minute": {"short": pick(st, "reason", "period") or ""},
+        "homeData": hd, "awayData": ad, "h2hSummary": h2h_summary,
+        "scorers": incidents,
+        "sofascoreEventId": sofa_event.get("id") if sofa_event else None,
+        "lineupSource": "Sofascore" if (sofa_lh.get("players") and sofa_la.get("players")) else ("FotMob" if (hd.get("lineup") and ad.get("lineup")) else None),
+        "fotmobMatchUrl": f"{ROOT}/matches/{mid}/match-details",
+    }
+    out["model"] = model(out)
+    return out
 
 def main():
     now = dt.datetime.now(dt.timezone.utc).astimezone(TZ)
@@ -718,67 +756,130 @@ def main():
             print(f"FotMob {day}: {len(rows)} raw fixtures")
             raw.extend(rows)
         except Exception as exc:
-            errors.append(f"{day}: {exc}"); print("FotMob daily failed", day, exc)
+            errors.append(f"{day}: {exc}")
+            print("FotMob daily failed", day, exc)
 
-    matches, seen = [], set()
-    candidates = []
+    candidates, seen = [], set()
     for m in raw:
         mid = str(pick(m, "id", "matchId") or "")
-        if not mid or mid in seen: continue
+        if not mid or mid in seen:
+            continue
         seen.add(mid)
-        base_comp = normalize_comp(m.get("_league_name"), m.get("_ccode"), m.get("_country"))[0]
-        if base_comp in SUPPORTED: candidates.append(m)
+        home, away = m.get("home") or {}, m.get("away") or {}
+        hn, an = pick(home, "name", "longName"), pick(away, "name", "longName")
+        if not hn or not an:
+            continue
+        base_comp, display_comp, ctry = normalize_comp(m.get("_league_name"), m.get("_ccode"), m.get("_country"))
+        if base_comp not in SUPPORTED:
+            continue
+        candidates.append((m, (mid, hn, an, display_comp, base_comp, ctry)))
 
-    # One scheduled-events request per day, shared by every match.
-    sofa_maps = {}
-    for day in days:
-        try:
-            evs = sofa_scheduled(day)
-            sofa_maps[day.isoformat()] = sofa_event_map(evs)
-            print(f"Sofascore {day}: {len(evs)} events indexed")
-        except Exception as exc:
-            sofa_maps[day.isoformat()] = {}
-            print("Sofascore schedule skipped", day, exc)
-
-    print(f"PROCESSING {len(candidates)} fixtures with 8 workers")
-    # Hard concurrency keeps one slow provider from serially blocking the whole matchday.
-    with ThreadPoolExecutor(max_workers=8) as pool:
-        futures = {pool.submit(process_match, m, now, sofa_maps): m for m in candidates}
-        for n, fut in enumerate(as_completed(futures), 1):
-            try:
-                out = fut.result()
-                if out:
-                    out["model"] = model(out)
-                    matches.append(out)
-            except Exception as exc:
-                m = futures[fut]
-                errors.append(f"{pick(m, 'id', 'matchId')}: {exc}")
-                print("MATCH FAILED", pick(m, "id", "matchId"), exc)
-            if n % 5 == 0 or n == len(futures):
-                print(f"PROGRESS {n}/{len(futures)}")
-
-    matches.sort(key=lambda x: (x["status"] != "LIVE", x.get("kickoff") or ""))
-    if not matches:
+    print(f"SUPPORTED FIXTURES: {len(candidates)}")
+    if not candidates:
         print("NO NEW FIXTURES GENERATED")
         existing = Path("data/fixtures.json")
         if existing.exists():
             try:
                 old = json.loads(existing.read_text(encoding="utf-8"))
                 if isinstance(old.get("matches"), list) and old["matches"]:
-                    old["sourceStatus"] = "Refresh failed · last valid feed retained"
+                    old["sourceStatus"] = "No fresh fixtures returned · last valid feed retained"
                     old["sourceErrors"] = errors
                     old["updatedAt"] = dt.datetime.now(dt.timezone.utc).isoformat()
                     existing.write_text(json.dumps(old, ensure_ascii=False, indent=2), encoding="utf-8")
                     return
-            except Exception as exc:
-                print("Could not preserve previous feed:", exc)
+            except Exception:
+                pass
         raise SystemExit(2)
 
-    result = {"updatedAt": dt.datetime.now(dt.timezone.utc).isoformat(), "fixtureCount": len(matches),
-              "sourceStatus": f"FotMob + Sofascore · {len(matches)} fixtures", "sourceErrors": errors, "matches": matches}
+    # Fetch team/league/detail/lineup work concurrently, but preserve the full old schema.
+    # We deliberately cap concurrency to avoid hammering public endpoints.
+    workers = min(8, max(2, len(candidates)))
+    print(f"ENRICHING {len(candidates)} fixtures with {workers} workers")
+
+    # First fetch the once-per-day Sofascore schedule maps. This prevents one schedule request per match.
+    sofa_maps = {}
+    for day in days:
+        key = day.isoformat()
+        try:
+            sofa_maps[key] = sofa_event_map(sofa_scheduled(day))
+            SOFA_EVENTS[key] = sofa_maps[key]
+            print(f"Sofascore schedule {key}: {len(sofa_maps[key])} events")
+        except Exception as exc:
+            sofa_maps[key] = {}
+            print(f"Sofascore schedule {key} unavailable: {exc}")
+
+    def prepare(m, base):
+        mid, hn, an, display_comp, base_comp, ctry = base
+        # Team payloads are the expensive common dependency. Do them in parallel per match.
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            f1 = pool.submit(team_payload, m.get("home", {}).get("id"))
+            f2 = pool.submit(team_payload, m.get("away", {}).get("id"))
+            hp = safe_call(f"Team {hn}", lambda: f1.result(), {})
+            ap = safe_call(f"Team {an}", lambda: f2.result(), {})
+        hl, al = current_league(hp), current_league(ap)
+        # League payloads are retained for current table positions.
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            fh = pool.submit(league_payload, hl.get("leagueId")) if hl.get("leagueId") else None
+            fa = pool.submit(league_payload, al.get("leagueId")) if al.get("leagueId") else None
+            hleague = safe_call(f"League {hl.get('leagueId')}", lambda: fh.result(), {}) if fh else {}
+            aleague = safe_call(f"League {al.get('leagueId')}", lambda: fa.result(), {}) if fa else {}
+        hpos = table_position(hleague, m.get("home", {}).get("id")) or table_position(hp, m.get("home", {}).get("id"))
+        apos = table_position(aleague, m.get("away", {}).get("id")) or table_position(ap, m.get("away", {}).get("id"))
+        hlast = previous_finish(hp, m.get("home", {}).get("id"))
+        alast = previous_finish(ap, m.get("away", {}).get("id"))
+        if hlast is None and hl.get("leagueId"):
+            hlast = safe_call(f"History {hn}", lambda: historical_position(hl.get("leagueId"), m.get("home", {}).get("id")), None)
+        if alast is None and al.get("leagueId"):
+            alast = safe_call(f"History {an}", lambda: historical_position(al.get("leagueId"), m.get("away", {}).get("id")), None)
+        hd = {"id":m.get("home",{}).get("id"),"division":hl.get("division"),"leagueId":hl.get("leagueId"),"ccode":hl.get("ccode"),"position":hpos,"form":form_from_team(hp,m.get("home",{}).get("id")),"lastSeasonPosition":hlast,"transferImpact":transfer_impact(hp),"lineup":[],"injuries":[]}
+        ad = {"id":m.get("away",{}).get("id"),"division":al.get("division"),"leagueId":al.get("leagueId"),"ccode":al.get("ccode"),"position":apos,"form":form_from_team(ap,m.get("away",{}).get("id")),"lastSeasonPosition":alast,"transferImpact":transfer_impact(ap),"lineup":[],"injuries":[]}
+        hd["formPoints"] = sum(3 if x=="W" else 1 if x=="D" else 0 for x in hd["form"])
+        ad["formPoints"] = sum(3 if x=="W" else 1 if x=="D" else 0 for x in ad["form"])
+        detail = safe_call(f"Detail {mid}", lambda: match_details(mid), {})
+        if detail:
+            fh, fa = lineup(detail, hd["id"], ad["id"])
+            hd["lineup"], ad["lineup"] = fh, fa
+            hd["xg"], ad["xg"] = xg(detail)
+            h2h_summary = h2h(detail)
+        else:
+            hd["xg"] = ad["xg"] = None; h2h_summary = "Not available from FotMob."
+        day_key=(m.get("utcTime") or "")[:10] or now.date().isoformat()
+        event=sofa_maps.get(day_key,{}).get((norm_team_name(hn),norm_team_name(an)))
+        lh=la={}; incidents=[]
+        if event:
+            sid=event.get("id")
+            # Lineups are most useful near kickoff and live; still try for FT if missing from FotMob.
+            try: lh,la=sofa_lineups(sid)
+            except Exception as exc: print("Sofascore lineup failed",mid,exc)
+            try: incidents=sofa_incidents(sid)
+            except Exception as exc: print("Sofascore incidents failed",mid,exc)
+            apply_sofa(hd,ad,event,lh,la)
+        hs,ass=score(m); st=m.get("status") or {}
+        out={"id":mid,"competition":display_comp,"competitionName":base_comp,"competitionCountry":ctry,"competitionCode":str(m.get("_ccode") or "INT").upper(),"competitionFlag":flag(m.get("_ccode"),ctry),"home":hn,"away":an,"homeScore":hs,"awayScore":ass,"status":status(m),"kickoff":st.get("utcTime") or m.get("utcTime"),"minute":{"short":pick(st,"reason","period") or ""},"homeData":hd,"awayData":ad,"h2hSummary":h2h_summary,"scorers":incidents,"sofascoreEventId":event.get("id") if event else None,"lineupSource":"Sofascore" if (lh.get("players") and la.get("players")) else ("FotMob" if (hd.get("lineup") and ad.get("lineup")) else None),"fotmobMatchUrl":f"{ROOT}/matches/{mid}/match-details"}
+        out["model"]=model(out)
+        return out
+
+    matches=[]
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures={pool.submit(prepare,m,b): (m,b) for m,b in candidates}
+        done=0
+        for future in as_completed(futures):
+            done += 1
+            m,b=futures[future]
+            try:
+                matches.append(future.result())
+            except Exception as exc:
+                errors.append(f"{b[0]} {b[1]} v {b[2]}: {exc}")
+                print("MATCH FAILED", b[0], b[1], "v", b[2], exc)
+            print(f"PROGRESS {done}/{len(candidates)}")
+
+    matches.sort(key=lambda x: (x["status"] != "LIVE", x.get("kickoff") or ""))
+    if not matches:
+        raise SystemExit(2)
+    result={"updatedAt":dt.datetime.now(dt.timezone.utc).isoformat(),"fixtureCount":len(matches),"sourceStatus":f"FotMob + Sofascore enrichment · {len(matches)} fixtures","sourceErrors":errors,"matches":matches}
     Path("data").mkdir(exist_ok=True)
-    Path("data/fixtures.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    print("WROTE", len(matches), "fixtures")
+    Path("data/fixtures.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
+    print("WROTE",len(matches),"fixtures")
 
 
 if __name__ == "__main__":
