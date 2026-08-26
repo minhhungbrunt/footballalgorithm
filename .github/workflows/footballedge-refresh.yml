@@ -46,6 +46,11 @@ jobs:
           for m in x["matches"]:
               assert m.get("home") and m.get("away") and m.get("competition")
           print("VALID:", len(x["matches"]), "fixtures")
+          lineups=sum(bool((m.get("homeData") or {}).get("lineup")) and bool((m.get("awayData") or {}).get("lineup")) for m in x["matches"])
+          forms=sum(bool((m.get("homeData") or {}).get("form")) and bool((m.get("awayData") or {}).get("form")) for m in x["matches"])
+          divisions=sum(bool((m.get("homeData") or {}).get("division")) and bool((m.get("awayData") or {}).get("division")) for m in x["matches"])
+          xgs=sum((m.get("homeData") or {}).get("xg") is not None and (m.get("awayData") or {}).get("xg") is not None for m in x["matches"])
+          print(f"ENRICHMENT: {lineups} lineups · {forms} form pairs · {divisions} divisions · {xgs} xG pairs")
           PY
 
       - name: Commit refreshed data
