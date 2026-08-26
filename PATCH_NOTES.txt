@@ -1,0 +1,21 @@
+FOOTBALEDGE V12 — RECOVERY + DATA INTEGRITY
+
+This build restores the rich data pipeline while keeping the live/UI work.
+
+FIXED
+- Form now comes primarily from the team's current domestic league fixture history, with team payload fallback.
+- Previous-season position is read from the previous domestic league table, not the cup.
+- Current table evidence includes points, played and goal difference when available.
+- FotMob match-detail goals/assists are now a fallback when the live incident source is unavailable.
+- Sofascore remains the lineup/incident source; FotMob remains the primary fixture/match-detail source.
+- No cup competition is used as a team's domestic division.
+- Cross-division table positions are never compared directly.
+- Draw remains a genuine 1X2 outcome.
+- Score projection is generated from the same probability grid as the verdict and must agree with it.
+- GitHub Pages deployment workflow restored.
+- Five-minute data refresh remains enabled; browser live polling remains 5 seconds for live events.
+
+IMPORTANT
+- Replace the repository contents with this package at the repo root.
+- Run "FootballEdge refresh" once manually after commit.
+- The Action log must show non-zero FORM PAIRS and DIVISIONS before judging the site.
