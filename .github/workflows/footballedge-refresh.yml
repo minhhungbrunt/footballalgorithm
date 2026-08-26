@@ -1,0 +1,63 @@
+name: FootballEdge refresh
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: footballedge-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Offline model sanity test
+        run: python -u scripts/self_test.py
+
+      - name: Pull FotMob
+        run: python -u scripts/update.py
+
+      - name: Validate generated feed
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("data/fixtures.json")
+          x=json.loads(p.read_text(encoding="utf-8"))
+          assert isinstance(x.get("matches"), list) and x["matches"], "No fixtures generated"
+          for m in x["matches"]:
+              assert m.get("home") and m.get("away") and m.get("competition")
+          divisions=sum(1 for m in x["matches"] if m.get("homeData",{}).get("division") and m.get("awayData",{}).get("division"))
+          lineups=sum(1 for m in x["matches"] if m.get("homeData",{}).get("lineup") and m.get("awayData",{}).get("lineup"))
+          xgpairs=sum(1 for m in x["matches"] if m.get("homeData",{}).get("xg") is not None and m.get("awayData",{}).get("xg") is not None)
+          print("VALID:", len(x["matches"]), "fixtures")
+          print("ENRICHMENT: divisions=", divisions, "lineup_pairs=", lineups, "xg_pairs=", xgpairs)
+          PY
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name "football-edge-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/fixtures.json
+          git diff --cached --quiet && echo "No data changes" && exit 0
+          git commit -m "chore: refresh football data"
+          git push origin HEAD:main
