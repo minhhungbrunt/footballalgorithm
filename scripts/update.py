@@ -210,6 +210,20 @@ def sofa_event_map(events):
         out[(norm_team_name(h),norm_team_name(a))]=e
     return out
 
+def sofa_find_event(events, home, away):
+    """Tolerant name matching for FotMob ↔ SofaScore team names."""
+    hn,an=norm_team_name(home),norm_team_name(away)
+    exact=sofa_event_map(events).get((hn,an))
+    if exact:return exact
+    for e in events:
+        if not isinstance(e,dict): continue
+        eh=norm_team_name(((e.get("homeTeam") or {}).get("name")))
+        ea=norm_team_name(((e.get("awayTeam") or {}).get("name")))
+        if not eh or not ea: continue
+        if (eh in hn or hn in eh) and (ea in an or an in ea):
+            return e
+    return None
+
 
 def sofa_lineups(event_id):
     if not event_id: return {}, {}
@@ -736,6 +750,16 @@ def model(match):
             if i>j:pH+=q
             elif i==j:pD+=q
             else:pA+=q
+    # Evidence-based draw calibration.
+    # Do NOT force draws: only boost X when the two teams are close in the
+    # actual model inputs and the expected total is not unusually high.
+    strength_close=max(0.0,1.0-min(1.0,abs(raw_gap)/75.0))
+    goal_close=max(0.0,1.0-min(1.0,abs(lam_h-lam_a)/1.25))
+    low_total=max(0.0,min(1.0,(3.25-(lam_h+lam_a))/1.65))
+    balance=.50*strength_close+.35*goal_close+.15*low_total
+    # 1.00 = no change; max 1.32 = modest draw lift in truly balanced games.
+    draw_mult=1.0 + .32*max(0.0,min(1.0,balance))
+    pD*=draw_mult
     z=pH+pD+pA; probs=[pH/z,pD/z,pA/z]
     idx=max(range(3),key=lambda k:probs[k])
     verdict=match["home"] if idx==0 else "DRAW" if idx==1 else match["away"]
@@ -752,7 +776,7 @@ def model(match):
     return {"verdict":f"WIN: {verdict}" if verdict!="DRAW" else "DRAW","confidence":confidence,"probabilities":probs,
             "projected":f"{modal[1]}–{modal[2]}","modalScore":f"{modal[1]}–{modal[2]}","expectedGoals":[round(lam_h,2),round(lam_a,2)],
             "factors":factors,"dataCompleteness":round(completeness/8*100),
-            "decisionNote":"Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + low-score draw correction"}
+            "decisionNote":"Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"}
 
 
 
@@ -792,6 +816,37 @@ def enrich_base(m, now):
         d["formPoints"]=_form_points(d["form"]); d["recentResults"]=rows; d["recentGF"]=sum(x["gf"] for x in rows); d["recentGA"]=sum(x["ga"] for x in rows); d["ratingPrior"]=_rating_prior(payload,tid); d["xgSeason"]=_team_xg(payload,tid)
     return hp,ap,hd,ad
 
+
+def fotmob_incidents(detail, home_id=None, away_id=None):
+    """Best-effort goal extraction from FotMob match detail/liveticker payload."""
+    if not isinstance(detail,dict): return []
+    out=[]
+    content=detail.get("content") if isinstance(detail.get("content"),dict) else {}
+    lt=content.get("liveticker") if isinstance(content.get("liveticker"),dict) else {}
+    # Common shape: liveticker -> events / teams; also walk arbitrary nested event lists.
+    candidates=[]
+    for obj in walk(lt):
+        if isinstance(obj,dict):
+            typ=str(pick(obj,"type","eventType","incidentType","action") or "").lower()
+            if "goal" in typ or obj.get("isGoal") is True:
+                candidates.append(obj)
+    seen=set()
+    for e in candidates:
+        player=e.get("player") if isinstance(e.get("player"),dict) else {}
+        scorer=pick(player,"name","fullName") or pick(e,"playerName","scorer","name")
+        if not scorer: continue
+        minute=pick(e,"time","minute","minuteString")
+        assist=e.get("assist") if isinstance(e.get("assist"),dict) else {}
+        assist_name=pick(assist,"name","fullName") or pick(e,"assistName","assistPlayer")
+        key=(str(scorer),str(minute),str(assist_name))
+        if key in seen: continue
+        seen.add(key)
+        is_home=None
+        tid=pick(e,"teamId","teamID")
+        if home_id is not None and str(tid)==str(home_id): is_home=True
+        elif away_id is not None and str(tid)==str(away_id): is_home=False
+        out.append({"minute":minute,"team":"home" if is_home is True else "away" if is_home is False else None,"scorer":scorer,"assist":assist_name,"ownGoal":bool(e.get("ownGoal") or e.get("isOwnGoal"))})
+    return sorted(out,key=lambda x:(str(x.get("minute") or ""),x.get("scorer") or ""))
 
 def apply_match_detail(detail,hd,ad):
     if not detail:return "Not available from FotMob."
@@ -857,6 +912,8 @@ def build_match(m, now, sofa_info):
     detail=detail_for_match(mid)
     h2h_summary=apply_match_detail(detail,hd,ad) if detail else "Not available from FotMob."
     sofa_event,sofa_lh,sofa_la,incidents=sofa_info
+    if not incidents and detail:
+        incidents=fotmob_incidents(detail,hd.get("id"),ad.get("id"))
     apply_sofa(hd,ad,sofa_event,sofa_lh,sofa_la)
     # Prefer SofaScore lineup if available, otherwise keep FotMob detail lineup.
     if not hd.get("lineup") and not ad.get("lineup") and detail:
@@ -905,16 +962,35 @@ def _prep_team_cache(rows):
 
 
 def _sofa_map_for_rows(rows,now):
-    dates=sorted({(m.get("status") or {}).get("utcTime",m.get("utcTime", ""))[:10] for m in rows if m.get("utcTime")})
-    for day in dates:
-        try: SOFA_EVENTS[day]=sofa_event_map(sofa_scheduled(dt.date.fromisoformat(day)))
-        except Exception as exc: print("Sofascore schedule",day,"failed",exc);SOFA_EVENTS[day]={}
+    # FotMob UTC dates can straddle SofaScore's scheduled-events date boundary.
+    base_dates=sorted({(m.get("status") or {}).get("utcTime",m.get("utcTime", ""))[:10] for m in rows if m.get("utcTime")})
+    dates=set()
+    for ds in base_dates:
+        try:
+            d=dt.date.fromisoformat(ds)
+            for delta in (-1,0,1): dates.add((d+dt.timedelta(days=delta)).isoformat())
+        except Exception: pass
+    for day in sorted(dates):
+        try: SOFA_EVENTS[day]=sofa_scheduled(dt.date.fromisoformat(day))
+        except Exception as exc: print("Sofascore schedule",day,"failed",exc);SOFA_EVENTS[day]=[]
     out={}
     for m in rows:
         day=((m.get("status") or {}).get("utcTime") or m.get("utcTime") or "")[:10]
         hn=pick(m.get("home") or {},"name","longName"); an=pick(m.get("away") or {},"name","longName")
-        ev=SOFA_EVENTS.get(day,{}).get((norm_team_name(hn),norm_team_name(an)))
-        if not ev: out[str(m.get("id"))]=(None,{}, {}, []); continue
+        ev=None
+        for d in (day,):
+            ev=sofa_find_event(SOFA_EVENTS.get(d,[]),hn,an)
+            if ev: break
+        if not ev:
+            # Try adjacent UTC dates for midnight/timezone crossover.
+            try:
+                base=dt.date.fromisoformat(day)
+                for delta in (-1,1):
+                    ev=sofa_find_event(SOFA_EVENTS.get((base+dt.timedelta(days=delta)).isoformat(),[]),hn,an)
+                    if ev: break
+            except Exception: pass
+        if not ev:
+            out[str(m.get("id"))]=(None,{}, {}, []); continue
         sid=ev.get("id"); need_lineup=status(m) in ("LIVE","UPCOMING")
         lh=la={};inc=[]
         try:
