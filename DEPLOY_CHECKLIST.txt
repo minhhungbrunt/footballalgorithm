@@ -1,0 +1,21 @@
+FOOTBALEDGE FINAL DEPLOY CHECKLIST
+
+1. Upload/replace all bundle files in the repository.
+2. Commit to MAIN.
+3. Actions -> FootballEdge refresh -> Run workflow.
+4. Confirm data/fixtures.json changes.
+5. Confirm GitHub Pages deployment succeeds.
+6. Open the site and hard refresh once.
+7. Confirm:
+   - multiple fixtures
+   - country flags / country-specific league names
+   - UCL separated
+   - current division is not inferred from cup competition
+   - FotMob lineup section
+   - last-season prior
+   - transfer/squad prior
+   - varied projected scores
+   - Draw is allowed
+   - Refresh button changes the data timestamp when new data exists
+
+If the Action fails, inspect the "Pull FotMob" step first.

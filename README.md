@@ -1,35 +1,10 @@
-# FootballEdge V7
+# FootballEdge
 
-This is a GitHub Pages site with a GitHub Actions data pipeline.
+FotMob-powered football matchday dashboard.
 
-## What this fixes
-- Draw is a genuine 1X2 outcome.
-- No default home-team prediction.
-- Cross-division matches do not compare raw table positions.
-- Premier League is not matched by the string "Premier League" alone; competition country is considered.
-- UCL and UCL qualification are explicit competitions.
-- Live/FT scores are shown.
-- Analysis opens inside the selected match row.
-- RotoWire is used as the lineup/injury listing for supported competitions; the UI is text-only.
-- FotMob is the primary fixture/match-detail source.
-- Missing data lowers confidence instead of generating fake evidence.
+### Run
+Commit the bundle to `main`, then run **Actions → FootballEdge refresh** once.
 
-## GitHub Pages
-Settings → Pages → Source: GitHub Actions.
+The site checks for fresh data every 30 seconds. GitHub Actions refreshes the underlying FotMob data on its scheduled interval.
 
-## First run
-Actions → Update FootballEdge data → Run workflow.
-
-After that the workflow runs every 15 minutes and commits `data/fixtures.json`.
-The Pages workflow redeploys after that commit.
-
-## Important
-Do not use a PHP/API proxy. This project is GitHub Pages + GitHub Actions only.
-
-## Data used by the model
-FotMob match details are used for match state, xG where available, lineups/player ratings where exposed, and match context. RotoWire is separately queried for its text lineup/injury listing. Player market value is secondary and never determines the verdict by itself.
-
-
-
-## Important API correction
-The updater uses FotMob's current `/api/matches`, `/api/matchDetails`, `/api/teams`, and `/api/leagues` routes. The older `/api/data/...` paths are not used. Current public references document the `/api/` routes and `YYYYMMDD` date format.
+**Note:** GitHub scheduled workflows can be delayed by GitHub; 5 minutes is a target, not a guaranteed exact interval.

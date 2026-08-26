@@ -1,214 +1,185 @@
 const DATA_URL="data/fixtures.json";
-let DATA=null, filter="ALL", openId=null;
+let DATA=null, filter="ALL", openId=null, lastPollAt=null;
 
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const num=(x)=>Number.isFinite(Number(x))?Number(x):null;
-const nice=(x,fallback="Not available")=>{
-  if(x===null||x===undefined||x===""||x==="—"||x==="--"||String(x).toLowerCase()==="none") return fallback;
-  return String(x);
-};
-const pct=x=>`${Math.round((Number(x)||0)*100)}%`;
-const verdictClass=v=>String(v||"").startsWith("DRAW")?"draw":"";
-const cleanStatus=s=>String(s||"").toUpperCase();
+const n=x=>Number.isFinite(Number(x))?Number(x):null;
+const clean=x=>String(x??"").trim();
+const unavailable=x=>x==null||clean(x)===""||["—","--","none","null"].includes(clean(x).toLowerCase());
+const nice=(x,f="Not available")=>unavailable(x)?f:String(x);
+const pct=x=>Math.round((Number(x)||0)*100)+"%";
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const td=(m,s)=>s==="home"?(m.homeData||{}):(m.awayData||{});
+const isDraw=v=>clean(v).toUpperCase()==="DRAW"||clean(v).toUpperCase().startsWith("DRAW");
+const status=m=>clean(m.status).toUpperCase();
 
-function teamData(m,side){return side==="home"?(m.homeData||{}):(m.awayData||{});}
-function formPills(form){
-  const chars=String(form||"").replace(/[^WDL]/g,"").slice(-5).split("");
-  return chars.length?chars.map(x=>`<span class="pill ${x}">${x}</span>`).join(""):`<span class="muted">Not available</span>`;
+function formPills(f){
+  const a=clean(f).replace(/[^WDL]/gi,"").toUpperCase().slice(-5).split("");
+  return a.length?a.map(x=>`<i class="pill ${x}">${x}</i>`).join(""):`<span class="note">No five-match sample yet</span>`;
 }
-function formLabel(d){return d.formPoints!=null?`${nice(d.formPoints)}/15 pts`:"No recent-form sample";}
-function position(d){return d.position!=null?`#${d.position}`:"Position unavailable";}
+function pos(d){return d.position!=null?`#${d.position}`:"Position not available"}
+function time(m){
+  if(status(m)==="LIVE")return `<b class="time live">LIVE${m.minute&&m.minute.short?` · ${esc(m.minute.short)}`:""}</b>`;
+  if(status(m)==="FT")return `<b class="time">FT</b>`;
+  if(!m.kickoff)return `<span class="time">Time unavailable</span>`;
+  const z=new Date(m.kickoff); return `<span class="time">${z.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}</span>`;
+}
 function score(m){
-  const live=["LIVE","FT"].includes(cleanStatus(m.status));
-  return live&&m.homeScore!=null&&m.awayScore!=null
-    ? `${esc(m.homeScore)} : ${esc(m.awayScore)}` : "— : —";
+  return m.homeScore!=null&&m.awayScore!=null?`${esc(m.homeScore)} : ${esc(m.awayScore)}`:"— : —";
 }
-function kickoff(m){
-  if(cleanStatus(m.status)==="LIVE") return `<b class="time live">LIVE</b>`;
-  if(cleanStatus(m.status)==="FT") return `<b class="time">FT</b>`;
-  if(!m.kickoff) return `<span class="time">Time unavailable</span>`;
-  try{return `<span class="time">${new Date(m.kickoff).toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}</span>`}
-  catch{return `<span class="time">Upcoming</span>`}
-}
-function factorRows(m,r){
-  const h=teamData(m,"home"),a=teamData(m,"away");
-  const hp=num(h.position),ap=num(a.position);
-  const fp=num(h.formPoints),fq=num(a.formPoints);
-  const xh=num(h.xg),xa=num(a.xg);
-  const factors=[
-    ["Division / league strength", divisionSignal(h,a), "STRUCTURAL"],
-    ["League position", hp&&ap?positionSignal(hp,ap):0, hp&&ap?`${hp} vs ${ap}`:"Unavailable"],
-    ["Recent form", fp!=null&&fq!=null?clamp((fp-fq)*4,-20,20):0, fp!=null&&fq!=null?`${fp} vs ${fq}`:"Unavailable"],
-    ["xG / attacking output", xh!=null&&xa!=null?clamp((xh-xa)*18,-18,18):0, xh!=null&&xa!=null?`${xh} vs ${xa}`:"Unavailable"],
-    ["Home advantage", homeSignal(h,a), "Small context adjustment"],
-    ["H2H", h2hSignal(m), m.h2hSummary?m.h2hSummary.replace("H2H summary ",""):"Unavailable"]
-  ];
-  return factors.map(([name,val,desc])=>{
-    const v=Math.round(val||0), width=Math.min(100,Math.abs(v)*3);
-    return `<div class="factor"><div class="name">${esc(name)}</div><div class="meter"><i style="width:${width}%"></i></div><div class="value">${v>0?"+":""}${v}</div></div>`;
-  }).join("");
-}
-function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
-function divisionSignal(h,a){
-  if(!h.division||!a.division)return 0;
-  if(h.division===a.division)return 0;
-  // Cross-division: never use raw position. Existing model verdict remains authoritative.
-  return 0;
-}
-function positionSignal(h,a){return clamp((a-h)*1.8,-15,15)}
-function homeSignal(){return 3}
-function h2hSignal(m){
-  const s=String(m.h2hSummary||"");
-  const q=s.match(/(\d+)[–-](\d+)[–-](\d+)/);
-  if(!q)return 0;
-  return clamp((Number(q[1])-Number(q[3]))*1.5,-8,8);
-}
+function verdictClass(v){return isDraw(v)?"draw":""}
 
-function evidence(m,r){
-  const h=teamData(m,"home"),a=teamData(m,"away");
-  const items=[];
-  if(h.division&&a.division){
-    items.push(["D","Competition context",h.division===a.division?`${h.division} vs ${a.division}; league positions can be compared directly.`:`${h.division} vs ${a.division}; raw positions are not treated as equivalent across divisions.`]);
-  }
-  if(h.position!=null&&a.position!=null) items.push(["#","Table position",`${m.home} ${position(h)} · ${m.away} ${position(a)}.`]);
-  if(h.formPoints!=null||a.formPoints!=null) items.push(["F","Recent form",`${m.home}: ${formLabel(h)} · ${m.away}: ${formLabel(a)}.`]);
-  if(h.xg!=null||a.xg!=null) items.push(["xG","Expected goals",`${m.home}: ${nice(h.xg)} · ${m.away}: ${nice(a.xg)}.`]);
-  if(m.h2hSummary&& !/not available/i.test(m.h2hSummary)) items.push(["H2H","Head-to-head",m.h2hSummary]);
-  const hi=(h.injuries||[]).length, ai=(a.injuries||[]).length;
-  if(hi||ai) items.push(["!","Availability",`${m.home}: ${hi} listed absence/availability entries · ${m.away}: ${ai}.`]);
-  if(!items.length) items.push(["i","Data status","FotMob has not supplied enough secondary metrics for this fixture yet. The model does not invent them."]);
-  return items.map(([ic,t,p])=>`<div class="evidence-item"><div class="icon">${esc(ic)}</div><div><b>${esc(t)}</b><p>${esc(p)}</p></div></div>`).join("");
-}
-
-function statRows(m){
-  const h=teamData(m,"home"),a=teamData(m,"away");
-  const rows=[
-    ["League",nice(h.division),nice(a.division)],
-    ["Position",position(h),position(a)],
-    ["Form",nice(h.form,"Unavailable"),nice(a.form,"Unavailable")],
-    ["Form points",formLabel(h),formLabel(a)],
-    ["xG",nice(h.xg),nice(a.xg)],
-    ["Squad availability",`${(h.injuries||[]).length} listed`,`${(a.injuries||[]).length} listed`]
-  ];
-  return rows.map(r=>`<div class="stat-row"><span class="home">${esc(r[1])}</span><label>${esc(r[0])}</label><span class="away">${esc(r[2])}</span></div>`).join("");
-}
-
-function lineupCard(d,name){
+function lineup(d,name){
   const list=Array.isArray(d.lineup)?d.lineup:[];
-  if(!list.length)return `<div class="lineup-card"><h4>${esc(name)}</h4><div class="empty-data">FotMob lineup not available yet. This is normal before confirmed XI.</div></div>`;
-  return `<div class="lineup-card"><h4>${esc(name)} <span class="muted">· ${list.length} listed</span></h4>`+
-    list.slice(0,18).map(p=>`<div class="player"><span>${esc(nice(p.position,""))} ${esc(nice(p.name,"Unknown player"))}</span><span class="rating">${p.rating!=null?esc(p.rating):""}</span></div>`).join("")+
+  if(!list.length)return `<div class="lineup"><h3>${esc(name)}</h3><div class="empty-data">FotMob has not published a lineup for this match yet.</div></div>`;
+  return `<div class="lineup"><h3>${esc(name)} <span class="rank">${list.length} listed</span></h3>`+
+    list.map(p=>`<div class="player"><span class="pos">${esc(nice(p.position,""))}</span><span class="pname">${esc(nice(p.name,"Unknown"))}</span><span class="rating">${p.rating!=null?esc(p.rating):""}</span></div>`).join("")+
     `</div>`;
 }
 
-function analysisHTML(m,r){
-  const p=r.probabilities||[0,0,0];
-  const h=teamData(m,"home"),a=teamData(m,"away");
-  const verdict=nice(r.verdict,"MODEL UNAVAILABLE");
-  const confidence=Math.round(num(r.confidence)||0);
-  const projected=nice(r.projected,"Score unavailable");
-  const completeness=Math.round(num(r.dataCompleteness)||0);
-  return `<div class="analysis-shell">
-    <div>
-      <div class="panel">
-        <div class="panel-title">MODEL DECISION</div>
-        <div class="decision ${verdictClass(verdict)}">
-          <div><div class="label">${verdictClass(verdict)?"DRAW":"BEST OUTCOME"}</div><div class="big">${esc(verdict)}</div><div class="sub">Confidence ${confidence}/100 · Based only on available FotMob evidence</div></div>
-          <div class="projected"><small>PROJECTED SCORE</small><b>${esc(projected)}</b></div>
-        </div>
-        <div class="prob">
-          <div class="prob-card"><div class="name">${esc(m.home)}</div><strong>${pct(p[0])}</strong><div class="bar"><i style="width:${Math.min(100,(p[0]||0)*100)}%"></i></div></div>
-          <div class="prob-card"><div class="name">DRAW</div><strong>${pct(p[1])}</strong><div class="bar"><i style="width:${Math.min(100,(p[1]||0)*100)}%"></i></div></div>
-          <div class="prob-card"><div class="name">${esc(m.away)}</div><strong>${pct(p[2])}</strong><div class="bar"><i style="width:${Math.min(100,(p[2]||0)*100)}%"></i></div></div>
-        </div>
+function evidence(m){
+  const h=td(m,"home"),a=td(m,"away"),items=[];
+  if(h.division||a.division)items.push(["DIV","League context",h.division===a.division?`${m.home} and ${m.away} are in ${nice(h.division)}. Positions are comparable.`:`${nice(h.division)} vs ${nice(a.division)}. Raw positions are NOT compared across divisions.`]);
+  if(h.position!=null||a.position!=null)items.push(["POS","Current table",`${m.home}: ${pos(h)} · ${m.away}: ${pos(a)}.`]);
+  if(h.lastSeasonPosition!=null||a.lastSeasonPosition!=null)items.push(["22","Last season finish",`${m.home}: ${nice(h.lastSeasonPosition,"N/A")} · ${m.away}: ${nice(a.lastSeasonPosition,"N/A")}. Used as an early-season prior.`]);
+  if(h.form||a.form)items.push(["FORM","Recent form",`${m.home}: ${nice(h.form,"N/A")} · ${m.away}: ${nice(a.form,"N/A")}.`]);
+  if(h.xg!=null||a.xg!=null)items.push(["xG","Expected goals",`${m.home}: ${nice(h.xg)} · ${m.away}: ${nice(a.xg)}.`]);
+  if(h.transferImpact!=null||a.transferImpact!=null)items.push(["TR","Squad change",`${m.home}: ${fmtSigned(h.transferImpact)} · ${m.away}: ${fmtSigned(a.transferImpact)}. Rough transfer/squad-strength adjustment.`]);
+  if(m.h2hSummary&&!/not available/i.test(m.h2hSummary))items.push(["H2H","Head-to-head",m.h2hSummary]);
+  if(h.injuries?.length||a.injuries?.length)items.push(["AVL","Availability",`${m.home}: ${h.injuries.length} listed · ${m.away}: ${a.injuries.length} listed.`]);
+  if(!items.length)items.push(["i","Data status","FotMob has not supplied enough secondary data yet. Missing fields are not invented."]);
+  return items.map(x=>`<div class="evidence-item"><div class="eicon">${esc(x[0])}</div><div><b>${esc(x[1])}</b><p>${esc(x[2])}</p></div></div>`).join("");
+}
+function fmtSigned(x){return x==null?"N/A":(Number(x)>0?"+":"")+Number(x).toFixed(1)}
+
+function factors(m){
+  const h=td(m,"home"),a=td(m,"away"),r=m.model||{};
+  const f=Array.isArray(r.factors)?r.factors:[
+    ["League strength",r.leagueStrengthDiff||0],
+    ["Current position",r.positionDiff||0],
+    ["Last season prior",r.lastSeasonDiff||0],
+    ["Recent form",r.formDiff||0],
+    ["Squad / transfers",r.transferDiff||0],
+    ["xG / attack",r.xgDiff||0],
+    ["Home advantage",r.homeAdvantage||0],
+    ["H2H",r.h2hDiff||0]
+  ];
+  return f.map(x=>{
+    const v=Number(x[1])||0,w=Math.min(100,Math.abs(v)*2.7);
+    return `<div class="factor"><span class="factor-name">${esc(x[0])}</span><span class="meter"><i style="width:${w}%"></i></span><span class="factor-val">${v>0?"+":""}${v.toFixed(1)}</span></div>`;
+  }).join("");
+}
+
+function comparison(m){
+  const h=td(m,"home"),a=td(m,"away");
+  const rows=[
+    ["League",nice(h.division),nice(a.division)],
+    ["Position",pos(h),pos(a)],
+    ["Last season",nice(h.lastSeasonPosition),nice(a.lastSeasonPosition)],
+    ["Form",nice(h.form,"N/A"),nice(a.form,"N/A")],
+    ["xG",nice(h.xg),nice(a.xg)],
+    ["Squad change",fmtSigned(h.transferImpact),fmtSigned(a.transferImpact)],
+    ["Injuries",h.injuries?.length??0,a.injuries?.length??0],
+    ["XI",h.lineup?.length??0,a.lineup?.length??0]
+  ];
+  return rows.map(r=>`<div class="stat"><span class="l">${esc(r[1])}</span><label>${esc(r[0])}</label><span class="r">${esc(r[2])}</span></div>`).join("");
+}
+
+function analysis(m){
+  const r=m.model||{},p=r.probabilities||[.33,.34,.33],conf=Math.round(Number(r.confidence)||0),comp=Math.round(Number(r.dataCompleteness)||0);
+  const verdict=nice(r.verdict,"MODEL PENDING");
+  const h=td(m,"home"),a=td(m,"away");
+  return `<div class="analysis-grid">
+  <div>
+    <div class="panel">
+      <div class="ptitle">MODEL DECISION</div>
+      <div class="decision ${verdictClass(verdict)}">
+        <div><div class="label">${isDraw(verdict)?"DRAW CALL":"BEST OUTCOME"}</div><div class="big">${esc(verdict)}</div>
+        <div class="sub">Confidence ${conf}/100 · ${esc(r.decisionNote||"Weighted match model using available FotMob evidence")}</div></div>
+        <div class="projected"><small>PROJECTED SCORE</small><b>${esc(nice(r.projected,"N/A"))}</b></div>
       </div>
-      <div class="panel">
-        <div class="panel-title">KEY FACTORS</div>
-        <div class="factors">${factorRows(m,r)}</div>
-      </div>
-      <div class="panel">
-        <div class="panel-title">EVIDENCE</div>
-        <div class="evidence">${evidence(m,r)}</div>
+      <div class="probs">
+        <div class="prob"><span>${esc(m.home)}</span><strong>${pct(p[0])}</strong><div class="bar"><i style="width:${p[0]*100}%"></i></div></div>
+        <div class="prob"><span>DRAW</span><strong>${pct(p[1])}</strong><div class="bar"><i style="width:${p[1]*100}%"></i></div></div>
+        <div class="prob"><span>${esc(m.away)}</span><strong>${pct(p[2])}</strong><div class="bar"><i style="width:${p[2]*100}%"></i></div></div>
       </div>
     </div>
-    <div>
-      <div class="panel">
-        <div class="panel-title">TEAM COMPARISON</div>
-        <div class="team-grid">
-          <div class="team-card"><div class="team-head"><b>${esc(m.home)}</b><span class="position">${esc(position(h))}</span></div><div class="stat-list">${statRows(m).split("</div>").slice(0,6).join("</div>")}</div>
-          <div class="team-card"><div class="team-head"><b>${esc(m.away)}</b><span class="position">${esc(position(a))}</span></div><div class="stat-list">${statRows(m).split("</div>").slice(0,6).join("</div>")}</div>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="panel-title">RECENT FORM</div>
-        <div class="form-row">
-          <div class="form-team"><b>${esc(m.home)}</b><div class="form-pills">${formPills(h.form)}</div></div>
-          <div class="form-team"><b>${esc(m.away)}</b><div class="form-pills">${formPills(a.form)}</div></div>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="panel-title">FOTMOB LINEUPS</div>
-        <div class="lineup-grid">${lineupCard(h,m.home)}${lineupCard(a,m.away)}</div>
-        <div class="footer-note">Lineups appear when FotMob publishes them. No RotoWire dependency.</div>
-      </div>
-      <div class="panel">
-        <div class="panel-title">DATA QUALITY</div>
-        <div class="stat-row"><span class="home">FotMob</span><label>Source</label><span class="away">Primary</span></div>
-        <div class="stat-row"><span class="home">${completeness}%</span><label>Completeness</label><span class="away">${completeness>=80?"Strong":"Limited"}</span></div>
-        <div class="footer-note">Missing data reduces confidence; it is never filled with invented numbers.</div>
-      </div>
-    </div>
-  </div>`;
+    <div class="panel"><div class="ptitle">MODEL FACTORS</div>${factors(m)}</div>
+    <div class="panel"><div class="ptitle">WHY THE MODEL LANDED HERE</div>${evidence(m)}</div>
+  </div>
+  <div>
+    <div class="panel"><div class="ptitle">TEAM SNAPSHOT</div><div class="team-compare">
+      <div class="team-card"><h3>${esc(m.home)} <span class="rank">${esc(pos(h))}</span></h3>${comparison(m).split("</div>").slice(0,8).join("</div>")}</div>
+      <div class="team-card"><h3>${esc(m.away)} <span class="rank">${esc(pos(a))}</span></h3>${comparison(m).split("</div>").slice(0,8).join("</div>")}</div>
+    </div></div>
+    <div class="panel"><div class="ptitle">RECENT FORM</div><div class="form-box">
+      <div class="form-team"><b>${esc(m.home)}</b><div class="form-line">${formPills(h.form)}</div></div>
+      <div class="form-team"><b>${esc(m.away)}</b><div class="form-line">${formPills(a.form)}</div></div>
+    </div></div>
+    <div class="panel"><div class="ptitle">EARLY-SEASON CONTEXT</div><div class="meta-grid">
+      <div class="meta-card"><span>LAST SEASON</span><b>${nice(h.lastSeasonPosition)} vs ${nice(a.lastSeasonPosition)}</b></div>
+      <div class="meta-card"><span>TRANSFER / SQUAD PRIOR</span><b>${fmtSigned(h.transferImpact)} vs ${fmtSigned(a.transferImpact)}</b></div>
+      <div class="meta-card"><span>H2H</span><b>${esc(nice(m.h2hSummary,"Not available"))}</b></div>
+      <div class="meta-card"><span>DATA COMPLETENESS</span><b>${comp}%</b></div>
+    </div><div class="note">At the start of a new season, current league position is down-weighted. Last-season finish and squad-change priors carry more weight until enough new matches exist.</div></div>
+    <div class="panel"><div class="ptitle">FOTMOB LINEUPS</div><div class="lineups">${lineup(h,m.home)}${lineup(a,m.away)}</div>
+      <div class="note">Lineups are shown when FotMob publishes the match XI.</div></div>
+  </div></div>`;
 }
 
 function matchHTML(m){
-  const r=m.model||{verdict:"DRAW",confidence:0,probabilities:[.33,.34,.33],projected:"Unavailable"};
-  const live=cleanStatus(m.status)==="LIVE";
-  const open=openId===String(m.id);
-  return `<article class="match ${live?"live":""}" id="m-${esc(m.id)}">
-    <div class="row">
-      <div>${kickoff(m)}</div>
+  const r=m.model||{},v=nice(r.verdict,"ANALYSIS PENDING"),open=openId===String(m.id);
+  return `<article class="match ${status(m)==="LIVE"?"live":""}" id="m-${esc(m.id)}">
+    <div class="match-head">
+      <div>${time(m)}</div>
       <div class="teams"><span>${esc(m.home)}</span><span class="vs">vs</span><span>${esc(m.away)}</span></div>
-      <div class="score ${score(m).startsWith("—")?"pending":""}">${score(m)}</div>
-      <div class="verdict ${verdictClass(r.verdict)}">${esc(nice(r.verdict,"ANALYSIS PENDING"))}<span class="confidence">${Math.round(num(r.confidence)||0)}/100 confidence</span></div>
+      <div class="score ${m.homeScore==null?"pending":""}">${score(m)}</div>
+      <div class="verdict ${verdictClass(v)}">${esc(v)}<span class="confidence">${Math.round(Number(r.confidence)||0)}/100</span></div>
       <button class="analyze ${open?"open":""}" onclick="toggleAnalysis('${esc(m.id)}')">${open?"CLOSE":"ANALYZE"}</button>
     </div>
-    <div class="analysis ${open?"open":""}" id="a-${esc(m.id)}">${analysisHTML(m,r)}</div>
+    <div class="analysis ${open?"open":""}">${analysis(m)}</div>
   </article>`;
 }
 
 function render(){
-  if(!DATA){$("#fixtures").innerHTML='<div class="empty">No feed loaded.</div>';return}
+  lastPollAt = new Date();
+  if(!DATA){$("#fixtures").innerHTML=`<div class="empty">Loading FootballEdge…</div>`;return}
   $("#updated").textContent=DATA.updatedAt?new Date(DATA.updatedAt).toLocaleString():"—";
-  $("#feedStatus").textContent=`${DATA.fixtureCount||0} FIXTURES · FOTMOB`;
-  const live=(DATA.matches||[]).filter(m=>cleanStatus(m.status)==="LIVE");
-  $("#liveStrip").innerHTML=live.length?live.map(m=>`<div class="live-card"><div class="live-title">● LIVE · ${esc(m.competition)}</div><div class="teams">${esc(m.home)} vs ${esc(m.away)}</div><div class="score">${score(m)}</div><div class="minute">${esc(nice(m.minute,"Live"))}</div></div>`).join(""):"";
+  $("#feedStatus").textContent=`${DATA.fixtureCount||0} FIXTURES · ${DATA.sourceStatus||"FOTMOB"}`;
+  const live=(DATA.matches||[]).filter(m=>status(m)==="LIVE");
+  $("#liveStrip").innerHTML=live.length?live.map(m=>`<div class="live-card"><div class="tag heartbeat"><i></i> LIVE · ${esc(m.competition)}</div><div class="pair">${esc(m.home)} vs ${esc(m.away)}</div><div class="live-score">${score(m)}</div><div class="min">${esc(m.minute?.short||m.minute?.long||"Live")}</div></div>`).join(""):"";
   const comps=[...new Set((DATA.matches||[]).map(m=>m.competition).filter(Boolean))];
-  $("#filters").innerHTML=`<button class="${filter==="ALL"?"active":""}" onclick="setFilter('ALL')">ALL</button>`+
-    comps.map(c=>`<button class="${filter===c?"active":""}" onclick='setFilter(${JSON.stringify(c)})'>${esc(c)}</button>`).join("");
-  const matches=(DATA.matches||[]).filter(m=>filter==="ALL"||m.competition===filter);
-  if(!matches.length){$("#fixtures").innerHTML='<div class="empty">No matches in this filter.</div>';return}
-  const groups={};matches.forEach(m=>(groups[m.competition]??=[]).push(m));
-  $("#fixtures").innerHTML=Object.entries(groups).map(([comp,arr])=>`<section class="league"><div class="league-head"><span class="badge">${esc((arr[0].competitionCode||comp.slice(0,2)).toUpperCase())}</span><h2>${esc(comp)}</h2><span class="count">${arr.length} MATCH${arr.length===1?"":"ES"}</span></div>${arr.map(matchHTML).join("")}</section>`).join("");
+  $("#filters").innerHTML=`<button class="filter ${filter==="ALL"?"active":""}" onclick="setFilter('ALL')">ALL</button>`+
+    comps.map(c=>`<button class="filter ${filter===c?"active":""}" onclick='setFilter(${JSON.stringify(c)})'>${esc(c)}</button>`).join("");
+  const ms=(DATA.matches||[]).filter(m=>filter==="ALL"||m.competition===filter);
+  if(!ms.length){$("#fixtures").innerHTML=`<div class="empty">No matches in this filter.</div>`;return}
+  const groups={};ms.forEach(m=>(groups[m.competition]??=[]).push(m));
+  $("#fixtures").innerHTML=Object.entries(groups).map(([c,arr])=>`<section class="competition">
+    <div class="comp-head"><span class="comp-logo">${esc((arr[0].competitionCode||c.slice(0,3)).toUpperCase())}</span><h2>${esc(c)}</h2><span class="count">${arr.length} MATCH${arr.length===1?"":"ES"}</span></div>
+    ${arr.map(matchHTML).join("")}</section>`).join("");
 }
 function toggleAnalysis(id){
-  openId=openId===String(id)?null:String(id);
-  render();
-  if(openId){
-    requestAnimationFrame(()=>document.getElementById(`m-${CSS.escape(String(id))}`)?.scrollIntoView({behavior:"smooth",block:"nearest"}));
-  }
+  openId=openId===String(id)?null:String(id);render();
+  if(openId)requestAnimationFrame(()=>document.getElementById(`m-${CSS.escape(String(id))}`)?.scrollIntoView({behavior:"smooth",block:"nearest"}));
 }
 function setFilter(x){filter=x;openId=null;render()}
-async function load(){
+async function load(manual=false){
+  const btn=$("#refresh");
+  if(manual){btn.disabled=true;btn.textContent="↻ Loading…";$("#feedStatus").textContent="REFRESHING";}
   try{
-    const r=await fetch(`${DATA_URL}?t=${Date.now()}`,{cache:"no-store"});
-    if(!r.ok)throw new Error(`HTTP ${r.status}`);
+    const r=await fetch(`${DATA_URL}?v=${Date.now()}`,{cache:"no-store",headers:{"Cache-Control":"no-cache"}});
+    if(!r.ok)throw Error(`HTTP ${r.status}`);
     DATA=await r.json();render();
+    if(manual){
+      btn.textContent="✓ Refreshed";
+      setTimeout(()=>{btn.textContent="↻ Refresh";},1400);
+    }
   }catch(e){
     $("#feedStatus").textContent="FEED ERROR";
-    $("#fixtures").innerHTML=`<div class="error"><b>Data feed unavailable.</b><br>${esc(e.message)}<br><br>Run the FootballEdge GitHub Action and check its log.</div>`;
-  }
+    if(!DATA)$("#fixtures").innerHTML=`<div class="error"><b>Football data feed unavailable.</b><br>${esc(e.message)}<br><br>Check the GitHub Action that refreshes <code>data/fixtures.json</code>.</div>`;
+    if(manual)btn.textContent="↻ Try again";
+  }finally{if(manual)btn.disabled=false;}
 }
-$("#refresh").onclick=load;
-load();setInterval(load,60000);
+$("#refresh").onclick=()=>load(true);
+load();
+setInterval(()=>load(false),60000);
