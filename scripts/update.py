@@ -1,353 +1,590 @@
-import os, re, json, time, math, datetime as dt
+import datetime as dt
+import json
+import math
+import re
+import time
 from pathlib import Path
 from zoneinfo import ZoneInfo
-from urllib.parse import urlencode
+
 import requests
-from bs4 import BeautifulSoup
 
-BASE="https://www.fotmob.com/api/data"
-HEAD={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36","Accept":"application/json,text/plain,*/*"}
-ROT="https://www.rotowire.com/soccer/lineups.php"
-HTTP_CACHE={}
-RW_CACHE={}
-TEAM_CACHE={}
-LEAGUE_CACHE={}
-
-
-# Canonical competition map. Name alone is never trusted: country/region is also considered.
-ALIASES={
- "Premier League":"Premier League","LaLiga":"LaLiga","Bundesliga":"Bundesliga","Serie A":"Serie A",
- "Ligue 1":"Ligue 1","Eredivisie":"Eredivisie","Primeira Liga":"Primeira Liga",
- "Championship":"Championship","League One":"League One","League Two":"League Two",
- "Champions League":"UEFA Champions League","Champions League Qualification":"UEFA Champions League Qualification",
- "Europa League":"UEFA Europa League","Europa League Qualification":"UEFA Europa League Qualification",
- "Conference League":"UEFA Conference League","Conference League Qualification":"UEFA Conference League Qualification",
- "EFL Cup":"EFL Cup","FA Cup":"FA Cup","Copa del Rey":"Copa del Rey","DFB Pokal":"DFB Pokal",
- "Coppa Italia":"Coppa Italia","MLS":"MLS","Liga MX":"Liga MX","Saudi Pro League":"Saudi Pro League",
- "Brasileirao":"Brasileirão","Scottish Premiership":"Scottish Premiership","Belgian Pro League":"Belgian Pro League",
- "Turkish Super Lig":"Turkish Super Lig","Ligue 2":"Ligue 2","Serie B":"Serie B","2. Bundesliga":"2. Bundesliga",
- "LaLiga 2":"LaLiga 2"
+TZ = ZoneInfo("America/New_York")
+ROOT = "https://www.fotmob.com"
+HEAD = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36",
+    "Accept": "application/json,text/plain,*/*",
+    "Accept-Language": "en-US,en;q=0.9",
 }
-TOP={v for v in ALIASES.values()}
+CACHE = {}
+TEAM_CACHE = {}
+DETAIL_CACHE = {}
+LEAGUE_CACHE = {}
 
-def get(url,params=None,tries=2):
-    last=None
-    for i in range(tries):
+# Major competitions. Premier League is deliberately resolved with its country/ccode.
+SUPPORTED = {
+    "Premier League", "Championship", "League One", "League Two", "EFL Cup", "FA Cup",
+    "LaLiga", "LaLiga 2", "Copa del Rey", "Bundesliga", "2. Bundesliga", "DFB Pokal",
+    "Serie A", "Serie B", "Coppa Italia", "Ligue 1", "Ligue 2", "Coupe de France",
+    "Eredivisie", "KNVB Beker", "Primeira Liga", "Taça de Portugal",
+    "Scottish Premiership", "Scottish Cup", "Belgian Pro League", "Belgian Cup",
+    "Turkish Super Lig", "Turkish Cup", "UEFA Champions League", "Champions League",
+    "UEFA Europa League", "Europa League", "UEFA Conference League", "Conference League",
+    "UEFA Champions League Qualification", "Champions League Qualification",
+    "UEFA Europa League Qualification", "Europa League Qualification",
+    "UEFA Conference League Qualification", "Conference League Qualification",
+    "MLS", "Liga MX", "Saudi Pro League", "Brasileirão", "Copa Libertadores", "Copa Sudamericana",
+    "J1 League", "K League 1", "A-League", "Liga Argentina", "Primera Division",
+    "U.S. Open Cup", "CONCACAF Champions Cup", "Copa do Brasil", "Colombian Primera A",
+}
+
+# Broad structural priors. These are not betting odds.
+STRENGTH = {
+    "Premier League": 1885, "UEFA Champions League": 1890, "Champions League": 1890,
+    "LaLiga": 1870, "Bundesliga": 1865, "Serie A": 1855, "Ligue 1": 1815,
+    "Eredivisie": 1710, "Primeira Liga": 1700, "Championship": 1660, "Saudi Pro League": 1640,
+    "Brasileirão": 1680, "Liga MX": 1640, "Liga Argentina": 1650, "Turkish Super Lig": 1650,
+    "Belgian Pro League": 1605, "Scottish Premiership": 1600, "MLS": 1570, "J1 League": 1580,
+    "K League 1": 1575, "A-League": 1510, "Serie B": 1515, "2. Bundesliga": 1540,
+    "LaLiga 2": 1510, "Ligue 2": 1470, "League One": 1410, "League Two": 1270,
+}
+
+CCODE_COUNTRY = {
+    "ENG":"England","SCO":"Scotland","WAL":"Wales","NIR":"Northern Ireland","ESP":"Spain",
+    "GER":"Germany","ITA":"Italy","FRA":"France","NED":"Netherlands","POR":"Portugal",
+    "BEL":"Belgium","TUR":"Türkiye","USA":"United States","CAN":"Canada","MEX":"Mexico",
+    "BRA":"Brazil","ARG":"Argentina","SAU":"Saudi Arabia","JPN":"Japan","KOR":"South Korea",
+    "AUS":"Australia","COL":"Colombia","CHI":"Chile","AUT":"Austria","SUI":"Switzerland",
+    "CRO":"Croatia","POL":"Poland","CZE":"Czechia","DNK":"Denmark","SWE":"Sweden",
+    "NOR":"Norway","GRC":"Greece","ROU":"Romania","SRB":"Serbia","ISR":"Israel",
+    "IRL":"Ireland","NZL":"New Zealand","KUW":"Kuwait","UGA":"Uganda","ZAF":"South Africa",
+    "EGY":"Egypt","QAT":"Qatar","UAE":"United Arab Emirates","CHN":"China","THA":"Thailand",
+    "VNM":"Vietnam","INT":"International",
+}
+
+
+def get(url, params=None, timeout=22, tries=3):
+    key = (url, tuple(sorted((params or {}).items())))
+    if key in CACHE:
+        return CACHE[key]
+    last = None
+    for attempt in range(tries):
         try:
-            r=requests.get(url,params=params,headers=HEAD,timeout=12)
+            r = requests.get(url, params=params, headers=HEAD, timeout=timeout)
             if r.ok:
-                return r.json() if "json" in r.headers.get("content-type","") else r.text
-            last=f"HTTP {r.status_code}"
-        except Exception as e:last=str(e)
-        time.sleep(1+i)
+                value = r.json()
+                CACHE[key] = value
+                return value
+            last = f"HTTP {r.status_code}"
+        except Exception as exc:
+            last = str(exc)
+        time.sleep(1.2 + attempt)
     raise RuntimeError(last or "request failed")
 
-def cached_get(url,params=None):
-    key=(url,tuple(sorted((params or {}).items())))
-    if key in HTTP_CACHE: return HTTP_CACHE[key]
-    value=get(url,params)
-    HTTP_CACHE[key]=value
-    return value
 
 def walk(obj):
-    if isinstance(obj,dict):
+    if isinstance(obj, dict):
         yield obj
-        for v in obj.values(): yield from walk(v)
-    elif isinstance(obj,list):
-        for v in obj: yield from walk(v)
+        for value in obj.values():
+            yield from walk(value)
+    elif isinstance(obj, list):
+        for value in obj:
+            yield from walk(value)
 
-def pick(d,*keys):
-    for k in keys:
-        if isinstance(d,dict) and d.get(k) not in (None,""): return d[k]
+
+def pick(obj, *keys):
+    if not isinstance(obj, dict):
+        return None
+    for key in keys:
+        value = obj.get(key)
+        if value not in (None, ""):
+            return value
     return None
 
-def daily(date):
-    date = date.strftime("%Y%m%d") if hasattr(date,"strftime") else str(date)
-    return get(f"{BASE}/matches",{"date":date,"timezone":"America/New_York"})
 
-def details(mid):
-    return get(f"{BASE}/matchDetails",{"matchId":mid})
+def as_num(value):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
 
-def team_page(tid):
-    key=str(tid)
-    if key not in TEAM_CACHE: TEAM_CACHE[key]=get(f"{BASE}/teams",{"id":tid})
+
+def country_name(country="", ccode=""):
+    if isinstance(country, dict):
+        country = country.get("name") or country.get("countryName") or ""
+    country = str(country or "").strip()
+    code = str(ccode or "").upper().strip()
+    return country or CCODE_COUNTRY.get(code) or ("International" if code == "INT" else "Unknown")
+
+
+def flag(code, country=""):
+    code = str(code or "").upper()
+    # ISO alpha-2 flags. FotMob commonly gives alpha-3 ccode.
+    iso = {
+        "ENG":"gb","SCO":"gb-sct","WAL":"gb-wls","NIR":"gb-nir","ESP":"es","GER":"de","ITA":"it",
+        "FRA":"fr","NED":"nl","POR":"pt","BEL":"be","TUR":"tr","USA":"us","CAN":"ca","MEX":"mx",
+        "BRA":"br","ARG":"ar","SAU":"sa","JPN":"jp","KOR":"kr","AUS":"au","COL":"co","CHI":"cl",
+        "AUT":"at","SUI":"ch","CRO":"hr","POL":"pl","CZE":"cz","DNK":"dk","SWE":"se","NOR":"no",
+        "GRC":"gr","ROU":"ro","SRB":"rs","ISR":"il","IRL":"ie","NZL":"nz","KUW":"kw","UGA":"ug",
+        "ZAF":"za","EGY":"eg","QAT":"qa","UAE":"ae","CHN":"cn","THA":"th","VNM":"vn",
+    }.get(code)
+    if not iso:
+        return "🌍"
+    if "-" in iso:
+        return "🏴"
+    return "".join(chr(127397 + ord(ch)) for ch in iso.upper())
+
+
+def normalize_comp(name, ccode="", country=""):
+    raw = str(name or "").strip()
+    aliases = {
+        "Champions League":"UEFA Champions League",
+        "Europa League":"UEFA Europa League",
+        "Conference League":"UEFA Conference League",
+        "Champions League Qualification":"UEFA Champions League Qualification",
+        "Europa League Qualification":"UEFA Europa League Qualification",
+        "Conference League Qualification":"UEFA Conference League Qualification",
+    }
+    base = aliases.get(raw, raw)
+    c = country_name(country, ccode)
+    # Country is part of the identity. This prevents Kuwait Premier League from becoming England.
+    display = f"{c} {base}" if base == "Premier League" else base
+    return base, display, c
+
+
+def daily(day):
+    return get(f"{ROOT}/api/matches", {"date": day.strftime("%Y%m%d")})
+
+
+def match_details(match_id):
+    key = str(match_id)
+    if key not in DETAIL_CACHE:
+        DETAIL_CACHE[key] = get(f"{ROOT}/api/matchDetails", {"matchId": key})
+    return DETAIL_CACHE[key]
+
+
+def team_payload(team_id):
+    key = str(team_id)
+    if key not in TEAM_CACHE:
+        TEAM_CACHE[key] = get(f"{ROOT}/api/teams", {"id": key})
     return TEAM_CACHE[key]
 
-def canonical_comp(raw,country=""):
-    s=str(raw or "").strip()
-    # prevent Kuwait/Azerbaijan/etc Premier League from becoming England Premier League
-    if s=="Premier League" and country and country.lower() not in {"england","england u21","england u18"}:
-        return f"{country} Premier League"
-    return ALIASES.get(s,s)
 
-def team_from_general(g,key):
-    x=g.get(key) if isinstance(g,dict) else {}
-    return x if isinstance(x,dict) else {}
+def league_payload(league_id):
+    key = str(league_id)
+    if not league_id:
+        return {}
+    if key not in LEAGUE_CACHE:
+        LEAGUE_CACHE[key] = get(f"{ROOT}/api/leagues", {"id": key})
+    return LEAGUE_CACHE[key]
 
-def form_from_matches(items,team_id):
-    out=[]
-    for x in items or []:
-        h=pick(x,"homeTeam","home")
-        a=pick(x,"awayTeam","away")
-        hs=pick(x,"homeScore","homeGoals")
-        as_=pick(x,"awayScore","awayGoals")
-        try:
-            hid=str(h.get("id")); aid=str(a.get("id"))
-        except: continue
-        if str(team_id) not in (hid,aid): continue
-        if hs is None or as_ is None: continue
-        try:
-            hs,as_=int(hs),int(as_)
-        except: continue
-        if str(team_id)==hid: out.append("W" if hs>as_ else "D" if hs==as_ else "L")
-        else: out.append("W" if as_>hs else "D" if hs==as_ else "L")
-    return "".join(out[-5:])
 
-def form_pts(f): return sum(3 if x=="W" else 1 if x=="D" else 0 for x in f)
+def match_rows(day_payload):
+    out = []
+    for league in day_payload.get("leagues", []) if isinstance(day_payload, dict) else []:
+        if not isinstance(league, dict):
+            continue
+        lname = pick(league, "name", "leagueName") or "Competition"
+        ccode = pick(league, "ccode", "countryCode") or "INT"
+        ctry = country_name(league.get("country"), ccode)
+        for match in league.get("matches", []) or []:
+            if not isinstance(match, dict):
+                continue
+            match = dict(match)
+            match["_league_name"] = lname
+            match["_ccode"] = ccode
+            match["_country"] = ctry
+            match["_league_id"] = league.get("id") or league.get("primaryId")
+            out.append(match)
+    return out
 
-def extract_team(d,tid):
-    # Generic extraction because FotMob response shapes can evolve.
-    matches=[]
-    for o in walk(d):
-        if isinstance(o,dict) and ("homeTeam" in o or "awayTeam" in o) and ("homeScore" in o or "awayScore" in o):
-            matches.append(o)
-    f=form_from_matches(matches,tid)
-    pos=None; division=None
-    for o in walk(d):
-        if isinstance(o,dict):
-            if pos is None and str(o.get("teamId",""))==str(tid) and isinstance(o.get("position"),int): pos=o["position"]
-            if division is None and isinstance(o.get("leagueName"),str): division=o["leagueName"]
-    return {"form":f or "—","formPoints":form_pts(f) if f else None,"position":pos,"division":division}
 
-def extract_lineup(detail,side):
-    arr=[]
-    for o in walk(detail):
-        if isinstance(o,dict):
-            # Common FotMob player objects
-            if "players" in o and isinstance(o["players"],list):
-                for p in o["players"]:
-                    if isinstance(p,dict) and pick(p,"name","playerName"):
-                        arr.append({"name":pick(p,"name","playerName"),"position":pick(p,"position","role")})
-            if "lineup" in o and isinstance(o["lineup"],list):
-                for p in o["lineup"]:
-                    if isinstance(p,dict) and pick(p,"name","playerName"):
-                        arr.append({"name":pick(p,"name","playerName"),"position":pick(p,"position","role")})
-    # de-dupe
-    seen=set();out=[]
-    for p in arr:
-        if p["name"] not in seen: seen.add(p["name"]);out.append(p)
-    return out[:11]
+def status(match):
+    s = match.get("status") or {}
+    if s.get("started") and not s.get("finished"):
+        return "LIVE"
+    if s.get("finished"):
+        return "FT"
+    return "UPCOMING"
 
-def current_league_from_team(payload):
-    candidates=[]
-    for o in walk(payload):
-        if not isinstance(o,dict): continue
-        for k in ("mainLeague","primaryLeague","currentLeague"):
-            x=o.get(k)
-            if isinstance(x,dict) and (x.get("name") or x.get("leagueName")):
-                candidates.append(x)
-        if o.get("leagueName") and (o.get("leagueId") or o.get("id")):
-            candidates.append(o)
-    for x in candidates:
-        name=pick(x,"name","leagueName")
-        lid=pick(x,"id","leagueId")
-        if name and lid: return {"division":name,"leagueId":lid}
-    return {"division":None,"leagueId":None}
 
-def table_position(league_payload,team_id):
-    for o in walk(league_payload):
-        if isinstance(o,dict):
-            tid=o.get("id") or o.get("teamId")
-            if tid is not None and str(tid)==str(team_id):
-                pos=pick(o,"idx","position","rank")
-                if isinstance(pos,(int,float)): return int(pos)
+def score(match):
+    h = match.get("home") or {}
+    a = match.get("away") or {}
+    hs, ass = pick(h, "score", "goals"), pick(a, "score", "goals")
+    if hs is None or ass is None:
+        text = str(pick(match.get("status") or {}, "scoreStr") or "")
+        found = re.match(r"\s*(\d+)\s*[-:]\s*(\d+)", text)
+        if found:
+            hs, ass = int(found.group(1)), int(found.group(2))
+    return hs, ass
+
+
+def current_league(payload):
+    # Team overview/current table is the source of truth. Never use the cup fixture's competition.
+    for obj in walk(payload):
+        if not isinstance(obj, dict):
+            continue
+        season = str(pick(obj, "season", "selectedSeason") or "")
+        if season and "2026" not in season:
+            continue
+        if obj.get("leagueName") and obj.get("leagueId"):
+            return {"division": obj["leagueName"], "leagueId": obj["leagueId"], "ccode": obj.get("ccode")}
+        data = obj.get("data")
+        if isinstance(data, dict) and data.get("leagueName") and data.get("leagueId"):
+            return {"division": data["leagueName"], "leagueId": data["leagueId"], "ccode": data.get("ccode")}
+    # Fallback: first current table data node.
+    for obj in walk(payload):
+        if isinstance(obj, dict) and obj.get("leagueName") and obj.get("leagueId"):
+            return {"division": obj["leagueName"], "leagueId": obj["leagueId"], "ccode": obj.get("ccode")}
+    return {"division": None, "leagueId": None, "ccode": None}
+
+
+def table_position(payload, team_id):
+    for obj in walk(payload):
+        if not isinstance(obj, dict):
+            continue
+        tid = obj.get("id") or obj.get("teamId")
+        if tid is None or str(tid) != str(team_id):
+            continue
+        p = pick(obj, "idx", "position", "rank")
+        if isinstance(p, (int, float)):
+            return int(p)
     return None
 
-def extract_h2h(detail):
-    for o in walk(detail):
-        if not isinstance(o,dict): continue
-        h=o.get("h2h")
-        if isinstance(h,dict):
-            summary=pick(h,"summary","results","form")
-            if isinstance(summary,list) and len(summary)>=3:
-                try:return f"H2H summary {summary[0]}–{summary[1]}–{summary[2]} (as supplied by FotMob)."
-                except: pass
-            if isinstance(summary,str): return summary
+
+
+def historical_position(league_id, team_id):
+    if not league_id or not team_id:
+        return None
+    for season in ("2025/2026", "2025"):
+        try:
+            payload = get(f"{ROOT}/api/leagues", {"id": str(league_id), "season": season})
+            pos = table_position(payload, team_id)
+            if pos is not None:
+                return pos
+        except Exception as exc:
+            print("Historical league lookup failed", league_id, season, exc)
+    return None
+
+def form_from_team(payload, team_id):
+    rows = []
+    for obj in walk(payload):
+        if not isinstance(obj, dict):
+            continue
+        h = obj.get("home") or obj.get("homeTeam")
+        a = obj.get("away") or obj.get("awayTeam")
+        if not isinstance(h, dict) or not isinstance(a, dict):
+            continue
+        hs, ass = pick(h, "score", "goals"), pick(a, "score", "goals")
+        hid, aid = pick(h, "id", "teamId"), pick(a, "id", "teamId")
+        if hs is None or ass is None or hid is None or aid is None:
+            continue
+        try:
+            hs, ass = int(hs), int(ass)
+        except (TypeError, ValueError):
+            continue
+        if str(team_id) == str(hid):
+            rows.append("W" if hs > ass else "D" if hs == ass else "L")
+        elif str(team_id) == str(aid):
+            rows.append("W" if ass > hs else "D" if hs == ass else "L")
+    return "".join(rows[-5:])
+
+
+def previous_finish(payload, team_id):
+    # Prefer explicit 2025/26 historical tables in the team payload.
+    best = None
+    for obj in walk(payload):
+        if not isinstance(obj, dict):
+            continue
+        season = str(pick(obj, "season", "selectedSeason", "year") or "")
+        if not re.search(r"2025(?:/2026)?|25/26", season, re.I):
+            continue
+        tid = obj.get("id") or obj.get("teamId")
+        if tid is not None and str(tid) == str(team_id):
+            p = pick(obj, "idx", "position", "rank", "finalPosition")
+            if isinstance(p, (int, float)):
+                best = int(p)
+    if best is not None:
+        return best
+    return None
+
+
+def transfer_impact(payload):
+    # Bounded rough squad-change signal. It is deliberately small versus division strength.
+    incoming = outgoing = 0
+    for obj in walk(payload):
+        if not isinstance(obj, dict):
+            continue
+        key = str(pick(obj, "name", "title", "header") or "").lower()
+        items = obj.get("items")
+        if not isinstance(items, list):
+            continue
+        if any(k in key for k in ("incoming", "arrival", "transfer in")):
+            incoming += len(items)
+        elif any(k in key for k in ("outgoing", "departure", "transfer out")):
+            outgoing += len(items)
+    return round(max(-7, min(7, (incoming - outgoing) * 0.45)), 1)
+
+
+def lineup(detail, home_id, away_id):
+    result = {str(home_id): [], str(away_id): []}
+    for obj in walk(detail):
+        if not isinstance(obj, dict):
+            continue
+        if "lineups" not in obj or not isinstance(obj["lineups"], list):
+            continue
+        for team in obj["lineups"]:
+            if not isinstance(team, dict):
+                continue
+            tid = pick(team, "teamId", "id")
+            if tid is None or str(tid) not in result:
+                continue
+            players = team.get("players") or []
+            for player in players:
+                if not isinstance(player, dict):
+                    continue
+                p = player.get("player") if isinstance(player.get("player"), dict) else player
+                name = pick(p, "name", "playerName")
+                if not name:
+                    continue
+                result[str(tid)].append({
+                    "name": name,
+                    "position": pick(player, "position", "role", "positionName") or pick(p, "position", "role"),
+                    "rating": pick(player, "rating", "matchRating") or pick(p, "rating", "matchRating"),
+                    "starter": player.get("starter", True),
+                })
+    for key in result:
+        seen = set(); clean = []
+        for p in result[key]:
+            if p["name"] in seen:
+                continue
+            seen.add(p["name"]); clean.append(p)
+        result[key] = clean[:18]
+    return result[str(home_id)], result[str(away_id)]
+
+
+def xg(detail):
+    for obj in walk(detail):
+        if not isinstance(obj, dict):
+            continue
+        if str(obj.get("title", "")).lower() in {"expected goals (xg)", "expected goals", "xg"}:
+            values = obj.get("stats")
+            if isinstance(values, list) and len(values) >= 2:
+                try: return float(values[0]), float(values[1])
+                except (TypeError, ValueError): pass
+    return None, None
+
+
+def h2h(detail):
+    for obj in walk(detail):
+        if not isinstance(obj, dict):
+            continue
+        h = obj.get("h2h")
+        if isinstance(h, dict):
+            for key in ("summary", "form", "results"):
+                value = h.get(key)
+                if isinstance(value, str) and value.strip():
+                    return value.strip()
+                if isinstance(value, list) and len(value) >= 3:
+                    return f"{value[0]}–{value[1]}–{value[2]}"
     return "Not available from FotMob."
 
-def extract_xg(detail,side):
-    for o in walk(detail):
-        if isinstance(o,dict):
-            if side in o and isinstance(o[side],dict):
-                x=pick(o[side],"xg","expectedGoals")
-                if x is not None:return x
-            name=o.get("name")
-            if isinstance(name,str) and name.strip().lower() in {"expected goals","xg"}:
-                v=o.get(side)
-                if isinstance(v,dict): v=pick(v,"value","xg","expectedGoals")
-                if v is not None:return v
-    return None
 
-def rw_page(league):
-    code={"Premier League":"EPL","UEFA Champions League":"UCL","LaLiga":"LALIGA","Serie A":"SERIEA","Bundesliga":"BUNDESLIGA","Ligue 1":"LIGUE1","MLS":"MLS","Liga MX":"LIGAMX"}.get(league)
-    return f"{ROT}?league={code}" if code else ROT
+def poisson(lam, max_goals=7):
+    p = [math.exp(-lam)]
+    for k in range(1, max_goals + 1):
+        p.append(p[-1] * lam / k)
+    return p
 
-def rotowire(team,league):
-    url=rw_page(league)
-    try:
-        if url in RW_CACHE:
-            html=RW_CACHE[url]
-        else:
-            html=get(url)
-            RW_CACHE[url]=html
-        if not isinstance(html,str): return [],[],url
-        soup=BeautifulSoup(html,"html.parser")
-        text=soup.get_text("\n",strip=True)
-        # Capture a conservative team block; RotoWire is supplementary and its page can change.
-        i=text.lower().find(str(team or "").lower())
-        if i<0:return [],[],url
-        block=text[i:i+6000]
-        injuries=[]
-        for nm,status in re.findall(r"([A-Z][A-Za-zÀ-ÿ.' -]{2,40})\s+(QUES|OUT|SUS)",block):
-            injuries.append({"name":nm.strip(),"status":status})
-        players=[]
-        positions={"GK","DL","DC","DR","DMC","MC","ML","MR","AML","AMC","AMR","FW","F","M","D"}
-        for line in block.splitlines():
-            line=line.strip()
-            if not line:continue
-            if line in positions: continue
-            # keep names after common position tokens
-            m=re.match(r"^(GK|DL|DC|DR|DMC|MC|ML|MR|AML|AMC|AMR|FW|F|M|D)\s+(.+)$",line)
-            if m: players.append({"position":m.group(1),"name":m.group(2).strip()})
-            if len(players)>=11:break
-        return players,injuries,url
-    except Exception:
-        return [],[],url
 
-def model(m):
-    h,a=m["homeData"],m["awayData"]
-    # Strongly structured but match-specific. Cross-division position is not compared directly.
-    strength={"Premier League":1880,"LaLiga":1860,"Bundesliga":1855,"Serie A":1845,"Ligue 1":1805,"UEFA Champions League":1880,
-      "Championship":1645,"League One":1405,"League Two":1260,"Eredivisie":1685,"Primeira Liga":1695,"MLS":1560,
-      "Saudi Pro League":1610,"Brasileirão":1650,"Liga MX":1605,"Scottish Premiership":1585}
-    hs=strength.get(h.get("division"),1500); as_=strength.get(a.get("division"),1500)
-    diff=(hs-as_)/4
-    same=h.get("division") and h.get("division")==a.get("division")
+def league_strength(name):
+    base = str(name or "")
+    if base == "Premier League" or base.endswith(" Premier League"):
+        # England gets the real top-flight prior; other countries get a sensible fallback.
+        if base == "Premier League" or base == "England Premier League": return 1885
+        return 1510
+    return STRENGTH.get(base, 1500)
+
+
+def model(match):
+    h, a = match["homeData"], match["awayData"]
+    hd, ad = h.get("division"), a.get("division")
+    same = bool(hd and ad and hd == ad)
+    diff = (league_strength(hd) - league_strength(ad)) / 3.0
+    factors = [["League strength", diff]]
+
+    # Early-season table is intentionally weak; cross-division positions are ignored.
     if same and h.get("position") and a.get("position"):
-        diff += (int(a["position"])-int(h["position"]))*3.2
-    diff += ((h.get("formPoints") or 0) - (a.get("formPoints") or 0))*(2.5 if not same else 4.0)
-    # small venue effect only
-    diff += 7 if same else 2
-    # lineups and injuries
-    diff += (len(h.get("lineup",[]))-len(a.get("lineup",[])))*0.5
-    diff += (len(a.get("injuries",[]))-len(h.get("injuries",[])))*1.5
-    # H2H is deliberately capped/low-weight because old meetings can be stale.
-    hs2h=str(m.get("h2hSummary", ""))
-    nums=re.findall(r"\d+", hs2h)
-    if len(nums)>=3:
-        try: diff += (int(nums[0])-int(nums[2]))*1.5
-        except: pass
-    # Draw rises when teams are close.
-    draw=0.25 + 0.15*math.exp(-abs(diff)/60)
-    wm=1-draw
-    ph=1/(1+math.exp(-diff/55))*wm
-    pa=wm-ph
-    p=[ph,draw,pa];s=sum(p);p=[x/s for x in p]
-    idx=max(range(3),key=lambda i:p[i])
-    verdict=m["home"] if idx==0 else "DRAW" if idx==1 else m["away"]
-    verdict="WIN: "+verdict if verdict!="DRAW" else "DRAW"
-    reasons=[
-      f"{h.get('division','Division unavailable')} vs {a.get('division','Division unavailable')}; division strength is the primary structural input.",
-      f"Recent form: {m['home']} {h.get('form','—')} ({h.get('formPoints','—')}/15) vs {m['away']} {a.get('form','—')} ({a.get('formPoints','—')}/15).",
-      ("Same-division table positions are compared directly." if same else "Different divisions: raw league positions are NOT compared; a lower-tier team is not treated as equal simply because it has a similar rank."),
-      f"Home advantage is intentionally small ({7 if same else 3} rating points).",
-      f"RotoWire lineup availability: {len(h.get('lineup',[]))} / 11 vs {len(a.get('lineup',[]))} / 11; injuries listed {len(h.get('injuries',[]))} vs {len(a.get('injuries',[]))}."
-    ]
-    conf=min(94,max(42,50+abs(p[idx]-sorted(p,reverse=True)[1])*120))
-    return {"verdict":verdict,"confidence":conf,"probabilities":p,"projected":"1–1" if idx==1 else "1–0" if idx==0 else "0–1","reasons":reasons,"dataCompleteness":min(100,45+sum(bool(v) for v in [h.get("division"),a.get("division"),h.get("position"),a.get("position"),h.get("form"),a.get("form")])*9)}
+        v = (a["position"] - h["position"]) * 2.0
+    else:
+        v = 0
+    diff += v; factors.append(["Current position", v])
+
+    if same and h.get("lastSeasonPosition") and a.get("lastSeasonPosition"):
+        v = (a["lastSeasonPosition"] - h["lastSeasonPosition"]) * 1.65
+    else:
+        v = 0
+    diff += v; factors.append(["Last season", v])
+
+    hp, ap = h.get("formPoints"), a.get("formPoints")
+    v = ((hp or 0) - (ap or 0)) * 2.5
+    diff += v; factors.append(["Recent form", v])
+
+    xh, xa = h.get("xg"), a.get("xg")
+    v = ((xh or 0) - (xa or 0)) * 13 if xh is not None and xa is not None else 0
+    diff += v; factors.append(["xG", v])
+
+    v = (h.get("transferImpact") or 0) - (a.get("transferImpact") or 0)
+    diff += v; factors.append(["Squad change", v])
+
+    home_adv = 6 if same else 3
+    diff += home_adv; factors.append(["Home advantage", home_adv])
+
+    h2 = re.findall(r"\d+", str(match.get("h2hSummary", "")))
+    v = max(-6, min(6, (int(h2[0]) - int(h2[2])) if len(h2) >= 3 else 0))
+    diff += v; factors.append(["H2H", v])
+
+    # Goal model: league scoring environment + strength split, then optional xG pull.
+    comp = str(match.get("competition", ""))
+    total = 2.55
+    if any(x in comp for x in ("Premier League", "Bundesliga", "Eredivisie")): total = 2.75
+    if any(x in comp for x in ("Serie A", "Ligue 1")): total = 2.45
+    if "Cup" in comp or "Copa" in comp or "Pokal" in comp: total = 2.65
+    share = 1 / (1 + math.exp(-diff / 105))
+    lam_h = max(.35, min(3.5, total * (.42 + .34 * share)))
+    lam_a = max(.30, min(3.25, total * (.42 + .34 * (1 - share))))
+    if xh is not None: lam_h = .65 * lam_h + .35 * max(.20, min(3.5, xh))
+    if xa is not None: lam_a = .65 * lam_a + .35 * max(.20, min(3.25, xa))
+
+    ph, pa = poisson(lam_h), poisson(lam_a)
+    pH = pD = pA = 0.0
+    grid = []
+    for i, pi in enumerate(ph):
+        for j, pj in enumerate(pa):
+            q = pi * pj; grid.append((q, i, j))
+            if i > j: pH += q
+            elif i == j: pD += q
+            else: pA += q
+    probs = [pH, pD, pA]
+    totalp = sum(probs); probs = [p / totalp for p in probs]
+    idx = max(range(3), key=lambda i: probs[i])
+    verdict = match["home"] if idx == 0 else "DRAW" if idx == 1 else match["away"]
+    modal = max(grid, key=lambda x: x[0])
+    projected = f"{max(0, min(5, round(lam_h)))}–{max(0, min(5, round(lam_a)))}"
+    confidence = round(max(42, min(95, 48 + (sorted(probs, reverse=True)[0] - sorted(probs, reverse=True)[1]) * 170)))
+
+    completeness = 35 + (8 if hd else 0) + (8 if ad else 0) + (7 if h.get("form") else 0) + (7 if a.get("form") else 0)
+    completeness += 7 if h.get("position") is not None and a.get("position") is not None else 0
+    completeness += 7 if h.get("lastSeasonPosition") is not None and a.get("lastSeasonPosition") is not None else 0
+    completeness += 7 if xh is not None and xa is not None else 0
+    completeness += 7 if h.get("lineup") and a.get("lineup") else 0
+    return {
+        "verdict": f"WIN: {verdict}" if verdict != "DRAW" else "DRAW",
+        "confidence": confidence,
+        "probabilities": probs,
+        "projected": projected,
+        "modalScore": f"{modal[1]}–{modal[2]}",
+        "expectedGoals": [round(lam_h, 2), round(lam_a, 2)],
+        "factors": [[name, round(value, 1)] for name, value in factors],
+        "dataCompleteness": min(100, completeness),
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect",
+    }
+
 
 def main():
-    today=dt.datetime.now(dt.timezone.utc).astimezone(ZoneInfo("America/New_York")).date()
-    dates=[today, today+dt.timedelta(days=1)]
-    raw=[]; errors=[]
-    for d in dates:
+    now = dt.datetime.now(dt.timezone.utc).astimezone(TZ)
+    days = [now.date(), now.date() + dt.timedelta(days=1)]
+    raw, errors = [], []
+    for day in days:
         try:
-            x=daily(d)
-            groups = x.get("leagues",[]) if isinstance(x,dict) else []
-            if isinstance(x,dict) and not groups:
-                groups = x.get("matches",[]) if isinstance(x.get("matches"),list) else []
-            for lg in groups:
-                if isinstance(lg,dict) and isinstance(lg.get("matches"),list):
-                    for m in lg.get("matches",[]): raw.append((lg,m))
-                elif isinstance(lg,dict) and lg.get("id") and (lg.get("home") or lg.get("homeTeam")):
-                    raw.append(({},lg))
-        except Exception as e:
-            errors.append(f"{d}: {e}"); print("FotMob daily failed",d,e)
-    matches=[]
-    seen=set()
-    for lg,m in raw:
-        mid=str(m.get("id") or m.get("matchId") or "")
-        if not mid or mid in seen:continue
+            payload = daily(day)
+            rows = match_rows(payload)
+            print(f"FotMob {day}: {len(rows)} raw fixtures")
+            raw.extend(rows)
+        except Exception as exc:
+            errors.append(f"{day}: {exc}")
+            print("FotMob daily failed", day, exc)
+
+    matches, seen = [], set()
+    for m in raw:
+        mid = str(pick(m, "id", "matchId") or "")
+        if not mid or mid in seen: continue
         seen.add(mid)
-        gen=m.get("general",m)
-        home=pick(m,"homeTeam","home") or {}
-        away=pick(m,"awayTeam","away") or {}
-        hn=pick(home,"name","longName","teamName") or m.get("homeTeamName")
-        an=pick(away,"name","longName","teamName") or m.get("awayTeamName")
-        if not hn or not an:continue
-        comp=canonical_comp(lg.get("name") or m.get("competitionName"),lg.get("country",{}).get("name","") if isinstance(lg.get("country"),dict) else "")
-        if comp not in TOP: continue
-        try:d=details(mid)
-        except Exception as e:
-            d={}; print("matchDetails failed",mid,e)
-        hid=home.get("id") or m.get("homeTeamId"); aid=away.get("id") or m.get("awayTeamId")
+        home, away = m.get("home") or {}, m.get("away") or {}
+        hn, an = pick(home, "name", "longName"), pick(away, "name", "longName")
+        if not hn or not an: continue
+
+        base_comp, display_comp, ctry = normalize_comp(m.get("_league_name"), m.get("_ccode"), m.get("_country"))
+        if base_comp not in SUPPORTED: continue
+
         try:
-            htp=team_page(hid) if hid else {}
-            hp=extract_team(htp,hid) if hid else {}
-            hlg=current_league_from_team(htp)
-            hp.update(hlg); hp["id"]=hid
-        except Exception: hp={}
+            hp = team_payload(home.get("id")); ap = team_payload(away.get("id"))
+        except Exception as exc:
+            print("Team data failed", mid, exc); hp = {}; ap = {}
+        hl, al = current_league(hp), current_league(ap)
+
+        hleague = league_payload(hl.get("leagueId")) if hl.get("leagueId") else {}
+        aleague = league_payload(al.get("leagueId")) if al.get("leagueId") else {}
+        hpos = table_position(hleague, home.get("id")) or table_position(hp, home.get("id"))
+        apos = table_position(aleague, away.get("id")) or table_position(ap, away.get("id"))
+        hlast = previous_finish(hp, home.get("id")) or historical_position(hl.get("leagueId"), home.get("id"))
+        alast = previous_finish(ap, away.get("id")) or historical_position(al.get("leagueId"), away.get("id"))
+        hd = {
+            "id": home.get("id"), "division": hl.get("division"), "leagueId": hl.get("leagueId"),
+            "ccode": hl.get("ccode"), "position": hpos,
+            "form": form_from_team(hp, home.get("id")), "lastSeasonPosition": hlast,
+            "transferImpact": transfer_impact(hp), "lineup": [], "injuries": []
+        }
+        ad = {
+            "id": away.get("id"), "division": al.get("division"), "leagueId": al.get("leagueId"),
+            "ccode": al.get("ccode"), "position": apos,
+            "form": form_from_team(ap, away.get("id")), "lastSeasonPosition": alast,
+            "transferImpact": transfer_impact(ap), "lineup": [], "injuries": []
+        }
+        hd["formPoints"] = sum(3 if x == "W" else 1 if x == "D" else 0 for x in hd["form"])
+        ad["formPoints"] = sum(3 if x == "W" else 1 if x == "D" else 0 for x in ad["form"])
+
         try:
-            atp=team_page(aid) if aid else {}
-            ap=extract_team(atp,aid) if aid else {}
-            alg=current_league_from_team(atp)
-            ap.update(alg); ap["id"]=aid
-        except Exception: ap={}
-        # Never use the cup competition as a club's domestic division.
-        for td in (hp,ap):
-            if td.get("leagueId"):
-                try: td["position"]=table_position(cached_get(f"{BASE}/leagues",{"id":td["leagueId"]}), td.get("id"))
-                except Exception: pass
-        hp["lineup"],hp["injuries"],rw=rotowire(hn,comp)
-        ap["lineup"],ap["injuries"],rw2=rotowire(an,comp)
-        # Match details can be unavailable/partially hydrated; xG is optional and must never abort the whole run.
-        try: hp["xg"]=extract_xg(d,"home")
-        except Exception as e: hp["xg"]=None; print("xG home parse skipped",mid,e)
-        try: ap["xg"]=extract_xg(d,"away")
-        except Exception as e: ap["xg"]=None; print("xG away parse skipped",mid,e)
-        st=m.get("status",{}) if isinstance(m.get("status",{}),dict) else {}
-        hs=pick(home,"score") if isinstance(home,dict) else None
-        aws=pick(away,"score") if isinstance(away,dict) else None
-        scorestr=pick(st,"scoreStr")
-        if (hs is None or aws is None) and isinstance(scorestr,str):
-            mm=re.match(r"\s*(\d+)\s*[-:]\s*(\d+)\s*",scorestr)
-            if mm: hs,aws=int(mm.group(1)),int(mm.group(2))
-        out={"id":mid,"competition":comp,"competitionCode":str(lg.get("ccode") or comp[:3]).upper(),"home":hn,"away":an,
-             "homeScore":hs,"awayScore":aws,
-             "status":"LIVE" if st.get("started") and not st.get("finished") else "FT" if st.get("finished") else "UPCOMING",
-             "kickoff":st.get("utcTime") or m.get("time"),"minute":pick(st,"period","reason"),
-             "homeData":hp,"awayData":ap,"rotowireUrl":rw if rw!=ROT else rw2,
-             "h2hSummary":extract_h2h(d)}
-        out["model"]=model(out);matches.append(out)
-    matches.sort(key=lambda x:(x["status"]!="LIVE",x.get("kickoff") or ""))
+            detail = match_details(mid)
+            hd["lineup"], ad["lineup"] = lineup(detail, hd["id"], ad["id"])
+            xh, xa = xg(detail); hd["xg"], ad["xg"] = xh, xa
+            h2h_summary = h2h(detail)
+        except Exception as exc:
+            print("Detail failed", mid, exc); detail = {}; h2h_summary = "Not available from FotMob."
+            hd["xg"] = ad["xg"] = None
+
+        hs, ass = score(m)
+        st = m.get("status") or {}
+        out = {
+            "id": mid, "competition": display_comp, "competitionName": base_comp,
+            "competitionCountry": ctry, "competitionCode": str(m.get("_ccode") or "INT").upper(),
+            "competitionFlag": flag(m.get("_ccode"), ctry),
+            "home": hn, "away": an, "homeScore": hs, "awayScore": ass, "status": status(m),
+            "kickoff": st.get("utcTime") or m.get("utcTime"),
+            "minute": {"short": pick(st, "reason", "period") or ""},
+            "homeData": hd, "awayData": ad, "h2hSummary": h2h_summary,
+            "fotmobMatchUrl": f"{ROOT}/matches/{mid}/match-details",
+        }
+        out["model"] = model(out)
+        matches.append(out)
+
+    matches.sort(key=lambda x: (x["status"] != "LIVE", x.get("kickoff") or ""))
     if not matches:
         print("NO FIXTURES GENERATED")
-        if errors: print("SOURCE ERRORS:"," | ".join(errors))
+        if errors: print("SOURCE ERRORS:", " | ".join(errors))
         raise SystemExit(2)
-    result={"updatedAt":dt.datetime.now(dt.timezone.utc).isoformat(),"fixtureCount":len(matches),
-            "sourceStatus":f"FotMob OK · RotoWire attempted · {len(matches)} fixtures",
-            "sourceErrors":errors,"matches":matches}
-    Path("data/fixtures.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
-    print("WROTE",len(matches),"fixtures")
 
-if __name__=="__main__": main()
+    result = {
+        "updatedAt": dt.datetime.now(dt.timezone.utc).isoformat(),
+        "fixtureCount": len(matches),
+        "sourceStatus": f"FotMob only · {len(matches)} fixtures",
+        "sourceErrors": errors,
+        "matches": matches,
+    }
+    Path("data").mkdir(exist_ok=True)
+    Path("data/fixtures.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    print("WROTE", len(matches), "fixtures")
+
+
+if __name__ == "__main__":
+    main()
