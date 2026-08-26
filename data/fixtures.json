@@ -1,27 +1,27 @@
 {
-  "updatedAt": "2026-08-26T21:22:02.478925+00:00",
+  "updatedAt": "2026-08-26T17:51:16.191918+00:00",
   "fixtureCount": 69,
-  "sourceStatus": "FotMob + Sofascore enrichment · 69 fixtures",
+  "sourceStatus": "FotMob only · 69 fixtures",
   "sourceErrors": [],
   "matches": [
     {
-      "id": "5987808",
-      "competition": "UEFA Champions League Qualification",
-      "competitionName": "UEFA Champions League Qualification",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "NK Celje",
-      "away": "Slovan Bratislava",
-      "homeScore": 1,
+      "id": "6018558",
+      "competition": "Kuwait Premier League",
+      "competitionName": "Premier League",
+      "competitionCountry": "Kuwait",
+      "competitionCode": "KUW",
+      "competitionFlag": "🇰🇼",
+      "home": "Al-Shabab SC",
+      "away": "Al-Jahra",
+      "homeScore": 2,
       "awayScore": 2,
       "status": "LIVE",
-      "kickoff": "2026-08-26T19:00:00.000Z",
+      "kickoff": "2026-08-26T15:45:00.000Z",
       "minute": {
         "short": ""
       },
       "homeData": {
-        "id": 4622,
+        "id": 150412,
         "division": null,
         "leagueId": null,
         "ccode": null,
@@ -35,7 +35,7 @@
         "xg": null
       },
       "awayData": {
-        "id": 6019,
+        "id": 101712,
         "division": null,
         "leagueId": null,
         "ccode": null,
@@ -49,12 +49,107 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5987808/match-details",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/6018558/match-details",
       "model": {
-        "verdict": "WIN: NK Celje",
+        "verdict": "WIN: Al-Shabab SC",
+        "confidence": 49,
+        "probabilities": [
+          0.3865488375112764,
+          0.2325605372642055,
+          0.38089062522451816
+        ],
+        "projected": "2–2",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.63,
+          1.62
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
+          ],
+          [
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
+            0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "5970105",
+      "competition": "Saudi Pro League",
+      "competitionName": "Saudi Pro League",
+      "competitionCountry": "Unknown",
+      "competitionCode": "KSA",
+      "competitionFlag": "🌍",
+      "home": "Al-Faisaly",
+      "away": "Al Fateh FC",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "LIVE",
+      "kickoff": "2026-08-26T16:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 205687,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 177356,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5970105/match-details",
+      "model": {
+        "verdict": "WIN: Al-Faisaly",
         "confidence": 49,
         "probabilities": [
           0.3813837042983075,
@@ -62,7 +157,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -99,14 +194,304 @@
           [
             "H2H",
             0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "5988083",
+      "competition": "UEFA Conference League Qualification",
+      "competitionName": "UEFA Conference League Qualification",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Rapid Wien",
+      "away": "Hearts",
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "LIVE",
+      "kickoff": "2026-08-26T16:45:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 10015,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 9860,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5988083/match-details",
+      "model": {
+        "verdict": "WIN: Rapid Wien",
+        "confidence": 49,
+        "probabilities": [
+          0.3813837042983075,
+          0.24266481743348567,
+          0.3759514782682069
+        ],
+        "projected": "2–1",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.51,
+          1.5
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
           ],
           [
-            "Starting XI quality",
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
             0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "5996693",
+      "competition": "Egypt Premier League",
+      "competitionName": "Premier League",
+      "competitionCountry": "Egypt",
+      "competitionCode": "EGY",
+      "competitionFlag": "🇪🇬",
+      "home": "National Bank",
+      "away": "Zamalek SC",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "LIVE",
+      "kickoff": "2026-08-26T17:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 687954,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 80591,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5996693/match-details",
+      "model": {
+        "verdict": "WIN: National Bank",
+        "confidence": 49,
+        "probabilities": [
+          0.3865488375112764,
+          0.2325605372642055,
+          0.38089062522451816
+        ],
+        "projected": "2–2",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.63,
+          1.62
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
+          ],
+          [
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
+            0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "5996694",
+      "competition": "Egypt Premier League",
+      "competitionName": "Premier League",
+      "competitionCountry": "Egypt",
+      "competitionCode": "EGY",
+      "competitionFlag": "🇪🇬",
+      "home": "Petrojet-Suez",
+      "away": "Tala'ea El Gaish",
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "LIVE",
+      "kickoff": "2026-08-26T17:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 103017,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 101747,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5996694/match-details",
+      "model": {
+        "verdict": "WIN: Petrojet-Suez",
+        "confidence": 49,
+        "probabilities": [
+          0.3865488375112764,
+          0.2325605372642055,
+          0.38089062522451816
+        ],
+        "projected": "2–2",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.63,
+          1.62
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
+          ],
+          [
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
+            0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -159,9 +544,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/1000019461/match-details",
       "model": {
         "verdict": "WIN: Cruzeiro",
@@ -171,8 +553,8 @@
           0.2374446676226173,
           0.37850433298578734
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.57,
           1.56
@@ -209,14 +591,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -269,9 +647,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5996692/match-details",
       "model": {
         "verdict": "WIN: Smouha SC",
@@ -281,8 +656,8 @@
           0.2325605372642055,
           0.38089062522451816
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.63,
           1.62
@@ -319,564 +694,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "6018558",
-      "competition": "Kuwait Premier League",
-      "competitionName": "Premier League",
-      "competitionCountry": "Kuwait",
-      "competitionCode": "KUW",
-      "competitionFlag": "🇰🇼",
-      "home": "Al-Shabab SC",
-      "away": "Al-Jahra",
-      "homeScore": 3,
-      "awayScore": 2,
-      "status": "FT",
-      "kickoff": "2026-08-26T15:45:00.000Z",
-      "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
-      },
-      "homeData": {
-        "id": 150412,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 101712,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/6018558/match-details",
-      "model": {
-        "verdict": "WIN: Al-Shabab SC",
-        "confidence": 49,
-        "probabilities": [
-          0.3865488375112764,
-          0.2325605372642055,
-          0.38089062522451816
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.63,
-          1.62
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "5970105",
-      "competition": "Saudi Pro League",
-      "competitionName": "Saudi Pro League",
-      "competitionCountry": "Unknown",
-      "competitionCode": "KSA",
-      "competitionFlag": "🌍",
-      "home": "Al-Faisaly",
-      "away": "Al Fateh FC",
-      "homeScore": 1,
-      "awayScore": 1,
-      "status": "FT",
-      "kickoff": "2026-08-26T16:00:00.000Z",
-      "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
-      },
-      "homeData": {
-        "id": 205687,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 177356,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5970105/match-details",
-      "model": {
-        "verdict": "WIN: Al-Faisaly",
-        "confidence": 49,
-        "probabilities": [
-          0.3813837042983075,
-          0.24266481743348567,
-          0.3759514782682069
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.51,
-          1.5
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "5988083",
-      "competition": "UEFA Conference League Qualification",
-      "competitionName": "UEFA Conference League Qualification",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Rapid Wien",
-      "away": "Hearts",
-      "homeScore": 2,
-      "awayScore": 2,
-      "status": "FT",
-      "kickoff": "2026-08-26T16:45:00.000Z",
-      "minute": {
-        "short": {
-          "short": "Pen",
-          "shortKey": "penalties_short",
-          "long": "After penalties",
-          "longKey": "afterpenalties"
-        }
-      },
-      "homeData": {
-        "id": 10015,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 9860,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5988083/match-details",
-      "model": {
-        "verdict": "WIN: Rapid Wien",
-        "confidence": 49,
-        "probabilities": [
-          0.3813837042983075,
-          0.24266481743348567,
-          0.3759514782682069
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.51,
-          1.5
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "5996694",
-      "competition": "Egypt Premier League",
-      "competitionName": "Premier League",
-      "competitionCountry": "Egypt",
-      "competitionCode": "EGY",
-      "competitionFlag": "🇪🇬",
-      "home": "Petrojet-Suez",
-      "away": "Tala'ea El Gaish",
-      "homeScore": 2,
-      "awayScore": 3,
-      "status": "FT",
-      "kickoff": "2026-08-26T17:00:00.000Z",
-      "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
-      },
-      "homeData": {
-        "id": 103017,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 101747,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5996694/match-details",
-      "model": {
-        "verdict": "WIN: Petrojet-Suez",
-        "confidence": 49,
-        "probabilities": [
-          0.3865488375112764,
-          0.2325605372642055,
-          0.38089062522451816
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.63,
-          1.62
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "5996693",
-      "competition": "Egypt Premier League",
-      "competitionName": "Premier League",
-      "competitionCountry": "Egypt",
-      "competitionCode": "EGY",
-      "competitionFlag": "🇪🇬",
-      "home": "National Bank",
-      "away": "Zamalek SC",
-      "homeScore": 0,
-      "awayScore": 3,
-      "status": "FT",
-      "kickoff": "2026-08-26T17:00:00.000Z",
-      "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
-      },
-      "homeData": {
-        "id": 687954,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 80591,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5996693/match-details",
-      "model": {
-        "verdict": "WIN: National Bank",
-        "confidence": 49,
-        "probabilities": [
-          0.3865488375112764,
-          0.2325605372642055,
-          0.38089062522451816
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.63,
-          1.62
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -888,17 +709,12 @@
       "competitionFlag": "🇰🇼",
       "home": "Al-Salmiyah",
       "away": "Al Nasr",
-      "homeScore": 1,
-      "awayScore": 2,
-      "status": "FT",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
       "kickoff": "2026-08-26T18:00:00.000Z",
       "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
+        "short": ""
       },
       "homeData": {
         "id": 101716,
@@ -929,9 +745,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6018557/match-details",
       "model": {
         "verdict": "WIN: Al-Salmiyah",
@@ -941,8 +754,8 @@
           0.2325605372642055,
           0.38089062522451816
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.63,
           1.62
@@ -979,14 +792,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -998,17 +807,12 @@
       "competitionFlag": "🌍",
       "home": "Al Diriyah",
       "away": "Al Kholood",
-      "homeScore": 1,
-      "awayScore": 1,
-      "status": "FT",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
       "kickoff": "2026-08-26T18:00:00.000Z",
       "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
+        "short": ""
       },
       "homeData": {
         "id": 1787233,
@@ -1039,9 +843,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5970106/match-details",
       "model": {
         "verdict": "WIN: Al Diriyah",
@@ -1052,7 +853,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -1089,124 +890,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "6005666",
-      "competition": "EFL Cup",
-      "competitionName": "EFL Cup",
-      "competitionCountry": "England",
-      "competitionCode": "ENG",
-      "competitionFlag": "🇬🇧",
-      "home": "Tottenham",
-      "away": "Charlton",
-      "homeScore": 5,
-      "awayScore": 1,
-      "status": "FT",
-      "kickoff": "2026-08-26T18:45:00.000Z",
-      "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
-      },
-      "homeData": {
-        "id": 8586,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 8451,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/6005666/match-details",
-      "model": {
-        "verdict": "WIN: Tottenham",
-        "confidence": 49,
-        "probabilities": [
-          0.38405099939159537,
-          0.2374446676226173,
-          0.37850433298578734
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.57,
-          1.56
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -1220,15 +907,10 @@
       "away": "Burnley",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "FT",
+      "status": "UPCOMING",
       "kickoff": "2026-08-26T18:45:00.000Z",
       "minute": {
-        "short": {
-          "short": "Pen",
-          "shortKey": "penalties_short",
-          "long": "After penalties",
-          "longKey": "afterpenalties"
-        }
+        "short": ""
       },
       "homeData": {
         "id": 8484,
@@ -1259,9 +941,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6005653/match-details",
       "model": {
         "verdict": "WIN: Bradford",
@@ -1271,8 +950,8 @@
           0.2374446676226173,
           0.37850433298578734
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.57,
           1.56
@@ -1309,14 +988,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -1328,17 +1003,12 @@
       "competitionFlag": "🇬🇧",
       "home": "Newcastle",
       "away": "West Brom",
-      "homeScore": 3,
-      "awayScore": 2,
-      "status": "FT",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
       "kickoff": "2026-08-26T18:45:00.000Z",
       "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
+        "short": ""
       },
       "homeData": {
         "id": 10261,
@@ -1369,9 +1039,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6005645/match-details",
       "model": {
         "verdict": "WIN: Newcastle",
@@ -1381,8 +1048,8 @@
           0.2374446676226173,
           0.37850433298578734
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.57,
           1.56
@@ -1419,39 +1086,30 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
-      "id": "5987805",
-      "competition": "UEFA Champions League Qualification",
-      "competitionName": "UEFA Champions League Qualification",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "AEK Athens",
-      "away": "Levski Sofia",
-      "homeScore": 4,
+      "id": "6005666",
+      "competition": "EFL Cup",
+      "competitionName": "EFL Cup",
+      "competitionCountry": "England",
+      "competitionCode": "ENG",
+      "competitionFlag": "🇬🇧",
+      "home": "Tottenham",
+      "away": "Charlton",
+      "homeScore": 0,
       "awayScore": 0,
-      "status": "FT",
-      "kickoff": "2026-08-26T19:00:00.000Z",
+      "status": "UPCOMING",
+      "kickoff": "2026-08-26T18:45:00.000Z",
       "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
+        "short": ""
       },
       "homeData": {
-        "id": 8563,
+        "id": 8586,
         "division": null,
         "leagueId": null,
         "ccode": null,
@@ -1465,7 +1123,7 @@
         "xg": null
       },
       "awayData": {
-        "id": 8632,
+        "id": 8451,
         "division": null,
         "leagueId": null,
         "ccode": null,
@@ -1479,23 +1137,20 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5987805/match-details",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/6005666/match-details",
       "model": {
-        "verdict": "WIN: AEK Athens",
+        "verdict": "WIN: Tottenham",
         "confidence": 49,
         "probabilities": [
-          0.3813837042983075,
-          0.24266481743348567,
-          0.3759514782682069
+          0.38405099939159537,
+          0.2374446676226173,
+          0.37850433298578734
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
-          1.51,
-          1.5
+          1.57,
+          1.56
         ],
         "factors": [
           [
@@ -1529,234 +1184,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "5987810",
-      "competition": "UEFA Champions League Qualification",
-      "competitionName": "UEFA Champions League Qualification",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Lyon",
-      "away": "Fenerbahçe",
-      "homeScore": 1,
-      "awayScore": 2,
-      "status": "FT",
-      "kickoff": "2026-08-26T19:00:00.000Z",
-      "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
-      },
-      "homeData": {
-        "id": 9748,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 8695,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5987810/match-details",
-      "model": {
-        "verdict": "WIN: Lyon",
-        "confidence": 49,
-        "probabilities": [
-          0.3813837042983075,
-          0.24266481743348567,
-          0.3759514782682069
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.51,
-          1.5
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "5868018",
-      "competition": "LaLiga",
-      "competitionName": "LaLiga",
-      "competitionCountry": "Spain",
-      "competitionCode": "ESP",
-      "competitionFlag": "🇪🇸",
-      "home": "Real Madrid",
-      "away": "Real Sociedad",
-      "homeScore": 4,
-      "awayScore": 1,
-      "status": "FT",
-      "kickoff": "2026-08-26T19:00:00.000Z",
-      "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
-      },
-      "homeData": {
-        "id": 8633,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 8560,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5868018/match-details",
-      "model": {
-        "verdict": "WIN: Real Madrid",
-        "confidence": 49,
-        "probabilities": [
-          0.3813837042983075,
-          0.24266481743348567,
-          0.3759514782682069
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.51,
-          1.5
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -1769,16 +1200,11 @@
       "home": "Preston",
       "away": "Everton",
       "homeScore": 0,
-      "awayScore": 4,
-      "status": "FT",
+      "awayScore": 0,
+      "status": "UPCOMING",
       "kickoff": "2026-08-26T19:00:00.000Z",
       "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
+        "short": ""
       },
       "homeData": {
         "id": 8411,
@@ -1809,9 +1235,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6005650/match-details",
       "model": {
         "verdict": "WIN: Preston",
@@ -1821,8 +1244,8 @@
           0.2374446676226173,
           0.37850433298578734
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.57,
           1.56
@@ -1859,39 +1282,30 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
-      "id": "5987807",
-      "competition": "UEFA Champions League Qualification",
-      "competitionName": "UEFA Champions League Qualification",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Viking",
-      "away": "Dinamo Zagreb",
-      "homeScore": 3,
-      "awayScore": 1,
-      "status": "FT",
+      "id": "5868018",
+      "competition": "LaLiga",
+      "competitionName": "LaLiga",
+      "competitionCountry": "Spain",
+      "competitionCode": "ESP",
+      "competitionFlag": "🇪🇸",
+      "home": "Real Madrid",
+      "away": "Real Sociedad",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
       "kickoff": "2026-08-26T19:00:00.000Z",
       "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
+        "short": ""
       },
       "homeData": {
-        "id": 8478,
+        "id": 8633,
         "division": null,
         "leagueId": null,
         "ccode": null,
@@ -1905,7 +1319,7 @@
         "xg": null
       },
       "awayData": {
-        "id": 10156,
+        "id": 8560,
         "division": null,
         "leagueId": null,
         "ccode": null,
@@ -1919,12 +1333,9 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5987807/match-details",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5868018/match-details",
       "model": {
-        "verdict": "WIN: Viking",
+        "verdict": "WIN: Real Madrid",
         "confidence": 49,
         "probabilities": [
           0.3813837042983075,
@@ -1932,7 +1343,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -1969,34 +1380,30 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
-      "id": "1000019463",
-      "competition": "Copa do Brasil",
-      "competitionName": "Copa do Brasil",
-      "competitionCountry": "Brazil",
-      "competitionCode": "BRA",
-      "competitionFlag": "🇧🇷",
-      "home": "Palmeiras",
-      "away": "Santos FC",
+      "id": "5987805",
+      "competition": "UEFA Champions League Qualification",
+      "competitionName": "UEFA Champions League Qualification",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "AEK Athens",
+      "away": "Levski Sofia",
       "homeScore": 0,
       "awayScore": 0,
       "status": "UPCOMING",
-      "kickoff": "2026-08-27T00:30:00.000Z",
+      "kickoff": "2026-08-26T19:00:00.000Z",
       "minute": {
         "short": ""
       },
       "homeData": {
-        "id": 10283,
+        "id": 8563,
         "division": null,
         "leagueId": null,
         "ccode": null,
@@ -2010,7 +1417,7 @@
         "xg": null
       },
       "awayData": {
-        "id": 8514,
+        "id": 8632,
         "division": null,
         "leagueId": null,
         "ccode": null,
@@ -2024,23 +1431,20 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000019463/match-details",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5987805/match-details",
       "model": {
-        "verdict": "WIN: Palmeiras",
+        "verdict": "WIN: AEK Athens",
         "confidence": 49,
         "probabilities": [
-          0.38405099939159537,
-          0.2374446676226173,
-          0.37850433298578734
+          0.3813837042983075,
+          0.24266481743348567,
+          0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
-          1.57,
-          1.56
+          1.51,
+          1.5
         ],
         "factors": [
           [
@@ -2074,14 +1478,304 @@
           [
             "H2H",
             0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "5987810",
+      "competition": "UEFA Champions League Qualification",
+      "competitionName": "UEFA Champions League Qualification",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Lyon",
+      "away": "Fenerbahçe",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-08-26T19:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 9748,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 8695,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5987810/match-details",
+      "model": {
+        "verdict": "WIN: Lyon",
+        "confidence": 49,
+        "probabilities": [
+          0.3813837042983075,
+          0.24266481743348567,
+          0.3759514782682069
+        ],
+        "projected": "2–1",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.51,
+          1.5
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
           ],
           [
-            "Starting XI quality",
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
             0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "5987808",
+      "competition": "UEFA Champions League Qualification",
+      "competitionName": "UEFA Champions League Qualification",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "NK Celje",
+      "away": "Slovan Bratislava",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-08-26T19:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 4622,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 6019,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5987808/match-details",
+      "model": {
+        "verdict": "WIN: NK Celje",
+        "confidence": 49,
+        "probabilities": [
+          0.3813837042983075,
+          0.24266481743348567,
+          0.3759514782682069
+        ],
+        "projected": "2–1",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.51,
+          1.5
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
+          ],
+          [
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
+            0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "5987807",
+      "competition": "UEFA Champions League Qualification",
+      "competitionName": "UEFA Champions League Qualification",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Viking",
+      "away": "Dinamo Zagreb",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-08-26T19:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 8478,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 10156,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5987807/match-details",
+      "model": {
+        "verdict": "WIN: Viking",
+        "confidence": 49,
+        "probabilities": [
+          0.3813837042983075,
+          0.24266481743348567,
+          0.3759514782682069
+        ],
+        "projected": "2–1",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.51,
+          1.5
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
+          ],
+          [
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
+            0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -2129,9 +1823,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/1000019462/match-details",
       "model": {
         "verdict": "WIN: Vasco da Gama",
@@ -2141,8 +1832,8 @@
           0.2374446676226173,
           0.37850433298578734
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.57,
           1.56
@@ -2179,14 +1870,108 @@
           [
             "H2H",
             0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "1000019463",
+      "competition": "Copa do Brasil",
+      "competitionName": "Copa do Brasil",
+      "competitionCountry": "Brazil",
+      "competitionCode": "BRA",
+      "competitionFlag": "🇧🇷",
+      "home": "Palmeiras",
+      "away": "Santos FC",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-08-27T00:30:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 10283,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 8514,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000019463/match-details",
+      "model": {
+        "verdict": "WIN: Palmeiras",
+        "confidence": 49,
+        "probabilities": [
+          0.38405099939159537,
+          0.2374446676226173,
+          0.37850433298578734
+        ],
+        "projected": "2–2",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.57,
+          1.56
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
           ],
           [
-            "Starting XI quality",
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
             0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -2234,9 +2019,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5998296/match-details",
       "model": {
         "verdict": "WIN: Mashujaa",
@@ -2246,8 +2028,8 @@
           0.2325605372642055,
           0.38089062522451816
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.63,
           1.62
@@ -2284,14 +2066,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -2339,9 +2117,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5996695/match-details",
       "model": {
         "verdict": "WIN: Modern Sport FC",
@@ -2351,8 +2126,8 @@
           0.2325605372642055,
           0.38089062522451816
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.63,
           1.62
@@ -2389,14 +2164,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -2444,9 +2215,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988076/match-details",
       "model": {
         "verdict": "WIN: KuPS",
@@ -2457,7 +2225,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -2494,14 +2262,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -2549,9 +2313,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6072424/match-details",
       "model": {
         "verdict": "WIN: Al Sahel SC",
@@ -2561,8 +2322,8 @@
           0.2325605372642055,
           0.38089062522451816
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.63,
           1.62
@@ -2599,14 +2360,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -2654,9 +2411,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988091/match-details",
       "model": {
         "verdict": "WIN: Jablonec",
@@ -2667,7 +2421,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -2704,14 +2458,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -2759,9 +2509,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988098/match-details",
       "model": {
         "verdict": "WIN: Maccabi Tel Aviv",
@@ -2772,7 +2519,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -2809,14 +2556,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -2864,9 +2607,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988096/match-details",
       "model": {
         "verdict": "WIN: Qarabağ FK",
@@ -2877,7 +2617,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -2914,14 +2654,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -2969,9 +2705,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5987968/match-details",
       "model": {
         "verdict": "WIN: Ararat Armenia",
@@ -2982,7 +2715,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -3019,14 +2752,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -3074,9 +2803,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5987972/match-details",
       "model": {
         "verdict": "WIN: Iberia 1999",
@@ -3087,7 +2813,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -3124,14 +2850,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -3179,9 +2901,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5998297/match-details",
       "model": {
         "verdict": "WIN: Simba SC",
@@ -3191,8 +2910,8 @@
           0.2325605372642055,
           0.38089062522451816
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.63,
           1.62
@@ -3229,119 +2948,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "5988081",
-      "competition": "UEFA Conference League Qualification",
-      "competitionName": "UEFA Conference League Qualification",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Monaco",
-      "away": "Górnik Zabrze",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-08-27T16:45:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 9829,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 8020,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5988081/match-details",
-      "model": {
-        "verdict": "WIN: Monaco",
-        "confidence": 49,
-        "probabilities": [
-          0.3813837042983075,
-          0.24266481743348567,
-          0.3759514782682069
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.51,
-          1.5
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -3389,9 +2999,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988080/match-details",
       "model": {
         "verdict": "WIN: Freiburg",
@@ -3402,7 +3009,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -3439,14 +3046,108 @@
           [
             "H2H",
             0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "5988081",
+      "competition": "UEFA Conference League Qualification",
+      "competitionName": "UEFA Conference League Qualification",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Monaco",
+      "away": "Górnik Zabrze",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-08-27T16:45:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 9829,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 8020,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5988081/match-details",
+      "model": {
+        "verdict": "WIN: Monaco",
+        "confidence": 49,
+        "probabilities": [
+          0.3813837042983075,
+          0.24266481743348567,
+          0.3759514782682069
+        ],
+        "projected": "2–1",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.51,
+          1.5
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
           ],
           [
-            "Starting XI quality",
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
             0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -3494,9 +3195,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988088/match-details",
       "model": {
         "verdict": "WIN: Brann",
@@ -3507,7 +3205,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -3544,14 +3242,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -3599,9 +3293,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988082/match-details",
       "model": {
         "verdict": "WIN: FC København",
@@ -3612,7 +3303,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -3649,14 +3340,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -3704,9 +3391,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988086/match-details",
       "model": {
         "verdict": "WIN: Hradec Králové",
@@ -3717,7 +3401,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -3754,14 +3438,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -3809,9 +3489,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988077/match-details",
       "model": {
         "verdict": "WIN: Inter Club d'Escaldes",
@@ -3822,7 +3499,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -3859,224 +3536,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "5988078",
-      "competition": "UEFA Conference League Qualification",
-      "competitionName": "UEFA Conference League Qualification",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Riga FC",
-      "away": "Klaksvik",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-08-27T17:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 624924,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 8106,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5988078/match-details",
-      "model": {
-        "verdict": "WIN: Riga FC",
-        "confidence": 49,
-        "probabilities": [
-          0.3813837042983075,
-          0.24266481743348567,
-          0.3759514782682069
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.51,
-          1.5
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "5988085",
-      "competition": "UEFA Conference League Qualification",
-      "competitionName": "UEFA Conference League Qualification",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Raków Częstochowa",
-      "away": "Hajduk Split",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-08-27T17:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 4024,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 10154,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5988085/match-details",
-      "model": {
-        "verdict": "WIN: Raków Częstochowa",
-        "confidence": 49,
-        "probabilities": [
-          0.3813837042983075,
-          0.24266481743348567,
-          0.3759514782682069
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.51,
-          1.5
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -4124,9 +3587,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988093/match-details",
       "model": {
         "verdict": "WIN: Pafos FC",
@@ -4137,7 +3597,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -4174,14 +3634,206 @@
           [
             "H2H",
             0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "5988085",
+      "competition": "UEFA Conference League Qualification",
+      "competitionName": "UEFA Conference League Qualification",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Raków Częstochowa",
+      "away": "Hajduk Split",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-08-27T17:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 4024,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 10154,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5988085/match-details",
+      "model": {
+        "verdict": "WIN: Raków Częstochowa",
+        "confidence": 49,
+        "probabilities": [
+          0.3813837042983075,
+          0.24266481743348567,
+          0.3759514782682069
+        ],
+        "projected": "2–1",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.51,
+          1.5
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
           ],
           [
-            "Starting XI quality",
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
             0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "5988078",
+      "competition": "UEFA Conference League Qualification",
+      "competitionName": "UEFA Conference League Qualification",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Riga FC",
+      "away": "Klaksvik",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-08-27T17:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 624924,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 8106,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5988078/match-details",
+      "model": {
+        "verdict": "WIN: Riga FC",
+        "confidence": 49,
+        "probabilities": [
+          0.3813837042983075,
+          0.24266481743348567,
+          0.3759514782682069
+        ],
+        "projected": "2–1",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.51,
+          1.5
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
+          ],
+          [
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
+            0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -4229,9 +3881,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5987976/match-details",
       "model": {
         "verdict": "WIN: FK Kauno Žalgiris",
@@ -4242,7 +3891,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -4279,14 +3928,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -4334,9 +3979,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5987971/match-details",
       "model": {
         "verdict": "WIN: Lillestrøm",
@@ -4347,7 +3989,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -4384,14 +4026,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -4439,9 +4077,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5987969/match-details",
       "model": {
         "verdict": "WIN: Omonia Nicosia",
@@ -4452,7 +4087,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -4489,119 +4124,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
-      }
-    },
-    {
-      "id": "5987970",
-      "competition": "UEFA Europa League Qualification",
-      "competitionName": "UEFA Europa League Qualification",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Viktoria Plzeň",
-      "away": "FK Crvena Zvezda",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-08-27T17:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 6033,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "awayData": {
-        "id": 8687,
-        "division": null,
-        "leagueId": null,
-        "ccode": null,
-        "position": null,
-        "form": "",
-        "lastSeasonPosition": null,
-        "transferImpact": 0.0,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 0,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/5987970/match-details",
-      "model": {
-        "verdict": "WIN: Viktoria Plzeň",
-        "confidence": 49,
-        "probabilities": [
-          0.3813837042983075,
-          0.24266481743348567,
-          0.3759514782682069
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.51,
-          1.5
-        ],
-        "factors": [
-          [
-            "League strength",
-            0.0
-          ],
-          [
-            "Current position",
-            0
-          ],
-          [
-            "Last season",
-            0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "xG",
-            0
-          ],
-          [
-            "Squad change",
-            0
-          ],
-          [
-            "Home advantage",
-            3
-          ],
-          [
-            "H2H",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ]
-        ],
-        "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -4649,9 +4175,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5987973/match-details",
       "model": {
         "verdict": "WIN: Salzburg",
@@ -4662,7 +4185,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -4699,14 +4222,108 @@
           [
             "H2H",
             0
+          ]
+        ],
+        "dataCompleteness": 35,
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
+      }
+    },
+    {
+      "id": "5987970",
+      "competition": "UEFA Europa League Qualification",
+      "competitionName": "UEFA Europa League Qualification",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Viktoria Plzeň",
+      "away": "FK Crvena Zvezda",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-08-27T17:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 6033,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "awayData": {
+        "id": 8687,
+        "division": null,
+        "leagueId": null,
+        "ccode": null,
+        "position": null,
+        "form": "",
+        "lastSeasonPosition": null,
+        "transferImpact": 0.0,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5987970/match-details",
+      "model": {
+        "verdict": "WIN: Viktoria Plzeň",
+        "confidence": 49,
+        "probabilities": [
+          0.3813837042983075,
+          0.24266481743348567,
+          0.3759514782682069
+        ],
+        "projected": "2–1",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.51,
+          1.5
+        ],
+        "factors": [
+          [
+            "League strength",
+            0.0
           ],
           [
-            "Starting XI quality",
+            "Current position",
+            0
+          ],
+          [
+            "Last season",
+            0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "xG",
+            0
+          ],
+          [
+            "Squad change",
+            0
+          ],
+          [
+            "Home advantage",
+            3
+          ],
+          [
+            "H2H",
             0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -4754,9 +4371,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5996696/match-details",
       "model": {
         "verdict": "WIN: Al Mokawloon Al Arab",
@@ -4766,8 +4380,8 @@
           0.2325605372642055,
           0.38089062522451816
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.63,
           1.62
@@ -4804,14 +4418,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -4859,9 +4469,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5996697/match-details",
       "model": {
         "verdict": "WIN: Pyramids FC",
@@ -4871,8 +4478,8 @@
           0.2325605372642055,
           0.38089062522451816
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.63,
           1.62
@@ -4909,14 +4516,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -4964,9 +4567,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988094/match-details",
       "model": {
         "verdict": "WIN: Ajax",
@@ -4977,7 +4577,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -5014,14 +4614,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -5069,9 +4665,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988089/match-details",
       "model": {
         "verdict": "WIN: Hapoel Tel Aviv",
@@ -5082,7 +4675,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -5119,14 +4712,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -5174,9 +4763,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988092/match-details",
       "model": {
         "verdict": "WIN: St. Gallen",
@@ -5187,7 +4773,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -5224,14 +4810,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -5279,9 +4861,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5987977/match-details",
       "model": {
         "verdict": "WIN: AGF",
@@ -5292,7 +4871,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -5329,14 +4908,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -5384,9 +4959,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5987978/match-details",
       "model": {
         "verdict": "WIN: CSKA Sofia",
@@ -5397,7 +4969,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -5434,14 +5006,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -5489,9 +5057,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5987975/match-details",
       "model": {
         "verdict": "WIN: Thun",
@@ -5502,7 +5067,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -5539,14 +5104,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -5594,9 +5155,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5989698/match-details",
       "model": {
         "verdict": "WIN: ES Sétif",
@@ -5606,8 +5164,8 @@
           0.24825852932310843,
           0.3732133470866564
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "1–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.45,
           1.44
@@ -5644,14 +5202,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -5699,9 +5253,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6018559/match-details",
       "model": {
         "verdict": "WIN: Al-Tadhamon",
@@ -5711,8 +5262,8 @@
           0.2325605372642055,
           0.38089062522451816
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.63,
           1.62
@@ -5749,14 +5300,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -5804,9 +5351,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6005665/match-details",
       "model": {
         "verdict": "WIN: Chelsea",
@@ -5816,8 +5360,8 @@
           0.2374446676226173,
           0.37850433298578734
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.57,
           1.56
@@ -5854,14 +5398,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -5909,9 +5449,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5868013/match-details",
       "model": {
         "verdict": "WIN: Celta Vigo",
@@ -5922,7 +5459,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -5959,14 +5496,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -6014,9 +5547,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988095/match-details",
       "model": {
         "verdict": "WIN: Austria Wien",
@@ -6027,7 +5557,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -6064,14 +5594,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -6119,9 +5645,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988075/match-details",
       "model": {
         "verdict": "WIN: Borac Banja Luka",
@@ -6132,7 +5655,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -6169,14 +5692,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -6224,9 +5743,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988084/match-details",
       "model": {
         "verdict": "WIN: Brighton",
@@ -6237,7 +5753,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -6274,14 +5790,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -6329,9 +5841,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5987974/match-details",
       "model": {
         "verdict": "WIN: Anderlecht",
@@ -6342,7 +5851,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -6379,14 +5888,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -6434,9 +5939,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5987967/match-details",
       "model": {
         "verdict": "WIN: Ferencváros",
@@ -6447,7 +5949,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -6484,14 +5986,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -6539,9 +6037,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988090/match-details",
       "model": {
         "verdict": "WIN: Rijeka",
@@ -6552,7 +6047,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -6589,14 +6084,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -6644,9 +6135,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6005663/match-details",
       "model": {
         "verdict": "WIN: Fulham",
@@ -6656,8 +6144,8 @@
           0.2374446676226173,
           0.37850433298578734
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.57,
           1.56
@@ -6694,14 +6182,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -6749,9 +6233,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5868016/match-details",
       "model": {
         "verdict": "WIN: Barcelona",
@@ -6762,7 +6243,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -6799,14 +6280,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -6854,9 +6331,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988087/match-details",
       "model": {
         "verdict": "WIN: Hibernian",
@@ -6867,7 +6341,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -6904,14 +6378,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -6959,9 +6429,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988079/match-details",
       "model": {
         "verdict": "WIN: Larne",
@@ -6972,7 +6439,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -7009,14 +6476,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -7064,9 +6527,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5988097/match-details",
       "model": {
         "verdict": "WIN: Partizan Beograd",
@@ -7077,7 +6537,7 @@
           0.3759514782682069
         ],
         "projected": "2–1",
-        "modalScore": "2–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.51,
           1.5
@@ -7114,14 +6574,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -7169,9 +6625,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5989695/match-details",
       "model": {
         "verdict": "WIN: MC Alger",
@@ -7181,8 +6634,8 @@
           0.24825852932310843,
           0.3732133470866564
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "1–1",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.45,
           1.44
@@ -7219,14 +6672,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     },
     {
@@ -7274,9 +6723,6 @@
         "xg": null
       },
       "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
       "fotmobMatchUrl": "https://www.fotmob.com/matches/1000019464/match-details",
       "model": {
         "verdict": "WIN: Internacional",
@@ -7286,8 +6732,8 @@
           0.2374446676226173,
           0.37850433298578734
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "2–2",
+        "modalScore": "1–1",
         "expectedGoals": [
           1.57,
           1.56
@@ -7324,14 +6770,10 @@
           [
             "H2H",
             0
-          ],
-          [
-            "Starting XI quality",
-            0
           ]
         ],
         "dataCompleteness": 35,
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect"
+        "decisionNote": "League strength + early-season baseline + form/xG + squad change + H2H + small home effect"
       }
     }
   ]
