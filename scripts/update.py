@@ -527,97 +527,147 @@ def league_strength(name):
     return STRENGTH.get(base, 1500)
 
 
+def _form_points(form):
+    return sum(3 if c == "W" else 1 if c == "D" else 0 for c in str(form or "")[-5:])
+
+
+def _recent_stats(payload, team_id):
+    rows=[]
+    for obj in walk(payload):
+        if not isinstance(obj,dict): continue
+        h=obj.get("home") or obj.get("homeTeam"); a=obj.get("away") or obj.get("awayTeam")
+        if not isinstance(h,dict) or not isinstance(a,dict): continue
+        hs,ass=pick(h,"score","goals"),pick(a,"score","goals")
+        hid,aid=pick(h,"id","teamId"),pick(a,"id","teamId")
+        if hs is None or ass is None or hid is None or aid is None: continue
+        try: hs,ass=int(hs),int(ass)
+        except: continue
+        if str(team_id)==str(hid):
+            opp=pick(a,"name","longName") or "Opponent"; gf,ga=hs,ass; result="W" if hs>ass else "D" if hs==ass else "L"
+        elif str(team_id)==str(aid):
+            opp=pick(h,"name","longName") or "Opponent"; gf,ga=ass,hs; result="W" if ass>hs else "D" if hs==ass else "L"
+        else: continue
+        rows.append({"result":result,"gf":gf,"ga":ga,"opponent":opp})
+    return rows[-5:]
+
+
+def _team_xg(payload, team_id):
+    vals=[]
+    for obj in walk(payload):
+        if not isinstance(obj,dict): continue
+        tid=obj.get("teamId") or obj.get("id")
+        if tid is not None and str(tid)!=str(team_id): continue
+        for key in ("xg","expectedGoals","expectedGoalsFor","xGFor"):
+            v=as_num(obj.get(key))
+            if v is not None and 0<=v<=6: vals.append(v)
+        stats=obj.get("stats")
+        if isinstance(stats,dict):
+            for key in ("xg","expectedGoals","expectedGoalsFor"):
+                v=as_num(stats.get(key))
+                if v is not None and 0<=v<=6: vals.append(v)
+    return round(sum(vals[-5:])/len(vals[-5:]),2) if vals else None
+
+
+def _rating_prior(payload, team_id):
+    vals=[]
+    for obj in walk(payload):
+        if not isinstance(obj,dict): continue
+        for key in ("averageRating","seasonRating","rating"):
+            v=as_num(obj.get(key))
+            if v is not None and 5<=v<=10: vals.append(v)
+    return round(sum(vals[-20:])/len(vals[-20:]),2) if vals else None
+
+
+def _strength(team):
+    # 0 is neutral. Division is the structural prior; recent form and season finish
+    # are bounded so one hot/cold run cannot overwhelm the league gap.
+    div=league_strength(team.get("division"))
+    same_season_pos=team.get("position")
+    last=team.get("lastSeasonPosition")
+    form=_form_points(team.get("form"))
+    gf=team.get("recentGF",0); ga=team.get("recentGA",0)
+    rating=team.get("ratingPrior")
+    s=float(div)
+    if same_season_pos: s += max(-35,min(35,(12-float(same_season_pos))*3.0))
+    if last: s += max(-55,min(55,(12-float(last))*3.8))
+    s += max(-42,min(42,(form-7)*5.0))
+    s += max(-24,min(24,(float(gf)-float(ga))*2.5))
+    if rating is not None: s += max(-20,min(20,(rating-7.0)*35))
+    return s
+
+
+def _dc_adjust(i,j,rho=-0.10):
+    # Dixon-Coles low-score correction; keeps draws realistic without forcing them.
+    if i==0 and j==0: return 1-rho
+    if i==0 and j==1: return 1+rho
+    if i==1 and j==0: return 1+rho
+    if i==1 and j==1: return 1-rho
+    return 1.0
+
+
 def model(match):
-    h, a = match["homeData"], match["awayData"]
-    hd, ad = h.get("division"), a.get("division")
-    same = bool(hd and ad and hd == ad)
-    diff = (league_strength(hd) - league_strength(ad)) / 3.0
-    factors = [["League strength", diff]]
-
-    # Early-season table is intentionally weak; cross-division positions are ignored.
+    h,a=match["homeData"],match["awayData"]
+    same=bool(h.get("division") and h.get("division")==a.get("division"))
+    hs,as_=_strength(h),_strength(a)
+    # Current position is only comparable within the same division.
+    raw_gap=hs-as_
+    factors=[]
+    factors.append(["Division / team strength",round((league_strength(h.get("division"))-league_strength(a.get("division")))/10,1)])
     if same and h.get("position") and a.get("position"):
-        v = (a["position"] - h["position"]) * 2.0
-    else:
-        v = 0
-    diff += v; factors.append(["Current position", v])
-
-    if same and h.get("lastSeasonPosition") and a.get("lastSeasonPosition"):
-        v = (a["lastSeasonPosition"] - h["lastSeasonPosition"]) * 1.65
-    else:
-        v = 0
-    diff += v; factors.append(["Last season", v])
-
-    hp, ap = h.get("formPoints"), a.get("formPoints")
-    v = ((hp or 0) - (ap or 0)) * 2.5
-    diff += v; factors.append(["Recent form", v])
-
-    xh, xa = h.get("xg"), a.get("xg")
-    v = ((xh or 0) - (xa or 0)) * 13 if xh is not None and xa is not None else 0
-    diff += v; factors.append(["xG", v])
-
-    v = (h.get("transferImpact") or 0) - (a.get("transferImpact") or 0)
-    diff += v; factors.append(["Squad change", v])
-
-    home_adv = 6 if same else 3
-    diff += home_adv; factors.append(["Home advantage", home_adv])
-
-    h2 = re.findall(r"\d+", str(match.get("h2hSummary", "")))
-    v = max(-6, min(6, (int(h2[0]) - int(h2[2])) if len(h2) >= 3 else 0))
-    diff += v; factors.append(["H2H", v])
-
-    # Confirmed XI quality is a meaningful late pre-match adjustment.
-    hxi, axi = h.get("xiRating"), a.get("xiRating")
-    v = ((hxi or 0) - (axi or 0)) * 10 if hxi is not None and axi is not None else 0
-    diff += v; factors.append(["Starting XI quality", v])
-
-    # Goal model: league scoring environment + strength split, then optional xG pull.
-    comp = str(match.get("competition", ""))
-    total = 2.55
-    if any(x in comp for x in ("Premier League", "Bundesliga", "Eredivisie")): total = 2.75
-    if any(x in comp for x in ("Serie A", "Ligue 1")): total = 2.45
-    if "Cup" in comp or "Copa" in comp or "Pokal" in comp: total = 2.65
-    share = 1 / (1 + math.exp(-diff / 105))
-    lam_h = max(.35, min(3.5, total * (.42 + .34 * share)))
-    lam_a = max(.30, min(3.25, total * (.42 + .34 * (1 - share))))
-    if xh is not None: lam_h = .65 * lam_h + .35 * max(.20, min(3.5, xh))
-    if xa is not None: lam_a = .65 * lam_a + .35 * max(.20, min(3.25, xa))
-
-    ph, pa = poisson(lam_h), poisson(lam_a)
-    pH = pD = pA = 0.0
-    grid = []
-    for i, pi in enumerate(ph):
-        for j, pj in enumerate(pa):
-            q = pi * pj; grid.append((q, i, j))
-            if i > j: pH += q
-            elif i == j: pD += q
-            else: pA += q
-    probs = [pH, pD, pA]
-    totalp = sum(probs); probs = [p / totalp for p in probs]
-    idx = max(range(3), key=lambda i: probs[i])
-    verdict = match["home"] if idx == 0 else "DRAW" if idx == 1 else match["away"]
-    # Pick the most likely exact score that is CONSISTENT with the 1X2 verdict.
-    allowed = [g for g in grid if (idx==0 and g[1]>g[2]) or (idx==1 and g[1]==g[2]) or (idx==2 and g[1]<g[2])]
-    modal = max(allowed or grid, key=lambda x:x[0])
-    projected = f"{modal[1]}–{modal[2]}"
-    confidence = round(max(42, min(95, 48 + (sorted(probs, reverse=True)[0] - sorted(probs, reverse=True)[1]) * 170)))
-
-    completeness = 35 + (8 if hd else 0) + (8 if ad else 0) + (7 if h.get("form") else 0) + (7 if a.get("form") else 0)
-    completeness += 7 if h.get("position") is not None and a.get("position") is not None else 0
-    completeness += 7 if h.get("lastSeasonPosition") is not None and a.get("lastSeasonPosition") is not None else 0
-    completeness += 7 if xh is not None and xa is not None else 0
-    completeness += 7 if h.get("lineup") and a.get("lineup") else 0
-    completeness += 5 if h.get("xiRating") is not None and a.get("xiRating") is not None else 0
-    return {
-        "verdict": f"WIN: {verdict}" if verdict != "DRAW" else "DRAW",
-        "confidence": confidence,
-        "probabilities": probs,
-        "projected": projected,
-        "modalScore": f"{modal[1]}–{modal[2]}",
-        "expectedGoals": [round(lam_h, 2), round(lam_a, 2)],
-        "factors": [[name, round(value, 1)] for name, value in factors],
-        "dataCompleteness": min(100, completeness),
-        "decisionNote": "League strength + season prior + form/xG + squad change + H2H + XI quality + home effect",
-    }
+        factors.append(["Current table",round((a["position"]-h["position"])*2.0,1)])
+    else: factors.append(["Current table",0.0])
+    factors.append(["Last-season prior",round(((a.get("lastSeasonPosition") or 12)-(h.get("lastSeasonPosition") or 12))*1.6,1)])
+    factors.append(["Recent form",round((_form_points(h.get("form"))-_form_points(a.get("form")))*2.5,1)])
+    factors.append(["Recent goal difference",round(((h.get("recentGF",0)-h.get("recentGA",0))-(a.get("recentGF",0)-a.get("recentGA",0)))*1.5,1)])
+    factors.append(["Squad / transfer",round((h.get("transferImpact") or 0)-(a.get("transferImpact") or 0),1)])
+    factors.append(["Starting XI quality",round(((h.get("xiRating") or h.get("ratingPrior") or 7)-(a.get("xiRating") or a.get("ratingPrior") or 7))*18,1)])
+    factors.append(["Home advantage",24 if same else 12])
+    # xG is used only as a secondary goal signal, never as a post-match leak for upcoming games.
+    xh,xa=h.get("xg"),a.get("xg")
+    # Rating gap is converted into expected goals with a deliberately shallow slope.
+    home_adv=0.18 if same else 0.08
+    goal_gap=max(-1.55,min(1.55,raw_gap/520.0))
+    league_total=2.62
+    comp=str(match.get("competition") or "")
+    if any(k in comp for k in ("Serie A","Ligue 1")): league_total=2.50
+    if any(k in comp for k in ("Bundesliga","Eredivisie","Premier League")): league_total=2.72
+    if "Champions League" in comp: league_total=2.78
+    if "Cup" in comp or "Copa" in comp or "Pokal" in comp: league_total=2.68
+    lam_h=max(.28,min(3.9,league_total/2 + home_adv + goal_gap/2))
+    lam_a=max(.24,min(3.6,league_total/2 - goal_gap/2))
+    if xh is not None and xa is not None:
+        # Team/season xG gets only 20% weight because early-season samples can be thin.
+        lam_h=.80*lam_h+.20*max(.20,min(3.6,float(xh)))
+        lam_a=.80*lam_a+.20*max(.20,min(3.4,float(xa)))
+    # Confirmed XI quality should nudge goals, not turn a match into a 5-point certainty.
+    if h.get("xiRating") is not None and a.get("xiRating") is not None:
+        q=max(-.28,min(.28,(h["xiRating"]-a["xiRating"])*.10)); lam_h=max(.25,min(4.0,lam_h+q)); lam_a=max(.22,min(3.6,lam_a-q*.55))
+    grid=[]; pH=pD=pA=0.0
+    ph=poisson(lam_h,9); pa=poisson(lam_a,9)
+    for i,pi in enumerate(ph):
+        for j,pj in enumerate(pa):
+            q=pi*pj*_dc_adjust(i,j)
+            grid.append((q,i,j))
+            if i>j:pH+=q
+            elif i==j:pD+=q
+            else:pA+=q
+    z=pH+pD+pA; probs=[pH/z,pD/z,pA/z]
+    idx=max(range(3),key=lambda k:probs[k])
+    verdict=match["home"] if idx==0 else "DRAW" if idx==1 else match["away"]
+    allowed=[g for g in grid if (idx==0 and g[1]>g[2]) or (idx==1 and g[1]==g[2]) or (idx==2 and g[1]<g[2])]
+    modal=max(allowed or grid,key=lambda x:x[0])
+    margin=max(probs)-sorted(probs,reverse=True)[1]
+    # Confidence is deliberately conservative when evidence is sparse.
+    completeness=sum(bool(h.get(k) and a.get(k)) for k in ("division","form","lastSeasonPosition"))
+    completeness += 1 if h.get("position") is not None and a.get("position") is not None else 0
+    completeness += 1 if h.get("xg") is not None and a.get("xg") is not None else 0
+    completeness += 1 if h.get("lineup") and a.get("lineup") else 0
+    completeness += 1 if h.get("xiRating") is not None and a.get("xiRating") is not None else 0
+    confidence=round(max(43,min(92,47+margin*135+(completeness-4)*1.5)))
+    return {"verdict":f"WIN: {verdict}" if verdict!="DRAW" else "DRAW","confidence":confidence,"probabilities":probs,
+            "projected":f"{modal[1]}–{modal[2]}","modalScore":f"{modal[1]}–{modal[2]}","expectedGoals":[round(lam_h,2),round(lam_a,2)],
+            "factors":factors,"dataCompleteness":round(completeness/8*100),
+            "decisionNote":"Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + low-score draw correction"}
 
 
 
@@ -630,40 +680,34 @@ def safe_call(label, fn, default=None):
 
 
 def enrich_base(m, now):
-    """Build the full non-match-detail team data while preserving every old field."""
-    home, away = m.get("home") or {}, m.get("away") or {}
-    hn, an = pick(home, "name", "longName"), pick(away, "name", "longName")
-    hp = safe_call(f"Team {hn}", lambda: team_payload(home.get("id")), {})
-    ap = safe_call(f"Team {an}", lambda: team_payload(away.get("id")), {})
-    hl, al = current_league(hp), current_league(ap)
+    home,away=m.get("home") or {},m.get("away") or {}
+    hn,an=pick(home,"name","longName"),pick(away,"name","longName")
+    hp=TEAM_CACHE.get(str(home.get("id"))) or safe_call(f"Team {hn}",lambda:team_payload(home.get("id")),{})
+    ap=TEAM_CACHE.get(str(away.get("id"))) or safe_call(f"Team {an}",lambda:team_payload(away.get("id")),{})
+    hl,al=current_league(hp),current_league(ap)
+    hleague=LEAGUE_CACHE.get(str(hl.get("leagueId"))) or (safe_call(f"League {hl.get('leagueId')}",lambda:league_payload(hl.get("leagueId")),{}) if hl.get("leagueId") else {})
+    aleague=LEAGUE_CACHE.get(str(al.get("leagueId"))) or (safe_call(f"League {al.get('leagueId')}",lambda:league_payload(al.get("leagueId")),{}) if al.get("leagueId") else {})
+    hpos=table_position(hleague,home.get("id")) or table_position(hp,home.get("id")); apos=table_position(aleague,away.get("id")) or table_position(ap,away.get("id"))
+    hlast=previous_finish(hp,home.get("id")); alast=previous_finish(ap,away.get("id"))
+    hd={"id":home.get("id"),"division":hl.get("division"),"leagueId":hl.get("leagueId"),"ccode":hl.get("ccode"),"position":hpos,"form":form_from_team(hp,home.get("id")),"lastSeasonPosition":hlast,"transferImpact":transfer_impact(hp),"lineup":[],"injuries":[]}
+    ad={"id":away.get("id"),"division":al.get("division"),"leagueId":al.get("leagueId"),"ccode":al.get("ccode"),"position":apos,"form":form_from_team(ap,away.get("id")),"lastSeasonPosition":alast,"transferImpact":transfer_impact(ap),"lineup":[],"injuries":[]}
+    hr=_recent_stats(hp,home.get("id")); ar=_recent_stats(ap,away.get("id"))
+    for d,rows,payload,tid in ((hd,hr,hp,home.get("id")),(ad,ar,ap,away.get("id"))):
+        d["formPoints"]=_form_points(d["form"]); d["recentResults"]=rows; d["recentGF"]=sum(x["gf"] for x in rows); d["recentGA"]=sum(x["ga"] for x in rows); d["ratingPrior"]=_rating_prior(payload,tid); d["xgSeason"]=_team_xg(payload,tid)
+    return hp,ap,hd,ad
 
-    hleague = safe_call(f"League {hl.get('leagueId')}", lambda: league_payload(hl.get("leagueId")), {}) if hl.get("leagueId") else {}
-    aleague = safe_call(f"League {al.get('leagueId')}", lambda: league_payload(al.get("leagueId")), {}) if al.get("leagueId") else {}
-    hpos = table_position(hleague, home.get("id")) or table_position(hp, home.get("id"))
-    apos = table_position(aleague, away.get("id")) or table_position(ap, away.get("id"))
-    hlast = previous_finish(hp, home.get("id"))
-    alast = previous_finish(ap, away.get("id"))
-    # Keep last-season finish, but only make the extra historical call when the team payload lacks it.
-    if hlast is None:
-        hlast = safe_call(f"History {hn}", lambda: historical_position(hl.get("leagueId"), home.get("id")), None)
-    if alast is None:
-        alast = safe_call(f"History {an}", lambda: historical_position(al.get("leagueId"), away.get("id")), None)
 
-    hd = {
-        "id": home.get("id"), "division": hl.get("division"), "leagueId": hl.get("leagueId"),
-        "ccode": hl.get("ccode"), "position": hpos,
-        "form": form_from_team(hp, home.get("id")), "lastSeasonPosition": hlast,
-        "transferImpact": transfer_impact(hp), "lineup": [], "injuries": []
-    }
-    ad = {
-        "id": away.get("id"), "division": al.get("division"), "leagueId": al.get("leagueId"),
-        "ccode": al.get("ccode"), "position": apos,
-        "form": form_from_team(ap, away.get("id")), "lastSeasonPosition": alast,
-        "transferImpact": transfer_impact(ap), "lineup": [], "injuries": []
-    }
-    hd["formPoints"] = sum(3 if x == "W" else 1 if x == "D" else 0 for x in hd["form"])
-    ad["formPoints"] = sum(3 if x == "W" else 1 if x == "D" else 0 for x in ad["form"])
-    return hp, ap, hd, ad
+def apply_match_detail(detail,hd,ad):
+    if not detail:return "Not available from FotMob."
+    fh,fa=lineup(detail,hd["id"],ad["id"])
+    if fh and fa:
+        hd["lineup"],ad["lineup"]=fh,fa
+        hd["xiRating"]=lineup_quality({"players":fh}); ad["xiRating"]=lineup_quality({"players":fa})
+    xh,xa=xg(detail)
+    # Only use match xG after kickoff; before kickoff it is not a valid predictor.
+    if xh is not None and xa is not None:
+        hd["matchXG"],ad["matchXG"]=xh,xa
+    return h2h(detail)
 
 
 def sofa_for_match(m, hn, an, now):
@@ -711,176 +755,102 @@ def apply_sofa(hd, ad, event, lh, la):
         hd["xiRating"] = lineup_quality(lh); ad["xiRating"] = lineup_quality(la)
 
 
-def build_match(m, base, now, sofa_info):
-    mid, hn, an = base
-    hp, ap, hd, ad = enrich_base(m, now)
-    detail = detail_for_match(mid)
-    if detail:
-        fh, fa = lineup(detail, hd["id"], ad["id"])
-        if fh and fa:
-            hd["lineup"], ad["lineup"] = fh, fa
-        xh, xa = xg(detail); hd["xg"], ad["xg"] = xh, xa
-        h2h_summary = h2h(detail)
+def build_match(m, now, sofa_info):
+    mid=pick(m,"id"); home,away=m.get("home") or {},m.get("away") or {}; hn,an=pick(home,"name","longName"),pick(away,"name","longName")
+    hp,ap,hd,ad=enrich_base(m,now)
+    detail=detail_for_match(mid)
+    h2h_summary=apply_match_detail(detail,hd,ad) if detail else "Not available from FotMob."
+    sofa_event,sofa_lh,sofa_la,incidents=sofa_info
+    apply_sofa(hd,ad,sofa_event,sofa_lh,sofa_la)
+    # Prefer SofaScore lineup if available, otherwise keep FotMob detail lineup.
+    if not hd.get("lineup") and not ad.get("lineup") and detail:
+        fh,fa=lineup(detail,hd["id"],ad["id"])
+        if fh and fa: hd["lineup"],ad["lineup"]=fh,fa
+    hs,ass=score(m); st=m.get("status") or {}
+    status_value=status(m)
+    out={"id":str(mid),"competition":m.get("_display_competition") or m.get("_league_name") or "Competition","competitionName":m.get("_league_name") or "Competition","competitionCountry":m.get("_country") or "Unknown","competitionCode":str(m.get("_ccode") or "INT").upper(),"competitionFlag":flag(m.get("_ccode"),m.get("_country")),"home":hn,"away":an,"homeScore":hs,"awayScore":ass,"status":status_value,"kickoff":st.get("utcTime") or m.get("utcTime"),"minute":{"short":pick(st,"reason","period") or ""},"homeData":hd,"awayData":ad,"h2hSummary":h2h_summary,"scorers":incidents,"sofascoreEventId":sofa_event.get("id") if sofa_event else None,"lineupSource":"Sofascore" if sofa_lh.get("players") and sofa_la.get("players") else ("FotMob" if hd.get("lineup") and ad.get("lineup") else None),"fotmobMatchUrl":f"{ROOT}/matches/{mid}/match-details"}
+    # For upcoming games, season/team xG is the predictive xG input; post-match xG remains informational.
+    if status_value in ("LIVE","FT") and hd.get("matchXG") is not None:
+        hd["xg"],ad["xg"]=hd.get("matchXG"),ad.get("matchXG")
     else:
-        hd["xg"] = ad["xg"] = None
-        h2h_summary = "Not available from FotMob."
-
-    sofa_event, sofa_lh, sofa_la, incidents = sofa_info
-    apply_sofa(hd, ad, sofa_event, sofa_lh, sofa_la)
-    hs, ass = score(m)
-    st = m.get("status") or {}
-    out = {
-        "id": mid, "competition": base[3], "competitionName": base[4],
-        "competitionCountry": base[5], "competitionCode": str(m.get("_ccode") or "INT").upper(),
-        "competitionFlag": flag(m.get("_ccode"), base[5]),
-        "home": hn, "away": an, "homeScore": hs, "awayScore": ass, "status": status(m),
-        "kickoff": st.get("utcTime") or m.get("utcTime"),
-        "minute": {"short": pick(st, "reason", "period") or ""},
-        "homeData": hd, "awayData": ad, "h2hSummary": h2h_summary,
-        "scorers": incidents,
-        "sofascoreEventId": sofa_event.get("id") if sofa_event else None,
-        "lineupSource": "Sofascore" if (sofa_lh.get("players") and sofa_la.get("players")) else ("FotMob" if (hd.get("lineup") and ad.get("lineup")) else None),
-        "fotmobMatchUrl": f"{ROOT}/matches/{mid}/match-details",
-    }
-    out["model"] = model(out)
+        hd["xg"],ad["xg"]=hd.get("xgSeason"),ad.get("xgSeason")
+    out["model"]=model(out)
     return out
 
+
+def _prep_team_cache(rows):
+    ids={str((m.get("home") or {}).get("id")) for m in rows}|{str((m.get("away") or {}).get("id")) for m in rows}
+    ids.discard("None")
+    def one(tid):
+        try: TEAM_CACHE[tid]=team_payload(tid)
+        except Exception as exc: print("TEAM",tid,"failed",exc)
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        list(ex.map(one,ids))
+    league_ids=set()
+    for tid,p in TEAM_CACHE.items():
+        if not isinstance(p,dict):continue
+        lg=current_league(p).get("leagueId")
+        if lg: league_ids.add(str(lg))
+    def one_lid(lid):
+        try: LEAGUE_CACHE[lid]=league_payload(lid)
+        except Exception as exc: print("LEAGUE",lid,"failed",exc)
+    with ThreadPoolExecutor(max_workers=8) as ex:list(ex.map(one_lid,league_ids))
+
+
+def _sofa_map_for_rows(rows,now):
+    dates=sorted({(m.get("status") or {}).get("utcTime",m.get("utcTime", ""))[:10] for m in rows if m.get("utcTime")})
+    for day in dates:
+        try: SOFA_EVENTS[day]=sofa_event_map(sofa_scheduled(dt.date.fromisoformat(day)))
+        except Exception as exc: print("Sofascore schedule",day,"failed",exc);SOFA_EVENTS[day]={}
+    out={}
+    for m in rows:
+        day=((m.get("status") or {}).get("utcTime") or m.get("utcTime") or "")[:10]
+        hn=pick(m.get("home") or {},"name","longName"); an=pick(m.get("away") or {},"name","longName")
+        ev=SOFA_EVENTS.get(day,{}).get((norm_team_name(hn),norm_team_name(an)))
+        if not ev: out[str(m.get("id"))]=(None,{}, {}, []); continue
+        sid=ev.get("id"); need_lineup=status(m) in ("LIVE","UPCOMING")
+        lh=la={};inc=[]
+        try:
+            if need_lineup: lh,la=sofa_lineups(sid)
+        except Exception as exc: print("LINEUP",sid,"failed",exc)
+        try:
+            if status(m) in ("LIVE","FT"): inc=sofa_incidents(sid)
+        except Exception as exc: print("INCIDENT",sid,"failed",exc)
+        out[str(m.get("id"))]=(ev,lh,la,inc)
+    return out
+
+
 def main():
-    now = dt.datetime.now(dt.timezone.utc).astimezone(TZ)
-    days = [now.date(), now.date() + dt.timedelta(days=1)]
-    raw, errors = [], []
+    now=dt.datetime.now(dt.timezone.utc).astimezone(TZ); days=[now.date(),now.date()+dt.timedelta(days=1)]; raw=[]; errors=[]
     for day in days:
         try:
-            payload = daily(day)
-            rows = match_rows(payload)
-            print(f"FotMob {day}: {len(rows)} raw fixtures")
-            raw.extend(rows)
-        except Exception as exc:
-            errors.append(f"{day}: {exc}")
-            print("FotMob daily failed", day, exc)
-
-    candidates, seen = [], set()
+            payload=daily(day); rows=match_rows(payload); print(f"FotMob {day}: {len(rows)} raw fixtures",flush=True); raw.extend(rows)
+        except Exception as exc: errors.append(f"{day}: {exc}")
+    if not raw: raise RuntimeError("No FotMob fixtures returned; refusing to overwrite existing data")
+    # Normalize competition identity so Kuwait Premier League can never masquerade as England Premier League.
     for m in raw:
-        mid = str(pick(m, "id", "matchId") or "")
-        if not mid or mid in seen:
-            continue
-        seen.add(mid)
-        home, away = m.get("home") or {}, m.get("away") or {}
-        hn, an = pick(home, "name", "longName"), pick(away, "name", "longName")
-        if not hn or not an:
-            continue
-        base_comp, display_comp, ctry = normalize_comp(m.get("_league_name"), m.get("_ccode"), m.get("_country"))
-        if base_comp not in SUPPORTED:
-            continue
-        candidates.append((m, (mid, hn, an, display_comp, base_comp, ctry)))
-
-    print(f"SUPPORTED FIXTURES: {len(candidates)}")
-    if not candidates:
-        print("NO NEW FIXTURES GENERATED")
-        existing = Path("data/fixtures.json")
-        if existing.exists():
-            try:
-                old = json.loads(existing.read_text(encoding="utf-8"))
-                if isinstance(old.get("matches"), list) and old["matches"]:
-                    old["sourceStatus"] = "No fresh fixtures returned · last valid feed retained"
-                    old["sourceErrors"] = errors
-                    old["updatedAt"] = dt.datetime.now(dt.timezone.utc).isoformat()
-                    existing.write_text(json.dumps(old, ensure_ascii=False, indent=2), encoding="utf-8")
-                    return
-            except Exception:
-                pass
-        raise SystemExit(2)
-
-    # Fetch team/league/detail/lineup work concurrently, but preserve the full old schema.
-    # We deliberately cap concurrency to avoid hammering public endpoints.
-    workers = min(8, max(2, len(candidates)))
-    print(f"ENRICHING {len(candidates)} fixtures with {workers} workers")
-
-    # First fetch the once-per-day Sofascore schedule maps. This prevents one schedule request per match.
-    sofa_maps = {}
-    for day in days:
-        key = day.isoformat()
-        try:
-            sofa_maps[key] = sofa_event_map(sofa_scheduled(day))
-            SOFA_EVENTS[key] = sofa_maps[key]
-            print(f"Sofascore schedule {key}: {len(sofa_maps[key])} events")
+        base,display,country=normalize_comp(m.get("_league_name"),m.get("_ccode"),m.get("_country"));m["_display_competition"]=display;m["_country"]=country;m["_base_competition"]=base
+    raw=[m for m in raw if (m.get("_base_competition") in SUPPORTED or str(m.get("_league_name","")).startswith("UEFA "))]
+    print(f"SUPPORTED FIXTURES: {len(raw)}",flush=True)
+    _prep_team_cache(raw)
+    sofa=_sofa_map_for_rows(raw,now)
+    results=[None]*len(raw)
+    def one(pair):
+        i,m=pair
+        try:return i,build_match(m,now,sofa.get(str(m.get("id")),(None,{}, {}, [])))
         except Exception as exc:
-            sofa_maps[key] = {}
-            print(f"Sofascore schedule {key} unavailable: {exc}")
-
-    def prepare(m, base):
-        mid, hn, an, display_comp, base_comp, ctry = base
-        # Team payloads are the expensive common dependency. Do them in parallel per match.
-        with ThreadPoolExecutor(max_workers=2) as pool:
-            f1 = pool.submit(team_payload, m.get("home", {}).get("id"))
-            f2 = pool.submit(team_payload, m.get("away", {}).get("id"))
-            hp = safe_call(f"Team {hn}", lambda: f1.result(), {})
-            ap = safe_call(f"Team {an}", lambda: f2.result(), {})
-        hl, al = current_league(hp), current_league(ap)
-        # League payloads are retained for current table positions.
-        with ThreadPoolExecutor(max_workers=2) as pool:
-            fh = pool.submit(league_payload, hl.get("leagueId")) if hl.get("leagueId") else None
-            fa = pool.submit(league_payload, al.get("leagueId")) if al.get("leagueId") else None
-            hleague = safe_call(f"League {hl.get('leagueId')}", lambda: fh.result(), {}) if fh else {}
-            aleague = safe_call(f"League {al.get('leagueId')}", lambda: fa.result(), {}) if fa else {}
-        hpos = table_position(hleague, m.get("home", {}).get("id")) or table_position(hp, m.get("home", {}).get("id"))
-        apos = table_position(aleague, m.get("away", {}).get("id")) or table_position(ap, m.get("away", {}).get("id"))
-        hlast = previous_finish(hp, m.get("home", {}).get("id"))
-        alast = previous_finish(ap, m.get("away", {}).get("id"))
-        if hlast is None and hl.get("leagueId"):
-            hlast = safe_call(f"History {hn}", lambda: historical_position(hl.get("leagueId"), m.get("home", {}).get("id")), None)
-        if alast is None and al.get("leagueId"):
-            alast = safe_call(f"History {an}", lambda: historical_position(al.get("leagueId"), m.get("away", {}).get("id")), None)
-        hd = {"id":m.get("home",{}).get("id"),"division":hl.get("division"),"leagueId":hl.get("leagueId"),"ccode":hl.get("ccode"),"position":hpos,"form":form_from_team(hp,m.get("home",{}).get("id")),"lastSeasonPosition":hlast,"transferImpact":transfer_impact(hp),"lineup":[],"injuries":[]}
-        ad = {"id":m.get("away",{}).get("id"),"division":al.get("division"),"leagueId":al.get("leagueId"),"ccode":al.get("ccode"),"position":apos,"form":form_from_team(ap,m.get("away",{}).get("id")),"lastSeasonPosition":alast,"transferImpact":transfer_impact(ap),"lineup":[],"injuries":[]}
-        hd["formPoints"] = sum(3 if x=="W" else 1 if x=="D" else 0 for x in hd["form"])
-        ad["formPoints"] = sum(3 if x=="W" else 1 if x=="D" else 0 for x in ad["form"])
-        detail = safe_call(f"Detail {mid}", lambda: match_details(mid), {})
-        if detail:
-            fh, fa = lineup(detail, hd["id"], ad["id"])
-            hd["lineup"], ad["lineup"] = fh, fa
-            hd["xg"], ad["xg"] = xg(detail)
-            h2h_summary = h2h(detail)
-        else:
-            hd["xg"] = ad["xg"] = None; h2h_summary = "Not available from FotMob."
-        day_key=(m.get("utcTime") or "")[:10] or now.date().isoformat()
-        event=sofa_maps.get(day_key,{}).get((norm_team_name(hn),norm_team_name(an)))
-        lh=la={}; incidents=[]
-        if event:
-            sid=event.get("id")
-            # Lineups are most useful near kickoff and live; still try for FT if missing from FotMob.
-            try: lh,la=sofa_lineups(sid)
-            except Exception as exc: print("Sofascore lineup failed",mid,exc)
-            try: incidents=sofa_incidents(sid)
-            except Exception as exc: print("Sofascore incidents failed",mid,exc)
-            apply_sofa(hd,ad,event,lh,la)
-        hs,ass=score(m); st=m.get("status") or {}
-        out={"id":mid,"competition":display_comp,"competitionName":base_comp,"competitionCountry":ctry,"competitionCode":str(m.get("_ccode") or "INT").upper(),"competitionFlag":flag(m.get("_ccode"),ctry),"home":hn,"away":an,"homeScore":hs,"awayScore":ass,"status":status(m),"kickoff":st.get("utcTime") or m.get("utcTime"),"minute":{"short":pick(st,"reason","period") or ""},"homeData":hd,"awayData":ad,"h2hSummary":h2h_summary,"scorers":incidents,"sofascoreEventId":event.get("id") if event else None,"lineupSource":"Sofascore" if (lh.get("players") and la.get("players")) else ("FotMob" if (hd.get("lineup") and ad.get("lineup")) else None),"fotmobMatchUrl":f"{ROOT}/matches/{mid}/match-details"}
-        out["model"]=model(out)
-        return out
-
-    matches=[]
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        futures={pool.submit(prepare,m,b): (m,b) for m,b in candidates}
+            print("MATCH",m.get("id"),"failed",exc,flush=True);return i,None
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        futures=[ex.submit(one,p) for p in enumerate(raw)]
         done=0
-        for future in as_completed(futures):
-            done += 1
-            m,b=futures[future]
-            try:
-                matches.append(future.result())
-            except Exception as exc:
-                errors.append(f"{b[0]} {b[1]} v {b[2]}: {exc}")
-                print("MATCH FAILED", b[0], b[1], "v", b[2], exc)
-            print(f"PROGRESS {done}/{len(candidates)}")
+        for f in as_completed(futures):
+            i,val=f.result();results[i]=val;done+=1
+            if done%5==0 or done==len(raw):print(f"PROGRESS {done}/{len(raw)}",flush=True)
+    matches=[x for x in results if x]
+    matches.sort(key=lambda m:(str(m.get("competition")),m.get("kickoff") or ""))
+    payload={"updatedAt":dt.datetime.now(dt.timezone.utc).isoformat(),"updated":dt.datetime.now(TZ).strftime("%Y-%m-%d %I:%M:%S %p ET"),"fixtureCount":len(matches),"sourceStatus":f"FotMob + Sofascore · {len(matches)} fixtures","sourceErrors":errors,"matches":matches}
+    Path("data").mkdir(exist_ok=True);Path("data/fixtures.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding="utf-8")
+    print(f"WROTE {len(matches)} fixtures",flush=True)
+    print("ENRICHMENT:",sum(bool((m.get("homeData") or {}).get("form")) and bool((m.get("awayData") or {}).get("form")) for m in matches),"form pairs ·",sum(bool((m.get("homeData") or {}).get("division")) and bool((m.get("awayData") or {}).get("division")) for m in matches),"divisions ·",sum(bool(m.get("scorers")) for m in matches),"incident feeds ·",sum(bool((m.get("homeData") or {}).get("lineup")) and bool((m.get("awayData") or {}).get("lineup")) for m in matches),"lineups")
 
-    matches.sort(key=lambda x: (x["status"] != "LIVE", x.get("kickoff") or ""))
-    if not matches:
-        raise SystemExit(2)
-    result={"updatedAt":dt.datetime.now(dt.timezone.utc).isoformat(),"fixtureCount":len(matches),"sourceStatus":f"FotMob + Sofascore enrichment · {len(matches)} fixtures","sourceErrors":errors,"matches":matches}
-    Path("data").mkdir(exist_ok=True)
-    Path("data/fixtures.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
-    print("WROTE",len(matches),"fixtures")
-
-
-if __name__ == "__main__":
-    main()
+if __name__=="__main__":main()
