@@ -182,4 +182,4 @@ async function load(manual=false){
 }
 $("#refresh").onclick=()=>load(true);
 load();
-setInterval(()=>load(false),60000);
+setInterval(()=>load(false),30000);
