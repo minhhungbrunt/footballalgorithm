@@ -24,7 +24,6 @@ CACHE = {}
 TEAM_CACHE = {}
 DETAIL_CACHE = {}
 LEAGUE_CACHE = {}
-HIST_CACHE = {}
 SOFA_CACHE = {}
 SOFA_EVENTS = {}
 
@@ -288,27 +287,26 @@ def daily(day):
 
 
 def match_details(match_id):
-    key = str(match_id)
+    key=str(match_id)
     if key not in DETAIL_CACHE:
-        DETAIL_CACHE[key] = get(f"{ROOT}/api/matchDetails", {"matchId": key})
+        try: DETAIL_CACHE[key]=_page_match_payload(key)
+        except Exception: DETAIL_CACHE[key]=get(f"{ROOT}/api/matchDetails",{"matchId":key})
     return DETAIL_CACHE[key]
 
-
-def team_payload(team_id):
-    key = str(team_id)
+def team_payload(team_id, name=""):
+    key=str(team_id)
     if key not in TEAM_CACHE:
-        TEAM_CACHE[key] = get(f"{ROOT}/api/teams", {"id": key})
+        try: TEAM_CACHE[key]=_page_team_payload(key,name)
+        except Exception: TEAM_CACHE[key]=get(f"{ROOT}/api/teams",{"id":key})
     return TEAM_CACHE[key]
 
-
-def league_payload(league_id):
-    key = str(league_id)
-    if not league_id:
-        return {}
+def league_payload(league_id, name=""):
+    key=str(league_id)
+    if not league_id: return {}
     if key not in LEAGUE_CACHE:
-        LEAGUE_CACHE[key] = get(f"{ROOT}/api/leagues", {"id": key})
+        try: LEAGUE_CACHE[key]=_page_league_payload(key,name)
+        except Exception: LEAGUE_CACHE[key]=get(f"{ROOT}/api/leagues",{"id":key})
     return LEAGUE_CACHE[key]
-
 
 def match_rows(day_payload):
     out = []
@@ -352,24 +350,16 @@ def score(match):
 
 
 def current_league(payload):
-    # Team overview/current table is the source of truth. Never use the cup fixture's competition.
+    explicit=_find_team_league(payload)
+    if explicit.get("division"): return explicit
     for obj in walk(payload):
-        if not isinstance(obj, dict):
-            continue
-        season = str(pick(obj, "season", "selectedSeason") or "")
-        if season and "2026" not in season:
-            continue
-        if obj.get("leagueName") and obj.get("leagueId"):
-            return {"division": obj["leagueName"], "leagueId": obj["leagueId"], "ccode": obj.get("ccode")}
-        data = obj.get("data")
-        if isinstance(data, dict) and data.get("leagueName") and data.get("leagueId"):
-            return {"division": data["leagueName"], "leagueId": data["leagueId"], "ccode": data.get("ccode")}
-    # Fallback: first current table data node.
-    for obj in walk(payload):
-        if isinstance(obj, dict) and obj.get("leagueName") and obj.get("leagueId"):
-            return {"division": obj["leagueName"], "leagueId": obj["leagueId"], "ccode": obj.get("ccode")}
-    return {"division": None, "leagueId": None, "ccode": None}
-
+        if not isinstance(obj,dict): continue
+        name=pick(obj,"leagueName"); lid=pick(obj,"leagueId")
+        if name and lid:
+            n=str(name).lower()
+            if not any(k in n for k in ("cup","champions","europa","conference","pokal","copa")):
+                return {"division":str(name),"leagueId":lid,"ccode":pick(obj,"ccode","countryCode")}
+    return {"division":None,"leagueId":None,"ccode":None}
 
 def table_position(payload, team_id):
     for obj in walk(payload):
@@ -386,94 +376,83 @@ def table_position(payload, team_id):
 
 
 def historical_position(league_id, team_id):
-    """Final position in the previous domestic season for the team."""
     if not league_id or not team_id:
         return None
-    key = str(league_id)
-    if key not in HIST_CACHE:
-        payload = {}
-        for season in ("2025/2026", "2025"):
-            try:
-                payload = get(f"{ROOT}/api/leagues", {"id": key, "season": season})
-                if payload:
-                    break
-            except Exception as exc:
-                print("Historical league lookup failed", key, season, exc)
-        HIST_CACHE[key] = payload
-    return table_position(HIST_CACHE.get(key, {}), team_id)
+    for season in ("2025/2026", "2025"):
+        try:
+            payload = get(f"{ROOT}/api/leagues", {"id": str(league_id), "season": season})
+            pos = table_position(payload, team_id)
+            if pos is not None:
+                return pos
+        except Exception as exc:
+            print("Historical league lookup failed", league_id, season, exc)
+    return None
+
+RECENT_DAILY_CACHE={}
+
+def daily_matches_for_date(day):
+    key=day.strftime("%Y%m%d")
+    if key not in RECENT_DAILY_CACHE:
+        try: RECENT_DAILY_CACHE[key]=match_rows(daily(day))
+        except Exception as exc:
+            print(f"RECENT {key} failed: {exc}")
+            RECENT_DAILY_CACHE[key]=[]
+    return RECENT_DAILY_CACHE[key]
+
+def form_from_recent_daily(team_id,before_date,days_back=35):
+    rows=[]; seen=set()
+    for n in range(1,days_back+1):
+        for m in daily_matches_for_date(before_date-dt.timedelta(days=n)):
+            if status(m)!="FT": continue
+            h=m.get("home") or {}; a=m.get("away") or {}
+            hid,aid=pick(h,"id","teamId"),pick(a,"id","teamId")
+            if str(team_id) not in (str(hid),str(aid)): continue
+            hs,aa=score(m)
+            if hs is None or aa is None: continue
+            comp=str(m.get("_league_name") or "").lower()
+            if any(x in comp for x in ("cup","champions","europa","conference","pokal","libertadores","sudamericana")): continue
+            mid=str(m.get("id"))
+            if mid in seen: continue
+            seen.add(mid)
+            if str(team_id)==str(hid): gf,ga=int(hs),int(aa); opp=pick(a,"name","longName") or "Opponent"
+            else: gf,ga=int(aa),int(hs); opp=pick(h,"name","longName") or "Opponent"
+            rows.append({"date":(m.get("status") or {}).get("utcTime") or m.get("utcTime"),
+                         "result":"W" if gf>ga else "D" if gf==ga else "L","gf":gf,"ga":ga,"opponent":opp,
+                         "competition":m.get("_league_name")})
+    rows.sort(key=lambda x:x.get("date") or "",reverse=True)
+    return rows[:5]
 
 
-def _score_pair(obj):
-    """Extract a completed score from several FotMob match shapes."""
-    if not isinstance(obj, dict):
-        return None, None
-    h = obj.get("home") or obj.get("homeTeam") or {}
-    a = obj.get("away") or obj.get("awayTeam") or {}
-    hs = pick(h, "score", "goals", "currentScore", "displayScore") if isinstance(h, dict) else None
-    ass = pick(a, "score", "goals", "currentScore", "displayScore") if isinstance(a, dict) else None
-    if hs is None or ass is None:
-        text = str(pick(obj.get("status") or {}, "scoreStr") or obj.get("scoreStr") or "")
-        m = re.search(r"(\d+)\s*[-:]\s*(\d+)", text)
-        if m:
-            hs, ass = int(m.group(1)), int(m.group(2))
-    try:
-        return int(hs), int(ass)
-    except (TypeError, ValueError):
-        return None, None
+def prefetch_recent_history(anchor, days_back=21):
+    days=[anchor-dt.timedelta(days=n) for n in range(1,days_back+1)]
+    def one(day): daily_matches_for_date(day)
+    with ThreadPoolExecutor(max_workers=6) as ex:
+        list(ex.map(one,days))
+    print(f"RECENT HISTORY: {sum(bool(v) for v in RECENT_DAILY_CACHE.values())}/{len(days)} daily feeds loaded",flush=True)
 
-
-def _match_rows_from_payload(payload):
-    rows=[]
+def form_from_team(payload, team_id):
+    rows = []
     for obj in walk(payload):
         if not isinstance(obj, dict):
             continue
-        h=obj.get("home") or obj.get("homeTeam")
-        a=obj.get("away") or obj.get("awayTeam")
-        if not isinstance(h,dict) or not isinstance(a,dict):
+        h = obj.get("home") or obj.get("homeTeam")
+        a = obj.get("away") or obj.get("awayTeam")
+        if not isinstance(h, dict) or not isinstance(a, dict):
             continue
-        hid=pick(h,"id","teamId"); aid=pick(a,"id","teamId")
-        if hid is None or aid is None:
+        hs, ass = pick(h, "score", "goals"), pick(a, "score", "goals")
+        hid, aid = pick(h, "id", "teamId"), pick(a, "id", "teamId")
+        if hs is None or ass is None or hid is None or aid is None:
             continue
-        hs,ass=_score_pair(obj)
-        if hs is None or ass is None:
+        try:
+            hs, ass = int(hs), int(ass)
+        except (TypeError, ValueError):
             continue
-        rows.append({"homeId":str(hid),"awayId":str(aid),"home":pick(h,"name","longName","teamName") or "",
-                     "away":pick(a,"name","longName","teamName") or "", "homeScore":hs,"awayScore":ass,
-                     "finished":bool((obj.get("status") or {}).get("finished",True))})
-    # Deduplicate repeated layout nodes while preserving order.
-    seen=set(); out=[]
-    for r in rows:
-        key=(r["homeId"],r["awayId"],r["homeScore"],r["awayScore"])
-        if key in seen: continue
-        seen.add(key); out.append(r)
-    return out
+        if str(team_id) == str(hid):
+            rows.append("W" if hs > ass else "D" if hs == ass else "L")
+        elif str(team_id) == str(aid):
+            rows.append("W" if ass > hs else "D" if hs == ass else "L")
+    return "".join(rows[-5:])
 
-
-def recent_from_payload(payload, team_id):
-    rows=[]
-    for r in _match_rows_from_payload(payload):
-        if not r.get("finished"): continue
-        if str(team_id)==r["homeId"]:
-            gf,ga=r["homeScore"],r["awayScore"]; opp=r["away"]
-        elif str(team_id)==r["awayId"]:
-            gf,ga=r["awayScore"],r["homeScore"]; opp=r["home"]
-        else:
-            continue
-        rows.append({"result":"W" if gf>ga else "D" if gf==ga else "L","gf":gf,"ga":ga,"opponent":opp})
-    return rows[-5:]
-
-
-def form_from_team(payload, team_id, fallback_payload=None):
-    rows = recent_from_payload(payload, team_id)
-    if len(rows) < 5 and fallback_payload:
-        # Team payloads and league payloads have changed shape over time; merge both.
-        extra = recent_from_payload(fallback_payload, team_id)
-        existing={(x["opponent"],x["gf"],x["ga"]) for x in rows}
-        for x in extra:
-            if (x["opponent"],x["gf"],x["ga"]) not in existing:
-                rows.append(x)
-        rows=rows[-5:]
-    return "".join(x["result"] for x in rows[-5:])
 
 def previous_finish(payload, team_id):
     # Prefer explicit 2025/26 historical tables in the team payload.
@@ -513,6 +492,19 @@ def transfer_impact(payload):
 
 def lineup(detail, home_id, away_id):
     result = {str(home_id): [], str(away_id): []}
+    content=detail.get("content") if isinstance(detail,dict) else None
+    lb=content.get("lineup") if isinstance(content,dict) else None
+    if isinstance(lb,dict):
+        for side,tid in (("homeTeam",home_id),("awayTeam",away_id)):
+            block=lb.get(side) or {}
+            for row in (block.get("starters") or block.get("players") or []):
+                if not isinstance(row,dict): continue
+                pl=row.get("player") if isinstance(row.get("player"),dict) else row
+                name=pick(pl,"name","playerName")
+                if name:
+                    st=row.get("stats") if isinstance(row.get("stats"),dict) else row.get("statistics") if isinstance(row.get("statistics"),dict) else {}
+                    result[str(tid)].append({"name":name,"position":pick(row,"position","role","positionName") or pick(pl,"position"),
+                        "rating":pick(st,"rating","FotMob rating") or pick(row,"rating","matchRating"),"starter":True})
     for obj in walk(detail):
         if not isinstance(obj, dict): continue
         lines=obj.get("lineups")
@@ -736,51 +728,23 @@ def safe_call(label, fn, default=None):
 def enrich_base(m, now):
     home,away=m.get("home") or {},m.get("away") or {}
     hn,an=pick(home,"name","longName"),pick(away,"name","longName")
-    hp=TEAM_CACHE.get(str(home.get("id"))) or safe_call(f"Team {hn}",lambda:team_payload(home.get("id")),{})
-    ap=TEAM_CACHE.get(str(away.get("id"))) or safe_call(f"Team {an}",lambda:team_payload(away.get("id")),{})
+    hp=TEAM_CACHE.get(str(home.get("id"))) or safe_call(f"Team {hn}",lambda:team_payload(home.get("id"),home.get("name") or home.get("longName")),{})
+    ap=TEAM_CACHE.get(str(away.get("id"))) or safe_call(f"Team {an}",lambda:team_payload(away.get("id"),away.get("name") or away.get("longName")),{})
     hl,al=current_league(hp),current_league(ap)
-    hleague=LEAGUE_CACHE.get(str(hl.get("leagueId"))) or (safe_call(f"League {hl.get('leagueId')}",lambda:league_payload(hl.get("leagueId")),{}) if hl.get("leagueId") else {})
-    aleague=LEAGUE_CACHE.get(str(al.get("leagueId"))) or (safe_call(f"League {al.get('leagueId')}",lambda:league_payload(al.get("leagueId")),{}) if al.get("leagueId") else {})
+    hleague=LEAGUE_CACHE.get(str(hl.get("leagueId"))) or (safe_call(f"League {hl.get('leagueId')}",lambda:league_payload(hl.get("leagueId"),hl.get("division")),{}) if hl.get("leagueId") else {})
+    aleague=LEAGUE_CACHE.get(str(al.get("leagueId"))) or (safe_call(f"League {al.get('leagueId')}",lambda:league_payload(al.get("leagueId"),al.get("division")),{}) if al.get("leagueId") else {})
     hpos=table_position(hleague,home.get("id")) or table_position(hp,home.get("id")); apos=table_position(aleague,away.get("id")) or table_position(ap,away.get("id"))
-    hlast=historical_position(hl.get("leagueId"),home.get("id")); alast=historical_position(al.get("leagueId"),away.get("id"))
-    hrows=recent_from_payload(hleague,home.get("id")) or recent_from_payload(hp,home.get("id"))
-    arows=recent_from_payload(aleague,away.get("id")) or recent_from_payload(ap,away.get("id"))
-    hd={"id":home.get("id"),"division":hl.get("division"),"leagueId":hl.get("leagueId"),"ccode":hl.get("ccode"),"position":hpos,"form":"".join(x["result"] for x in hrows[-5:]) or form_from_team(hp,home.get("id"),hleague),"lastSeasonPosition":hlast,"transferImpact":transfer_impact(hp),"lineup":[],"injuries":[]}
-    ad={"id":away.get("id"),"division":al.get("division"),"leagueId":al.get("leagueId"),"ccode":al.get("ccode"),"position":apos,"form":"".join(x["result"] for x in arows[-5:]) or form_from_team(ap,away.get("id"),aleague),"lastSeasonPosition":alast,"transferImpact":transfer_impact(ap),"lineup":[],"injuries":[]}
-    hr=hrows[-5:]; ar=arows[-5:]
+    hlast=previous_finish(hp,home.get("id")); alast=previous_finish(ap,away.get("id"))
+    h_recent=form_from_recent_daily(home.get("id"),now.date())
+    a_recent=form_from_recent_daily(away.get("id"),now.date())
+    h_form="".join(x["result"] for x in h_recent) or form_from_team(hp,home.get("id"))
+    a_form="".join(x["result"] for x in a_recent) or form_from_team(ap,away.get("id"))
+    hd={"id":home.get("id"),"division":hl.get("division"),"leagueId":hl.get("leagueId"),"ccode":hl.get("ccode"),"position":hpos,"form":h_form,"lastSeasonPosition":hlast,"transferImpact":transfer_impact(hp),"lineup":[],"injuries":[]}
+    ad={"id":away.get("id"),"division":al.get("division"),"leagueId":al.get("leagueId"),"ccode":al.get("ccode"),"position":apos,"form":a_form,"lastSeasonPosition":alast,"transferImpact":transfer_impact(ap),"lineup":[],"injuries":[]}
+    hr=h_recent or _recent_stats(hp,home.get("id")); ar=a_recent or _recent_stats(ap,away.get("id"))
     for d,rows,payload,tid in ((hd,hr,hp,home.get("id")),(ad,ar,ap,away.get("id"))):
         d["formPoints"]=_form_points(d["form"]); d["recentResults"]=rows; d["recentGF"]=sum(x["gf"] for x in rows); d["recentGA"]=sum(x["ga"] for x in rows); d["ratingPrior"]=_rating_prior(payload,tid); d["xgSeason"]=_team_xg(payload,tid)
-        # Keep transparent table evidence for the UI/model; these are domestic-league stats, not cup stats.
-        table_rows=[]
-        for obj in walk(hleague if tid==home.get("id") else aleague):
-            if not isinstance(obj,dict): continue
-            if str(obj.get("id"))==str(tid) and (obj.get("pts") is not None or obj.get("played") is not None):
-                table_rows.append(obj)
-        if table_rows:
-            t=table_rows[0]; d["tablePoints"]=as_num(t.get("pts")); d["played"]=as_num(t.get("played")); d["goalDifference"]=as_num(t.get("goalConDiff")); d["tableRecord"]={"wins":t.get("wins"),"draws":t.get("draws"),"losses":t.get("losses")}
     return hp,ap,hd,ad
-
-
-def fotmob_goals(detail):
-    out=[]
-    for obj in walk(detail):
-        if not isinstance(obj,dict): continue
-        events=obj.get("events")
-        if not isinstance(events,list): continue
-        for e in events:
-            if not isinstance(e,dict): continue
-            typ=str(e.get("type") or e.get("incidentType") or "").lower()
-            if "goal" not in typ: continue
-            player=e.get("player") if isinstance(e.get("player"),dict) else {}
-            assist=e.get("assist1") if isinstance(e.get("assist1"),dict) else (e.get("assist") if isinstance(e.get("assist"),dict) else {})
-            out.append({"minute":pick(e,"time","minute","timeStr"),"added":pick(e,"addedTime","addedTimeStr"),"team":"home" if e.get("isHome") else "away","scorer":pick(player,"name","playerName"),"assist":pick(assist,"name","playerName"),"ownGoal":str(e.get("incidentClass") or "").lower()=="owngoal"})
-    # De-duplicate the same event when header/content both expose it.
-    seen=set(); clean=[]
-    for g in out:
-        key=(g.get("minute"),g.get("team"),g.get("scorer"),g.get("assist"))
-        if key in seen: continue
-        seen.add(key); clean.append(g)
-    return clean
 
 
 def apply_match_detail(detail,hd,ad):
@@ -846,7 +810,6 @@ def build_match(m, now, sofa_info):
     hp,ap,hd,ad=enrich_base(m,now)
     detail=detail_for_match(mid)
     h2h_summary=apply_match_detail(detail,hd,ad) if detail else "Not available from FotMob."
-    fotmob_goal_events=fotmob_goals(detail) if detail else []
     sofa_event,sofa_lh,sofa_la,incidents=sofa_info
     apply_sofa(hd,ad,sofa_event,sofa_lh,sofa_la)
     # Prefer SofaScore lineup if available, otherwise keep FotMob detail lineup.
@@ -855,8 +818,7 @@ def build_match(m, now, sofa_info):
         if fh and fa: hd["lineup"],ad["lineup"]=fh,fa
     hs,ass=score(m); st=m.get("status") or {}
     status_value=status(m)
-    goals=incidents or fotmob_goal_events
-    out={"id":str(mid),"competition":m.get("_display_competition") or m.get("_league_name") or "Competition","competitionName":m.get("_league_name") or "Competition","competitionCountry":m.get("_country") or "Unknown","competitionCode":str(m.get("_ccode") or "INT").upper(),"competitionFlag":flag(m.get("_ccode"),m.get("_country")),"home":hn,"away":an,"homeScore":hs,"awayScore":ass,"status":status_value,"kickoff":st.get("utcTime") or m.get("utcTime"),"minute":{"short":pick(st,"reason","period") or ""},"homeData":hd,"awayData":ad,"h2hSummary":h2h_summary,"scorers":goals,"sofascoreEventId":sofa_event.get("id") if sofa_event else None,"lineupSource":"Sofascore" if sofa_lh.get("players") and sofa_la.get("players") else ("FotMob" if hd.get("lineup") and ad.get("lineup") else None),"fotmobMatchUrl":f"{ROOT}/matches/{mid}/match-details"}
+    out={"id":str(mid),"competition":m.get("_display_competition") or m.get("_league_name") or "Competition","competitionName":m.get("_league_name") or "Competition","competitionCountry":m.get("_country") or "Unknown","competitionCode":str(m.get("_ccode") or "INT").upper(),"competitionFlag":flag(m.get("_ccode"),m.get("_country")),"home":hn,"away":an,"homeScore":hs,"awayScore":ass,"status":status_value,"kickoff":st.get("utcTime") or m.get("utcTime"),"minute":{"short":pick(st,"reason","period") or ""},"homeData":hd,"awayData":ad,"h2hSummary":h2h_summary,"scorers":incidents,"sofascoreEventId":sofa_event.get("id") if sofa_event else None,"lineupSource":"Sofascore" if sofa_lh.get("players") and sofa_la.get("players") else ("FotMob" if hd.get("lineup") and ad.get("lineup") else None),"fotmobMatchUrl":f"{ROOT}/matches/{mid}/match-details"}
     # For upcoming games, season/team xG is the predictive xG input; post-match xG remains informational.
     if status_value in ("LIVE","FT") and hd.get("matchXG") is not None:
         hd["xg"],ad["xg"]=hd.get("matchXG"),ad.get("matchXG")
@@ -869,8 +831,14 @@ def build_match(m, now, sofa_info):
 def _prep_team_cache(rows):
     ids={str((m.get("home") or {}).get("id")) for m in rows}|{str((m.get("away") or {}).get("id")) for m in rows}
     ids.discard("None")
+    name_by_id={}
+    for m in rows:
+        for side in ("home","away"):
+            t=m.get(side) or {}
+            if t.get("id") is not None:
+                name_by_id[str(t["id"])] = pick(t,"name","longName") or ""
     def one(tid):
-        try: TEAM_CACHE[tid]=team_payload(tid)
+        try: TEAM_CACHE[tid]=team_payload(tid,name_by_id.get(tid,""))
         except Exception as exc: print("TEAM",tid,"failed",exc)
     with ThreadPoolExecutor(max_workers=10) as ex:
         list(ex.map(one,ids))
@@ -879,8 +847,13 @@ def _prep_team_cache(rows):
         if not isinstance(p,dict):continue
         lg=current_league(p).get("leagueId")
         if lg: league_ids.add(str(lg))
+    league_name_by_id={}
+    for p in TEAM_CACHE.values():
+        if isinstance(p,dict):
+            lg=current_league(p)
+            if lg.get("leagueId"): league_name_by_id[str(lg["leagueId"])]=lg.get("division") or ""
     def one_lid(lid):
-        try: LEAGUE_CACHE[lid]=league_payload(lid)
+        try: LEAGUE_CACHE[lid]=league_payload(lid,league_name_by_id.get(lid,""))
         except Exception as exc: print("LEAGUE",lid,"failed",exc)
     with ThreadPoolExecutor(max_workers=8) as ex:list(ex.map(one_lid,league_ids))
 
@@ -920,6 +893,7 @@ def main():
         base,display,country=normalize_comp(m.get("_league_name"),m.get("_ccode"),m.get("_country"));m["_display_competition"]=display;m["_country"]=country;m["_base_competition"]=base
     raw=[m for m in raw if (m.get("_base_competition") in SUPPORTED or str(m.get("_league_name","")).startswith("UEFA "))]
     print(f"SUPPORTED FIXTURES: {len(raw)}",flush=True)
+    prefetch_recent_history(now.date(),21)
     _prep_team_cache(raw)
     sofa=_sofa_map_for_rows(raw,now)
     results=[None]*len(raw)
@@ -937,8 +911,14 @@ def main():
     matches=[x for x in results if x]
     matches.sort(key=lambda m:(str(m.get("competition")),m.get("kickoff") or ""))
     payload={"updatedAt":dt.datetime.now(dt.timezone.utc).isoformat(),"updated":dt.datetime.now(TZ).strftime("%Y-%m-%d %I:%M:%S %p ET"),"fixtureCount":len(matches),"sourceStatus":f"FotMob + Sofascore · {len(matches)} fixtures","sourceErrors":errors,"matches":matches}
+    form_n=sum(bool((m.get("homeData") or {}).get("form")) and bool((m.get("awayData") or {}).get("form")) for m in matches)
+    div_n=sum(bool((m.get("homeData") or {}).get("division")) and bool((m.get("awayData") or {}).get("division")) for m in matches)
+    inc_n=sum(bool(m.get("scorers")) for m in matches)
+    lu_n=sum(bool((m.get("homeData") or {}).get("lineup")) and bool((m.get("awayData") or {}).get("lineup")) for m in matches)
+    print("ENRICHMENT:",form_n,"form pairs ·",div_n,"divisions ·",inc_n,"incident feeds ·",lu_n,"lineups",flush=True)
+    if form_n == 0 or div_n == 0:
+        raise RuntimeError(f"DATA QUALITY CHECK FAILED: {form_n} form pairs · {div_n} divisions. Refusing to publish fallback-only data.")
     Path("data").mkdir(exist_ok=True);Path("data/fixtures.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding="utf-8")
     print(f"WROTE {len(matches)} fixtures",flush=True)
-    print("ENRICHMENT:",sum(bool((m.get("homeData") or {}).get("form")) and bool((m.get("awayData") or {}).get("form")) for m in matches),"form pairs ·",sum(bool((m.get("homeData") or {}).get("division")) and bool((m.get("awayData") or {}).get("division")) for m in matches),"divisions ·",sum(bool(m.get("scorers")) for m in matches),"incident feeds ·",sum(bool((m.get("homeData") or {}).get("lineup")) and bool((m.get("awayData") or {}).get("lineup")) for m in matches),"lineups")
 
 if __name__=="__main__":main()
