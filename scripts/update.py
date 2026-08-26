@@ -3,6 +3,7 @@ import json
 import math
 import re
 import time
+import unicodedata
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -10,6 +11,7 @@ import requests
 
 TZ = ZoneInfo("America/New_York")
 ROOT = "https://www.fotmob.com"
+APIGW = "https://apigw.fotmob.com"
 HEAD = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
     "Accept": "application/json,text/plain,*/*",
@@ -154,55 +156,225 @@ def normalize_comp(name, ccode="", country=""):
     return base, display, c
 
 
-def daily(day):
-    """Fetch a FotMob daily fixture list with endpoint fallbacks.
+# Competition search terms. Search API returns the current FotMob league ID.
+# Country-qualified Premier League names are resolved separately after the search.
+LEAGUE_SEARCH = [
+    ("Premier League","England"),("Championship","England"),("League One","England"),("League Two","England"),
+    ("EFL Cup","England"),("FA Cup","England"),("LaLiga","Spain"),("LaLiga 2","Spain"),("Copa del Rey","Spain"),
+    ("Bundesliga","Germany"),("2. Bundesliga","Germany"),("DFB Pokal","Germany"),("Serie A","Italy"),("Serie B","Italy"),
+    ("Coppa Italia","Italy"),("Ligue 1","France"),("Ligue 2","France"),("Coupe de France","France"),
+    ("Eredivisie","Netherlands"),("KNVB Beker","Netherlands"),("Primeira Liga","Portugal"),
+    ("Scottish Premiership","Scotland"),("Belgian Pro League","Belgium"),("Turkish Super Lig","Türkiye"),
+    ("Saudi Pro League","Saudi Arabia"),("MLS","United States"),("Liga MX","Mexico"),("Brasileirão","Brazil"),
+    ("Liga Argentina","Argentina"),("J1 League","Japan"),("K League 1","South Korea"),("A-League","Australia"),
+    ("UEFA Champions League","International"),("UEFA Europa League","International"),
+    ("UEFA Conference League","International"),("UEFA Champions League Qualification","International"),
+    ("UEFA Europa League Qualification","International"),("UEFA Conference League Qualification","International"),
+    ("Copa Libertadores","International"),("Copa Sudamericana","International"),("CONCACAF Champions Cup","International"),
+]
 
-    FotMob has changed/retired API paths before. The current public route is
-    /api/matches; /api/data/matches is retained only as a compatibility fallback.
-    We never silently return an empty feed.
+
+def search_league_id(name, country):
+    key = ("SEARCH_LEAGUE", name, country)
+    if key in CACHE:
+        return CACHE[key]
+    try:
+        r = requests.get(f"{APIGW}/searchapi/suggest", params={"term": name, "lang": "en"}, headers=HEAD, timeout=18)
+        r.raise_for_status()
+        data = r.json()
+        hits = []
+        for group in data if isinstance(data, list) else []:
+            if not isinstance(group, dict):
+                continue
+            for item in group.get("suggestions", []) or group.get("options", []) or []:
+                payload = item.get("payload") if isinstance(item, dict) else None
+                obj = payload if isinstance(payload, dict) else item
+                typ = str(obj.get("type") or "").lower()
+                lname = str(obj.get("leagueName") or obj.get("name") or "")
+                if typ == "league" or lname:
+                    hits.append(obj)
+        target = name.lower()
+        for obj in hits:
+            lname = str(obj.get("leagueName") or obj.get("name") or "")
+            c = country_name(obj.get("country"), obj.get("ccode") or obj.get("countryCode"))
+            if lname.lower() == target and (country == "International" or c.lower() == country.lower()):
+                lid = obj.get("id") or obj.get("leagueId")
+                if lid:
+                    CACHE[key] = int(lid)
+                    return int(lid)
+        for obj in hits:
+            lname = str(obj.get("leagueName") or obj.get("name") or "")
+            if lname.lower() == target:
+                lid = obj.get("id") or obj.get("leagueId")
+                if lid:
+                    CACHE[key] = int(lid)
+                    return int(lid)
+    except Exception as exc:
+        print("League search failed", name, country, exc)
+    return None
+
+
+def league_page_matches(league_id, day):
+    payload = page_json(f"{ROOT}/leagues/{league_id}")
+    rows = []
+    # Current pageProps shape: fixtures.allMatches. Walk fallback handles minor schema changes.
+    candidates = []
+    for obj in walk(payload):
+        if isinstance(obj, dict):
+            allm = obj.get("allMatches")
+            if isinstance(allm, list):
+                candidates.extend(allm)
+    seen = set()
+    wanted = day.strftime("%Y-%m-%d")
+    for m in candidates:
+        if not isinstance(m, dict):
+            continue
+        mid = str(pick(m, "id","matchId") or "")
+        if not mid or mid in seen:
+            continue
+        st = m.get("status") or {}
+        utc = pick(st, "utcTime") or m.get("utcTime")
+        if not utc or str(utc)[:10] != wanted:
+            continue
+        if st.get("cancelled"):
+            continue
+        seen.add(mid)
+        rows.append(m)
+    return rows
+
+
+def daily(day):
+    """Build today's fixtures from FotMob's current search + server-rendered league pages.
+
+    The legacy www.fotmob.com/api/matches route is intentionally NOT used here.
+    Current FotMob data is exposed through apigw search plus server-rendered league pages.
     """
-    date = day.strftime("%Y%m%d")
-    attempts = [
-        (f"{ROOT}/api/matches", {"date": date, "timezone": "America/New_York"}),
-        (f"{ROOT}/api/matches", {"date": date}),
-        (f"{ROOT}/api/data/matches", {"date": date}),
-    ]
+    all_rows = []
     errors = []
-    for url, params in attempts:
+    for name, country in LEAGUE_SEARCH:
+        lid = search_league_id(name, country)
+        if not lid:
+            errors.append(f"{name}: league id not found")
+            continue
         try:
-            payload = get(url, params)
-            if isinstance(payload, dict) and payload.get("leagues") is not None:
-                return payload
-            errors.append(f"{url}: unexpected response")
+            rows = league_page_matches(lid, day)
+            for m in rows:
+                m = dict(m)
+                m["_league_name"] = name
+                m["_ccode"] = "INT" if country == "International" else None
+                m["_country"] = country
+                m["_league_id"] = lid
+                m["_page_url"] = pick(m, "pageUrl", "matchPageUrl", "url")
+                all_rows.append(m)
+        except Exception as exc:
+            errors.append(f"{name}: {exc}")
+    # Return the same wrapper shape as the old daily parser.
+    return {"matches": all_rows, "_errors": errors}
+
+def extract_next_data(html):
+    marker = '__NEXT_DATA__'
+    i = html.find(marker)
+    if i < 0:
+        raise RuntimeError('__NEXT_DATA__ not found')
+    start = html.find('>', i)
+    end = html.find('</script>', start)
+    if start < 0 or end < 0:
+        raise RuntimeError('__NEXT_DATA__ script boundaries not found')
+    wrapper = json.loads(html[start + 1:end])
+    props = wrapper.get('props', {}).get('pageProps')
+    if props is None:
+        raise RuntimeError('pageProps missing')
+    return props
+
+
+def page_json(url, timeout=25):
+    key = ('PAGE', url)
+    if key in CACHE:
+        return CACHE[key]
+    last = None
+    for attempt in range(3):
+        try:
+            r = requests.get(url, headers={**HEAD, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"}, timeout=timeout)
+            if r.ok:
+                value = extract_next_data(r.text)
+                CACHE[key] = value
+                return value
+            last = f"HTTP {r.status_code}"
+        except Exception as exc:
+            last = str(exc)
+        time.sleep(1.0 + attempt)
+    raise RuntimeError(f"{url}: {last or 'request failed'}")
+
+
+def slugify(name):
+    x = unicodedata.normalize("NFKD", str(name or "")).encode("ascii", "ignore").decode().lower()
+    x = re.sub(r"[^a-z0-9]+", "-", x).strip("-")
+    return x or "team"
+
+
+def match_details(match_id, page_url=None, home=None, away=None):
+    key = str(match_id)
+    if key in DETAIL_CACHE:
+        return DETAIL_CACHE[key]
+    urls = []
+    if page_url:
+        if page_url.startswith("http"):
+            urls.append(page_url)
+        elif page_url.startswith("/"):
+            urls.append(ROOT + page_url)
+    # The daily match payload normally includes pageUrl. This slug fallback is useful
+    # for older/partial payloads; FotMob redirects to the canonical match page.
+    urls.append(f"{ROOT}/match/{key}")
+    if home and away:
+        urls.append(f"{ROOT}/matches/{slugify(home)}-vs-{slugify(away)}")
+    errors = []
+    for url in urls:
+        try:
+            value = page_json(url)
+            DETAIL_CACHE[key] = value
+            return value
         except Exception as exc:
             errors.append(f"{url}: {exc}")
-    raise RuntimeError("FotMob endpoints failed: " + " | ".join(errors))
+    # Last resort: old endpoint, only if FotMob restores it.
+    try:
+        value = get(f"{ROOT}/api/matchDetails", {"matchId": key})
+        DETAIL_CACHE[key] = value
+        return value
+    except Exception as exc:
+        errors.append(str(exc))
+    raise RuntimeError("match detail unavailable: " + " | ".join(errors))
 
 
-def match_details(match_id):
-    key = str(match_id)
-    if key not in DETAIL_CACHE:
-        DETAIL_CACHE[key] = get(f"{ROOT}/api/matchDetails", {"matchId": key})
-    return DETAIL_CACHE[key]
-
-
-def team_payload(team_id):
+def team_payload(team_id, team_name=""):
     key = str(team_id)
     if key not in TEAM_CACHE:
-        TEAM_CACHE[key] = get(f"{ROOT}/api/teams", {"id": key})
+        url = f"{ROOT}/teams/{key}/overview/{slugify(team_name)}"
+        try:
+            TEAM_CACHE[key] = page_json(url)
+        except Exception as exc:
+            print("Team page failed", key, exc)
+            TEAM_CACHE[key] = {}
     return TEAM_CACHE[key]
 
 
-def league_payload(league_id):
+def league_payload(league_id, league_name=""):
     key = str(league_id)
     if not league_id:
         return {}
     if key not in LEAGUE_CACHE:
-        LEAGUE_CACHE[key] = get(f"{ROOT}/api/leagues", {"id": key})
+        # FotMob's /api/leagues JSON route is no longer reliable. The league page
+        # contains current table/fixture data in its server-rendered pageProps.
+        try:
+            LEAGUE_CACHE[key] = page_json(f"{ROOT}/leagues/{key}")
+        except Exception as exc:
+            print("League page failed", key, exc)
+            LEAGUE_CACHE[key] = {}
     return LEAGUE_CACHE[key]
 
 
 def match_rows(day_payload):
+    if isinstance(day_payload, dict) and isinstance(day_payload.get("matches"), list):
+        return [dict(x) for x in day_payload["matches"] if isinstance(x, dict)]
     out = []
     for league in day_payload.get("leagues", []) if isinstance(day_payload, dict) else []:
         if not isinstance(league, dict):
@@ -218,6 +390,7 @@ def match_rows(day_payload):
             match["_ccode"] = ccode
             match["_country"] = ctry
             match["_league_id"] = league.get("id") or league.get("primaryId")
+            match["_page_url"] = pick(match, "pageUrl", "matchPageUrl", "url")
             out.append(match)
     return out
 
@@ -244,24 +417,28 @@ def score(match):
 
 
 def current_league(payload):
-    # Team overview/current table is the source of truth. Never use the cup fixture's competition.
+    # FotMob team pages expose primaryLeagueId/primaryLeagueName and memberOf data.
+    # We deliberately read the team's own page, never the cup fixture's competition.
+    candidates = []
     for obj in walk(payload):
         if not isinstance(obj, dict):
             continue
-        season = str(pick(obj, "season", "selectedSeason") or "")
-        if season and "2026" not in season:
-            continue
-        if obj.get("leagueName") and obj.get("leagueId"):
-            return {"division": obj["leagueName"], "leagueId": obj["leagueId"], "ccode": obj.get("ccode")}
-        data = obj.get("data")
-        if isinstance(data, dict) and data.get("leagueName") and data.get("leagueId"):
-            return {"division": data["leagueName"], "leagueId": data["leagueId"], "ccode": data.get("ccode")}
-    # Fallback: first current table data node.
-    for obj in walk(payload):
-        if isinstance(obj, dict) and obj.get("leagueName") and obj.get("leagueId"):
-            return {"division": obj["leagueName"], "leagueId": obj["leagueId"], "ccode": obj.get("ccode")}
-    return {"division": None, "leagueId": None, "ccode": None}
-
+        pid = pick(obj, "primaryLeagueId", "leagueId")
+        pname = pick(obj, "primaryLeagueName", "leagueName", "division")
+        if pid and pname:
+            candidates.append({"division": str(pname), "leagueId": pid, "ccode": pick(obj, "ccode", "countryCode")})
+        member = obj.get("memberOf")
+        if isinstance(member, dict):
+            pid = pick(member, "leagueId", "id")
+            pname = pick(member, "leagueName", "name")
+            if pid and pname:
+                candidates.append({"division": str(pname), "leagueId": pid, "ccode": pick(member, "ccode", "countryCode")})
+    # Prefer a normal domestic league over a cup/European competition.
+    for c in candidates:
+        name = c["division"].lower()
+        if not any(x in name for x in ("cup", "champions", "europa", "conference", "friendly", "relegation")):
+            return c
+    return candidates[0] if candidates else {"division": None, "leagueId": None, "ccode": None}
 
 def table_position(payload, team_id):
     for obj in walk(payload):
@@ -280,14 +457,11 @@ def table_position(payload, team_id):
 def historical_position(league_id, team_id):
     if not league_id or not team_id:
         return None
-    for season in ("2025/2026", "2025"):
-        try:
-            payload = get(f"{ROOT}/api/leagues", {"id": str(league_id), "season": season})
-            pos = table_position(payload, team_id)
-            if pos is not None:
-                return pos
-        except Exception as exc:
-            print("Historical league lookup failed", league_id, season, exc)
+    # The old season API is unreliable. Try a current team-page history node first.
+    for payload in list(TEAM_CACHE.values()):
+        pos = previous_finish(payload, team_id)
+        if pos is not None:
+            return pos
     return None
 
 def form_from_team(payload, team_id):
@@ -352,31 +526,53 @@ def transfer_impact(payload):
 
 def lineup(detail, home_id, away_id):
     result = {str(home_id): [], str(away_id): []}
-    for obj in walk(detail):
-        if not isinstance(obj, dict):
-            continue
-        if "lineups" not in obj or not isinstance(obj["lineups"], list):
-            continue
-        for team in obj["lineups"]:
-            if not isinstance(team, dict):
+    # Current pageProps uses content.lineup.homeTeam / awayTeam. Keep support for
+    # the older lineups[] shape as a fallback.
+    content = detail.get("content") if isinstance(detail, dict) else None
+    lu = content.get("lineup") if isinstance(content, dict) else None
+    if isinstance(lu, dict):
+        for side, tid in (("homeTeam", home_id), ("awayTeam", away_id)):
+            team = lu.get(side)
+            if isinstance(team, dict):
+                players = team.get("players") or team.get("starters") or team.get("lineup") or []
+                for player in players:
+                    if not isinstance(player, dict):
+                        continue
+                    p = player.get("player") if isinstance(player.get("player"), dict) else player
+                    name = pick(p, "name", "playerName")
+                    if not name:
+                        continue
+                    result[str(tid)].append({
+                        "name": name,
+                        "position": pick(player, "position", "role", "positionName") or pick(p, "usualPosition","position","role"),
+                        "rating": pick(player, "rating", "matchRating") or pick(p, "rating","matchRating"),
+                        "starter": player.get("starter", True),
+                    })
+    if not any(result.values()):
+        for obj in walk(detail):
+            if not isinstance(obj, dict):
                 continue
-            tid = pick(team, "teamId", "id")
-            if tid is None or str(tid) not in result:
+            teams = obj.get("lineups")
+            if not isinstance(teams, list):
                 continue
-            players = team.get("players") or []
-            for player in players:
-                if not isinstance(player, dict):
+            for team in teams:
+                if not isinstance(team, dict):
                     continue
-                p = player.get("player") if isinstance(player.get("player"), dict) else player
-                name = pick(p, "name", "playerName")
-                if not name:
+                tid = pick(team, "teamId", "id")
+                if tid is None or str(tid) not in result:
                     continue
-                result[str(tid)].append({
-                    "name": name,
-                    "position": pick(player, "position", "role", "positionName") or pick(p, "position", "role"),
-                    "rating": pick(player, "rating", "matchRating") or pick(p, "rating", "matchRating"),
-                    "starter": player.get("starter", True),
-                })
+                for player in team.get("players") or []:
+                    if not isinstance(player, dict):
+                        continue
+                    p = player.get("player") if isinstance(player.get("player"), dict) else player
+                    name = pick(p, "name", "playerName")
+                    if name:
+                        result[str(tid)].append({
+                            "name": name,
+                            "position": pick(player, "position","role","positionName") or pick(p,"usualPosition","position","role"),
+                            "rating": pick(player, "rating","matchRating") or pick(p,"rating","matchRating"),
+                            "starter": player.get("starter", True),
+                        })
     for key in result:
         seen = set(); clean = []
         for p in result[key]:
@@ -386,33 +582,44 @@ def lineup(detail, home_id, away_id):
         result[key] = clean[:18]
     return result[str(home_id)], result[str(away_id)]
 
-
 def xg(detail):
-    for obj in walk(detail):
-        if not isinstance(obj, dict):
+    content = detail.get("content") if isinstance(detail, dict) else None
+    periods = (((content or {}).get("stats") or {}).get("Periods") or {}) if isinstance(content, dict) else {}
+    all_stats = periods.get("All") or {}
+    groups = all_stats.get("stats") if isinstance(all_stats, dict) else None
+    for group in groups or []:
+        if not isinstance(group, dict):
             continue
-        if str(obj.get("title", "")).lower() in {"expected goals (xg)", "expected goals", "xg"}:
-            values = obj.get("stats")
-            if isinstance(values, list) and len(values) >= 2:
-                try: return float(values[0]), float(values[1])
-                except (TypeError, ValueError): pass
+        for stat in group.get("stats") or []:
+            if not isinstance(stat, dict):
+                continue
+            title = str(stat.get("title") or "").lower()
+            if "expected goals" in title or title == "xg":
+                vals = stat.get("stats")
+                if isinstance(vals, list) and len(vals) >= 2:
+                    return as_num(vals[0]), as_num(vals[1])
+                return as_num(stat.get("home")), as_num(stat.get("away"))
+    # Fallback to recursive search used by older payloads.
+    for obj in walk(detail):
+        if isinstance(obj, dict) and str(obj.get("title","")).lower() in {"expected goals (xg)","expected goals","xg"}:
+            vals = obj.get("stats")
+            if isinstance(vals,list) and len(vals)>=2:
+                return as_num(vals[0]), as_num(vals[1])
     return None, None
 
-
 def h2h(detail):
-    for obj in walk(detail):
-        if not isinstance(obj, dict):
-            continue
-        h = obj.get("h2h")
-        if isinstance(h, dict):
-            for key in ("summary", "form", "results"):
-                value = h.get(key)
-                if isinstance(value, str) and value.strip():
-                    return value.strip()
-                if isinstance(value, list) and len(value) >= 3:
-                    return f"{value[0]}–{value[1]}–{value[2]}"
+    content = detail.get("content") if isinstance(detail, dict) else None
+    h = content.get("h2h") if isinstance(content, dict) else None
+    if h:
+        text = json.dumps(h, ensure_ascii=False)
+        # Prefer a compact record if FotMob provides wins/draws fields.
+        wins = re.findall(r'"(?:wins|win|homeWins)"\s*:\s*(\d+)', text)
+        draws = re.findall(r'"(?:draws|draw)"\s*:\s*(\d+)', text)
+        losses = re.findall(r'"(?:losses|awayWins)"\s*:\s*(\d+)', text)
+        if wins and draws and losses:
+            return f"{wins[0]}–{draws[0]}–{losses[0]}"
+        return text[:450]
     return "Not available from FotMob."
-
 
 def poisson(lam, max_goals=7):
     p = [math.exp(-lam)]
@@ -523,6 +730,8 @@ def main():
         try:
             payload = daily(day)
             rows = match_rows(payload)
+            day_errors = payload.get("_errors", []) if isinstance(payload, dict) else []
+            errors.extend([f"{day}: {e}" for e in day_errors])
             print(f"FotMob {day}: {len(rows)} raw fixtures")
             raw.extend(rows)
         except Exception as exc:
@@ -541,18 +750,35 @@ def main():
         base_comp, display_comp, ctry = normalize_comp(m.get("_league_name"), m.get("_ccode"), m.get("_country"))
         if base_comp not in SUPPORTED: continue
 
-        try:
-            hp = team_payload(home.get("id")); ap = team_payload(away.get("id"))
-        except Exception as exc:
-            print("Team data failed", mid, exc); hp = {}; ap = {}
-        hl, al = current_league(hp), current_league(ap)
+        domestic_comp = base_comp in {
+            "Premier League","Championship","League One","League Two","LaLiga","LaLiga 2",
+            "Bundesliga","2. Bundesliga","Serie A","Serie B","Ligue 1","Ligue 2","Eredivisie",
+            "Primeira Liga","Scottish Premiership","Belgian Pro League","Turkish Super Lig",
+            "Saudi Pro League","Brasileirão","Liga MX","Liga Argentina","MLS","J1 League",
+            "K League 1","A-League","Colombian Primera A"
+        }
+        hp = ap = {}
+        if domestic_comp:
+            # This is a league fixture, so the fixture's league is the team's current league.
+            hl = {"division": base_comp, "leagueId": m.get("_league_id"), "ccode": m.get("_ccode")}
+            al = {"division": base_comp, "leagueId": m.get("_league_id"), "ccode": m.get("_ccode")}
+        else:
+            hp = team_payload(home.get("id"), hn)
+            ap = team_payload(away.get("id"), an)
+            hl, al = current_league(hp), current_league(ap)
 
-        hleague = league_payload(hl.get("leagueId")) if hl.get("leagueId") else {}
-        aleague = league_payload(al.get("leagueId")) if al.get("leagueId") else {}
+        hleague = league_payload(hl.get("leagueId"), hl.get("division")) if hl.get("leagueId") else {}
+        aleague = hleague if al.get("leagueId") == hl.get("leagueId") else (league_payload(al.get("leagueId"), al.get("division")) if al.get("leagueId") else {})
         hpos = table_position(hleague, home.get("id")) or table_position(hp, home.get("id"))
         apos = table_position(aleague, away.get("id")) or table_position(ap, away.get("id"))
         hlast = previous_finish(hp, home.get("id")) or historical_position(hl.get("leagueId"), home.get("id"))
         alast = previous_finish(ap, away.get("id")) or historical_position(al.get("leagueId"), away.get("id"))
+        if hlast is None and not hp:
+            hp = team_payload(home.get("id"), hn)
+            hlast = previous_finish(hp, home.get("id")) or historical_position(hl.get("leagueId"), home.get("id"))
+        if alast is None and not ap:
+            ap = team_payload(away.get("id"), an)
+            alast = previous_finish(ap, away.get("id")) or historical_position(al.get("leagueId"), away.get("id"))
         hd = {
             "id": home.get("id"), "division": hl.get("division"), "leagueId": hl.get("leagueId"),
             "ccode": hl.get("ccode"), "position": hpos,
@@ -569,7 +795,7 @@ def main():
         ad["formPoints"] = sum(3 if x == "W" else 1 if x == "D" else 0 for x in ad["form"])
 
         try:
-            detail = match_details(mid)
+            detail = match_details(mid, m.get("_page_url"), hn, an)
             hd["lineup"], ad["lineup"] = lineup(detail, hd["id"], ad["id"])
             xh, xa = xg(detail); hd["xg"], ad["xg"] = xh, xa
             h2h_summary = h2h(detail)
@@ -587,7 +813,7 @@ def main():
             "kickoff": st.get("utcTime") or m.get("utcTime"),
             "minute": {"short": pick(st, "reason", "period") or ""},
             "homeData": hd, "awayData": ad, "h2hSummary": h2h_summary,
-            "fotmobMatchUrl": f"{ROOT}/matches/{mid}/match-details",
+            "fotmobMatchUrl": (ROOT + m["_page_url"]) if isinstance(m.get("_page_url"), str) and m["_page_url"].startswith("/") else (m.get("_page_url") or f"{ROOT}/matches/{mid}/match-details"),
         }
         out["model"] = model(out)
         matches.append(out)
