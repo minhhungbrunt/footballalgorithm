@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Offline model sanity test
+        run: python scripts/self_test.py
+
       - name: Pull FotMob
         run: python scripts/update.py
 
@@ -45,11 +48,11 @@ jobs:
           assert isinstance(x.get("matches"), list) and x["matches"], "No fixtures generated"
           for m in x["matches"]:
               assert m.get("home") and m.get("away") and m.get("competition")
+          divisions=sum(1 for m in x["matches"] if m.get("homeData",{}).get("division") and m.get("awayData",{}).get("division"))
+          lineups=sum(1 for m in x["matches"] if m.get("homeData",{}).get("lineup") and m.get("awayData",{}).get("lineup"))
+          xgpairs=sum(1 for m in x["matches"] if m.get("homeData",{}).get("xg") is not None and m.get("awayData",{}).get("xg") is not None)
           print("VALID:", len(x["matches"]), "fixtures")
-          lineups=sum(bool((m.get("homeData") or {}).get("lineup")) and bool((m.get("awayData") or {}).get("lineup")) for m in x["matches"])
-          divisions=sum(bool((m.get("homeData") or {}).get("division")) and bool((m.get("awayData") or {}).get("division")) for m in x["matches"])
-          xgs=sum((m.get("homeData") or {}).get("xg") is not None and (m.get("awayData") or {}).get("xg") is not None for m in x["matches"])
-          print(f"ENRICHMENT: {lineups} lineups · {divisions} divisions · {xgs} xG pairs")
+          print("ENRICHMENT: divisions=", divisions, "lineup_pairs=", lineups, "xg_pairs=", xgpairs)
           PY
 
       - name: Commit refreshed data
