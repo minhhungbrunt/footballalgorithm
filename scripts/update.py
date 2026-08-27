@@ -523,6 +523,21 @@ def previous_finish(payload, team_id):
                 best = int(p)
     if best is not None:
         return best
+
+    # Fallback: query FotMob's league table for the previous season using the
+    # team's CURRENT league id. This fixes missing last-season positions when
+    # the team payload does not embed historical standings.
+    league_ids=set()
+    for obj in walk(payload):
+        if not isinstance(obj,dict):
+            continue
+        lid=pick(obj,"leagueId","leagueID")
+        if lid is not None:
+            league_ids.add(str(lid))
+    for lid in league_ids:
+        pos=historical_position(lid, team_id)
+        if pos is not None:
+            return pos
     return None
 
 
