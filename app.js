@@ -80,6 +80,20 @@ function updateLiveClocks(){
   });
 }
 
+
+function playerFace(p){
+  if(!p)return "";
+  if(p.image)return p.image;
+  const id=p.playerId||p.scorerId||p.assistId;
+  return id ? `https://images.fotmob.com/image_resources/playerimages/${id}.png` : "";
+}
+function scorerLine(e){
+  if(!e||!e.scorer)return "";
+  const assist=e.assist ? ` · assist ${e.assist}` : "";
+  const minute=(e.minute!==undefined&&e.minute!==null&&e.minute!=="") ? `${e.minute}'` : "";
+  return `${minute} ${e.scorer}${assist}`.trim();
+}
+
 function render(){if(!DATA){$("#fixtures").innerHTML='<div class="empty">Loading FootballEdge…</div>';return}$("#updated").textContent=DATA.updated||new Date(DATA.updatedAt||Date.now()).toLocaleString();$("#feedStatus").textContent=`${DATA.fixtureCount||0} FIXTURES · LIVE FEED`;const live=(DATA.matches||[]).filter(m=>st(m)==="LIVE");$("#liveStrip").innerHTML=live.length?live.map(m=>`<div class="live-card"><div class="tag heartbeat"><i></i> LIVE · ${esc(m.competition)}</div><div class="pair">${esc(m.home)} vs ${esc(m.away)}</div><div class="live-score">${score(m)}</div><div class="min">${esc(m.minute?.short||"Live")}</div>${scorerLine(m)}</div>`).join(""):"";const comps=[...new Set((DATA.matches||[]).map(m=>m.competition).filter(Boolean))];$("#filters").innerHTML=`<button class="filter ${filter==="ALL"?"active":""}" onclick="setFilter('ALL')">ALL</button>`+comps.map(c=>`<button class="filter ${filter===c?"active":""}" onclick='setFilter(${JSON.stringify(c)})'>${esc(c)}</button>`).join("");const ms=(DATA.matches||[]).filter(m=>filter==="ALL"||m.competition===filter);const groups={};ms.forEach(m=>(groups[m.competition]??=[]).push(m));$("#fixtures").innerHTML=Object.entries(groups).map(([c,arr])=>`<section class="competition"><div class="comp-head"><span class="comp-logo">${esc((arr[0].competitionCode||c.slice(0,3)).toUpperCase())}</span><h2>${esc(c)}</h2><span class="count">${arr.length} MATCH${arr.length===1?"":"ES"}</span></div>${arr.map(matchHTML).join("")}</section>`).join("")}
 function toggleAnalysis(id){openId=openId===String(id)?null:String(id);render();if(openId)requestAnimationFrame(()=>document.getElementById(`m-${CSS.escape(String(id))}`)?.scrollIntoView({behavior:"smooth",block:"nearest"}))}
 function setFilter(x){filter=x;openId=null;render()}
