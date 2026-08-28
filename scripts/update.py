@@ -156,29 +156,24 @@ def normalize_comp(name, ccode="", country=""):
     c = country_name(country, ccode)
     low = base.lower()
 
-    # Country is authoritative when FotMob supplies the same generic league
-    # name for Germany and Austria.
+    # Normalize generic league names first, then ALWAYS qualify domestic
+    # competitions by country. This prevents e.g. England League One and
+    # Scotland League One from becoming one shared league.
     if low in {"bundesliga", "austrian bundesliga", "österreichische bundesliga"}:
-        if c == "Austria":
-            base = "Austrian Bundesliga"
-            display = "Austria Bundesliga"
-        elif c == "Germany":
-            base = "German Bundesliga"
-            display = "Germany Bundesliga"
-        else:
-            display = base
+        base = "Austrian Bundesliga" if c == "Austria" else "German Bundesliga" if c == "Germany" else "Bundesliga"
     elif low in {"serie a", "liga pro serie a", "ligapro serie a",
                  "liga pro ecuador", "serie a de ecuador"}:
-        if c == "Ecuador":
-            base = "Ecuador Serie A"
-            display = "Ecuador Serie A"
-        elif c == "Italy":
-            base = "Serie A"
-            display = "Italy Serie A"
-        else:
-            display = f"{c} Serie A" if c not in ("Unknown", "International") else "Serie A"
+        base = "Ecuador Serie A" if c == "Ecuador" else "Serie A"
+    elif low in {"league one", "english league one", "scottish league one"}:
+        base = "League One"
+    elif low in {"league two", "english league two", "scottish league two"}:
+        base = "League Two"
+
+    # International competitions keep their canonical global names.
+    if base.startswith("UEFA ") or c in ("International","Unknown"):
+        display = base
     else:
-        display = f"{c} {base}" if base == "Premier League" else base
+        display = f"{c} {base}".strip()
 
     return base, display, c
 
@@ -539,8 +534,9 @@ def _find_team_league(payload):
 def current_league(payload):
     explicit=_find_team_league(payload)
     if explicit.get("division"):
-        base, _, country = normalize_comp(explicit.get("division"), explicit.get("ccode"), explicit.get("country"))
-        explicit["division"] = base
+        base, display, country = normalize_comp(explicit.get("division"), explicit.get("ccode"), explicit.get("country"))
+        explicit["division"] = display
+        explicit["baseDivision"] = base
         explicit["country"] = country
         return explicit
     for obj in walk(payload):
@@ -549,7 +545,9 @@ def current_league(payload):
         if name and lid:
             n=str(name).lower()
             if not any(k in n for k in ("cup","champions","europa","conference","pokal","copa")):
-                return {"division":str(name),"leagueId":lid,"ccode":pick(obj,"ccode","countryCode")}
+                ccode=pick(obj,"ccode","countryCode")
+                base,display,country=normalize_comp(str(name),ccode,pick(obj,"country","countryName"))
+                return {"division":display,"baseDivision":base,"leagueId":lid,"ccode":ccode,"country":country}
     return {"division":None,"leagueId":None,"ccode":None}
 
 def table_position(payload, team_id):
@@ -799,11 +797,17 @@ def poisson(lam, max_goals=7):
 
 
 def league_strength(name):
-    base = str(name or "")
-    if base == "Premier League" or base.endswith(" Premier League"):
-        # England gets the real top-flight prior; other countries get a sensible fallback.
-        if base == "Premier League" or base == "England Premier League": return 1885
-        return 1510
+    base = str(name or "").strip()
+    exact = {
+        "England Premier League":1885, "Scotland Premiership":1600,
+        "England Championship":1660, "England League One":1410,
+        "England League Two":1270, "Scotland Championship":1450,
+        "Scotland League One":1320, "Scotland League Two":1250,
+        "Germany Bundesliga":1765, "Austria Bundesliga":1610,
+        "Italy Serie A":1855, "Ecuador Serie A":1545,
+    }
+    if base in exact:
+        return exact[base]
     return STRENGTH.get(base, 1500)
 
 
@@ -1081,9 +1085,11 @@ def enrich_base(m, now):
     # team's division when it looks like a domestic league (not a cup/UEFA tie).
     fixture_div=str(m.get("_league_name") or "")
     if not hl.get("division") and fixture_div and not any(k in fixture_div.lower() for k in ("cup","copa","pokal","champions","europa","conference","qualification")):
-        hl={"division":fixture_div,"leagueId":m.get("_league_id"),"ccode":m.get("_ccode")}
+        _b,_d,_c=normalize_comp(fixture_div,m.get("_ccode"),m.get("_country"))
+        hl={"division":_d,"baseDivision":_b,"leagueId":m.get("_league_id"),"ccode":m.get("_ccode"),"country":_c}
     if not al.get("division") and fixture_div and not any(k in fixture_div.lower() for k in ("cup","copa","pokal","champions","europa","conference","qualification")):
-        al={"division":fixture_div,"leagueId":m.get("_league_id"),"ccode":m.get("_ccode")}
+        _b,_d,_c=normalize_comp(fixture_div,m.get("_ccode"),m.get("_country"))
+        al={"division":_d,"baseDivision":_b,"leagueId":m.get("_league_id"),"ccode":m.get("_ccode"),"country":_c}
     hleague=LEAGUE_CACHE.get(str(hl.get("leagueId"))) or (safe_call(f"League {hl.get('leagueId')}",lambda:league_payload(hl.get("leagueId"),hl.get("division")),{}) if hl.get("leagueId") else {})
     aleague=LEAGUE_CACHE.get(str(al.get("leagueId"))) or (safe_call(f"League {al.get('leagueId')}",lambda:league_payload(al.get("leagueId"),al.get("division")),{}) if al.get("leagueId") else {})
     hpos=table_position(hleague,home.get("id")) or table_position(hp,home.get("id")); apos=table_position(aleague,away.get("id")) or table_position(ap,away.get("id"))
