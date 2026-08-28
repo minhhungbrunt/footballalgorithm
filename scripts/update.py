@@ -9,6 +9,11 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+try:
+    from ml_model import load_if_fresh, train_or_load, predict as ml_predict
+except Exception:
+    load_if_fresh = train_or_load = ml_predict = None
+
 TZ = ZoneInfo("America/New_York")
 ROOT = "https://www.fotmob.com"
 SOFA = "https://www.sofascore.com/api/v1"
@@ -27,6 +32,8 @@ LEAGUE_CACHE = {}
 SOFA_CACHE = {}
 SOFA_EVENTS = {}
 PLAYER_CACHE = {}
+ML_ARTIFACT = None
+ML_HISTORY_CACHE = {}
 
 # Major competitions. Premier League is deliberately resolved with its country/ccode.
 SUPPORTED = {
@@ -905,6 +912,50 @@ def _dc_adjust(i,j,rho=-0.10):
     return 1.0
 
 
+def ml_history_rows(anchor, days_back=120):
+    """Load completed domestic league matches for the ML training window.
+    This runs only when the persisted model is stale/missing, not every 5-minute refresh.
+    """
+    days=[anchor-dt.timedelta(days=n) for n in range(1,days_back+1)]
+    def one(day):
+        key=day.strftime("%Y%m%d")
+        if key not in ML_HISTORY_CACHE:
+            try: ML_HISTORY_CACHE[key]=match_rows(daily(day))
+            except Exception as exc:
+                print(f"ML HISTORY {key} failed: {exc}"); ML_HISTORY_CACHE[key]=[]
+    with ThreadPoolExecutor(max_workers=12) as ex:
+        list(ex.map(one,days))
+    rows=[]
+    for vals in ML_HISTORY_CACHE.values(): rows.extend(vals or [])
+    print(f"ML HISTORY: {len(rows)} raw historical fixtures",flush=True)
+    return rows
+
+def ml_supported(comp,country):
+    n=str(comp or "").lower()
+    if any(k in n for k in ("cup","copa","pokal","champions","europa","conference","qualification","friendly","women","u21","u19")):
+        return False
+    return True
+
+def ensure_ml_model(now):
+    global ML_ARTIFACT
+    if load_if_fresh is None or train_or_load is None:
+        print("ML unavailable: sklearn/joblib not installed; using statistical model",flush=True); return None
+    fresh=load_if_fresh(Path("data/ml_model.joblib"),now)
+    if fresh:
+        ML_ARTIFACT=fresh
+        print(f"ML MODEL: loaded {fresh.get('trainingRows',0)} rows · accuracy {fresh.get('metrics',{}).get('holdout_accuracy','n/a')} · logloss {fresh.get('metrics',{}).get('holdout_logloss','n/a')}",flush=True)
+        return fresh
+    rows=ml_history_rows(now.date(),120)
+    try:
+        art,trained=train_or_load(Path("data/ml_model.joblib"),rows,status,score,league_strength,ml_supported,now)
+        ML_ARTIFACT=art
+        print(f"ML MODEL: {'trained' if trained else 'loaded'} {art.get('trainingRows',0)} rows · accuracy {art.get('metrics',{}).get('holdout_accuracy','n/a')} · logloss {art.get('metrics',{}).get('holdout_logloss','n/a')}",flush=True)
+        return art
+    except Exception as exc:
+        print("ML TRAINING FAILED:",exc,"· using statistical model",flush=True)
+        ML_ARTIFACT=None
+        return None
+
 def model(match):
     h,a=match["homeData"],match["awayData"]
     same=bool(h.get("division") and h.get("division")==a.get("division"))
@@ -1047,6 +1098,23 @@ def model(match):
 
     z=pH+pD+pA
     probs=[pH/z,pD/z,pA/z]
+
+    # ML ensemble: blend a learned 1X2 model with the football-specific
+    # Poisson/Dixon-Coles model. The learned model is trained only on
+    # completed historical fixtures and is disabled when evidence is sparse.
+    if ML_ARTIFACT is not None and ml_predict is not None:
+        try:
+            mp=ml_predict(ML_ARTIFACT,match,league_strength)
+            if mp and len(mp)==3:
+                # More weight to ML when the current feed has good team/form
+                # coverage; retain the statistical model as a stabilizer.
+                data_quality=sum(bool(h.get(k) and a.get(k)) for k in ('division','form','lastSeasonPosition'))/3
+                ml_weight=0.48 + 0.17*data_quality
+                probs=[(1-ml_weight)*probs[i]+ml_weight*mp[i] for i in range(3)]
+                s=sum(probs); probs=[v/s for v in probs]
+                factors.append(["Machine-learning ensemble",round(ml_weight*100,1)])
+        except Exception as exc:
+            print("ML prediction failed:",exc)
 
     # A draw verdict is allowed when DRAW is the most likely calibrated
     # outcome. There is deliberately no "every N games force X" mechanism.
@@ -1331,6 +1399,7 @@ def main():
     raw=[m for m in raw if (m.get("_base_competition") in SUPPORTED or str(m.get("_league_name","")).startswith("UEFA "))]
     print(f"SUPPORTED FIXTURES: {len(raw)}",flush=True)
     prefetch_recent_history(now.date(),21)
+    ensure_ml_model(now)
     _prep_team_cache(raw)
     sofa=_sofa_map_for_rows(raw,now)
     results=[None]*len(raw)
@@ -1347,7 +1416,7 @@ def main():
             if done%5==0 or done==len(raw):print(f"PROGRESS {done}/{len(raw)}",flush=True)
     matches=[x for x in results if x]
     matches.sort(key=lambda m:(str(m.get("competition")),m.get("kickoff") or ""))
-    payload={"updatedAt":dt.datetime.now(dt.timezone.utc).isoformat(),"updated":dt.datetime.now(TZ).strftime("%Y-%m-%d %I:%M:%S %p ET"),"updateMode":"AUTO","refreshIntervalSeconds":300,"fixtureCount":len(matches),"sourceStatus":f"FotMob + Sofascore · {len(matches)} fixtures","sourceErrors":errors,"matches":matches}
+    payload={"updatedAt":dt.datetime.now(dt.timezone.utc).isoformat(),"updated":dt.datetime.now(TZ).strftime("%Y-%m-%d %I:%M:%S %p ET"),"updateMode":"AUTO","refreshIntervalSeconds":300,"fixtureCount":len(matches),"sourceStatus":f"FotMob + Sofascore · {len(matches)} fixtures","sourceErrors":errors,"mlModel":({"version":ML_ARTIFACT.get("version"),"trainedAt":ML_ARTIFACT.get("createdAt"),"trainingRows":ML_ARTIFACT.get("trainingRows"),"metrics":ML_ARTIFACT.get("metrics",{})} if ML_ARTIFACT else {"status":"statistical fallback"}),"matches":matches}
     form_n=sum(bool((m.get("homeData") or {}).get("form")) and bool((m.get("awayData") or {}).get("form")) for m in matches)
     div_n=sum(bool((m.get("homeData") or {}).get("division")) and bool((m.get("awayData") or {}).get("division")) for m in matches)
     inc_n=sum(bool(m.get("scorers")) for m in matches)
