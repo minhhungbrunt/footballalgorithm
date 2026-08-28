@@ -80,32 +80,54 @@ function updateAutoStatus(ok=true){
 
 
 function liveElapsedLabel(match){
-  const live = match?.status || match?.state || {};
-  if (match?.status?.finished || match?.finished || match?.isFinished) return "";
-  let start = match?.startTime || match?.startTimestamp || match?.kickoff ||
-              match?.matchTime || live?.startTime || live?.startTimestamp;
-  let ms = null;
-  if (typeof start === "number") ms = start > 1e12 ? start : start * 1000;
-  else if (start) {
-    const d = new Date(start);
-    if (!Number.isNaN(d.getTime())) ms = d.getTime();
+  // Never derive the football clock from scheduled kickoff: kickoff can be
+  // delayed and the second half/half-time would make that clock wrong.
+  const ls=match?.liveStatus || match?.live?.status || {};
+  const typ=String(ls.type||"").toLowerCase();
+  const period=String(ls.period||"").toLowerCase();
+  const desc=String(ls.description||"").toLowerCase();
+
+  // Provider clock fields are preferred when available.
+  const clock=ls.clock || match?.liveClock;
+  if(clock){
+    const raw=clock.matchTime ?? clock.matchTimeSeconds ?? clock.seconds;
+    if(Number.isFinite(Number(raw))){
+      const total=Math.max(0,Math.floor(Number(raw)));
+      return `${Math.floor(total/60)}:${String(total%60).padStart(2,"0")}`;
+    }
   }
-  if (ms != null) {
-    const sec = Math.max(0, Math.floor((Date.now()-ms)/1000));
-    const mins = Math.floor(sec/60), secs = sec%60;
-    return `${mins}:${String(secs).padStart(2,"0")}`;
+
+  // At half-time the match clock must be frozen, not continue from kickoff.
+  if(typ.includes("halftime") || desc.includes("half time") || desc==="ht" || typ==="halftime"){
+    return "45:00";
   }
-  const raw = match?.minute?.short ?? match?.minute ?? live?.minute ?? match?.elapsed ?? "";
-  if (raw !== "") {
-    const s=String(raw);
-    const mmss=s.match(/(\d{1,3}):(\d{2})/);
-    if(mmss)return `${parseInt(mmss[1],10)}:${mmss[2]}`;
-    const min=s.match(/(\d{1,3})/);
-    if(min)return `${parseInt(min[1],10)}:00`;
-    return s;
+
+  const start=ls.currentPeriodStartTimestamp || ls.currentPeriodStartTime ||
+              (period==="1" ? ls.period1StartTimestamp : null) ||
+              (period==="2" ? ls.period2StartTimestamp : null);
+  if(start!=null){
+    const n=Number(start);
+    const startMs=n>1e12?n*1:n*1000;
+    const elapsed=Math.max(0,Math.floor((Date.now()-startMs)/1000));
+    // Second half is 45:00 + its own elapsed clock. Extra time is handled
+    // conservatively from the provider's period when present.
+    let base=0;
+    if(period==="2" || period==="second" || desc.includes("2nd half")) base=45*60;
+    else if(period==="3") base=90*60;
+    else if(period==="4") base=105*60;
+    const total=base+elapsed;
+    return `${Math.floor(total/60)}:${String(total%60).padStart(2,"0")}`;
   }
+
+  // Last fallback: accept an actual MM:SS value supplied by the feed.
+  const raw=match?.minute?.short ?? match?.minute ?? match?.elapsed ?? "";
+  const s=String(raw);
+  const mmss=s.match(/(\d{1,3}):(\d{2})/);
+  if(mmss)return `${parseInt(mmss[1],10)}:${mmss[2]}`;
+
   return "LIVE";
 }
+
 function updateLiveClocks(){
   document.querySelectorAll("[data-live-match-id]").forEach(el=>{
     const m = (window.DATA?.matches || []).find(x=>String(x.id)===String(el.dataset.liveMatchId));
@@ -280,10 +302,15 @@ function setFilter(x){filter=x;openId=null;render()}
 async function loadStatic(){try{const r=await fetch(`${DATA_URL}?v=${Date.now()}`,{cache:"no-store"});if(!r.ok)throw Error(`HTTP ${r.status}`);DATA=await r.json();window.DATA=DATA;lastStaticUpdate=DATA.updatedAt;render();updateAutoStatus(true)}catch(e){if(!DATA)$("#fixtures").innerHTML=`<div class="error"><b>Football data feed unavailable.</b><br>${esc(e.message)}</div>`}}
 async function pollLive(){
   if(!DATA)return;
-  const candidates=(DATA.matches||[]).filter(m=>
-    (st(m)==="LIVE" || st(m)==="FT") &&
-    (!Array.isArray(m.scorers)||!m.scorers.length || st(m)==="LIVE")
-  );
+  // Always re-check today's LIVE/FT matches from the live provider.
+  // Do not stop polling just because the static feed already has scorers: a
+  // finished score can still change from 1-2 to 1-3 after the last workflow run.
+  const now=Date.now();
+  const candidates=(DATA.matches||[]).filter(m=>{
+    const k=Date.parse(m.kickoff||"");
+    const recent=!Number.isNaN(k) && (now-k < 36*60*60*1000) && (k-now < 6*60*60*1000);
+    return recent;
+  });
   if(!candidates.length)return;
 
   const dates=[...new Set(candidates.map(m=>{
@@ -328,9 +355,8 @@ async function pollLive(){
       if(!sid)return;
       m.sofascoreEventId=sid;
 
-      const requests=[fetch(`https://www.sofascore.com/api/v1/event/${sid}`,{cache:"no-store"})];
-      if(st(m)==="LIVE" || !Array.isArray(m.scorers)||!m.scorers.length)
-        requests.push(fetch(`https://www.sofascore.com/api/v1/event/${sid}/incidents`,{cache:"no-store"}));
+      const requests=[fetch(`https://www.sofascore.com/api/v1/event/${sid}?_=${Date.now()}`,{cache:"no-store"}),
+                      fetch(`https://www.sofascore.com/api/v1/event/${sid}/incidents?_=${Date.now()}`,{cache:"no-store"})];
 
       const res=await Promise.all(requests);
       const ev=res[0]?.ok?await res[0].json():null;
@@ -339,8 +365,17 @@ async function pollLive(){
       if(ev?.event){
         m.homeScore=ev.event.homeScore?.current??m.homeScore;
         m.awayScore=ev.event.awayScore?.current??m.awayScore;
-        if(ev.event.status?.type==="finished")m.status="FT";
-        m.minute={short:ev.event.status?.description||ev.event.status?.type||"Live"};
+        const providerStatus=ev.event.status||{};
+        m.liveStatus=providerStatus;
+        if(providerStatus.clock)m.liveClock=providerStatus.clock;
+        const typ=String(providerStatus.type||"").toLowerCase();
+        if(typ==="finished" || typ==="afterpenalties" || typ==="afterextratime" || providerStatus.code===100) {
+          m.status="FT";
+          m.minute={short:"FT"};
+        } else {
+          m.status="LIVE";
+          m.minute={short:providerStatus.description||providerStatus.type||"LIVE"};
+        }
       }
       if(inc?.incidents){
         m.scorers=inc.incidents.filter(x=>x.incidentType==="goal").map(x=>({
@@ -353,7 +388,7 @@ async function pollLive(){
   }));
   render();
 }
-loadStatic();setInterval(loadStatic,5000);setInterval(pollLive,5000);
+loadStatic();setInterval(loadStatic,30000);setInterval(pollLive,5000);
 window.toggleAnalysis=toggleAnalysis;window.setFilter=setFilter;
 
 setInterval(updateLiveClocks,1000);
