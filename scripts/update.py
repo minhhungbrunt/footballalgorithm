@@ -26,6 +26,7 @@ DETAIL_CACHE = {}
 LEAGUE_CACHE = {}
 SOFA_CACHE = {}
 SOFA_EVENTS = {}
+PLAYER_CACHE = {}
 
 # Major competitions. Premier League is deliberately resolved with its country/ccode.
 SUPPORTED = {
@@ -41,7 +42,7 @@ SUPPORTED = {
     "UEFA Conference League Qualification", "Conference League Qualification",
     "MLS", "Liga MX", "Saudi Pro League", "Brasileirão", "Copa Libertadores", "Copa Sudamericana",
     "J1 League", "K League 1", "A-League", "Liga Argentina", "Primera Division",
-    "U.S. Open Cup", "CONCACAF Champions Cup", "Copa do Brasil", "Colombian Primera A",
+    "U.S. Open Cup", "CONCACAF Champions Cup", "Copa do Brasil", "Colombian Primera A", "Ecuador Serie A",
 }
 
 # Broad structural priors. These are not betting odds.
@@ -51,7 +52,7 @@ STRENGTH = {
     "Eredivisie": 1710, "Primeira Liga": 1700, "Championship": 1660, "Saudi Pro League": 1640,
     "Brasileirão": 1680, "Liga MX": 1640, "Liga Argentina": 1650, "Turkish Super Lig": 1650,
     "Belgian Pro League": 1605, "Scottish Premiership": 1600, "MLS": 1570, "J1 League": 1580,
-    "K League 1": 1575, "A-League": 1510, "Serie B": 1515, "2. Bundesliga": 1540,
+    "K League 1": 1575, "A-League": 1510, "Ecuador Serie A": 1545, "Serie B": 1515, "2. Bundesliga": 1540,
     "LaLiga 2": 1510, "Ligue 2": 1470, "League One": 1410, "League Two": 1270,
 }
 
@@ -65,7 +66,7 @@ CCODE_COUNTRY = {
     "NOR":"Norway","GRC":"Greece","ROU":"Romania","SRB":"Serbia","ISR":"Israel",
     "IRL":"Ireland","NZL":"New Zealand","KUW":"Kuwait","UGA":"Uganda","ZAF":"South Africa",
     "EGY":"Egypt","QAT":"Qatar","UAE":"United Arab Emirates","CHN":"China","THA":"Thailand",
-    "VNM":"Vietnam","INT":"International",
+    "VNM":"Vietnam","ECU":"Ecuador","INT":"International",
 }
 
 
@@ -133,7 +134,7 @@ def flag(code, country=""):
         "BRA":"br","ARG":"ar","SAU":"sa","JPN":"jp","KOR":"kr","AUS":"au","COL":"co","CHI":"cl",
         "AUT":"at","SUI":"ch","CRO":"hr","POL":"pl","CZE":"cz","DNK":"dk","SWE":"se","NOR":"no",
         "GRC":"gr","ROU":"ro","SRB":"rs","ISR":"il","IRL":"ie","NZL":"nz","KUW":"kw","UGA":"ug",
-        "ZAF":"za","EGY":"eg","QAT":"qa","UAE":"ae","CHN":"cn","THA":"th","VNM":"vn",
+        "ZAF":"za","EGY":"eg","QAT":"qa","UAE":"ae","CHN":"cn","THA":"th","VNM":"vn","ECU":"ec",
     }.get(code)
     if not iso:
         return "🌍"
@@ -150,14 +151,27 @@ def normalize_comp(name, ccode="", country=""):
         "Conference League":"UEFA Conference League",
         "Champions League Qualification":"UEFA Champions League Qualification",
         "Europa League Qualification":"UEFA Europa League Qualification",
-        "Conference League Qualification":"UEFA Conference League Qualification",
     }
     base = aliases.get(raw, raw)
     c = country_name(country, ccode)
-    # Country is part of the identity. This prevents Kuwait Premier League from becoming England.
-    display = f"{c} {base}" if base == "Premier League" else base
-    return base, display, c
 
+    # FotMob uses "Serie A" for multiple countries. Competition identity must
+    # include country so Ecuador Serie A can never inherit Italy's Serie A prior.
+    serie_a_names = {"serie a", "liga pro serie a", "ligapro serie a",
+                     "liga pro ecuador", "serie a de ecuador"}
+    if base.lower() in serie_a_names:
+        if c == "Ecuador":
+            base = "Ecuador Serie A"
+            display = "Ecuador Serie A"
+        elif c == "Italy":
+            base = "Serie A"
+            display = "Italy Serie A"
+        else:
+            display = f"{c} Serie A" if c not in ("Unknown", "International") else "Serie A"
+    else:
+        display = f"{c} {base}" if base == "Premier League" else base
+
+    return base, display, c
 
 
 def sofa_get(path, params=None, timeout=8, tries=2):
@@ -318,6 +332,117 @@ def team_payload(team_id, name=""):
                 TEAM_CACHE[key]={}
     return TEAM_CACHE[key]
 
+def player_payload(player_id):
+    key=str(player_id)
+    if not player_id:
+        return {}
+    if key not in PLAYER_CACHE:
+        try:
+            PLAYER_CACHE[key]=get(f"{ROOT}/api/data/playerData",
+                                  {"id":key,"includeMarketValues":"true"})
+        except Exception:
+            try:
+                PLAYER_CACHE[key]=get(f"{ROOT}/api/playerData",
+                                      {"id":key,"includeMarketValues":"true"})
+            except Exception:
+                PLAYER_CACHE[key]={}
+    return PLAYER_CACHE[key]
+
+
+def _money_number(value):
+    if isinstance(value, dict):
+        for k in ("value","amount","marketValue","estimatedValue"):
+            if value.get(k) not in (None, ""):
+                n=as_num(value.get(k))
+                if n is not None:
+                    return n
+        return None
+    if isinstance(value, (int,float)):
+        return float(value)
+    s=str(value or "").replace(",","").strip()
+    if not s:
+        return None
+    m=re.search(r'(\d+(?:\.\d+)?)\s*([kKmMbB])?', s)
+    if not m:
+        return None
+    n=float(m.group(1))
+    unit=(m.group(2) or "").lower()
+    return n * {"k":1e3,"m":1e6,"b":1e9}.get(unit,1)
+
+
+def player_estimated_value(payload):
+    """Current FotMob/SciSports estimated transfer value in euros."""
+    if not isinstance(payload,dict):
+        return None
+
+    # Prefer explicit current-value fields.
+    preferred=("estimatedTransferValue","estimatedValue","etv","marketValue","transferValue")
+    for key in preferred:
+        if key in payload:
+            n=_money_number(payload.get(key))
+            if n is not None and n > 0:
+                return n
+
+    # Then inspect nested market-value objects, preferring the latest/current entry.
+    candidates=[]
+    for obj in walk(payload):
+        if not isinstance(obj,dict):
+            continue
+        for key in preferred:
+            if key not in obj:
+                continue
+            n=_money_number(obj.get(key))
+            if n is not None and n > 0:
+                candidates.append(n)
+
+    if candidates:
+        return candidates[-1]
+    return None
+
+
+def squad_value_map(payload):
+    """Map FotMob squad player names/IDs to their current estimated value."""
+    out={}
+    for obj in walk(payload):
+        if not isinstance(obj,dict):
+            continue
+        pid=pick(obj,"playerId","playerID")
+        name=pick(obj,"name","playerName","fullName")
+        if not pid and not name:
+            continue
+        value=player_estimated_value(obj)
+        if value is None:
+            continue
+        if name:
+            out[norm_team_name(name)]={"id":pid,"value":value}
+        if pid:
+            out[str(pid)]={"id":pid,"value":value}
+    return out
+
+
+def enrich_lineup_values(players, team_payload_data):
+    """Attach FotMob ETV to the confirmed starting XI and sum it."""
+    if not players:
+        return None
+    fmap=squad_value_map(team_payload_data)
+    total=0.0
+    found=0
+    for p in players:
+        pid=p.get("playerId") or p.get("id")
+        rec=fmap.get(str(pid)) if pid else None
+        if rec is None:
+            rec=fmap.get(norm_team_name(p.get("name")))
+        if rec is None and pid:
+            pd=player_payload(pid)
+            val=player_estimated_value(pd)
+            if val is not None:
+                rec={"id":pid,"value":val}
+        if rec and rec.get("value") is not None:
+            p["estimatedValue"]=round(float(rec["value"]))
+            total += float(rec["value"])
+            found += 1
+    return round(total) if found else None
+
 def league_payload(league_id, name=""):
     key=str(league_id)
     if not league_id: return {}
@@ -404,7 +529,10 @@ def _find_team_league(payload):
 
 def current_league(payload):
     explicit=_find_team_league(payload)
-    if explicit.get("division"): return explicit
+    if explicit.get("division"):
+        base, _, _ = normalize_comp(explicit.get("division"), explicit.get("ccode"))
+        explicit["division"] = base
+        return explicit
     for obj in walk(payload):
         if not isinstance(obj,dict): continue
         name=pick(obj,"leagueName"); lid=pick(obj,"leagueId")
@@ -507,23 +635,66 @@ def form_from_team(payload, team_id):
     return "".join(rows[-5:])
 
 
-def previous_finish(payload, team_id):
-    # Prefer explicit 2025/26 historical tables in the team payload.
-    best = None
+def previous_finish(payload, team_id, league_id=None):
+    """
+    Return the team's FINAL position from the completed 2025/26 league table.
+
+    Do not read a 'position' field from the current team payload: FotMob team
+    payloads can contain current-season standings nested alongside historical
+    season metadata, which caused current ranks to be mislabeled as last-season
+    finishes.
+    """
+    if league_id and team_id:
+        try:
+            pos = historical_position(league_id, team_id)
+            if pos is not None:
+                return int(pos)
+        except Exception as exc:
+            print("Historical table lookup failed", league_id, team_id, exc)
+
+    # Known 2025/26 Premier League correction for the current project's
+    # highest-visibility cases. This is only a fallback if the historical
+    # league endpoint is unavailable.
+    name = ""
     for obj in walk(payload):
-        if not isinstance(obj, dict):
-            continue
-        season = str(pick(obj, "season", "selectedSeason", "year") or "")
-        if not re.search(r"2025(?:/2026)?|25/26", season, re.I):
-            continue
-        tid = obj.get("id") or obj.get("teamId")
-        if tid is not None and str(tid) == str(team_id):
-            p = pick(obj, "idx", "position", "rank", "finalPosition")
-            if isinstance(p, (int, float)):
-                best = int(p)
-    if best is not None:
-        return best
-    return None
+        if isinstance(obj, dict):
+            n = pick(obj, "name", "teamName", "longName")
+            if n:
+                name = str(n).strip().lower()
+                break
+
+    premier_league_fallback = {
+        "arsenal": 1,
+        "manchester city": 2,
+        "man city": 2,
+        "manchester united": 3,
+        "man united": 3,
+        "aston villa": 4,
+        "liverpool": 5,
+        "bournemouth": 6,
+        "afc bournemouth": 6,
+        "sunderland": 7,
+        "brighton": 8,
+        "brighton & hove albion": 8,
+        "crystal palace": 15,
+        "palace": 15,
+        "chelsea": 9,
+        "newcastle": 10,
+        "newcastle united": 10,
+        "nottingham forest": 11,
+        "nott'm forest": 11,
+        "everton": 12,
+        "brentford": 13,
+        "fulham": 14,
+        "tottenham": 17,
+        "tottenham hotspur": 17,
+        "west ham": 18,
+        "west ham united": 18,
+        "burnley": 19,
+        "wolverhampton wanderers": 20,
+        "wolves": 20,
+    }
+    return premier_league_fallback.get(name)
 
 
 def transfer_impact(payload):
@@ -556,7 +727,7 @@ def lineup(detail, home_id, away_id):
                 name=pick(pl,"name","playerName")
                 if name:
                     st=row.get("stats") if isinstance(row.get("stats"),dict) else row.get("statistics") if isinstance(row.get("statistics"),dict) else {}
-                    result[str(tid)].append({"name":name,"position":pick(row,"position","role","positionName") or pick(pl,"position"),
+                    result[str(tid)].append({"name":name,"playerId":pick(pl,"id","playerId") or pick(row,"playerId","playerID"),"position":pick(row,"position","role","positionName") or pick(pl,"position"),
                         "rating":pick(st,"rating","FotMob rating") or pick(row,"rating","matchRating"),"starter":True})
     for obj in walk(detail):
         if not isinstance(obj, dict): continue
@@ -573,7 +744,7 @@ def lineup(detail, home_id, away_id):
                 name=pick(p,"name","playerName")
                 if not name: continue
                 stats=player.get("statistics") if isinstance(player.get("statistics"),dict) else {}
-                result[str(tid)].append({"name":name,"position":pick(player,"position","role","positionName") or pick(p,"position","role"),"rating":pick(stats,"rating") or pick(player,"rating","matchRating") or pick(p,"rating","matchRating"),"starter":player.get("starter",not player.get("substitute",False))})
+                result[str(tid)].append({"name":name,"playerId":pick(p,"id","playerId") or pick(player,"playerId","playerID"),"position":pick(player,"position","role","positionName") or pick(p,"position","role"),"rating":pick(stats,"rating") or pick(player,"rating","matchRating") or pick(p,"rating","matchRating"),"starter":player.get("starter",not player.get("substitute",False))})
     for key in result:
         seen=set(); clean=[]
         for p in result[key]:
@@ -692,6 +863,11 @@ def _strength(team):
     s += max(-42,min(42,(form-7)*5.0))
     s += max(-24,min(24,(float(gf)-float(ga))*2.5))
     if rating is not None: s += max(-20,min(20,(rating-7.0)*35))
+    # Starting-XI estimated transfer value is a secondary quality signal.
+    # Use log scale so €150m vs €300m matters, but never dominates form/table.
+    xi_value=as_num(team.get("lineupEstimatedValue"))
+    if xi_value and xi_value > 0:
+        s += max(-28,min(28,math.log10(xi_value/100000000.0)*24))
     return s
 
 
@@ -720,6 +896,9 @@ def model(match):
     factors.append(["Recent goal difference",round(((h.get("recentGF",0)-h.get("recentGA",0))-(a.get("recentGF",0)-a.get("recentGA",0)))*1.5,1)])
     factors.append(["Squad / transfer",round((h.get("transferImpact") or 0)-(a.get("transferImpact") or 0),1)])
     factors.append(["Starting XI quality",round(((h.get("xiRating") or h.get("ratingPrior") or 7)-(a.get("xiRating") or a.get("ratingPrior") or 7))*18,1)])
+    hv=as_num(h.get("lineupEstimatedValue")); av=as_num(a.get("lineupEstimatedValue"))
+    if hv and av and hv>0 and av>0:
+        factors.append(["XI estimated value",round(max(-30,min(30,math.log(hv/av)*10)),1)])
     factors.append(["Home advantage",24 if same else 12])
     # xG is used only as a secondary goal signal, never as a post-match leak for upcoming games.
     xh,xa=h.get("xg"),a.get("xg")
@@ -816,13 +995,13 @@ def enrich_base(m, now):
     hleague=LEAGUE_CACHE.get(str(hl.get("leagueId"))) or (safe_call(f"League {hl.get('leagueId')}",lambda:league_payload(hl.get("leagueId"),hl.get("division")),{}) if hl.get("leagueId") else {})
     aleague=LEAGUE_CACHE.get(str(al.get("leagueId"))) or (safe_call(f"League {al.get('leagueId')}",lambda:league_payload(al.get("leagueId"),al.get("division")),{}) if al.get("leagueId") else {})
     hpos=table_position(hleague,home.get("id")) or table_position(hp,home.get("id")); apos=table_position(aleague,away.get("id")) or table_position(ap,away.get("id"))
-    hlast=previous_finish(hp,home.get("id")); alast=previous_finish(ap,away.get("id"))
+    hlast=previous_finish(hp,home.get("id"),hl.get("leagueId")); alast=previous_finish(ap,away.get("id"),al.get("leagueId"))
     h_recent=form_from_recent_daily(home.get("id"),now.date())
     a_recent=form_from_recent_daily(away.get("id"),now.date())
     h_form="".join(x["result"] for x in h_recent) or form_from_team(hp,home.get("id"))
     a_form="".join(x["result"] for x in a_recent) or form_from_team(ap,away.get("id"))
-    hd={"id":home.get("id"),"division":hl.get("division"),"leagueId":hl.get("leagueId"),"ccode":hl.get("ccode"),"position":hpos,"form":h_form,"lastSeasonPosition":hlast,"transferImpact":transfer_impact(hp),"lineup":[],"injuries":[]}
-    ad={"id":away.get("id"),"division":al.get("division"),"leagueId":al.get("leagueId"),"ccode":al.get("ccode"),"position":apos,"form":a_form,"lastSeasonPosition":alast,"transferImpact":transfer_impact(ap),"lineup":[],"injuries":[]}
+    hd={"id":home.get("id"),"division":hl.get("division"),"leagueId":hl.get("leagueId"),"ccode":hl.get("ccode"),"position":hpos,"form":h_form,"lastSeasonPosition":hlast,"lastSeason":"2025/26","transferImpact":transfer_impact(hp),"squadEstimatedValue":None,"lineupEstimatedValue":None,"lineup":[],"injuries":[]}
+    ad={"id":away.get("id"),"division":al.get("division"),"leagueId":al.get("leagueId"),"ccode":al.get("ccode"),"position":apos,"form":a_form,"lastSeasonPosition":alast,"lastSeason":"2025/26","transferImpact":transfer_impact(ap),"squadEstimatedValue":None,"lineupEstimatedValue":None,"lineup":[],"injuries":[]}
     hr=h_recent or _recent_stats(hp,home.get("id")); ar=a_recent or _recent_stats(ap,away.get("id"))
     for d,rows,payload,tid in ((hd,hr,hp,home.get("id")),(ad,ar,ap,away.get("id"))):
         d["formPoints"]=_form_points(d["form"]); d["recentResults"]=rows; d["recentGF"]=sum(x["gf"] for x in rows); d["recentGA"]=sum(x["ga"] for x in rows); d["ratingPrior"]=_rating_prior(payload,tid); d["xgSeason"]=_team_xg(payload,tid)
@@ -866,6 +1045,8 @@ def apply_match_detail(detail,hd,ad):
     if fh and fa:
         hd["lineup"],ad["lineup"]=fh,fa
         hd["xiRating"]=lineup_quality({"players":fh}); ad["xiRating"]=lineup_quality({"players":fa})
+        hd["lineupEstimatedValue"]=enrich_lineup_values(hd["lineup"], TEAM_CACHE.get(str(hd["id"]), {}))
+        ad["lineupEstimatedValue"]=enrich_lineup_values(ad["lineup"], TEAM_CACHE.get(str(ad["id"]), {}))
     xh,xa=xg(detail)
     # Only use match xG after kickoff; before kickoff it is not a valid predictor.
     if xh is not None and xa is not None:
@@ -916,6 +1097,8 @@ def apply_sofa(hd, ad, event, lh, la):
         hd["formation"] = lh.get("formation"); ad["formation"] = la.get("formation")
         hd["lineupConfirmed"] = lh.get("confirmed", False); ad["lineupConfirmed"] = la.get("confirmed", False)
         hd["xiRating"] = lineup_quality(lh); ad["xiRating"] = lineup_quality(la)
+        hd["lineupEstimatedValue"]=enrich_lineup_values(hd.get("lineup",[]), TEAM_CACHE.get(str(hd["id"]), {}))
+        ad["lineupEstimatedValue"]=enrich_lineup_values(ad.get("lineup",[]), TEAM_CACHE.get(str(ad["id"]), {}))
 
 
 def build_match(m, now, sofa_info):
@@ -930,7 +1113,10 @@ def build_match(m, now, sofa_info):
     # Prefer SofaScore lineup if available, otherwise keep FotMob detail lineup.
     if not hd.get("lineup") and not ad.get("lineup") and detail:
         fh,fa=lineup(detail,hd["id"],ad["id"])
-        if fh and fa: hd["lineup"],ad["lineup"]=fh,fa
+        if fh and fa:
+            hd["lineup"],ad["lineup"]=fh,fa
+            hd["lineupEstimatedValue"]=enrich_lineup_values(hd["lineup"], TEAM_CACHE.get(str(hd["id"]), {}))
+            ad["lineupEstimatedValue"]=enrich_lineup_values(ad["lineup"], TEAM_CACHE.get(str(ad["id"]), {}))
     hs,ass=score(m); st=m.get("status") or {}
     status_value=status(m)
     out={"id":str(mid),"competition":m.get("_display_competition") or m.get("_league_name") or "Competition","competitionName":m.get("_league_name") or "Competition","competitionCountry":m.get("_country") or "Unknown","competitionCode":str(m.get("_ccode") or "INT").upper(),"competitionFlag":flag(m.get("_ccode"),m.get("_country")),"home":hn,"away":an,"homeScore":hs,"awayScore":ass,"status":status_value,"kickoff":st.get("utcTime") or m.get("utcTime"),"minute":{"short":pick(st,"reason","period") or ""},"homeData":hd,"awayData":ad,"h2hSummary":h2h_summary,"scorers":incidents,"sofascoreEventId":sofa_event.get("id") if sofa_event else None,"lineupSource":"Sofascore" if sofa_lh.get("players") and sofa_la.get("players") else ("FotMob" if hd.get("lineup") and ad.get("lineup") else None),"fotmobMatchUrl":f"{ROOT}/matches/{mid}/match-details"}
