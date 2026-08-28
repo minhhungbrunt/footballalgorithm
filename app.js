@@ -80,51 +80,54 @@ function updateAutoStatus(ok=true){
 
 
 function liveElapsedLabel(match){
-  // Never derive the football clock from scheduled kickoff: kickoff can be
-  // delayed and the second half/half-time would make that clock wrong.
+  // Never let a stale provider timestamp turn into a 150+ minute clock.
+  // A normal football match clock should stay within regulation + reasonable
+  // stoppage/extra-time bounds. Finished matches always show FT.
+  const status=String(match?.status||"").toUpperCase();
+  if(status==="FT" || status==="FINISHED") return "FT";
+
   const ls=match?.liveStatus || match?.live?.status || {};
   const typ=String(ls.type||"").toLowerCase();
   const period=String(ls.period||"").toLowerCase();
   const desc=String(ls.description||"").toLowerCase();
 
-  // Provider clock fields are preferred when available.
+  if(typ.includes("finished") || typ.includes("afterpenalties") ||
+     typ.includes("afterextratime") || ls.code===100) return "FT";
+  if(typ.includes("halftime") || desc.includes("half time") || desc==="ht") return "45:00";
+
+  // Provider's actual football clock is the best source.
   const clock=ls.clock || match?.liveClock;
   if(clock){
-    const raw=clock.matchTime ?? clock.matchTimeSeconds ?? clock.seconds;
+    const raw=clock.matchTime ?? clock.matchTimeSeconds ?? clock.seconds ?? clock.current;
     if(Number.isFinite(Number(raw))){
       const total=Math.max(0,Math.floor(Number(raw)));
-      return `${Math.floor(total/60)}:${String(total%60).padStart(2,"0")}`;
+      // Reject epoch-like or otherwise corrupt values.
+      if(total<=150*60){
+        return `${Math.floor(total/60)}:${String(total%60).padStart(2,"0")}`;
+      }
     }
   }
 
-  // At half-time the match clock must be frozen, not continue from kickoff.
-  if(typ.includes("halftime") || desc.includes("half time") || desc==="ht" || typ==="halftime"){
-    return "45:00";
-  }
-
+  // If the provider gives a period start, calculate only within that period.
   const start=ls.currentPeriodStartTimestamp || ls.currentPeriodStartTime ||
               (period==="1" ? ls.period1StartTimestamp : null) ||
               (period==="2" ? ls.period2StartTimestamp : null);
   if(start!=null){
     const n=Number(start);
-    const startMs=n>1e12?n*1:n*1000;
-    const elapsed=Math.max(0,Math.floor((Date.now()-startMs)/1000));
-    // Second half is 45:00 + its own elapsed clock. Extra time is handled
-    // conservatively from the provider's period when present.
+    const startMs=n>1e12?n:n*1000;
+    let elapsed=Math.max(0,Math.floor((Date.now()-startMs)/1000));
     let base=0;
     if(period==="2" || period==="second" || desc.includes("2nd half")) base=45*60;
     else if(period==="3") base=90*60;
     else if(period==="4") base=105*60;
     const total=base+elapsed;
-    return `${Math.floor(total/60)}:${String(total%60).padStart(2,"0")}`;
+    // Hard safety ceiling: never display absurd stale clocks.
+    if(total<=150*60){
+      return `${Math.floor(total/60)}:${String(total%60).padStart(2,"0")}`;
+    }
   }
 
-  // Last fallback: accept an actual MM:SS value supplied by the feed.
-  const raw=match?.minute?.short ?? match?.minute ?? match?.elapsed ?? "";
-  const s=String(raw);
-  const mmss=s.match(/(\d{1,3}):(\d{2})/);
-  if(mmss)return `${parseInt(mmss[1],10)}:${mmss[2]}`;
-
+  // A stale LIVE event is preferable to showing an obviously false 200:00.
   return "LIVE";
 }
 
@@ -302,79 +305,131 @@ function setFilter(x){filter=x;openId=null;render()}
 async function loadStatic(){try{const r=await fetch(`${DATA_URL}?v=${Date.now()}`,{cache:"no-store"});if(!r.ok)throw Error(`HTTP ${r.status}`);DATA=await r.json();window.DATA=DATA;lastStaticUpdate=DATA.updatedAt;render();updateAutoStatus(true)}catch(e){if(!DATA)$("#fixtures").innerHTML=`<div class="error"><b>Football data feed unavailable.</b><br>${esc(e.message)}</div>`}}
 async function pollLive(){
   if(!DATA)return;
-  // Always re-check today's LIVE/FT matches from the live provider.
-  // Do not stop polling just because the static feed already has scorers: a
-  // finished score can still change from 1-2 to 1-3 after the last workflow run.
+  // PRIMARY LIVE/FT AUTHORITY: FotMob.  We check FotMob's daily match feed
+  // first because it explicitly exposes status.started/status.finished.
+  // SofaScore remains useful for incidents, but must never keep a match LIVE
+  // after FotMob has marked it finished.
   const now=Date.now();
   const candidates=(DATA.matches||[]).filter(m=>{
     const k=Date.parse(m.kickoff||"");
-    const recent=!Number.isNaN(k) && (now-k < 36*60*60*1000) && (k-now < 6*60*60*1000);
-    return recent;
+    const recent=!Number.isNaN(k) && (now-k < 36*60*60*1000) && (k-now < 8*60*60*1000);
+    return recent && st(m)!=="FT";
   });
   if(!candidates.length)return;
 
-  const dates=[...new Set(candidates.map(m=>{
-    const d=new Date(m.kickoff||Date.now());
-    return isNaN(d)?null:d.toISOString().slice(0,10);
-  }).filter(Boolean))];
-
-  const scheduleCache={};
   const norm=n=>String(n||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
     .replace(/[^a-z0-9]/g,"").replace(/footballclub|fc$/g,"");
-
-  async function scheduled(date){
-    if(scheduleCache[date])return scheduleCache[date];
-    try{
-      const r=await fetch(`https://www.sofascore.com/api/v1/sport/football/scheduled-events/${date}`,{cache:"no-store"});
-      const j=r.ok?await r.json():{};
-      return scheduleCache[date]=Array.isArray(j.events)?j.events:[];
-    }catch(e){return scheduleCache[date]=[]}
+  const fotmobCache={};
+  function ymd(iso){
+    const d=new Date(iso||Date.now());
+    return isNaN(d)?null:d.toISOString().slice(0,10).replace(/-/g,"");
   }
-
-  async function findEvent(m){
-    if(m.sofascoreEventId)return m.sofascoreEventId;
+  async function fotmobDay(date){
+    if(!date)return [];
+    if(fotmobCache[date])return fotmobCache[date];
+    try{
+      const r=await fetch(`https://www.fotmob.com/api/matches?date=${date}&timezone=America%2FNew_York&_=${Date.now()}`,{cache:"no-store"});
+      if(!r.ok)throw Error(`FotMob HTTP ${r.status}`);
+      const j=await r.json(),out=[];
+      for(const lg of (j?.leagues||[]))for(const m of (lg?.matches||[]))out.push(m);
+      return fotmobCache[date]=out;
+    }catch(e){
+      // Try the compatibility endpoint if FotMob changes the public route.
+      try{
+        const r=await fetch(`https://www.fotmob.com/api/data/matches?date=${date}&timezone=America%2FNew_York&_=${Date.now()}`,{cache:"no-store"});
+        if(!r.ok)throw Error(`FotMob HTTP ${r.status}`);
+        const j=await r.json(),out=[];
+        for(const lg of (j?.leagues||[]))for(const m of (lg?.matches||[]))out.push(m);
+        return fotmobCache[date]=out;
+      }catch(_){return fotmobCache[date]=[]}
+    }
+  }
+  async function findFotMobMatch(m){
+    const dates=[ymd(m.kickoff)];
     const base=new Date(m.kickoff||Date.now());
-    if(isNaN(base))return null;
-    for(const off of [-1,0,1]){
-      const d=new Date(base); d.setUTCDate(d.getUTCDate()+off);
-      const day=d.toISOString().slice(0,10);
-      const events=await scheduled(day);
-      const hn=norm(m.home), an=norm(m.away);
-      const hit=events.find(e=>{
-        const h=norm(e?.homeTeam?.name), a=norm(e?.awayTeam?.name);
-        return (h===hn&&a===an) || h.includes(hn)||hn.includes(h) ? (a.includes(an)||an.includes(a)) : false;
+    if(!isNaN(base)){
+      for(const off of [-1,1]){const d=new Date(base);d.setUTCDate(d.getUTCDate()+off);dates.push(d.toISOString().slice(0,10).replace(/-/g,""));}
+    }
+    for(const date of [...new Set(dates)]){
+      const rows=await fotmobDay(date);
+      const exact=rows.find(x=>String(x?.id)===String(m.id));
+      if(exact)return exact;
+      const hn=norm(m.home),an=norm(m.away);
+      const byTeams=rows.find(x=>{
+        const h=norm(x?.home?.name),a=norm(x?.away?.name);
+        return (h===hn||h.includes(hn)||hn.includes(h))&&(a===an||a.includes(an)||an.includes(a));
       });
-      if(hit)return hit.id;
+      if(byTeams)return byTeams;
     }
     return null;
   }
 
   await Promise.all(candidates.map(async m=>{
     try{
-      const sid=await findEvent(m);
+      const fm=await findFotMobMatch(m);
+      if(fm){
+        const fs=fm.status||{};
+        const hs=fm.home?.score ?? fm.home?.goals;
+        const as=fm.away?.score ?? fm.away?.goals;
+        if(hs!=null)m.homeScore=hs;
+        if(as!=null)m.awayScore=as;
+
+        // THIS IS THE KEY FIX: trust FotMob's finished flag.
+        if(fs.finished===true){
+          m.status="FT";
+          m.minute={short:fs.reason||"FT"};
+          m.liveStatus={type:"finished",code:100,description:fs.reason||"FT"};
+          m.liveClock=null;
+        }else if(fs.started===true && fs.finished!==true){
+          m.status="LIVE";
+          m.minute={short:fs.reason||fs.period||"LIVE"};
+          m.liveStatus=fs;
+          // Do not create a clock from kickoff here. The hardened clock uses
+          // provider timing only and otherwise displays LIVE.
+        }
+      }
+
+      // SofaScore is incident/clock enrichment only. It cannot override a
+      // FotMob FT decision.
+      if(st(m)==="FT")return;
+      let sid=m.sofascoreEventId;
+      if(!sid){
+        // Keep the existing Sofa lookup for incidents when no id is stored.
+        const d=new Date(m.kickoff||Date.now());
+        if(isNaN(d))return;
+        const day=d.toISOString().slice(0,10);
+        try{
+          const r=await fetch(`https://www.sofascore.com/api/v1/sport/football/scheduled-events/${day}?_=${Date.now()}`,{cache:"no-store"});
+          const j=r.ok?await r.json():{};
+          const events=Array.isArray(j.events)?j.events:[];
+          const hn=norm(m.home),an=norm(m.away);
+          const hit=events.find(e=>{
+            const h=norm(e?.homeTeam?.name),a=norm(e?.awayTeam?.name);
+            return (h===hn||h.includes(hn)||hn.includes(h))&&(a===an||a.includes(an)||an.includes(a));
+          });
+          if(hit)sid=hit.id;
+        }catch(_){ }
+      }
       if(!sid)return;
       m.sofascoreEventId=sid;
-
-      const requests=[fetch(`https://www.sofascore.com/api/v1/event/${sid}?_=${Date.now()}`,{cache:"no-store"}),
-                      fetch(`https://www.sofascore.com/api/v1/event/${sid}/incidents?_=${Date.now()}`,{cache:"no-store"})];
-
-      const res=await Promise.all(requests);
-      const ev=res[0]?.ok?await res[0].json():null;
-      const inc=res[1]?.ok?await res[1].json():null;
-
+      const [er,ir]=await Promise.all([
+        fetch(`https://www.sofascore.com/api/v1/event/${sid}?_=${Date.now()}`,{cache:"no-store"}),
+        fetch(`https://www.sofascore.com/api/v1/event/${sid}/incidents?_=${Date.now()}`,{cache:"no-store"})
+      ]);
+      const ev=er?.ok?await er.json():null,inc=ir?.ok?await ir.json():null;
       if(ev?.event){
-        m.homeScore=ev.event.homeScore?.current??m.homeScore;
-        m.awayScore=ev.event.awayScore?.current??m.awayScore;
-        const providerStatus=ev.event.status||{};
-        m.liveStatus=providerStatus;
-        if(providerStatus.clock)m.liveClock=providerStatus.clock;
-        const typ=String(providerStatus.type||"").toLowerCase();
-        if(typ==="finished" || typ==="afterpenalties" || typ==="afterextratime" || providerStatus.code===100) {
+        // Only use SofaScore's score if FotMob did not provide one.
+        if(m.homeScore==null)m.homeScore=ev.event.homeScore?.current;
+        if(m.awayScore==null)m.awayScore=ev.event.awayScore?.current;
+        const typ=String(ev.event.status?.type||"").toLowerCase();
+        if(st(m)!=="FT" && (typ==="finished"||typ==="afterpenalties"||typ==="afterextratime"||ev.event.status?.code===100)){
           m.status="FT";
           m.minute={short:"FT"};
-        } else {
+          m.liveStatus=ev.event.status;
+          m.liveClock=null;
+        }else if(st(m)!=="FT" && typ){
           m.status="LIVE";
-          m.minute={short:providerStatus.description||providerStatus.type||"LIVE"};
+          m.liveStatus=ev.event.status;
         }
       }
       if(inc?.incidents){
