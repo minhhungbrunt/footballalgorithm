@@ -27,6 +27,8 @@ LEAGUE_CACHE = {}
 SOFA_CACHE = {}
 SOFA_EVENTS = {}
 PLAYER_CACHE = {}
+ALL_LEAGUES_CACHE = None
+HISTORICAL_TABLE_CACHE = {}
 
 # Major competitions. Premier League is deliberately resolved with its country/ccode.
 SUPPORTED = {
@@ -52,7 +54,7 @@ STRENGTH = {
     "Eredivisie": 1710, "Primeira Liga": 1700, "Championship": 1660, "Saudi Pro League": 1640,
     "Brasileirão": 1680, "Liga MX": 1640, "Liga Argentina": 1650, "Turkish Super Lig": 1650,
     "Belgian Pro League": 1605, "Scottish Premiership": 1600, "MLS": 1570, "J1 League": 1580,
-    "K League 1": 1575, "A-League": 1510, "Ecuador Serie A": 1545, "Serie B": 1515, "2. Bundesliga": 1540,
+    "K League 1": 1575, "A-League": 1510, "Ecuador Serie A": 1545, "German Bundesliga": 1765, "Austrian Bundesliga": 1610, "Serie B": 1515, "2. Bundesliga": 1540,
     "LaLiga 2": 1510, "Ligue 2": 1470, "League One": 1410, "League Two": 1270,
 }
 
@@ -154,12 +156,21 @@ def normalize_comp(name, ccode="", country=""):
     }
     base = aliases.get(raw, raw)
     c = country_name(country, ccode)
+    low = base.lower()
 
-    # FotMob uses "Serie A" for multiple countries. Competition identity must
-    # include country so Ecuador Serie A can never inherit Italy's Serie A prior.
-    serie_a_names = {"serie a", "liga pro serie a", "ligapro serie a",
-                     "liga pro ecuador", "serie a de ecuador"}
-    if base.lower() in serie_a_names:
+    # Country is authoritative when FotMob supplies the same generic league
+    # name for Germany and Austria.
+    if low in {"bundesliga", "austrian bundesliga", "österreichische bundesliga"}:
+        if c == "Austria":
+            base = "Austrian Bundesliga"
+            display = "Austria Bundesliga"
+        elif c == "Germany":
+            base = "German Bundesliga"
+            display = "Germany Bundesliga"
+        else:
+            display = base
+    elif low in {"serie a", "liga pro serie a", "ligapro serie a",
+                 "liga pro ecuador", "serie a de ecuador"}:
         if c == "Ecuador":
             base = "Ecuador Serie A"
             display = "Ecuador Serie A"
@@ -530,8 +541,9 @@ def _find_team_league(payload):
 def current_league(payload):
     explicit=_find_team_league(payload)
     if explicit.get("division"):
-        base, _, _ = normalize_comp(explicit.get("division"), explicit.get("ccode"))
+        base, _, country = normalize_comp(explicit.get("division"), explicit.get("ccode"), explicit.get("country"))
         explicit["division"] = base
+        explicit["country"] = country
         return explicit
     for obj in walk(payload):
         if not isinstance(obj,dict): continue
@@ -556,18 +568,130 @@ def table_position(payload, team_id):
 
 
 
-def historical_position(league_id, team_id):
-    if not league_id or not team_id:
-        return None
-    for season in ("2025/2026", "2025"):
+
+def _all_domestic_leagues():
+    """Return FotMob domestic league ids grouped by country."""
+    global ALL_LEAGUES_CACHE
+    if ALL_LEAGUES_CACHE is not None:
+        return ALL_LEAGUES_CACHE
+    try:
+        data=get(f"{ROOT}/api/data/allLeagues")
+    except Exception:
         try:
-            payload = get(f"{ROOT}/api/data/leagues", {"id": str(league_id), "season": season})
-            pos = table_position(payload, team_id)
+            data=get(f"{ROOT}/api/allLeagues")
+        except Exception:
+            ALL_LEAGUES_CACHE={}
+            return ALL_LEAGUES_CACHE
+
+    out={}
+    for country in data.get("countries",[]) if isinstance(data,dict) else []:
+        cname=str(pick(country,"name","countryName") or "").strip()
+        ccode=str(pick(country,"ccode","countryCode") or "").upper()
+        rows=[]
+        for league in country.get("leagues",[]) if isinstance(country,dict) else []:
+            if not isinstance(league,dict): continue
+            lid=pick(league,"id","leagueId")
+            name=pick(league,"name","leagueName")
+            if not lid or not name: continue
+            lname=str(name).strip()
+            low=lname.lower()
+            if any(x in low for x in ("cup","copa","pokal","champions","europa","conference","qualification","super cup")):
+                continue
+            rows.append({"id":lid,"name":lname,"ccode":ccode,"country":cname})
+        if rows:
+            out[ccode or cname]=rows
+    ALL_LEAGUES_CACHE=out
+    return out
+
+
+DOMESTIC_TIER_WORDS = {
+    "England": ("Premier League","Championship","League One","League Two","National League"),
+    "Germany": ("Bundesliga","2. Bundesliga","3. Liga"),
+    "Spain": ("LaLiga","LaLiga 2","Primera Federación","Primera Division"),
+    "Italy": ("Serie A","Serie B","Serie C"),
+    "France": ("Ligue 1","Ligue 2","National"),
+    "Austria": ("Bundesliga","2. Liga"),
+    "Netherlands": ("Eredivisie","Eerste Divisie"),
+    "Portugal": ("Primeira Liga","Liga Portugal 2"),
+    "Belgium": ("Belgian Pro League","Challenger Pro League"),
+    "Scotland": ("Scottish Premiership","Scottish Championship","Scottish League One","Scottish League Two"),
+}
+
+
+def _historical_candidate_leagues(current_league_id, country, ccode):
+    leagues=_all_domestic_leagues()
+    rows=leagues.get(str(ccode).upper()) or leagues.get(str(country))
+    if not rows:
+        return [{"id":current_league_id,"name":"","ccode":ccode,"country":country}] if current_league_id else []
+
+    wanted=DOMESTIC_TIER_WORDS.get(country)
+    result=[]
+    seen=set()
+
+    # Always try the team's current competition first.
+    if current_league_id:
+        for r in rows:
+            if str(r["id"])==str(current_league_id):
+                result.append(r); seen.add(str(r["id"])); break
+
+    # Then search all normal domestic tiers. This is the key fix for relegation/
+    # promotion: Leicester can be in Championship now while its prior table was
+    # Premier League; a club can move between Championship and League One, etc.
+    for r in rows:
+        if str(r["id"]) in seen: continue
+        name=r["name"]
+        if wanted is None or any(name.lower()==w.lower() or w.lower() in name.lower() for w in wanted):
+            result.append(r); seen.add(str(r["id"]))
+
+    return result
+
+
+def _table_for_season(league_id, season):
+    key=(str(league_id),str(season))
+    if key in HISTORICAL_TABLE_CACHE:
+        return HISTORICAL_TABLE_CACHE[key]
+    try:
+        payload=get(f"{ROOT}/api/data/leagues", {"id":str(league_id), "season":str(season)})
+    except Exception:
+        try:
+            payload=get(f"{ROOT}/api/leagues", {"id":str(league_id), "season":str(season)})
+        except Exception:
+            payload={}
+    HISTORICAL_TABLE_CACHE[key]=payload
+    return payload
+
+
+def historical_position_info(league_id, team_id, country="", ccode=""):
+    """
+    Find the team's actual competition and final position in the completed
+    2025/26 season, even if it changed divisions afterward.
+
+    Example:
+      Leicester 2024/25 -> Premier League 18th -> Championship 2025/26.
+      A club moving Championship -> League One is looked up in Championship,
+      not its new League One table.
+    """
+    if not team_id:
+        return None, None
+
+    candidates=_historical_candidate_leagues(league_id,country,ccode)
+    seasons=("2025/2026","2025")
+
+    for league in candidates:
+        for season in seasons:
+            payload=_table_for_season(league["id"],season)
+            pos=table_position(payload,team_id)
             if pos is not None:
-                return pos
-        except Exception as exc:
-            print("Historical league lookup failed", league_id, season, exc)
-    return None
+                name=league["name"]
+                base,_,_=normalize_comp(name,league.get("ccode"),league.get("country"))
+                return int(pos), base
+
+    return None, None
+
+
+def historical_position(league_id, team_id, country="", ccode=""):
+    pos,_=historical_position_info(league_id,team_id,country,ccode)
+    return pos
 
 RECENT_DAILY_CACHE={}
 
@@ -635,64 +759,34 @@ def form_from_team(payload, team_id):
     return "".join(rows[-5:])
 
 
-def previous_finish(payload, team_id, league_id=None):
-    """
-    Return the team's FINAL position from the completed 2025/26 league table.
 
-    Do not read a 'position' field from the current team payload: FotMob team
-    payloads can contain current-season standings nested alongside historical
-    season metadata, which caused current ranks to be mislabeled as last-season
-    finishes.
-    """
-    if league_id and team_id:
-        try:
-            pos = historical_position(league_id, team_id)
-            if pos is not None:
-                return int(pos)
-        except Exception as exc:
-            print("Historical table lookup failed", league_id, team_id, exc)
+def previous_finish(payload, team_id, league_id=None, country="", ccode=""):
+    pos, _ = historical_position_info(league_id, team_id, country, ccode)
+    if pos is not None:
+        return int(pos)
 
-    # Known 2025/26 Premier League correction for the current project's
-    # highest-visibility cases. This is only a fallback if the historical
-    # league endpoint is unavailable.
-    name = ""
+    # Last-resort Premier League fallback for known 2024/25 final positions.
+    # This is only used when FotMob's historical table cannot be reached.
+    name=""
     for obj in walk(payload):
-        if isinstance(obj, dict):
-            n = pick(obj, "name", "teamName", "longName")
+        if isinstance(obj,dict):
+            n=pick(obj,"name","teamName","longName")
             if n:
-                name = str(n).strip().lower()
+                name=str(n).strip().lower()
                 break
 
-    premier_league_fallback = {
-        "arsenal": 1,
-        "manchester city": 2,
-        "man city": 2,
-        "manchester united": 3,
-        "man united": 3,
-        "aston villa": 4,
-        "liverpool": 5,
-        "bournemouth": 6,
-        "afc bournemouth": 6,
-        "sunderland": 7,
-        "brighton": 8,
-        "brighton & hove albion": 8,
-        "crystal palace": 15,
-        "palace": 15,
-        "chelsea": 9,
-        "newcastle": 10,
-        "newcastle united": 10,
-        "nottingham forest": 11,
-        "nott'm forest": 11,
-        "everton": 12,
-        "brentford": 13,
-        "fulham": 14,
-        "tottenham": 17,
-        "tottenham hotspur": 17,
-        "west ham": 18,
-        "west ham united": 18,
-        "burnley": 19,
-        "wolverhampton wanderers": 20,
-        "wolves": 20,
+    premier_league_fallback={
+        "arsenal":2, "manchester city":3, "man city":3,
+        "liverpool":1, "aston villa":6, "bournemouth":9,
+        "afc bournemouth":9, "brighton":8, "brighton & hove albion":8,
+        "crystal palace":12, "chelsea":4, "newcastle":5,
+        "nottingham forest":7, "nott'm forest":7, "everton":13,
+        "brentford":10, "fulham":11, "tottenham":17,
+        "tottenham hotspur":17, "west ham":14, "west ham united":14,
+        "wolverhampton wanderers":16, "wolves":16,
+        "leicester":18, "leicester city":18,
+        "ipswich":19, "ipswich town":19,
+        "southampton":20,
     }
     return premier_league_fallback.get(name)
 
@@ -995,13 +1089,16 @@ def enrich_base(m, now):
     hleague=LEAGUE_CACHE.get(str(hl.get("leagueId"))) or (safe_call(f"League {hl.get('leagueId')}",lambda:league_payload(hl.get("leagueId"),hl.get("division")),{}) if hl.get("leagueId") else {})
     aleague=LEAGUE_CACHE.get(str(al.get("leagueId"))) or (safe_call(f"League {al.get('leagueId')}",lambda:league_payload(al.get("leagueId"),al.get("division")),{}) if al.get("leagueId") else {})
     hpos=table_position(hleague,home.get("id")) or table_position(hp,home.get("id")); apos=table_position(aleague,away.get("id")) or table_position(ap,away.get("id"))
-    hlast=previous_finish(hp,home.get("id"),hl.get("leagueId")); alast=previous_finish(ap,away.get("id"),al.get("leagueId"))
+    hlast,hlast_div=historical_position_info(hl.get("leagueId"),home.get("id"),hl.get("country") or country_name("",hl.get("ccode")),hl.get("ccode"))
+    alast,alast_div=historical_position_info(al.get("leagueId"),away.get("id"),al.get("country") or country_name("",al.get("ccode")),al.get("ccode"))
+    if hlast is None: hlast=previous_finish(hp,home.get("id"),hl.get("leagueId"),hl.get("country"),hl.get("ccode"))
+    if alast is None: alast=previous_finish(ap,away.get("id"),al.get("leagueId"),al.get("country"),al.get("ccode"))
     h_recent=form_from_recent_daily(home.get("id"),now.date())
     a_recent=form_from_recent_daily(away.get("id"),now.date())
     h_form="".join(x["result"] for x in h_recent) or form_from_team(hp,home.get("id"))
     a_form="".join(x["result"] for x in a_recent) or form_from_team(ap,away.get("id"))
-    hd={"id":home.get("id"),"division":hl.get("division"),"leagueId":hl.get("leagueId"),"ccode":hl.get("ccode"),"position":hpos,"form":h_form,"lastSeasonPosition":hlast,"lastSeason":"2025/26","transferImpact":transfer_impact(hp),"squadEstimatedValue":None,"lineupEstimatedValue":None,"lineup":[],"injuries":[]}
-    ad={"id":away.get("id"),"division":al.get("division"),"leagueId":al.get("leagueId"),"ccode":al.get("ccode"),"position":apos,"form":a_form,"lastSeasonPosition":alast,"lastSeason":"2025/26","transferImpact":transfer_impact(ap),"squadEstimatedValue":None,"lineupEstimatedValue":None,"lineup":[],"injuries":[]}
+    hd={"id":home.get("id"),"division":hl.get("division"),"leagueId":hl.get("leagueId"),"ccode":hl.get("ccode"),"position":hpos,"form":h_form,"lastSeasonPosition":hlast,"lastSeasonDivision":hlast_div or hl.get("division"),"lastSeason":"2025/26","transferImpact":transfer_impact(hp),"squadEstimatedValue":None,"lineupEstimatedValue":None,"lineup":[],"injuries":[]}
+    ad={"id":away.get("id"),"division":al.get("division"),"leagueId":al.get("leagueId"),"ccode":al.get("ccode"),"position":apos,"form":a_form,"lastSeasonPosition":alast,"lastSeasonDivision":alast_div or al.get("division"),"lastSeason":"2025/26","transferImpact":transfer_impact(ap),"squadEstimatedValue":None,"lineupEstimatedValue":None,"lineup":[],"injuries":[]}
     hr=h_recent or _recent_stats(hp,home.get("id")); ar=a_recent or _recent_stats(ap,away.get("id"))
     for d,rows,payload,tid in ((hd,hr,hp,home.get("id")),(ad,ar,ap,away.get("id"))):
         d["formPoints"]=_form_points(d["form"]); d["recentResults"]=rows; d["recentGF"]=sum(x["gf"] for x in rows); d["recentGA"]=sum(x["ga"] for x in rows); d["ratingPrior"]=_rating_prior(payload,tid); d["xgSeason"]=_team_xg(payload,tid)
