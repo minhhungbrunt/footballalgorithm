@@ -91,15 +91,57 @@ box-shadow:0 0 0 0 rgba(53,232,139,.65);animation:livePulse 1.35s infinite}
 @media(max-width:1050px){.dash-grid{grid-template-columns:1fr 1fr}.toolbar{flex-direction:column}.searchbox{width:100%}.searchbox input{flex:1;width:auto}}
 @media(max-width:720px){.dash-grid{grid-template-columns:1fr 1fr}.searchbox{display:grid;grid-template-columns:1fr 120px}.dash-card{min-height:105px}.dash-card>b{font-size:21px}.player{grid-template-columns:30px 24px 1fr 30px}}
 
-/* Ask FootballEdge */
-.ai-chat{margin:0 0 15px;border:1px solid #214b39;border-radius:15px;background:linear-gradient(145deg,#0c1714,#091017);box-shadow:0 12px 35px rgba(0,0,0,.16);overflow:hidden}
-.ai-head{display:flex;justify-content:space-between;align-items:center;padding:13px 15px;border-bottom:1px solid #1c3029}
-.ai-head>div{display:flex;gap:10px;align-items:center}.ai-head b{display:block;font-size:13px}.ai-head small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+/* Ask FootballEdge — floating bottom-right assistant */
+.ai-launcher{
+  position:fixed;right:22px;bottom:22px;z-index:9998;
+  display:flex;align-items:center;gap:9px;
+  border:1px solid #39df8a;border-radius:999px;
+  padding:11px 16px;background:#0d1916;color:#e9fff4;
+  box-shadow:0 8px 28px rgba(0,0,0,.38),0 0 0 1px rgba(57,223,138,.08);
+  font:900 11px inherit;cursor:pointer;transition:.18s ease;
+}
+.ai-launcher:hover{transform:translateY(-2px);border-color:#62f2a5;background:#10221b}
+.ai-launcher-icon{width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:#35df89;color:#06130b;font-size:13px}
+.ai-launcher.hidden{display:none}
+
+.ai-popup{
+  position:fixed!important;right:22px;bottom:22px;z-index:9999;
+  width:min(410px,calc(100vw - 32px));height:590px;max-height:calc(100vh - 44px);
+  margin:0!important;border:1px solid #2a6349;border-radius:17px;
+  background:linear-gradient(160deg,#0b1519 0%,#081015 100%);
+  box-shadow:0 22px 65px rgba(0,0,0,.58),0 0 0 1px rgba(55,224,139,.05);
+  display:none;overflow:hidden;
+}
+.ai-popup.open{display:flex;flex-direction:column}
+.ai-popup .ai-head{
+  min-height:60px;display:flex;justify-content:space-between;align-items:center;
+  padding:12px 14px;border-bottom:1px solid #20352d;
+  background:rgba(9,18,18,.88);flex-shrink:0;
+}
+.ai-brand{display:flex;align-items:center;gap:10px}.ai-brand b{display:block;font-size:13px}.ai-brand small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
 .ai-dot{width:9px;height:9px;border-radius:50%;background:#39e58b;box-shadow:0 0 12px #39e58b;display:block}
-.ai-head button{background:none;border:0;color:var(--muted);font-size:18px;cursor:pointer}
-.ai-messages{max-height:330px;overflow:auto;padding:13px 15px;display:flex;flex-direction:column;gap:9px}
-.ai-msg{max-width:86%;padding:10px 12px;border-radius:11px;font-size:10px;line-height:1.55}.ai-msg.bot{background:#111e24;border:1px solid #1d3039}.ai-msg.user{align-self:flex-end;background:#163f2d;border:1px solid #286a4c}.ai-msg small{color:var(--muted)}
-.ai-suggestions{display:flex;gap:6px;padding:0 15px 10px;overflow:auto}.ai-suggestions button{white-space:nowrap;border:1px solid #284a3d;background:#101b18;color:#b9d9cc;border-radius:999px;padding:6px 9px;font-size:9px;cursor:pointer}
-.ai-input{display:flex;gap:7px;padding:11px 15px;border-top:1px solid #1c3029}.ai-input input{flex:1;min-width:0;background:#0a1116;border:1px solid #263742;color:var(--text);border-radius:9px;padding:10px 12px;outline:0;font:inherit;font-size:10px}.ai-input input:focus{border-color:#39805e}.ai-input button{border:0;border-radius:9px;padding:0 16px;background:#36d982;color:#07110c;font-weight:950;font-size:9px;cursor:pointer}
-.ai-game{display:grid;grid-template-columns:1fr auto;gap:2px 10px;margin:7px 0;padding:9px;border:1px solid #233a42;border-radius:9px;background:#0c151a;cursor:pointer}.ai-game:hover{border-color:#3a765b}.ai-game b{display:block;font-size:10px}.ai-game small,.ai-game span{display:block;color:var(--muted);font-size:8px}.ai-game strong{grid-column:2;grid-row:1/3;font-size:10px}.ai-game em{grid-column:1/-1;color:#53e59a;font-size:8px;font-style:normal;font-weight:900}.ai-result-pills{margin:7px 0;font-weight:900;font-size:9px}.ai-hint{color:var(--muted);font-size:8px}.ai-chat.collapsed .ai-messages,.ai-chat.collapsed .ai-suggestions,.ai-chat.collapsed .ai-input{display:none}
-@media(max-width:650px){.ai-msg{max-width:96%}}
+.ai-close{width:29px;height:29px;border:1px solid #30443d;border-radius:8px;background:#101a1e;color:#a9bbb4;font-size:19px;line-height:1;cursor:pointer}
+.ai-close:hover{color:#fff;border-color:#4c6b5d}
+
+.ai-popup .ai-messages{
+  flex:1;min-height:0;max-height:none;overflow:auto;padding:14px;
+  display:flex;flex-direction:column;gap:9px;
+}
+.ai-msg{max-width:90%;padding:10px 12px;border-radius:11px;font-size:10px;line-height:1.55}
+.ai-msg.bot{background:#111e24;border:1px solid #20333b}.ai-msg.user{align-self:flex-end;background:#153e2c;border:1px solid #286a4c}
+.ai-msg small{color:var(--muted)}
+.ai-popup .ai-suggestions{display:flex;gap:6px;padding:9px 12px;overflow:auto;border-top:1px solid #172821;flex-shrink:0}
+.ai-suggestions button{white-space:nowrap;border:1px solid #284a3d;background:#101b18;color:#b9d9cc;border-radius:999px;padding:6px 9px;font-size:9px;cursor:pointer}
+.ai-suggestions button:hover{border-color:#3c7e5f}
+.ai-popup .ai-input{display:flex;gap:7px;padding:11px 12px;border-top:1px solid #20352d;flex-shrink:0;background:#091115}
+.ai-input input{flex:1;min-width:0;background:#0b1318;border:1px solid #263742;color:var(--text);border-radius:9px;padding:10px 12px;outline:0;font:inherit;font-size:10px}
+.ai-input input:focus{border-color:#39805e}
+.ai-input button{border:0;border-radius:9px;padding:0 15px;background:#36d982;color:#07110c;font-weight:950;font-size:9px;cursor:pointer}
+.ai-game{display:grid;grid-template-columns:1fr auto;gap:2px 10px;margin:7px 0;padding:9px;border:1px solid #233a42;border-radius:9px;background:#0c151a;cursor:pointer}
+.ai-game:hover{border-color:#3a765b}.ai-game b{display:block;font-size:10px}.ai-game small,.ai-game span{display:block;color:var(--muted);font-size:8px}
+.ai-game strong{grid-column:2;grid-row:1/3;font-size:10px}.ai-game em{grid-column:1/-1;color:#53e59a;font-size:8px;font-style:normal;font-weight:900}
+.ai-result-pills{margin:7px 0;font-weight:900;font-size:9px}.ai-hint{color:var(--muted);font-size:8px}
+@media(max-width:520px){
+  .ai-launcher{right:14px;bottom:14px}
+  .ai-popup{right:8px;bottom:8px;width:calc(100vw - 16px);height:min(620px,calc(100vh - 16px));border-radius:15px}
+}

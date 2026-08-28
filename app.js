@@ -236,7 +236,11 @@ function askAI(q){
   const inp=$("#aiPrompt"); if(inp){inp.value="";inp.focus();}
 }
 function toggleAIChat(){
-  const el=$("#aiChat"); if(el)el.classList.toggle("collapsed");
+  const el=$("#aiChat"), launcher=$("#aiLauncher");
+  if(!el)return;
+  const open=el.classList.toggle("open");
+  if(launcher)launcher.classList.toggle("hidden",open);
+  if(open)setTimeout(()=>$("#aiPrompt")?.focus(),80);
 }
 
 function render(){
