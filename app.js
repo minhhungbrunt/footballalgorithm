@@ -46,10 +46,44 @@ function updateAutoStatus(ok=true){
   })}`;
 }
 
+
+function liveElapsedLabel(match){
+  const live = match?.status || match?.state || {};
+  if (match?.status?.finished || match?.finished || match?.isFinished) return "";
+  let start = match?.startTime || match?.startTimestamp || match?.kickoff ||
+              match?.matchTime || live?.startTime || live?.startTimestamp;
+  let ms = null;
+  if (typeof start === "number") ms = start > 1e12 ? start : start * 1000;
+  else if (start) {
+    const d = new Date(start);
+    if (!Number.isNaN(d.getTime())) ms = d.getTime();
+  }
+  if (ms != null) {
+    const sec = Math.max(0, Math.floor((Date.now()-ms)/1000));
+    const mins = Math.floor(sec/60), secs = sec%60;
+    return `${mins}:${String(secs).padStart(2,"0")}`;
+  }
+  const raw = match?.minute ?? live?.minute ?? match?.elapsed ?? "";
+  if (raw !== "") {
+    const n = parseInt(raw,10);
+    if (!Number.isNaN(n)) return `${n}:00`;
+    return String(raw);
+  }
+  return "LIVE";
+}
+function updateLiveClocks(){
+  document.querySelectorAll("[data-live-match-id]").forEach(el=>{
+    const m = (window.DATA?.matches || []).find(x=>String(x.id)===String(el.dataset.liveMatchId));
+    if (!m) return;
+    const clock = el.querySelector(".live-clock");
+    if (clock) clock.textContent = liveElapsedLabel(m);
+  });
+}
+
 function render(){if(!DATA){$("#fixtures").innerHTML='<div class="empty">Loading FootballEdge…</div>';return}$("#updated").textContent=DATA.updated||new Date(DATA.updatedAt||Date.now()).toLocaleString();$("#feedStatus").textContent=`${DATA.fixtureCount||0} FIXTURES · LIVE FEED`;const live=(DATA.matches||[]).filter(m=>st(m)==="LIVE");$("#liveStrip").innerHTML=live.length?live.map(m=>`<div class="live-card"><div class="tag heartbeat"><i></i> LIVE · ${esc(m.competition)}</div><div class="pair">${esc(m.home)} vs ${esc(m.away)}</div><div class="live-score">${score(m)}</div><div class="min">${esc(m.minute?.short||"Live")}</div>${scorerLine(m)}</div>`).join(""):"";const comps=[...new Set((DATA.matches||[]).map(m=>m.competition).filter(Boolean))];$("#filters").innerHTML=`<button class="filter ${filter==="ALL"?"active":""}" onclick="setFilter('ALL')">ALL</button>`+comps.map(c=>`<button class="filter ${filter===c?"active":""}" onclick='setFilter(${JSON.stringify(c)})'>${esc(c)}</button>`).join("");const ms=(DATA.matches||[]).filter(m=>filter==="ALL"||m.competition===filter);const groups={};ms.forEach(m=>(groups[m.competition]??=[]).push(m));$("#fixtures").innerHTML=Object.entries(groups).map(([c,arr])=>`<section class="competition"><div class="comp-head"><span class="comp-logo">${esc((arr[0].competitionCode||c.slice(0,3)).toUpperCase())}</span><h2>${esc(c)}</h2><span class="count">${arr.length} MATCH${arr.length===1?"":"ES"}</span></div>${arr.map(matchHTML).join("")}</section>`).join("")}
 function toggleAnalysis(id){openId=openId===String(id)?null:String(id);render();if(openId)requestAnimationFrame(()=>document.getElementById(`m-${CSS.escape(String(id))}`)?.scrollIntoView({behavior:"smooth",block:"nearest"}))}
 function setFilter(x){filter=x;openId=null;render()}
-async function loadStatic(){try{const r=await fetch(`${DATA_URL}?v=${Date.now()}`,{cache:"no-store"});if(!r.ok)throw Error(`HTTP ${r.status}`);DATA=await r.json();lastStaticUpdate=DATA.updatedAt;render();updateAutoStatus(true)}catch(e){if(!DATA)$("#fixtures").innerHTML=`<div class="error"><b>Football data feed unavailable.</b><br>${esc(e.message)}</div>`}}
+async function loadStatic(){try{const r=await fetch(`${DATA_URL}?v=${Date.now()}`,{cache:"no-store"});if(!r.ok)throw Error(`HTTP ${r.status}`);DATA=await r.json();window.DATA=DATA;lastStaticUpdate=DATA.updatedAt;render();updateAutoStatus(true)}catch(e){if(!DATA)$("#fixtures").innerHTML=`<div class="error"><b>Football data feed unavailable.</b><br>${esc(e.message)}</div>`}}
 async function pollLive(){
   if(!DATA)return;
   const candidates=(DATA.matches||[]).filter(m=>
@@ -127,3 +161,5 @@ async function pollLive(){
 }
 loadStatic();setInterval(loadStatic,5000);setInterval(pollLive,5000);
 window.toggleAnalysis=toggleAnalysis;window.setFilter=setFilter;
+
+setInterval(updateLiveClocks,1000);
