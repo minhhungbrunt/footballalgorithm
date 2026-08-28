@@ -256,8 +256,10 @@ def sofa_lineups(event_id):
             stats=row.get("statistics") or {}
             name=pl.get("name") or row.get("name")
             if not name: continue
+            pid=pick(pl,"id","playerId") or pick(row,"playerId","playerID")
             players.append({
-                "name":name,
+                "name":name,"playerId":pid,
+                "image":f"https://images.fotmob.com/image_resources/playerimages/{pid}.png" if pid else None,
                 "position":row.get("position") or pl.get("position"),
                 "rating":stats.get("rating") or row.get("rating"),
                 "starter":bool(row.get("substitute") is False or row.get("starter") is True),
@@ -282,7 +284,15 @@ def sofa_incidents(event_id):
         if not isinstance(i,dict): continue
         if i.get("incidentType")!="goal": continue
         player=i.get("player") or {}; assist=i.get("assist1") or i.get("assist2") or {}
-        out.append({"minute":i.get("time"),"added":i.get("addedTime"),"team":"home" if i.get("isHome") else "away","scorer":player.get("name"),"assist":assist.get("name"),"ownGoal":bool(i.get("incidentClass")=="ownGoal" or i.get("incidentClass")=="missed")})
+        pid=pick(player,"id","playerId")
+        aid=pick(assist,"id","playerId")
+        out.append({"minute":i.get("time"),"added":i.get("addedTime"),
+                    "team":"home" if i.get("isHome") else "away",
+                    "scorer":player.get("name"),"scorerId":pid,
+                    "scorerImage":f"https://images.fotmob.com/image_resources/playerimages/{pid}.png" if pid else None,
+                    "assist":assist.get("name"),"assistId":aid,
+                    "assistImage":f"https://images.fotmob.com/image_resources/playerimages/{aid}.png" if aid else None,
+                    "ownGoal":bool(i.get("incidentClass")=="ownGoal" or i.get("incidentClass")=="missed")})
     return sorted(out,key=lambda x:(x.get("minute") or 0,x.get("added") or 0))
 
 
@@ -735,7 +745,8 @@ def lineup(detail, home_id, away_id):
                 name=pick(pl,"name","playerName")
                 if name:
                     st=row.get("stats") if isinstance(row.get("stats"),dict) else row.get("statistics") if isinstance(row.get("statistics"),dict) else {}
-                    result[str(tid)].append({"name":name,"playerId":pick(pl,"id","playerId") or pick(row,"playerId","playerID"),"position":pick(row,"position","role","positionName") or pick(pl,"position"),
+                    result[str(tid)].append({"name":name,"playerId":pick(pl,"id","playerId") or pick(row,"playerId","playerID"),
+                        "image":(f"https://images.fotmob.com/image_resources/playerimages/{(pick(pl,"id","playerId") or pick(row,"playerId","playerID"))}.png" if (pick(pl,"id","playerId") or pick(row,"playerId","playerID")) else None),"position":pick(row,"position","role","positionName") or pick(pl,"position"),
                         "rating":pick(st,"rating","FotMob rating") or pick(row,"rating","matchRating"),"starter":True})
     for obj in walk(detail):
         if not isinstance(obj, dict): continue
@@ -1134,7 +1145,15 @@ def fotmob_incidents(detail, home_id=None, away_id=None):
         tid=pick(e,"teamId","teamID")
         if home_id is not None and str(tid)==str(home_id): is_home=True
         elif away_id is not None and str(tid)==str(away_id): is_home=False
-        out.append({"minute":minute,"team":"home" if is_home is True else "away" if is_home is False else None,"scorer":scorer,"assist":assist_name,"ownGoal":bool(e.get("ownGoal") or e.get("isOwnGoal"))})
+        scorer_id=pick(player,"id","playerId") or pick(e,"playerId","playerID")
+        assist_id=pick(assist,"id","playerId") or pick(e,"assistPlayerId","assistPlayerID")
+        out.append({"minute":minute,
+                    "team":"home" if is_home is True else "away" if is_home is False else None,
+                    "scorer":scorer,"scorerId":scorer_id,
+                    "scorerImage":f"https://images.fotmob.com/image_resources/playerimages/{scorer_id}.png" if scorer_id else None,
+                    "assist":assist_name,"assistId":assist_id,
+                    "assistImage":f"https://images.fotmob.com/image_resources/playerimages/{assist_id}.png" if assist_id else None,
+                    "ownGoal":bool(e.get("ownGoal") or e.get("isOwnGoal"))})
     return sorted(out,key=lambda x:(str(x.get("minute") or ""),x.get("scorer") or ""))
 
 def apply_match_detail(detail,hd,ad):
