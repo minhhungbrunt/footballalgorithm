@@ -177,6 +177,68 @@ function bindToolbar(){
   if(s&&!s.dataset.bound){s.dataset.bound="1";s.addEventListener("input",render)}
   if(sort&&!sort.dataset.bound){sort.dataset.bound="1";sort.addEventListener("change",render)}
 }
+
+function aiSay(html){
+  const box=$("#aiMessages");
+  if(!box)return;
+  box.insertAdjacentHTML("beforeend",`<div class="ai-msg bot">${html}</div>`);
+  box.scrollTop=box.scrollHeight;
+}
+function aiUser(text){
+  const box=$("#aiMessages");
+  box.insertAdjacentHTML("beforeend",`<div class="ai-msg user">${esc(text)}</div>`);
+  box.scrollTop=box.scrollHeight;
+}
+function aiPct(m,i){return Number(m?.model?.probabilities?.[i])||0}
+function aiCard(m,tag){
+  const p=m.model?.probabilities||[];
+  return `<div class="ai-game" onclick="toggleAnalysis('${esc(m.id)}')">
+    <div><b>${esc(m.home)} vs ${esc(m.away)}</b><small>${esc(m.competition||"Football")} · ${esc(matchTime(m))}</small></div>
+    <strong>${esc(m.model?.verdict||"—")}</strong>
+    <span>H ${pct(aiPct(m,0))} · D ${pct(aiPct(m,1))} · A ${pct(aiPct(m,2))}</span>
+    ${tag?`<em>${esc(tag)}</em>`:""}
+  </div>`;
+}
+function footballAI(q){
+  const all=DATA?.matches||[];
+  const s=String(q||"").toLowerCase().trim();
+  if(!all.length)return "I don't have any fixtures loaded yet. Once the feed updates, ask me again.";
+  let ms=all.filter(m=>`${m.home} ${m.away} ${m.competition} ${m.competitionCountry}`.toLowerCase().includes(s));
+  if(ms.length){
+    const m=ms[0], p=m.model?.probabilities||[];
+    return `<b>${esc(m.home)} vs ${esc(m.away)}</b><br><small>${esc(m.competition||"")}</small><div class="ai-result-pills">HOME ${pct(p[0]||0)} · DRAW ${pct(p[1]||0)} · AWAY ${pct(p[2]||0)}</div>${m.model?.verdict?`FootballEdge leans <b>${esc(m.model.verdict)}</b> with ${confidenceOf(m)}/100 confidence.`:"Analysis isn't available yet."}${m.scorers?.length?`<br><br>⚽ ${m.scorers.slice(0,3).map(g=>`${esc(g.scorer||"Goal")} ${g.minute!=null?g.minute+"'":""}`).join(" · ")}`:""}<br><br><span class="ai-hint">Click the game card in the match list to open the full analysis.</span>`;
+  }
+  let ranked;
+  if(/\b(draw|tie)\b/.test(s)){
+    ranked=all.filter(m=>m.model).sort((x,y)=>aiPct(y,1)-aiPct(x,1)).slice(0,3);
+    return ranked.length?`🤝 <b>Draw Watch</b><br>These have the highest draw probabilities right now:${ranked.map(m=>aiCard(m,"DRAW WATCH")).join("")}`:"I don't have enough analyzed games for Draw Watch yet.";
+  }
+  if(/\b(upset|underdog)\b/.test(s)){
+    ranked=all.filter(m=>m.model).map(m=>({m, u:Math.min(aiPct(m,0),aiPct(m,2))})).sort((x,y)=>y.u-x.u).slice(0,3).map(x=>x.m);
+    return ranked.length?`🚨 <b>Upset Watch</b><br>These are the closest games where the underdog has a meaningful chance:${ranked.map(m=>aiCard(m,"UPSET WATCH")).join("")}`:"I don't have enough analyzed games for Upset Watch yet.";
+  }
+  ranked=all.filter(m=>m.model).sort((x,y)=>confidenceOf(y)-confidenceOf(x)).slice(0,3);
+  if(/\b(best|watch|today|games|game)\b/.test(s)){
+    return ranked.length?`🔥 <b>Best games to start with</b><br>I’m ranking these from the FootballEdge data currently loaded:${ranked.map(m=>aiCard(m,`${confidenceOf(m)}/100 confidence`)).join("")}`:"No analyzed games are loaded yet.";
+  }
+  if(/\b(confidence|sure|confident)\b/.test(s)){
+    const m=ranked[0];
+    return m?`The strongest current read is <b>${esc(m.home)} vs ${esc(m.away)}</b> at <b>${confidenceOf(m)}/100</b> confidence. That doesn't mean it's guaranteed — it means the model has the clearest edge among the loaded games.`:"No confidence data is loaded yet.";
+  }
+  return `I can search the games currently loaded on FootballEdge. Try:<br>• “best games today”<br>• “likely draws”<br>• “biggest upsets”<br>• “which game has the highest confidence?”<br>• or type a team name.`;
+}
+function askAI(q){
+  q=String(q||"").trim(); if(!q)return;
+  aiUser(q);
+  const box=$("#aiMessages");
+  box.insertAdjacentHTML("beforeend",`<div class="ai-msg bot typing">Thinking…</div>`);
+  setTimeout(()=>{const t=box.querySelector(".typing");if(t)t.remove();aiSay(footballAI(q));},180);
+  const inp=$("#aiPrompt"); if(inp){inp.value="";inp.focus();}
+}
+function toggleAIChat(){
+  const el=$("#aiChat"); if(el)el.classList.toggle("collapsed");
+}
+
 function render(){
   if(!DATA){$("#fixtures").innerHTML='<div class="empty">Loading FootballEdge…</div>';return}
   $("#updated").textContent=DATA.updated||new Date(DATA.updatedAt||Date.now()).toLocaleString();

@@ -5,7 +5,25 @@
 .live-clock{font-variant-numeric:tabular-nums;white-space:nowrap}
 </style>
 
-</head><body><header class="topbar"><div class="brand">FOOTBALL<span>EDGE</span></div><div class="topmeta"><span id="feedStatus">LOADING</span><i></i><span>LIVE</span></div></header><main><section class="hero"><div><div class="eyebrow">MATCHDAY INTELLIGENCE</div><h1>Today's Football</h1><p>Fixtures · live scores · form · H2H · league context · xG · lineups · model decision</p></div><div class="refresh"><div>Data updated <b id="updated">—</b></div><div class="auto-badge"><i></i> <span id="autoStatus">AUTO · checking…</span></div></div></section><section id="dashboard" class="dashboard"></section>
+</head><body><header class="topbar"><div class="brand">FOOTBALL<span>EDGE</span></div><div class="topmeta"><span id="feedStatus">LOADING</span><i></i><span>LIVE</span></div></header><main><section class="hero"><div><div class="eyebrow">MATCHDAY INTELLIGENCE</div><h1>Today's Football</h1><p>Fixtures · live scores · form · H2H · league context · xG · lineups · model decision</p></div><div class="refresh"><div>Data updated <b id="updated">—</b></div><div class="auto-badge"><i></i> <span id="autoStatus">AUTO · checking…</span></div></div></section><section id="aiChat" class="ai-chat">
+  <div class="ai-head">
+    <div><span class="ai-dot"></span><div><b>Ask FootballEdge</b><small>Ask about today's games, predictions, draws, upsets or teams</small></div></div>
+    <button onclick="toggleAIChat()" aria-label="Minimize">−</button>
+  </div>
+  <div id="aiMessages" class="ai-messages">
+    <div class="ai-msg bot">👋 Ask me something like <b>“best games today”</b>, <b>“show likely draws”</b>, or <b>“what's the biggest upset?”</b></div>
+  </div>
+  <div class="ai-suggestions">
+    <button onclick="askAI('What are the best games today?')">🔥 Best games</button>
+    <button onclick="askAI('Show me likely draws')">🤝 Draws</button>
+    <button onclick="askAI('What are the biggest upsets?')">🚨 Upsets</button>
+  </div>
+  <form class="ai-input" onsubmit="event.preventDefault();askAI($('#aiPrompt').value);">
+    <input id="aiPrompt" placeholder="Ask about a game…" autocomplete="off">
+    <button>ASK</button>
+  </form>
+</section>
+<section id="dashboard" class="dashboard"></section>
 <section id="liveStrip" class="live-strip"></section>
 <div class="toolbar"><nav id="filters" class="filters"></nav><div class="searchbox"><input id="matchSearch" placeholder="Search team or league…" autocomplete="off"><select id="sortMode"><option value="time">Kickoff</option><option value="confidence">Confidence</option><option value="upset">Upset watch</option><option value="draw">Draw watch</option></select></div></div>
 <section id="fixtures"></section></main><script src="app.js"></script></body></html>
