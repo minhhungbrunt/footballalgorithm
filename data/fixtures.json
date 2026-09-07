@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-06T23:51:42.184288+00:00",
-  "updated": "2026-09-06 07:51:42 PM ET",
+  "updatedAt": "2026-09-07T01:22:10.863511+00:00",
+  "updated": "2026-09-06 09:22:10 PM ET",
   "updateMode": "AUTO",
   "refreshIntervalSeconds": 300,
   "fixtureCount": 86,
@@ -8,7 +8,7 @@
   "sourceErrors": [],
   "mlModel": {
     "version": 1,
-    "trainedAt": "2026-09-06T08:56:51.731439-04:00",
+    "trainedAt": "2026-09-06T21:20:14.961976-04:00",
     "trainingRows": 15052,
     "metrics": {
       "holdout_accuracy": 0.4537,
@@ -365,8 +365,8 @@
         "verdict": "WIN: Gent",
         "confidence": 68,
         "probabilities": [
-          0.23657436119430597,
-          0.31377523282398756,
+          0.23657436119430594,
+          0.3137752328239876,
           0.44965040598170647
         ],
         "projected": "0–1",
@@ -772,9 +772,9 @@
         "verdict": "WIN: Zulte Waregem",
         "confidence": 76,
         "probabilities": [
-          0.20396970804713288,
-          0.30050994550551885,
-          0.4955203464473483
+          0.20396970804713285,
+          0.3005099455055188,
+          0.49552034644734844
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -1187,9 +1187,9 @@
         "verdict": "DRAW",
         "confidence": 52,
         "probabilities": [
-          0.3304553427391596,
-          0.34873935593666666,
-          0.32080530132417373
+          0.33045534273915966,
+          0.3487393559366667,
+          0.3208053013241737
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -1595,9 +1595,9 @@
         "verdict": "WIN: SK Beveren",
         "confidence": 59,
         "probabilities": [
-          0.3936769171438475,
+          0.39367691714384767,
           0.32577982419882523,
-          0.2805432586573272
+          0.28054325865732715
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -1670,10 +1670,15 @@
       "away": "Supra du Québec",
       "homeScore": 3,
       "awayScore": 2,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-09-06T22:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 1436202,
@@ -2008,7 +2013,7 @@
         "probabilities": [
           0.3647427791089358,
           0.35854588389109054,
-          0.27671133699997374
+          0.27671133699997363
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -2419,9 +2424,9 @@
         "verdict": "WIN: Cavalry FC",
         "confidence": 72,
         "probabilities": [
-          0.23548365351483935,
-          0.2950124165725387,
-          0.469503929912622
+          0.23548365351483927,
+          0.29501241657253857,
+          0.46950392991262213
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -2671,9 +2676,9 @@
         "division": "Ecuador Ecuador Serie A",
         "leagueId": 246,
         "ccode": "ECU",
-        "position": 2,
+        "position": 3,
         "form": "DDWDL",
-        "lastSeasonPosition": 2,
+        "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -2836,15 +2841,15 @@
         "verdict": "WIN: Universidad Católica",
         "confidence": 60,
         "probabilities": [
-          0.27382009036003985,
-          0.32015593453021896,
-          0.4060239751097412
+          0.27435699549188214,
+          0.32107240919014757,
+          0.40457059531797035
         ],
         "projected": "0–1",
         "modalScore": "0–1",
         "expectedGoals": [
-          1.33,
-          1.35
+          1.34,
+          1.34
         ],
         "factors": [
           [
@@ -2853,11 +2858,11 @@
           ],
           [
             "Current table",
-            -26.0
+            -24.0
           ],
           [
             "Last-season prior",
-            -20.8
+            -19.2
           ],
           [
             "Recent form",
@@ -2909,9 +2914,9 @@
       "competitionFlag": "🇪🇨",
       "home": "Aucas",
       "away": "Barcelona SC",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "LIVE",
       "kickoff": "2026-09-07T00:00:00.000Z",
       "minute": {
         "short": ""
@@ -2921,9 +2926,9 @@
         "division": "Ecuador Ecuador Serie A",
         "leagueId": 246,
         "ccode": "ECU",
-        "position": 4,
+        "position": 2,
         "form": "DWWLW",
-        "lastSeasonPosition": 4,
+        "lastSeasonPosition": 2,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -2939,15 +2944,6 @@
             "estimatedValue": 203243
           },
           {
-            "name": "Alex Zova",
-            "playerId": 1828507,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1828507.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 784336
-          },
-          {
             "name": "Luis Gustavino",
             "playerId": 1404394,
             "image": "https://images.fotmob.com/image_resources/playerimages/1404394.png",
@@ -2955,33 +2951,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 399144
-          },
-          {
-            "name": "Santiago Morales",
-            "playerId": 1435961,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1435961.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 392075
-          },
-          {
-            "name": "Robiño Quiñónez",
-            "playerId": 1828927,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1828927.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 405154
-          },
-          {
-            "name": "Agostino Spina",
-            "playerId": 1230852,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1230852.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 500032
           },
           {
             "name": "Steven Tapiero",
@@ -2993,22 +2962,31 @@
             "estimatedValue": 152132
           },
           {
-            "name": "Piero Guzmán",
-            "playerId": 1682278,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1682278.png",
+            "name": "Santiago Morales",
+            "playerId": 1435961,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1435961.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 248832
+            "estimatedValue": 392075
           },
           {
-            "name": "Andrés Mena",
-            "playerId": 1031768,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1031768.png",
+            "name": "Alex Zova",
+            "playerId": 1828507,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1828507.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 390780
+            "estimatedValue": 784336
+          },
+          {
+            "name": "Robiño Quiñónez",
+            "playerId": 1828927,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1828927.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 405154
           },
           {
             "name": "Ayrton Preciado",
@@ -3018,6 +2996,33 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 170126
+          },
+          {
+            "name": "Piero Guzmán",
+            "playerId": 1682278,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1682278.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 248832
+          },
+          {
+            "name": "Agostino Spina",
+            "playerId": 1230852,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1230852.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 500032
+          },
+          {
+            "name": "Andrés Mena",
+            "playerId": 1031768,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1031768.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 390780
           },
           {
             "name": "Michael Carcelén",
@@ -3251,17 +3256,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/1000009097/match-details",
       "model": {
         "verdict": "WIN: Aucas",
-        "confidence": 53,
+        "confidence": 54,
         "probabilities": [
-          0.3710902674625259,
-          0.33609084238296144,
-          0.2928188901545126
+          0.37324771144618496,
+          0.3359093714720416,
+          0.29084291708177346
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
-          1.46,
-          1.22
+          1.47,
+          1.21
         ],
         "factors": [
           [
@@ -3270,11 +3275,11 @@
           ],
           [
             "Current table",
-            4.0
+            8.0
           ],
           [
             "Last-season prior",
-            3.2
+            6.4
           ],
           [
             "Recent form",
@@ -3328,7 +3333,7 @@
       "away": "Libertad",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "LIVE",
       "kickoff": "2026-09-07T00:00:00.000Z",
       "minute": {
         "short": ""
@@ -3501,9 +3506,9 @@
         "division": "Ecuador Ecuador Serie A",
         "leagueId": 246,
         "ccode": "ECU",
-        "position": 8,
+        "position": 7,
         "form": "DLWDW",
-        "lastSeasonPosition": 8,
+        "lastSeasonPosition": 7,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -3668,9 +3673,9 @@
         "verdict": "WIN: Libertad",
         "confidence": 56,
         "probabilities": [
-          0.2878843598267854,
-          0.32790104883595483,
-          0.3842145913372599
+          0.28717466911827594,
+          0.32731265284812683,
+          0.3855126780335972
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -3685,11 +3690,11 @@
           ],
           [
             "Current table",
-            -8.0
+            -10.0
           ],
           [
             "Last-season prior",
-            -6.4
+            -8.0
           ],
           [
             "Recent form",
@@ -4415,9 +4420,9 @@
         "verdict": "DRAW",
         "confidence": 50,
         "probabilities": [
-          0.3626795088296638,
+          0.36267950882966393,
           0.3658320688104353,
-          0.2714884223599009
+          0.2714884223599008
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -4793,7 +4798,7 @@
         "verdict": "WIN: National Bank",
         "confidence": 58,
         "probabilities": [
-          0.3806375195479547,
+          0.3806375195479548,
           0.32000806747401156,
           0.2993544129780338
         ],
@@ -5171,9 +5176,9 @@
         "verdict": "WIN: Petrojet-Suez",
         "confidence": 55,
         "probabilities": [
-          0.363460103709847,
-          0.31180458517008347,
-          0.32473531112006954
+          0.3634601037098468,
+          0.3118045851700835,
+          0.3247353111200696
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -5577,7 +5582,7 @@
         "probabilities": [
           0.32714788470720435,
           0.37034993667966526,
-          0.30250217861313045
+          0.30250217861313033
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -5985,7 +5990,7 @@
         "probabilities": [
           0.3401723815535312,
           0.3374929072149255,
-          0.32233471123154334
+          0.3223347112315434
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -6407,9 +6412,9 @@
         "verdict": "DRAW",
         "confidence": 50,
         "probabilities": [
-          0.3410124070687798,
+          0.3410124070687799,
           0.34220019500740206,
-          0.31678739792381816
+          0.3167873979238181
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -6831,9 +6836,9 @@
         "verdict": "WIN: Arsenal",
         "confidence": 56,
         "probabilities": [
-          0.383962085871721,
+          0.38396208587172104,
           0.34010801641956934,
-          0.2759298977087098
+          0.27592989770870974
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -7230,9 +7235,9 @@
         "verdict": "WIN: Troyes",
         "confidence": 52,
         "probabilities": [
-          0.38463219588801034,
-          0.36723634438225455,
-          0.2481314597297351
+          0.38463219588801045,
+          0.3672363443822546,
+          0.248131459729735
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -7629,9 +7634,9 @@
         "verdict": "WIN: Rennes",
         "confidence": 51,
         "probabilities": [
-          0.318406472001428,
-          0.3376610139067975,
-          0.3439325140917746
+          0.31840647200142813,
+          0.3376610139067974,
+          0.3439325140917745
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -7874,10 +7879,10 @@
         "recentGF": 11,
         "recentGA": 5,
         "ratingPrior": 6.75,
-        "xgSeason": 4.77,
+        "xgSeason": 4.68,
         "xiRating": null,
-        "matchXG": 1.5,
-        "xg": 1.5
+        "matchXG": 1.42,
+        "xg": 1.42
       },
       "awayData": {
         "id": 6379,
@@ -8017,8 +8022,8 @@
         "ratingPrior": 7.03,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 2.99,
-        "xg": 2.99
+        "matchXG": 3.29,
+        "xg": 3.29
       },
       "h2hSummary": "1–1–0",
       "scorers": [],
@@ -8027,17 +8032,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5802923/match-details",
       "model": {
         "verdict": "WIN: Marseille",
-        "confidence": 60,
+        "confidence": 58,
         "probabilities": [
-          0.38243060250968836,
-          0.3083182628681309,
-          0.3092511346221807
+          0.3776823343862959,
+          0.3074319418775194,
+          0.3148857237361847
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.47,
-          1.57
+          1.45,
+          1.63
         ],
         "factors": [
           [
@@ -8430,7 +8435,7 @@
         "probabilities": [
           0.2817414723771402,
           0.3440037005251527,
-          0.3742548270977071
+          0.3742548270977072
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -8828,9 +8833,9 @@
         "verdict": "WIN: Greuther Fürth",
         "confidence": 50,
         "probabilities": [
-          0.351740340828738,
-          0.3377093891110891,
-          0.3105502700601729
+          0.35174034082873806,
+          0.33770938911108916,
+          0.31055027006017283
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -9220,9 +9225,9 @@
         "verdict": "WIN: Hertha BSC",
         "confidence": 64,
         "probabilities": [
-          0.4399146734180458,
+          0.4399146734180459,
           0.3223526938963743,
-          0.23773263268557987
+          0.23773263268557981
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -9612,9 +9617,9 @@
         "verdict": "WIN: Eintracht Braunschweig",
         "confidence": 56,
         "probabilities": [
-          0.3167904139482947,
+          0.31679041394829477,
           0.3113908742548638,
-          0.3718187117968415
+          0.37181871179684145
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -10036,9 +10041,9 @@
         "verdict": "WIN: Frosinone",
         "confidence": 57,
         "probabilities": [
-          0.3741985261136907,
+          0.37419852611369087,
           0.3218401127452828,
-          0.30396136114102656
+          0.30396136114102645
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -10452,8 +10457,8 @@
         "verdict": "WIN: Monza",
         "confidence": 57,
         "probabilities": [
-          0.2870564023071638,
-          0.3304480862399762,
+          0.2870564023071637,
+          0.3304480862399761,
           0.3824955114528601
         ],
         "projected": "0–1",
@@ -10860,9 +10865,9 @@
         "verdict": "WIN: Bologna",
         "confidence": 50,
         "probabilities": [
-          0.3398231697126894,
-          0.32378827591299625,
-          0.3363885543743144
+          0.3398231697126893,
+          0.3237882759129963,
+          0.3363885543743145
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -11685,8 +11690,8 @@
         "verdict": "WIN: Cagliari",
         "confidence": 59,
         "probabilities": [
-          0.38179834749033004,
-          0.31176233246260815,
+          0.38179834749033015,
+          0.3117623324626082,
           0.30643932004706176
         ],
         "projected": "2–1",
@@ -12500,9 +12505,9 @@
         "verdict": "WIN: Mantova",
         "confidence": 53,
         "probabilities": [
-          0.31111862015085495,
+          0.3111186201508549,
           0.3335132760534253,
-          0.3553681037957198
+          0.35536810379571976
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -13284,7 +13289,7 @@
         "verdict": "WIN: Modena",
         "confidence": 64,
         "probabilities": [
-          0.4198021413701579,
+          0.4198021413701578,
           0.3194835339175429,
           0.2607143247122992
         ],
@@ -14084,8 +14089,8 @@
         "confidence": 66,
         "probabilities": [
           0.4214292553582254,
-          0.30591318132154516,
-          0.2726575633202295
+          0.3059131813215451,
+          0.27265756332022945
         ],
         "projected": "2–0",
         "modalScore": "2–0",
@@ -14483,9 +14488,9 @@
         "verdict": "WIN: Cremonese",
         "confidence": 66,
         "probabilities": [
-          0.4332886803740483,
+          0.4332886803740482,
           0.31303055099518706,
-          0.2536807686307646
+          0.2536807686307647
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -14891,7 +14896,7 @@
         "verdict": "WIN: Palermo",
         "confidence": 68,
         "probabilities": [
-          0.4474330894266231,
+          0.4474330894266232,
           0.3002381700067265,
           0.25232874056665044
         ],
@@ -15063,9 +15068,9 @@
         "verdict": "WIN: Al-Salmiyah",
         "confidence": 55,
         "probabilities": [
-          0.37343643942421106,
-          0.31350300927088265,
-          0.31306055130490623
+          0.37343643942421095,
+          0.31350300927088276,
+          0.31306055130490634
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -15231,9 +15236,9 @@
         "verdict": "DRAW",
         "confidence": 48,
         "probabilities": [
-          0.3169138055199507,
-          0.34433452502211914,
-          0.3387516694579301
+          0.31691380551995063,
+          0.3443345250221192,
+          0.3387516694579302
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -16104,21 +16109,26 @@
       "competitionFlag": "🇲🇽",
       "home": "Cruz Azul",
       "away": "Santos",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-09-06T23:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 6578,
         "division": "Cruz Azul",
         "leagueId": 230,
         "ccode": null,
-        "position": 8,
+        "position": 6,
         "form": "WLLL",
-        "lastSeasonPosition": 8,
+        "lastSeasonPosition": 6,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -16263,8 +16273,8 @@
         "ratingPrior": 7.11,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.41,
-        "xg": 0.41
+        "matchXG": 2.05,
+        "xg": 2.05
       },
       "awayData": {
         "id": 7857,
@@ -16324,6 +16334,23 @@
             "estimatedValue": 279821
           },
           {
+            "name": "Luis Gómez",
+            "playerId": 1621326,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1621326.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Kevin Palacios",
+            "playerId": 1300602,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1300602.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1006248
+          },
+          {
             "name": "Salvador Mariscal",
             "playerId": 1239856,
             "image": "https://images.fotmob.com/image_resources/playerimages/1239856.png",
@@ -16342,21 +16369,13 @@
             "estimatedValue": 1542892
           },
           {
-            "name": "Luis Gómez",
-            "playerId": 1621326,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1621326.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Kevin Palacios",
-            "playerId": 1300602,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1300602.png",
+            "name": "Diego González",
+            "playerId": 1348496,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1348496.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1006248
+            "estimatedValue": 4362934
           },
           {
             "name": "Ezequiel Bullaude",
@@ -16366,15 +16385,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 1324733
-          },
-          {
-            "name": "Diego González",
-            "playerId": 1348496,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1348496.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 4362934
           }
         ],
         "injuries": [],
@@ -16418,8 +16428,8 @@
         "ratingPrior": 6.48,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.3,
-        "xg": 0.3
+        "matchXG": 0.52,
+        "xg": 0.52
       },
       "h2hSummary": "19–6–13",
       "scorers": [],
@@ -16428,17 +16438,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/1000014561/match-details",
       "model": {
         "verdict": "WIN: Cruz Azul",
-        "confidence": 71,
+        "confidence": 76,
         "probabilities": [
-          0.46767680097713904,
-          0.3137804567104872,
-          0.21854274231237378
+          0.49673862932614443,
+          0.30080358378288463,
+          0.20245778689097096
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
-          1.28,
-          1.03
+          1.62,
+          1.06
         ],
         "factors": [
           [
@@ -16451,7 +16461,7 @@
           ],
           [
             "Last-season prior",
-            14.4
+            17.6
           ],
           [
             "Recent form",
@@ -17247,8 +17257,8 @@
         "confidence": 57,
         "probabilities": [
           0.27459897425515056,
-          0.33530920994249225,
-          0.39009181580235713
+          0.3353092099424923,
+          0.3900918158023572
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -17645,8 +17655,8 @@
         "verdict": "WIN: Telstar",
         "confidence": 75,
         "probabilities": [
-          0.489144467396532,
-          0.3018113890739963,
+          0.48914446739653195,
+          0.30181138907399635,
           0.2090441435294717
         ],
         "projected": "2–1",
@@ -18054,8 +18064,8 @@
         "confidence": 50,
         "probabilities": [
           0.3214841973052941,
-          0.340988376242457,
-          0.3375274264522489
+          0.34098837624245704,
+          0.33752742645224887
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -18448,9 +18458,9 @@
         "verdict": "WIN: Dynamo Kyiv",
         "confidence": 60,
         "probabilities": [
-          0.40021783000695527,
+          0.4002178300069553,
           0.3174676728118124,
-          0.28231449718123236
+          0.28231449718123225
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -19068,9 +19078,9 @@
         "verdict": "WIN: Orenburg",
         "confidence": 60,
         "probabilities": [
-          0.41554667482865043,
+          0.4155466748286505,
           0.3442812634429201,
-          0.2401720617284295
+          0.24017206172842936
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -19280,9 +19290,9 @@
         "verdict": "WIN: Neman Grodno",
         "confidence": 52,
         "probabilities": [
-          0.321166834856865,
+          0.3211668348568649,
           0.31983292622735904,
-          0.3590002389157761
+          0.35900023891577604
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -19473,7 +19483,7 @@
         "confidence": 49,
         "probabilities": [
           0.3510093952278702,
-          0.3119494312662559,
+          0.31194943126625585,
           0.3370411735058739
         ],
         "projected": "2–1",
@@ -19859,7 +19869,7 @@
         "confidence": 55,
         "probabilities": [
           0.32543972710926117,
-          0.30009913702575675,
+          0.3000991370257567,
           0.3744611358649822
         ],
         "projected": "1–2",
@@ -20070,9 +20080,9 @@
         "verdict": "WIN: Urartu FC",
         "confidence": 59,
         "probabilities": [
-          0.2975664217180458,
+          0.29756642171804576,
           0.30762362218832834,
-          0.3948099560936259
+          0.39480995609362596
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -20270,9 +20280,9 @@
         "verdict": "WIN: FC Astana",
         "confidence": 62,
         "probabilities": [
-          0.434610507848913,
-          0.3267753015877371,
-          0.23861419056334987
+          0.4346105078489131,
+          0.32677530158773704,
+          0.23861419056334982
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -20470,9 +20480,9 @@
         "verdict": "WIN: Polisi Tanzania FC",
         "confidence": 54,
         "probabilities": [
-          0.3890888943430553,
-          0.33404706960324354,
-          0.2768640360537012
+          0.3890888943430556,
+          0.33404706960324343,
+          0.2768640360537009
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -20874,9 +20884,9 @@
         "verdict": "WIN: Dynamo Makhachkala",
         "confidence": 67,
         "probabilities": [
-          0.4307942571171464,
-          0.30810574093583293,
-          0.2611000019470207
+          0.4307942571171463,
+          0.308105740935833,
+          0.26110000194702077
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -21078,9 +21088,9 @@
         "verdict": "WIN: Baranovichi",
         "confidence": 57,
         "probabilities": [
-          0.41177074707567274,
+          0.41177074707567285,
           0.33850626115666577,
-          0.2497229917676615
+          0.24972299176766138
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -21254,8 +21264,8 @@
         "verdict": "WIN: Turan Tovuz",
         "confidence": 62,
         "probabilities": [
-          0.41667235360760385,
-          0.30402863508689776,
+          0.4166723536076039,
+          0.3040286350868978,
           0.2792990113054984
         ],
         "projected": "2–1",
@@ -21454,8 +21464,8 @@
         "verdict": "WIN: Tobol Kostanay",
         "confidence": 57,
         "probabilities": [
-          0.39350370493688214,
-          0.3191944924135132,
+          0.39350370493688225,
+          0.31919449241351316,
           0.28730180264960464
         ],
         "projected": "2–1",
@@ -21855,8 +21865,8 @@
         "confidence": 59,
         "probabilities": [
           0.40212758229918344,
-          0.32077639210835174,
-          0.27709602559246477
+          0.3207763921083518,
+          0.2770960255924648
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -22050,7 +22060,7 @@
         "verdict": "WIN: Sardarapat",
         "confidence": 55,
         "probabilities": [
-          0.3208944046778331,
+          0.32089440467783303,
           0.29760544853355936,
           0.38150014678860766
         ],
@@ -22246,9 +22256,9 @@
         "verdict": "WIN: Bibiani Gold Stars",
         "confidence": 48,
         "probabilities": [
-          0.32559313923963384,
+          0.32559313923963396,
           0.3350819701756125,
-          0.33932489058475374
+          0.3393248905847537
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -22442,9 +22452,9 @@
         "verdict": "DRAW",
         "confidence": 50,
         "probabilities": [
-          0.34264272206009455,
+          0.34264272206009466,
           0.3652687989583993,
-          0.29208847898150614
+          0.2920884789815061
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -23031,8 +23041,8 @@
         "confidence": 49,
         "probabilities": [
           0.3524768556113541,
-          0.33912820085617146,
-          0.30839494353247454
+          0.3391282008561714,
+          0.3083949435324745
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -23422,9 +23432,9 @@
         "verdict": "WIN: Samartex",
         "confidence": 50,
         "probabilities": [
-          0.35908356265657737,
+          0.3590835626565775,
           0.33446594913695815,
-          0.3064504882064645
+          0.3064504882064644
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -23834,7 +23844,7 @@
         "verdict": "WIN: Dinamo",
         "confidence": 54,
         "probabilities": [
-          0.3658688366583552,
+          0.36586883665835523,
           0.3329744769929929,
           0.3011566863486519
         ],
@@ -24038,9 +24048,9 @@
         "verdict": "WIN: Borac Banja Luka",
         "confidence": 51,
         "probabilities": [
-          0.32101235588866905,
+          0.3210123558886691,
           0.32584885774382444,
-          0.35313878636750656
+          0.3531387863675065
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -24246,9 +24256,9 @@
         "verdict": "WIN: Željezničar",
         "confidence": 52,
         "probabilities": [
-          0.3701163132970949,
+          0.37011631329709493,
           0.331478031400659,
-          0.29840565530224616
+          0.2984056553022461
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -24424,7 +24434,7 @@
         "probabilities": [
           0.4631615753215864,
           0.304701490707588,
-          0.23213693397082563
+          0.23213693397082558
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -24622,9 +24632,9 @@
         "verdict": "WIN: ML Vitebsk",
         "confidence": 52,
         "probabilities": [
-          0.364570942336092,
+          0.3645709423360921,
           0.326472807992461,
-          0.3089562496714471
+          0.30895624967144697
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -25025,9 +25035,9 @@
         "verdict": "WIN: Baltika",
         "confidence": 52,
         "probabilities": [
-          0.3563427561705905,
+          0.3563427561705907,
           0.3404338321858263,
-          0.30322341164358313
+          0.3032234116435831
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -25245,9 +25255,9 @@
         "verdict": "WIN: Zrinjski Mostar",
         "confidence": 71,
         "probabilities": [
-          0.46908233892645634,
+          0.46908233892645645,
           0.2927681482027869,
-          0.2381495128707567
+          0.23814951287075664
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -25440,9 +25450,9 @@
         "verdict": "WIN: Isloch",
         "confidence": 79,
         "probabilities": [
-          0.5328915535304459,
-          0.2960235528851016,
-          0.17108489358445242
+          0.5328915535304461,
+          0.29602355288510157,
+          0.17108489358445234
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -25643,9 +25653,9 @@
         "verdict": "WIN: Rubin",
         "confidence": 50,
         "probabilities": [
-          0.36357985453797104,
+          0.36357985453797115,
           0.3434521979776571,
-          0.29296794748437194
+          0.2929679474843718
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -25855,8 +25865,8 @@
         "confidence": 54,
         "probabilities": [
           0.38821018325853535,
-          0.3326570354112598,
-          0.2791327813302048
+          0.33265703541125985,
+          0.27913278133020486
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -26677,9 +26687,9 @@
         "verdict": "WIN: Al Hilal",
         "confidence": 68,
         "probabilities": [
-          0.4600663426232495,
+          0.4600663426232496,
           0.3185500647794357,
-          0.22138359259731474
+          0.2213835925973147
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -27092,7 +27102,7 @@
         "verdict": "WIN: Barcelona",
         "confidence": 65,
         "probabilities": [
-          0.21305280495986634,
+          0.21305280495986625,
           0.33846078546756453,
           0.44848640957256924
         ],
@@ -27492,9 +27502,9 @@
         "verdict": "WIN: Deportivo Alavés",
         "confidence": 52,
         "probabilities": [
-          0.36470555324729,
-          0.3501468417177215,
-          0.2851476050349885
+          0.36470555324729004,
+          0.35014684171772154,
+          0.2851476050349884
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -27907,9 +27917,9 @@
         "verdict": "WIN: Málaga",
         "confidence": 60,
         "probabilities": [
-          0.39954576219916116,
-          0.3263452945144599,
-          0.2741089432863789
+          0.399545762199161,
+          0.32634529451446,
+          0.274108943286379
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -28732,7 +28742,7 @@
         "confidence": 54,
         "probabilities": [
           0.31828592853231646,
-          0.3255448131793964,
+          0.3255448131793963,
           0.3561692582882872
         ],
         "projected": "1–2",
@@ -29131,9 +29141,9 @@
         "verdict": "WIN: Real Sociedad",
         "confidence": 50,
         "probabilities": [
-          0.32820665334663124,
+          0.3282066533466313,
           0.3348071278941688,
-          0.3369862187592
+          0.3369862187591999
         ],
         "projected": "1–2",
         "modalScore": "1–2",
