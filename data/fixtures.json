@@ -1,23 +1,23 @@
 {
-  "updatedAt": "2026-09-09T06:04:20.867047+00:00",
-  "updated": "2026-09-09 02:04:20 AM ET",
+  "updatedAt": "2026-09-09T11:13:02.334324+00:00",
+  "updated": "2026-09-09 07:13:02 AM ET",
   "updateMode": "AUTO",
   "refreshIntervalSeconds": 300,
-  "fixtureCount": 47,
-  "sourceStatus": "FotMob + Sofascore · 47 fixtures",
+  "fixtureCount": 35,
+  "sourceStatus": "FotMob + Sofascore · 35 fixtures",
   "sourceErrors": [],
   "mlModel": {
     "version": 1,
-    "trainedAt": "2026-09-08T14:03:34.013711-04:00",
-    "trainingRows": 14698,
+    "trainedAt": "2026-09-09T07:11:49.723370-04:00",
+    "trainingRows": 14675,
     "metrics": {
-      "holdout_accuracy": 0.4568,
-      "holdout_logloss": 1.0586,
-      "holdout_rows": 2940,
+      "holdout_accuracy": 0.4606,
+      "holdout_logloss": 1.0595,
+      "holdout_rows": 2935,
       "class_counts": [
-        6561,
-        3563,
-        4574
+        6558,
+        3551,
+        4566
       ]
     }
   },
@@ -369,15 +369,15 @@
       "lineupSource": "FotMob",
       "fotmobMatchUrl": "https://www.fotmob.com/matches/1000008700/match-details",
       "model": {
-        "verdict": "DRAW",
+        "verdict": "WIN: Inter Toronto FC",
         "confidence": 49,
         "probabilities": [
-          0.344586749700603,
-          0.3490506984953552,
-          0.30636255180404187
+          0.3438302324253516,
+          0.34161998557294915,
+          0.31454978200169936
         ],
-        "projected": "1–1",
-        "modalScore": "1–1",
+        "projected": "2–1",
+        "modalScore": "2–1",
         "expectedGoals": [
           1.55,
           1.35
@@ -747,9 +747,9 @@
         "verdict": "WIN: Wadi Degla FC",
         "confidence": 51,
         "probabilities": [
-          0.2981239041234929,
-          0.3472632975176264,
-          0.3546127983588807
+          0.3004308051128965,
+          0.3450634111802575,
+          0.354505783706846
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -1122,11 +1122,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5996716/match-details",
       "model": {
         "verdict": "WIN: Pyramids FC",
-        "confidence": 59,
+        "confidence": 58,
         "probabilities": [
-          0.4005009820557205,
-          0.3330328918223329,
-          0.26646612612194664
+          0.39703691098704946,
+          0.3364601671742576,
+          0.266502921838693
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -1509,11 +1509,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5996720/match-details",
       "model": {
         "verdict": "WIN: Al Ahly SC",
-        "confidence": 59,
+        "confidence": 58,
         "probabilities": [
-          0.3123466916468197,
-          0.3094236179773452,
-          0.3782296903758351
+          0.3146337524283318,
+          0.30789006116368234,
+          0.3774761864079859
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -1887,9 +1887,9 @@
         "verdict": "WIN: ZED FC",
         "confidence": 51,
         "probabilities": [
-          0.29281167549096326,
-          0.3515156308622054,
-          0.35567269364683135
+          0.28927706152457033,
+          0.35066981858321467,
+          0.3600531198922151
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -2282,11 +2282,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5836823/match-details",
       "model": {
         "verdict": "WIN: West Brom",
-        "confidence": 70,
+        "confidence": 71,
         "probabilities": [
-          0.19938245587920395,
-          0.3145697807955719,
-          0.48604776332522415
+          0.20110719264389004,
+          0.30996394954560363,
+          0.4889288578105063
         ],
         "projected": "0–2",
         "modalScore": "0–2",
@@ -2375,7 +2375,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 24982531,
+        "lineupEstimatedValue": 26749762,
         "lineup": [
           {
             "name": "Vladan Kovačević",
@@ -2383,7 +2383,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/857434.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 1767231
           },
           {
             "name": "Kellen Fisher",
@@ -2678,11 +2679,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5836824/match-details",
       "model": {
         "verdict": "WIN: Norwich",
-        "confidence": 63,
+        "confidence": 62,
         "probabilities": [
-          0.4245585714287684,
-          0.30702383169040814,
-          0.2684175968808235
+          0.4200762330574041,
+          0.30765005978705173,
+          0.2722737071555442
         ],
         "projected": "2–0",
         "modalScore": "2–0",
@@ -2721,7 +2722,7 @@
           ],
           [
             "XI estimated value",
-            -7.5
+            -6.8
           ],
           [
             "Home advantage",
@@ -3077,9 +3078,9 @@
         "verdict": "WIN: QPR",
         "confidence": 67,
         "probabilities": [
-          0.2229725239700436,
-          0.31360029986167093,
-          0.46342717616828544
+          0.22466174032212863,
+          0.31276360872896425,
+          0.4625746509489072
         ],
         "projected": "0–2",
         "modalScore": "0–2",
@@ -3494,9 +3495,9 @@
         "verdict": "WIN: Chelsea",
         "confidence": 50,
         "probabilities": [
-          0.3388289876040386,
-          0.33748617659996827,
-          0.3236848357959932
+          0.3382689389771622,
+          0.33748003724580855,
+          0.32425102377702925
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -3910,9 +3911,9 @@
         "verdict": "DRAW",
         "confidence": 49,
         "probabilities": [
-          0.33988688249927335,
-          0.3446482590148253,
-          0.3154648584859013
+          0.34338210328752444,
+          0.34351150961479243,
+          0.3131063870976831
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -4099,11 +4100,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106068/match-details",
       "model": {
         "verdict": "DRAW",
-        "confidence": 52,
+        "confidence": 51,
         "probabilities": [
-          0.3231192331136121,
-          0.3819853936804715,
-          0.2948953732059163
+          0.32626597219807574,
+          0.3816584540609147,
+          0.29207557374100956
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -4286,11 +4287,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106061/match-details",
       "model": {
         "verdict": "DRAW",
-        "confidence": 48,
+        "confidence": 49,
         "probabilities": [
-          0.26900954226667684,
-          0.3820550969105003,
-          0.34893536082282295
+          0.26562360545898156,
+          0.384476317942836,
+          0.34990007659818245
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -4481,11 +4482,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106082/match-details",
       "model": {
         "verdict": "DRAW",
-        "confidence": 45,
+        "confidence": 44,
         "probabilities": [
-          0.2571971563529122,
-          0.3761703503572563,
-          0.3666324932898315
+          0.25317498071253264,
+          0.3744344529564958,
+          0.37239056633097156
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -4650,11 +4651,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5989817/match-details",
       "model": {
         "verdict": "WIN: ES Ben Aknoun",
-        "confidence": 54,
+        "confidence": 56,
         "probabilities": [
-          0.38584362506682396,
-          0.33480298652307006,
-          0.279353388410106
+          0.39396832740350185,
+          0.33070624447984487,
+          0.2753254281166533
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -4799,9 +4800,9 @@
         "verdict": "WIN: USM Alger",
         "confidence": 67,
         "probabilities": [
-          0.45467002978613724,
-          0.3088925891341608,
-          0.23643738107970197
+          0.45428849496073853,
+          0.3078139673031108,
+          0.2378975377361508
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -5182,7 +5183,7 @@
         ],
         "recentGF": 5,
         "recentGA": 10,
-        "ratingPrior": 6.39,
+        "ratingPrior": 6.4,
         "xgSeason": null,
         "xiRating": null,
         "xg": null
@@ -5196,9 +5197,9 @@
         "verdict": "WIN: FC Twente",
         "confidence": 63,
         "probabilities": [
-          0.4216907962662788,
-          0.3137376410506002,
-          0.26457156268312093
+          0.4226029971282137,
+          0.3128414680241095,
+          0.2645555348476769
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -5233,7 +5234,7 @@
           ],
           [
             "Starting XI quality",
-            11.2
+            11.0
           ],
           [
             "XI estimated value",
@@ -5409,11 +5410,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5998312/match-details",
       "model": {
         "verdict": "WIN: Singida Black Stars",
-        "confidence": 63,
+        "confidence": 62,
         "probabilities": [
-          0.26488759682420493,
-          0.3068656446396623,
-          0.42824675853613275
+          0.2666610279659719,
+          0.31215092369507286,
+          0.42118804833895523
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -5588,11 +5589,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5204204/match-details",
       "model": {
         "verdict": "WIN: Kairat Almaty",
-        "confidence": 67,
+        "confidence": 68,
         "probabilities": [
-          0.46807814924481106,
-          0.32061562656823245,
-          0.2113062241869565
+          0.46881826775957164,
+          0.31597321860957256,
+          0.2152085136308558
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -5799,11 +5800,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5927572/match-details",
       "model": {
         "verdict": "WIN: FK Sarajevo",
-        "confidence": 59,
+        "confidence": 58,
         "probabilities": [
-          0.2891554520088031,
-          0.31059070407813316,
-          0.40025384391306373
+          0.2882687655526035,
+          0.316516705688163,
+          0.3952145287592336
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -6012,9 +6013,9 @@
         "verdict": "WIN: Simba SC",
         "confidence": 56,
         "probabilities": [
-          0.3056636598897506,
-          0.31351344692579997,
-          0.3808228931844495
+          0.30951492879831416,
+          0.31248164811099705,
+          0.37800342309068885
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -6421,11 +6422,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5970132/match-details",
       "model": {
         "verdict": "WIN: Al Kholood",
-        "confidence": 57,
+        "confidence": 55,
         "probabilities": [
-          0.4097319856931345,
-          0.34397191937423827,
-          0.24629609493262727
+          0.39774570204576304,
+          0.35172216972288617,
+          0.2505321282313508
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -6836,11 +6837,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5970133/match-details",
       "model": {
         "verdict": "WIN: Al Diriyah",
-        "confidence": 54,
+        "confidence": 53,
         "probabilities": [
-          0.27746423608633997,
-          0.3424169371207717,
-          0.38011882679288833
+          0.2827500373272297,
+          0.34371997540590427,
+          0.37352998726686604
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -7250,11 +7251,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5970134/match-details",
       "model": {
         "verdict": "WIN: Al Nassr FC",
-        "confidence": 81,
+        "confidence": 82,
         "probabilities": [
-          0.542474858890342,
-          0.3010582264387077,
-          0.1564669146709503
+          0.544457082000228,
+          0.29776480472714384,
+          0.15777811327262822
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -7667,11 +7668,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106264/match-details",
       "model": {
         "verdict": "WIN: Feyenoord",
-        "confidence": 52,
+        "confidence": 53,
         "probabilities": [
-          0.3279266877107353,
-          0.328188493926963,
-          0.3438848183623017
+          0.3262857195329193,
+          0.321682625138521,
+          0.3520316553285597
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -8067,11 +8068,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106400/match-details",
       "model": {
         "verdict": "WIN: VfB Stuttgart",
-        "confidence": 55,
+        "confidence": 53,
         "probabilities": [
-          0.37369727002327685,
-          0.3370082701495739,
-          0.2892944598271492
+          0.36494287850311763,
+          0.34169130521445035,
+          0.2933658162824321
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -8484,11 +8485,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106246/match-details",
       "model": {
         "verdict": "WIN: Liverpool",
-        "confidence": 66,
+        "confidence": 65,
         "probabilities": [
-          0.4114465610818128,
-          0.2957940816017177,
-          0.29275935731646946
+          0.40978951226129906,
+          0.296184125147078,
+          0.29402636259162296
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -8741,7 +8742,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 8694928,
+        "lineupEstimatedValue": 11903455,
         "lineup": [
           {
             "name": "Dominik Takác",
@@ -8767,7 +8768,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/315814.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 999185
           },
           {
             "name": "Svetozar Marković",
@@ -8802,7 +8804,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/951951.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 1120966
           },
           {
             "name": "Tigran Barseghyan",
@@ -8837,7 +8840,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/338136.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 1088376
           }
         ],
         "injuries": [],
@@ -8892,9 +8896,9 @@
         "verdict": "WIN: Slovan Bratislava",
         "confidence": 56,
         "probabilities": [
-          0.33757643471906,
-          0.28259828915640883,
-          0.3798252761245312
+          0.3365867804755659,
+          0.2831213590435842,
+          0.38029186048084995
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -9146,7 +9150,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 107289555,
+        "lineupEstimatedValue": 136042298,
         "lineup": [
           {
             "name": "Uğurcan Çakir",
@@ -9154,7 +9158,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/603669.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 11931310
           },
           {
             "name": "Roland Sallai",
@@ -9243,7 +9248,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/890232.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 16821433
           }
         ],
         "injuries": [],
@@ -9304,17 +9310,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106280/match-details",
       "model": {
         "verdict": "WIN: Sporting CP",
-        "confidence": 71,
+        "confidence": 67,
         "probabilities": [
-          0.4617522482920243,
-          0.3098238483918662,
-          0.2284239033161095
+          0.4447165229169691,
+          0.3192878622752752,
+          0.23599561480775566
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
           1.23,
-          1.13
+          1.14
         ],
         "factors": [
           [
@@ -9347,7 +9353,7 @@
           ],
           [
             "XI estimated value",
-            5.1
+            2.7
           ],
           [
             "Home advantage",
@@ -9721,11 +9727,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106318/match-details",
       "model": {
         "verdict": "WIN: Arsenal",
-        "confidence": 62,
+        "confidence": 60,
         "probabilities": [
-          0.29516859261100653,
-          0.30958578279797166,
-          0.39524562459102186
+          0.30507557643354943,
+          0.3107389949158531,
+          0.38418542865059757
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -9814,7 +9820,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 117033178,
+        "lineupEstimatedValue": 127774298,
         "lineup": [
           {
             "name": "Ederson",
@@ -9840,7 +9846,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/309328.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 5101603
           },
           {
             "name": "Nathan Aké",
@@ -9893,7 +9900,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/1092015.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 5639517
           },
           {
             "name": "Mason Greenwood",
@@ -10116,7 +10124,7 @@
         ],
         "recentGF": 12,
         "recentGA": 6,
-        "ratingPrior": 7.51,
+        "ratingPrior": 7.62,
         "xgSeason": 0.0,
         "xiRating": null,
         "xg": 0.0
@@ -10128,11 +10136,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106331/match-details",
       "model": {
         "verdict": "WIN: Roma",
-        "confidence": 56,
+        "confidence": 55,
         "probabilities": [
-          0.28008378101800424,
-          0.3369164512460338,
-          0.382999767735962
+          0.2704684866858891,
+          0.3460934371345216,
+          0.3834380761795894
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -10167,11 +10175,11 @@
           ],
           [
             "Starting XI quality",
-            -11.0
+            -13.0
           ],
           [
             "XI estimated value",
-            -6.4
+            -5.5
           ],
           [
             "Home advantage",
@@ -10537,9 +10545,9 @@
         "verdict": "WIN: PSV Eindhoven",
         "confidence": 54,
         "probabilities": [
-          0.3616846524283717,
-          0.3085647599818804,
-          0.32975058758974796
+          0.3599524384840127,
+          0.31053516881778814,
+          0.32951239269819915
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -10628,7 +10636,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 565357650,
+        "lineupEstimatedValue": 611384994,
         "lineup": [
           {
             "name": "Manuel Neuer",
@@ -10690,7 +10698,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/1473580.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 46027344
           },
           {
             "name": "Michael Olise",
@@ -10935,11 +10944,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106240/match-details",
       "model": {
         "verdict": "WIN: Bayern München",
-        "confidence": 55,
+        "confidence": 54,
         "probabilities": [
-          0.366342339939923,
-          0.32782712588164437,
-          0.3058305341784327
+          0.3582795029264968,
+          0.3257302283214492,
+          0.31599026875205405
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -11346,9 +11355,9 @@
         "verdict": "WIN: Como",
         "confidence": 77,
         "probabilities": [
-          0.4874944643702699,
-          0.28719580175652465,
-          0.22530973387320552
+          0.48428457388760415,
+          0.2877461415384404,
+          0.2279692845739555
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -11734,11 +11743,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106293/match-details",
       "model": {
         "verdict": "WIN: Sabah FK",
-        "confidence": 53,
+        "confidence": 54,
         "probabilities": [
-          0.33193602259703603,
-          0.31078877373587865,
-          0.35727520366708543
+          0.3379224914099579,
+          0.29815979841278234,
+          0.3639177101772598
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -11823,7 +11832,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 20965252,
+        "lineupEstimatedValue": 24568771,
         "lineup": [
           {
             "name": "Jakub Markovič",
@@ -11831,7 +11840,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/1085744.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 2236648
           },
           {
             "name": "Mikulás Konečný",
@@ -11920,7 +11930,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/523217.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 1366871
           }
         ],
         "injuries": [],
@@ -12137,11 +12148,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106392/match-details",
       "model": {
         "verdict": "WIN: Slavia Prague",
-        "confidence": 60,
+        "confidence": 57,
         "probabilities": [
-          0.4155678330757765,
-          0.3451697295348303,
-          0.23926243738939312
+          0.4061201577167811,
+          0.35410516124824093,
+          0.23977468103497798
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -12180,7 +12191,7 @@
           ],
           [
             "XI estimated value",
-            -12.3
+            -10.7
           ],
           [
             "Home advantage",
@@ -12200,2298 +12211,6 @@
           ]
         ],
         "dataCompleteness": 75,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021088",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "VfB Stuttgart U19",
-      "away": "Viking U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-09T10:30:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 665291,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 31,
-        "form": "DDDDD",
-        "lastSeasonPosition": 31,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Atlético Madrid U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Galatasaray U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Inter U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Lille U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Viking U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 2182994,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 32,
-        "form": "DDDDD",
-        "lastSeasonPosition": 32,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Aston Villa U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Sabah FK U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Atlético Madrid U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Feyenoord U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "VfB Stuttgart U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021088/match-details",
-      "model": {
-        "verdict": "DRAW",
-        "confidence": 48,
-        "probabilities": [
-          0.3407487337102198,
-          0.34661044335876723,
-          0.31264082293101303
-        ],
-        "projected": "1–1",
-        "modalScore": "1–1",
-        "expectedGoals": [
-          1.49,
-          1.31
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            2.0
-          ],
-          [
-            "Last-season prior",
-            1.6
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "Recent goal difference",
-            0.0
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            100.0
-          ]
-        ],
-        "dataCompleteness": 50,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021092",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "SSC Napoli U19",
-      "away": "Arsenal U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-09T12:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 889585,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 21,
-        "form": "DDDDL",
-        "lastSeasonPosition": 25,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "FC Porto U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Man City U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Club Brugge U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Arsenal U19"
-          },
-          {
-            "result": "L",
-            "gf": 0,
-            "ga": 3,
-            "opponent": "Benfica U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 3,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 394196,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 9,
-        "form": "DDDDL",
-        "lastSeasonPosition": 33,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Slavia Prague U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Dortmund U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Real Madrid U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "SSC Napoli U19"
-          },
-          {
-            "result": "L",
-            "gf": 1,
-            "ga": 2,
-            "opponent": "Club Brugge U19"
-          }
-        ],
-        "recentGF": 1,
-        "recentGA": 2,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021092/match-details",
-      "model": {
-        "verdict": "DRAW",
-        "confidence": 48,
-        "probabilities": [
-          0.33635275189603686,
-          0.3459965144619874,
-          0.31765073364197577
-        ],
-        "projected": "1–1",
-        "modalScore": "1–1",
-        "expectedGoals": [
-          1.46,
-          1.34
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            -24.0
-          ],
-          [
-            "Last-season prior",
-            12.8
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "Recent goal difference",
-            -3.0
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            80.0
-          ]
-        ],
-        "dataCompleteness": 50,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021090",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "PSG U19",
-      "away": "Slovan Bratislava U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-09T12:30:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 394203,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 23,
-        "form": "DDDDL",
-        "lastSeasonPosition": 13,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Villarreal U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Roma U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Aston Villa U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Slovan Bratislava U19"
-          },
-          {
-            "result": "L",
-            "gf": 5,
-            "ga": 6,
-            "opponent": "Real Madrid U19"
-          }
-        ],
-        "recentGF": 5,
-        "recentGA": 6,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 559151,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 29,
-        "form": "DDDDD",
-        "lastSeasonPosition": 29,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Roma U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "LASK U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Real Betis U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Shakhtar Donetsk U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "PSG U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021090/match-details",
-      "model": {
-        "verdict": "WIN: PSG U19",
-        "confidence": 47,
-        "probabilities": [
-          0.3468123080661179,
-          0.3454232454232573,
-          0.3077644465106249
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.53,
-          1.27
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            12.0
-          ],
-          [
-            "Last-season prior",
-            25.6
-          ],
-          [
-            "Recent form",
-            -2.5
-          ],
-          [
-            "Recent goal difference",
-            -1.5
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            90.0
-          ]
-        ],
-        "dataCompleteness": 50,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021091",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Sporting CP U19",
-      "away": "Galatasaray U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-09T13:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 394210,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 30,
-        "form": "DDDDL",
-        "lastSeasonPosition": 12,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Shakhtar Donetsk U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Man United U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Roma U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Galatasaray U19"
-          },
-          {
-            "result": "L",
-            "gf": 1,
-            "ga": 2,
-            "opponent": "Real Madrid U19"
-          }
-        ],
-        "recentGF": 1,
-        "recentGA": 2,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 598333,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 17,
-        "form": "DDDDL",
-        "lastSeasonPosition": 32,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "VfB Stuttgart U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Aston Villa U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "AEK Athens U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Sporting CP U19"
-          },
-          {
-            "result": "L",
-            "gf": 0,
-            "ga": 5,
-            "opponent": "Monaco U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 5,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021091/match-details",
-      "model": {
-        "verdict": "WIN: Sporting CP U19",
-        "confidence": 48,
-        "probabilities": [
-          0.34819600020490327,
-          0.34404856862071825,
-          0.3077554311743786
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.53,
-          1.27
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            -26.0
-          ],
-          [
-            "Last-season prior",
-            32.0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "Recent goal difference",
-            6.0
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            80.0
-          ]
-        ],
-        "dataCompleteness": 50,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021089",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Liverpool U19",
-      "away": "Atlético Madrid U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-09T14:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 394197,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 19,
-        "form": "DDDDL",
-        "lastSeasonPosition": 16,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Fenerbahçe U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Club Brugge U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "FC Porto U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Atlético Madrid U19"
-          },
-          {
-            "result": "L",
-            "gf": 1,
-            "ga": 2,
-            "opponent": "Žilina U19"
-          }
-        ],
-        "recentGF": 1,
-        "recentGA": 2,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 581120,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 10,
-        "form": "DDDDL",
-        "lastSeasonPosition": 7,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Bayern München U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Viking U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "PSV Eindhoven U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Liverpool U19"
-          },
-          {
-            "result": "L",
-            "gf": 0,
-            "ga": 4,
-            "opponent": "Club Brugge U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 4,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "0–1–0",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021089/match-details",
-      "model": {
-        "verdict": "DRAW",
-        "confidence": 48,
-        "probabilities": [
-          0.33484801121561736,
-          0.344177351099378,
-          0.3209746376850047
-        ],
-        "projected": "1–1",
-        "modalScore": "1–1",
-        "expectedGoals": [
-          1.44,
-          1.36
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            -18.0
-          ],
-          [
-            "Last-season prior",
-            -14.4
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "Recent goal difference",
-            4.5
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            80.0
-          ]
-        ],
-        "dataCompleteness": 50,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021087",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Barcelona U19",
-      "away": "Feyenoord U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-10T07:30:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 394213,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 11,
-        "form": "DDDDL",
-        "lastSeasonPosition": 8,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Aston Villa U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Sabah FK U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Man City U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Feyenoord U19"
-          },
-          {
-            "result": "L",
-            "gf": 3,
-            "ga": 5,
-            "opponent": "Maccabi Haifa U19"
-          }
-        ],
-        "recentGF": 3,
-        "recentGA": 5,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 889586,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 16,
-        "form": "DDDDD",
-        "lastSeasonPosition": 16,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Real Betis U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Inter U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "FC Porto U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Viking U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Barcelona U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021087/match-details",
-      "model": {
-        "verdict": "DRAW",
-        "confidence": 47,
-        "probabilities": [
-          0.3447043862382797,
-          0.34669889908602114,
-          0.30859671467569927
-        ],
-        "projected": "1–1",
-        "modalScore": "1–1",
-        "expectedGoals": [
-          1.52,
-          1.28
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            10.0
-          ],
-          [
-            "Last-season prior",
-            12.8
-          ],
-          [
-            "Recent form",
-            -2.5
-          ],
-          [
-            "Recent goal difference",
-            -3.0
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            90.0
-          ]
-        ],
-        "dataCompleteness": 50,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021093",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Fenerbahçe U19",
-      "away": "Roma U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-10T11:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 394215,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 15,
-        "form": "DDDDD",
-        "lastSeasonPosition": 15,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Slavia Prague U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Liverpool U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Shakhtar Donetsk U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "LASK U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Roma U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 597676,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 25,
-        "form": "DDDDD",
-        "lastSeasonPosition": 25,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Slovan Bratislava U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Man United U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "PSG U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Sporting CP U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Fenerbahçe U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021093/match-details",
-      "model": {
-        "verdict": "WIN: Fenerbahçe U19",
-        "confidence": 48,
-        "probabilities": [
-          0.35213132933846614,
-          0.3416632374894,
-          0.3062054331721339
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.55,
-          1.25
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            20.0
-          ],
-          [
-            "Last-season prior",
-            16.0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "Recent goal difference",
-            0.0
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            100.0
-          ]
-        ],
-        "dataCompleteness": 50,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021094",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "PSV Eindhoven U19",
-      "away": "Shakhtar Donetsk U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-10T12:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 394208,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 22,
-        "form": "DDDDL",
-        "lastSeasonPosition": 19,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Club Brugge U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Real Madrid U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Atlético Madrid U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Shakhtar Donetsk U19"
-          },
-          {
-            "result": "L",
-            "gf": 7,
-            "ga": 8,
-            "opponent": "Chelsea U19"
-          }
-        ],
-        "recentGF": 7,
-        "recentGA": 8,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 592748,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 27,
-        "form": "DDDDD",
-        "lastSeasonPosition": 27,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Inter U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Sporting CP U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Fenerbahçe U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Slovan Bratislava U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "PSV Eindhoven U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "0–1–0",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021094/match-details",
-      "model": {
-        "verdict": "DRAW",
-        "confidence": 48,
-        "probabilities": [
-          0.34277624637152115,
-          0.3478653084063681,
-          0.3093584452221107
-        ],
-        "projected": "1–1",
-        "modalScore": "1–1",
-        "expectedGoals": [
-          1.51,
-          1.29
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            10.0
-          ],
-          [
-            "Last-season prior",
-            12.8
-          ],
-          [
-            "Recent form",
-            -2.5
-          ],
-          [
-            "Recent goal difference",
-            -1.5
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            90.0
-          ]
-        ],
-        "dataCompleteness": 50,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021098",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Slavia Prague U19",
-      "away": "Lens U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-10T12:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 408784,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 28,
-        "form": "DDDDL",
-        "lastSeasonPosition": 20,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Arsenal U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Villarreal U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Bayern München U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Lens U19"
-          },
-          {
-            "result": "L",
-            "gf": 2,
-            "ga": 3,
-            "opponent": "Benfica U19"
-          }
-        ],
-        "recentGF": 2,
-        "recentGA": 3,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 1537856,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 18,
-        "form": "DDDDD",
-        "lastSeasonPosition": 18,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Club Brugge U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Como U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "RB Leipzig U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Bodø/Glimt U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Slavia Prague U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021098/match-details",
-      "model": {
-        "verdict": "DRAW",
-        "confidence": 49,
-        "probabilities": [
-          0.33509155695310144,
-          0.34778694080750766,
-          0.31712150223939095
-        ],
-        "projected": "1–1",
-        "modalScore": "1–1",
-        "expectedGoals": [
-          1.46,
-          1.34
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            -20.0
-          ],
-          [
-            "Last-season prior",
-            -3.2
-          ],
-          [
-            "Recent form",
-            -2.5
-          ],
-          [
-            "Recent goal difference",
-            -1.5
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            90.0
-          ]
-        ],
-        "dataCompleteness": 50,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021095",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Como U19",
-      "away": "RB Leipzig U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-10T13:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 2161028,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 14,
-        "form": "DDDDD",
-        "lastSeasonPosition": 14,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Man United U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Lens U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "AEK Athens U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Real Betis U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "RB Leipzig U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 667906,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 24,
-        "form": "DDDDD",
-        "lastSeasonPosition": 24,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Real Madrid U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Man City U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Lens U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Man United U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Como U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021095/match-details",
-      "model": {
-        "verdict": "WIN: Como U19",
-        "confidence": 49,
-        "probabilities": [
-          0.35275871719246593,
-          0.34128223845193006,
-          0.30595904435560406
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.55,
-          1.25
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            20.0
-          ],
-          [
-            "Last-season prior",
-            16.0
-          ],
-          [
-            "Recent form",
-            0.0
-          ],
-          [
-            "Recent goal difference",
-            0.0
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            100.0
-          ]
-        ],
-        "dataCompleteness": 50,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021097",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Man United U19",
-      "away": "Sabah FK U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-10T13:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 686654,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 20,
-        "form": "DDDDD",
-        "lastSeasonPosition": 20,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Como U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Roma U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Sporting CP U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "RB Leipzig U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Sabah FK U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 1677363,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 26,
-        "form": "DDDDL",
-        "lastSeasonPosition": 80,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Viking U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Barcelona U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Villarreal U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Man United U19"
-          },
-          {
-            "result": "L",
-            "gf": 1,
-            "ga": 2,
-            "opponent": "Nantes U19"
-          }
-        ],
-        "recentGF": 1,
-        "recentGA": 2,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021097/match-details",
-      "model": {
-        "verdict": "WIN: Man United U19",
-        "confidence": 48,
-        "probabilities": [
-          0.354192771319612,
-          0.34651005603486035,
-          0.29929717264552774
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.53,
-          1.27
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            12.0
-          ],
-          [
-            "Last-season prior",
-            96.0
-          ],
-          [
-            "Recent form",
-            2.5
-          ],
-          [
-            "Recent goal difference",
-            1.5
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            90.0
-          ]
-        ],
-        "dataCompleteness": 50,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000021096",
-      "competition": "UEFA Youth League League Stage",
-      "competitionName": "UEFA Youth League League Stage",
-      "competitionCountry": "International",
-      "competitionCode": "INT",
-      "competitionFlag": "🌍",
-      "home": "Bayern München U19",
-      "away": "Bodø/Glimt U19",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-09-10T14:00:00.000Z",
-      "minute": {
-        "short": ""
-      },
-      "homeData": {
-        "id": 601179,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 12,
-        "form": "DDDDD",
-        "lastSeasonPosition": 27,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 5,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Atlético Madrid U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Lille U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Slavia Prague U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Bodø/Glimt U19"
-          },
-          {
-            "result": "D",
-            "gf": 3,
-            "ga": 3,
-            "opponent": "Sporting CP U19"
-          }
-        ],
-        "recentGF": 3,
-        "recentGA": 3,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "awayData": {
-        "id": 1808605,
-        "division": "UEFA Youth League",
-        "leagueId": 9741,
-        "ccode": null,
-        "position": 13,
-        "form": "DDDDL",
-        "lastSeasonPosition": 35,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Lille U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "LASK U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Lens U19"
-          },
-          {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Bayern München U19"
-          },
-          {
-            "result": "L",
-            "gf": 0,
-            "ga": 4,
-            "opponent": "Dortmund U19"
-          }
-        ],
-        "recentGF": 0,
-        "recentGA": 4,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xg": null
-      },
-      "h2hSummary": "Not available from FotMob.",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": null,
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021096/match-details",
-      "model": {
-        "verdict": "WIN: Bayern München U19",
-        "confidence": 47,
-        "probabilities": [
-          0.349538194474238,
-          0.34881475708564685,
-          0.3016470484401152
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.51,
-          1.29
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            2.0
-          ],
-          [
-            "Last-season prior",
-            12.8
-          ],
-          [
-            "Recent form",
-            2.5
-          ],
-          [
-            "Recent goal difference",
-            6.0
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            0
-          ],
-          [
-            "Home advantage",
-            24
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            33.3
-          ],
-          [
-            "Team draw tendency",
-            90.0
-          ]
-        ],
-        "dataCompleteness": 50,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     }
