@@ -1,23 +1,23 @@
 {
-  "updatedAt": "2026-09-09T23:12:10.250612+00:00",
-  "updated": "2026-09-09 07:12:10 PM ET",
+  "updatedAt": "2026-09-10T01:04:30.548055+00:00",
+  "updated": "2026-09-09 09:04:30 PM ET",
   "updateMode": "AUTO",
   "refreshIntervalSeconds": 300,
-  "fixtureCount": 47,
-  "sourceStatus": "FotMob + Sofascore · 47 fixtures",
+  "fixtureCount": 48,
+  "sourceStatus": "FotMob + Sofascore · 48 fixtures",
   "sourceErrors": [],
   "mlModel": {
     "version": 1,
-    "trainedAt": "2026-09-09T07:11:49.723370-04:00",
-    "trainingRows": 14675,
+    "trainedAt": "2026-09-09T21:02:55.598238-04:00",
+    "trainingRows": 14681,
     "metrics": {
-      "holdout_accuracy": 0.4606,
-      "holdout_logloss": 1.0595,
-      "holdout_rows": 2935,
+      "holdout_accuracy": 0.4603,
+      "holdout_logloss": 1.0598,
+      "holdout_rows": 2937,
       "class_counts": [
-        6558,
-        3551,
-        4566
+        6561,
+        3553,
+        4567
       ]
     }
   },
@@ -31,9 +31,9 @@
       "competitionFlag": "🇨🇦",
       "home": "Inter Toronto FC",
       "away": "Pacific FC",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "homeScore": 2,
+      "awayScore": 2,
+      "status": "LIVE",
       "kickoff": "2026-09-09T23:30:00.000Z",
       "minute": {
         "short": ""
@@ -372,9 +372,423 @@
         "verdict": "WIN: Inter Toronto FC",
         "confidence": 49,
         "probabilities": [
-          0.34383023242535155,
-          0.3416199855729491,
-          0.31454978200169936
+          0.3443907005217512,
+          0.3405282524297808,
+          0.31508104704846795
+        ],
+        "projected": "2–1",
+        "modalScore": "2–1",
+        "expectedGoals": [
+          1.55,
+          1.35
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            2.0
+          ],
+          [
+            "Last-season prior",
+            1.6
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "Recent goal difference",
+            1.5
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0.7
+          ],
+          [
+            "XI estimated value",
+            -5.5
+          ],
+          [
+            "Home advantage",
+            24
+          ],
+          [
+            "Machine-learning ensemble",
+            65.0
+          ],
+          [
+            "League draw rate",
+            27.3
+          ],
+          [
+            "Team draw tendency",
+            60.0
+          ]
+        ],
+        "dataCompleteness": 62,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000008700",
+      "competition": "Canada Premier League",
+      "competitionName": "Premier League",
+      "competitionCountry": "Canada",
+      "competitionCode": "CAN",
+      "competitionFlag": "🇨🇦",
+      "home": "Inter Toronto FC",
+      "away": "Pacific FC",
+      "homeScore": 2,
+      "awayScore": 2,
+      "status": "LIVE",
+      "kickoff": "2026-09-09T23:30:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 1022954,
+        "division": "Canada Premier League",
+        "leagueId": 9986,
+        "ccode": "CAN",
+        "position": 7,
+        "form": "DLDWD",
+        "lastSeasonPosition": 7,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": 975067,
+        "lineup": [
+          {
+            "name": "Kai Campos",
+            "playerId": 1909687,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1909687.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Luke Singh",
+            "playerId": 1018521,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1018521.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 145197
+          },
+          {
+            "name": "Frank Sturing",
+            "playerId": 829104,
+            "image": "https://images.fotmob.com/image_resources/playerimages/829104.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 84658
+          },
+          {
+            "name": "Oswaldo León",
+            "playerId": 949959,
+            "image": "https://images.fotmob.com/image_resources/playerimages/949959.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 194041
+          },
+          {
+            "name": "Carlos Guzmán",
+            "playerId": 294973,
+            "image": "https://images.fotmob.com/image_resources/playerimages/294973.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 75142
+          },
+          {
+            "name": "Steffen Yeates",
+            "playerId": 1346748,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1346748.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 138893
+          },
+          {
+            "name": "Ollie Bassett",
+            "playerId": 680816,
+            "image": "https://images.fotmob.com/image_resources/playerimages/680816.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 113538
+          },
+          {
+            "name": "Juan Córdova",
+            "playerId": 855352,
+            "image": "https://images.fotmob.com/image_resources/playerimages/855352.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 67273
+          },
+          {
+            "name": "Kevonte Clarke",
+            "playerId": 2174828,
+            "image": "https://images.fotmob.com/image_resources/playerimages/2174828.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Tomasz Skublak",
+            "playerId": 1052762,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1052762.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Ariel Almagro",
+            "playerId": 1585889,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1585889.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 156325
+          }
+        ],
+        "injuries": [],
+        "formPoints": 6,
+        "recentResults": [
+          {
+            "date": "2026-09-05T23:00:00.000Z",
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Forge FC",
+            "competition": "Premier League"
+          },
+          {
+            "date": "2026-08-28T23:00:00.000Z",
+            "result": "L",
+            "gf": 1,
+            "ga": 2,
+            "opponent": "Atlético Ottawa",
+            "competition": "Premier League"
+          },
+          {
+            "date": "2026-08-23T20:00:00.000Z",
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Supra du Quebec",
+            "competition": "Premier League"
+          },
+          {
+            "date": "2026-08-16T20:00:00.000Z",
+            "result": "W",
+            "gf": 4,
+            "ga": 3,
+            "opponent": "HFX Wanderers FC",
+            "competition": "Premier League"
+          },
+          {
+            "date": "2026-08-08T21:00:00.000Z",
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Pacific FC",
+            "competition": "Premier League"
+          }
+        ],
+        "recentGF": 8,
+        "recentGA": 8,
+        "ratingPrior": 6.61,
+        "xgSeason": null,
+        "xiRating": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 1022953,
+        "division": "Canada Premier League",
+        "leagueId": 9986,
+        "ccode": "CAN",
+        "position": 8,
+        "form": "DWLDD",
+        "lastSeasonPosition": 8,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": 1688548,
+        "lineup": [
+          {
+            "name": "Eleias Himaras",
+            "playerId": 1780430,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1780430.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 179728
+          },
+          {
+            "name": "Joshua Heard",
+            "playerId": 765140,
+            "image": "https://images.fotmob.com/image_resources/playerimages/765140.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 78010
+          },
+          {
+            "name": "Juan Quintana",
+            "playerId": 1440183,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1440183.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 161459
+          },
+          {
+            "name": "Diego Konincks",
+            "playerId": 1636909,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1636909.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 238282
+          },
+          {
+            "name": "Christian Greco-Taylor",
+            "playerId": 1500408,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1500408.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 204963
+          },
+          {
+            "name": "Lukas Lagerfeldt",
+            "playerId": 1159354,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1159354.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 100108
+          },
+          {
+            "name": "Roshawn Juhmi",
+            "playerId": 1829594,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1829594.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 141935
+          },
+          {
+            "name": "Marco Bustos",
+            "playerId": 621561,
+            "image": "https://images.fotmob.com/image_resources/playerimages/621561.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 99409
+          },
+          {
+            "name": "Aidan Daniels",
+            "playerId": 766590,
+            "image": "https://images.fotmob.com/image_resources/playerimages/766590.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 88712
+          },
+          {
+            "name": "Yann Toualy",
+            "playerId": 1779221,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1779221.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 197937
+          },
+          {
+            "name": "Ronan Kratt",
+            "playerId": 1385640,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1385640.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 198005
+          }
+        ],
+        "injuries": [],
+        "formPoints": 6,
+        "recentResults": [
+          {
+            "date": "2026-09-05T20:00:00.000Z",
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Atlético Ottawa",
+            "competition": "Premier League"
+          },
+          {
+            "date": "2026-08-30T22:00:00.000Z",
+            "result": "W",
+            "gf": 4,
+            "ga": 3,
+            "opponent": "HFX Wanderers FC",
+            "competition": "Premier League"
+          },
+          {
+            "date": "2026-08-22T23:30:00.000Z",
+            "result": "L",
+            "gf": 0,
+            "ga": 2,
+            "opponent": "Forge FC",
+            "competition": "Premier League"
+          },
+          {
+            "date": "2026-08-15T01:00:00.000Z",
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Vancouver FC",
+            "competition": "Premier League"
+          },
+          {
+            "date": "2026-08-08T21:00:00.000Z",
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Inter Toronto FC",
+            "competition": "Premier League"
+          }
+        ],
+        "recentGF": 6,
+        "recentGA": 7,
+        "ratingPrior": 6.57,
+        "xgSeason": null,
+        "xiRating": null,
+        "xg": null
+      },
+      "h2hSummary": "10–10–10",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": "FotMob",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000008700/match-details",
+      "model": {
+        "verdict": "WIN: Inter Toronto FC",
+        "confidence": 49,
+        "probabilities": [
+          0.3443907005217512,
+          0.3405282524297808,
+          0.31508104704846795
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -750,15 +1164,15 @@
       "lineupSource": "FotMob",
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5996719/match-details",
       "model": {
-        "verdict": "DRAW",
+        "verdict": "WIN: Wadi Degla FC",
         "confidence": 50,
         "probabilities": [
-          0.2996471361679325,
-          0.3504434363286697,
-          0.34990942750339793
+          0.29903641996503644,
+          0.35030337239529025,
+          0.35066020763967337
         ],
-        "projected": "1–1",
-        "modalScore": "1–1",
+        "projected": "1–2",
+        "modalScore": "1–2",
         "expectedGoals": [
           1.41,
           1.3
@@ -1137,9 +1551,9 @@
         "verdict": "WIN: Pyramids FC",
         "confidence": 62,
         "probabilities": [
-          0.43054948129188597,
-          0.3384846235203926,
-          0.23096589518772143
+          0.4290208207288146,
+          0.3417270281465224,
+          0.22925215112466305
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -1533,9 +1947,9 @@
         "verdict": "WIN: Al Ahly SC",
         "confidence": 54,
         "probabilities": [
-          0.32403981809440097,
-          0.3200454512802768,
-          0.3559147306253223
+          0.3247480796294357,
+          0.31797056763503784,
+          0.3572813527355266
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -1914,11 +2328,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5996721/match-details",
       "model": {
         "verdict": "WIN: ZED FC",
-        "confidence": 51,
+        "confidence": 50,
         "probabilities": [
-          0.28215821636406446,
-          0.3563851578006735,
-          0.36145662583526217
+          0.282189496647826,
+          0.357427695513043,
+          0.3603828078391311
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -2318,11 +2732,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5836823/match-details",
       "model": {
         "verdict": "WIN: West Bromwich Albion",
-        "confidence": 67,
+        "confidence": 66,
         "probabilities": [
-          0.2220623335085378,
-          0.3221057084341655,
-          0.4558319580572967
+          0.2216849295672077,
+          0.3235453493208944,
+          0.45476972111189784
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -2557,8 +2971,8 @@
         "ratingPrior": 6.76,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.82,
-        "xg": 0.82
+        "matchXG": 1.01,
+        "xg": 1.01
       },
       "awayData": {
         "id": 8658,
@@ -2712,8 +3126,8 @@
         "ratingPrior": 6.75,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.79,
-        "xg": 1.79
+        "matchXG": 1.63,
+        "xg": 1.63
       },
       "h2hSummary": "9–4–4",
       "scorers": [],
@@ -2722,17 +3136,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5836824/match-details",
       "model": {
         "verdict": "WIN: Norwich City",
-        "confidence": 59,
+        "confidence": 60,
         "probabilities": [
-          0.39406388742793086,
-          0.3134675558823039,
-          0.29246855668976524
+          0.40096811512405933,
+          0.3126811437292831,
+          0.28635074114665754
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
-          1.67,
-          1.02
+          1.7,
+          0.98
         ],
         "factors": [
           [
@@ -3128,9 +3542,9 @@
         "verdict": "WIN: Queens Park Rangers",
         "confidence": 65,
         "probabilities": [
-          0.231984843994676,
-          0.3215310609770614,
-          0.4464840950282627
+          0.23232369666758884,
+          0.3210971000932687,
+          0.44657920323914246
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -3551,9 +3965,9 @@
         "verdict": "DRAW",
         "confidence": 51,
         "probabilities": [
-          0.3354351283174946,
-          0.3398672883879513,
-          0.32469758329455417
+          0.33447614922628743,
+          0.34098535830430293,
+          0.32453849246940963
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -3967,9 +4381,9 @@
         "verdict": "DRAW",
         "confidence": 49,
         "probabilities": [
-          0.34338210328752444,
-          0.34351150961479243,
-          0.3131063870976831
+          0.34280335052885125,
+          0.34554430863949964,
+          0.31165234083164906
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -4163,9 +4577,9 @@
         "verdict": "DRAW",
         "confidence": 47,
         "probabilities": [
-          0.3267544548061785,
-          0.3502814847423671,
-          0.3229640604514545
+          0.3268782817724023,
+          0.3506613601473976,
+          0.3224603580802001
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -4355,9 +4769,9 @@
         "verdict": "WIN: Baník Lehota pod Vtacnikom",
         "confidence": 47,
         "probabilities": [
-          0.2654371395964733,
-          0.35638797479385764,
-          0.37817488560966905
+          0.2645729936371235,
+          0.35672359900976225,
+          0.37870340735311425
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -4555,9 +4969,9 @@
         "verdict": "WIN: Žilina",
         "confidence": 49,
         "probabilities": [
-          0.24741132536236105,
-          0.3588990208287665,
-          0.39368965380887244
+          0.2479868299581197,
+          0.3583271476627998,
+          0.39368602237908046
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -4722,11 +5136,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5989817/match-details",
       "model": {
         "verdict": "WIN: ES Ben Aknoun",
-        "confidence": 56,
+        "confidence": 55,
         "probabilities": [
-          0.3939683274035019,
-          0.33070624447984487,
-          0.27532542811665334
+          0.3922147423573395,
+          0.33231904181664446,
+          0.27546621582601605
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -4871,9 +5285,9 @@
         "verdict": "WIN: USM Alger",
         "confidence": 67,
         "probabilities": [
-          0.4542884949607384,
-          0.3078139673031108,
-          0.2378975377361508
+          0.45503871687284736,
+          0.30591319952697893,
+          0.2390480836001737
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -5106,8 +5520,8 @@
         "ratingPrior": 7.06,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 2.58,
-        "xg": 2.58
+        "matchXG": 2.65,
+        "xg": 2.65
       },
       "awayData": {
         "id": 6414,
@@ -5263,8 +5677,8 @@
         "ratingPrior": 6.3,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.2,
-        "xg": 0.2
+        "matchXG": 0.52,
+        "xg": 0.52
       },
       "h2hSummary": "3–2–0",
       "scorers": [],
@@ -5273,17 +5687,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5781722/match-details",
       "model": {
         "verdict": "WIN: FC Twente",
-        "confidence": 70,
+        "confidence": 69,
         "probabilities": [
-          0.4554842883882829,
-          0.30746333986750685,
-          0.23705237174421034
+          0.45031881714824207,
+          0.3093769889329455,
+          0.24030419391881236
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.86,
-          1.02
+          1.87,
+          1.08
         ],
         "factors": [
           [
@@ -5479,9 +5893,9 @@
         "verdict": "WIN: Pyunik",
         "confidence": 52,
         "probabilities": [
-          0.29723153072570896,
-          0.33107596496229463,
-          0.3716925043119965
+          0.2967995003513185,
+          0.3315844834591128,
+          0.37161601618956874
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -5693,11 +6107,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5998312/match-details",
       "model": {
         "verdict": "WIN: Singida Black Stars",
-        "confidence": 61,
+        "confidence": 62,
         "probabilities": [
-          0.26845069644455416,
-          0.31212903328425334,
-          0.41942027027119255
+          0.26843044157989904,
+          0.3113212078770098,
+          0.4202483505430912
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -5879,9 +6293,9 @@
         "verdict": "WIN: Kairat Almaty",
         "confidence": 68,
         "probabilities": [
-          0.46986600733058165,
-          0.3158690227984843,
-          0.21426496987093413
+          0.471356842662504,
+          0.31497086797596924,
+          0.21367228936152677
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -6095,9 +6509,9 @@
         "verdict": "WIN: FK Sarajevo",
         "confidence": 57,
         "probabilities": [
-          0.2895281936850787,
-          0.31744320004136106,
-          0.39302860627356023
+          0.28858221766603126,
+          0.3185710951890842,
+          0.3928466871448845
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -6511,9 +6925,9 @@
         "verdict": "WIN: Al Kholood",
         "confidence": 59,
         "probabilities": [
-          0.4171406619668817,
-          0.3490420488201127,
-          0.23381728921300565
+          0.41656355822147767,
+          0.35094435722944844,
+          0.23249208454907394
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -6933,9 +7347,9 @@
         "verdict": "WIN: Al Diriyah",
         "confidence": 58,
         "probabilities": [
-          0.2661472412880752,
-          0.3366757010657847,
-          0.39717705764614014
+          0.2660560500351267,
+          0.3384459315897478,
+          0.3954980183751255
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -7180,8 +7594,8 @@
         "ratingPrior": 6.87,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.13,
-        "xg": 1.13
+        "matchXG": 1.34,
+        "xg": 1.34
       },
       "awayData": {
         "id": 150414,
@@ -7354,16 +7768,16 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5970134/match-details",
       "model": {
         "verdict": "WIN: Al Nassr FC",
-        "confidence": 83,
+        "confidence": 84,
         "probabilities": [
-          0.5479172044034072,
-          0.30272895857291887,
-          0.14935383702367394
+          0.5506502957367829,
+          0.3018798106971789,
+          0.1474698935660383
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
-          1.61,
+          1.65,
           0.91
         ],
         "factors": [
@@ -7780,9 +8194,9 @@
         "verdict": "WIN: Barcelona",
         "confidence": 52,
         "probabilities": [
-          0.35214329427581026,
-          0.309533713886348,
-          0.33832299183784176
+          0.3517805025615497,
+          0.3111603028367333,
+          0.33705919460171707
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -8185,11 +8599,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106400/match-details",
       "model": {
         "verdict": "WIN: VfB Stuttgart",
-        "confidence": 52,
+        "confidence": 51,
         "probabilities": [
-          0.35397281478353587,
-          0.34143934263039716,
-          0.3045878425860669
+          0.3526901794654622,
+          0.3420986246848172,
+          0.3052111958497206
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -8609,11 +9023,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106246/match-details",
       "model": {
         "verdict": "WIN: Liverpool",
-        "confidence": 64,
+        "confidence": 65,
         "probabilities": [
-          0.4099307500448113,
-          0.3026795994075274,
-          0.2873896505476613
+          0.4102323613288293,
+          0.3020594650426572,
+          0.2877081736285136
         ],
         "projected": "2–0",
         "modalScore": "2–0",
@@ -9025,11 +9439,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106237/match-details",
       "model": {
         "verdict": "WIN: Slovan Bratislava",
-        "confidence": 56,
+        "confidence": 55,
         "probabilities": [
-          0.33997531467148734,
-          0.27892086956456486,
-          0.3811038157639478
+          0.3409246941614549,
+          0.27945052909885676,
+          0.37962477673968836
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -9450,9 +9864,9 @@
         "verdict": "WIN: Sporting CP",
         "confidence": 70,
         "probabilities": [
-          0.4576594942626988,
-          0.30815148399589254,
-          0.23418902174140863
+          0.4581046439726703,
+          0.30798612876474957,
+          0.23390922726258007
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -9874,9 +10288,9 @@
         "verdict": "WIN: Arsenal",
         "confidence": 66,
         "probabilities": [
-          0.261848647735924,
-          0.3082585130048385,
-          0.4298928392592375
+          0.26061422482774255,
+          0.3097204269239724,
+          0.4296653482482851
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -10283,9 +10697,9 @@
         "verdict": "WIN: Roma",
         "confidence": 55,
         "probabilities": [
-          0.2705223505576894,
-          0.34610772515711835,
-          0.3833699242851923
+          0.26974410966509066,
+          0.34596603317829255,
+          0.3842898571566168
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -10690,9 +11104,9 @@
         "verdict": "WIN: PSV Eindhoven",
         "confidence": 54,
         "probabilities": [
-          0.3599524384840127,
-          0.31053516881778814,
-          0.32951239269819915
+          0.3605700852138547,
+          0.3109616030163471,
+          0.3284683117697983
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -11091,9 +11505,9 @@
         "verdict": "WIN: Bayern München",
         "confidence": 54,
         "probabilities": [
-          0.3583630107608068,
-          0.32571315391408384,
-          0.3159238353251095
+          0.35580615080388744,
+          0.3292524539416879,
+          0.31494139525442466
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -11500,9 +11914,9 @@
         "verdict": "WIN: Como",
         "confidence": 77,
         "probabilities": [
-          0.4840934952467202,
-          0.2877753327822383,
-          0.22813117197104144
+          0.4859068143282844,
+          0.2864980283563638,
+          0.22759515731535174
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -11888,11 +12302,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6106293/match-details",
       "model": {
         "verdict": "WIN: Sabah FK",
-        "confidence": 54,
+        "confidence": 53,
         "probabilities": [
-          0.33792341306405915,
-          0.2981598155733337,
-          0.36391677136260714
+          0.3372846440669656,
+          0.3008659016800897,
+          0.3618494542529447
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -12295,9 +12709,9 @@
         "verdict": "WIN: Slavia Prague",
         "confidence": 57,
         "probabilities": [
-          0.40641826203861,
-          0.3540828471958003,
-          0.2394988907655897
+          0.4063441761281842,
+          0.3550684167251409,
+          0.23858740714667492
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -12675,9 +13089,9 @@
         "verdict": "WIN: VfB Stuttgart U19",
         "confidence": 57,
         "probabilities": [
-          0.39032442971078696,
-          0.326897702443135,
-          0.28277786784607806
+          0.39029373077215,
+          0.32730826229906806,
+          0.28239800692878203
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -13051,9 +13465,9 @@
         "verdict": "DRAW",
         "confidence": 50,
         "probabilities": [
-          0.3353429190266381,
-          0.34312186112536724,
-          0.32153521984799466
+          0.3353066819245922,
+          0.34322081869057336,
+          0.3214724993848345
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -13427,9 +13841,9 @@
         "verdict": "WIN: Paris Saint Germain U19",
         "confidence": 54,
         "probabilities": [
-          0.37203565040250347,
-          0.3331772995216565,
-          0.29478705007584016
+          0.37153622311375595,
+          0.33383041821860243,
+          0.29463335866764173
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -13804,9 +14218,9 @@
         "verdict": "WIN: Sporting CP U19",
         "confidence": 51,
         "probabilities": [
-          0.35742239136460063,
-          0.3367299460858718,
-          0.3058476625495276
+          0.35738615426255466,
+          0.336828903651078,
+          0.3057849420863674
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -14180,9 +14594,9 @@
         "verdict": "DRAW",
         "confidence": 50,
         "probabilities": [
-          0.33670802040417536,
-          0.34478282995625287,
-          0.3185091496395718
+          0.3366717833021294,
+          0.34488178752145904,
+          0.31844642917641164
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -14369,11 +14783,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021087/match-details",
       "model": {
         "verdict": "WIN: Barcelona U19",
-        "confidence": 48,
+        "confidence": 47,
         "probabilities": [
-          0.34820537504804233,
-          0.3440642328871801,
-          0.3077303920647776
+          0.34802353315640033,
+          0.3445222352420083,
+          0.3074542316015913
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -14562,9 +14976,9 @@
         "verdict": "WIN: Fenerbahçe U19",
         "confidence": 47,
         "probabilities": [
-          0.3460433502868178,
-          0.34395166985697573,
-          0.3100049798562064
+          0.34600711318477184,
+          0.3440506274221819,
+          0.3099422593930462
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -14753,9 +15167,9 @@
         "verdict": "DRAW",
         "confidence": 48,
         "probabilities": [
-          0.3416084631122112,
-          0.3477756006514155,
-          0.3106159362363733
+          0.3414266212205692,
+          0.34823360300624373,
+          0.310339775773187
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -14944,9 +15358,9 @@
         "verdict": "DRAW",
         "confidence": 48,
         "probabilities": [
-          0.3381641850190122,
-          0.34780555335876767,
-          0.3140302616222201
+          0.33798234312737024,
+          0.34826355571359596,
+          0.31375410115903385
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -15135,9 +15549,9 @@
         "verdict": "WIN: Como U19",
         "confidence": 47,
         "probabilities": [
-          0.3466545954354284,
-          0.34358187303682075,
-          0.30976353152775077
+          0.3466183583333825,
+          0.3436808306020269,
+          0.3097008110645906
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -15326,9 +15740,9 @@
         "verdict": "WIN: Manchester United U19",
         "confidence": 48,
         "probabilities": [
-          0.3511442656074683,
-          0.34481153810795084,
-          0.3040441962845809
+          0.3507755308892151,
+          0.3453119316790499,
+          0.30391253743173496
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -15517,9 +15931,9 @@
         "verdict": "WIN: Bayern München U19",
         "confidence": 48,
         "probabilities": [
-          0.3505179980965286,
-          0.34481765269450926,
-          0.3046643492089622
+          0.35014926337827534,
+          0.34531804626560836,
+          0.30453269035611624
         ],
         "projected": "2–1",
         "modalScore": "2–1",
