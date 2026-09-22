@@ -1,27 +1,198 @@
 {
-  "updatedAt": "2026-09-22T00:57:59.280972+00:00",
-  "updated": "2026-09-21 08:57:59 PM ET",
+  "updatedAt": "2026-09-22T05:50:19.900125+00:00",
+  "updated": "2026-09-22 01:50:19 AM ET",
   "updateMode": "AUTO",
   "refreshIntervalSeconds": 300,
-  "fixtureCount": 5,
-  "sourceStatus": "FotMob + Sofascore · 5 fixtures",
+  "fixtureCount": 19,
+  "sourceStatus": "FotMob + Sofascore · 19 fixtures",
   "sourceErrors": [],
   "mlModel": {
     "version": 1,
-    "trainedAt": "2026-09-21T09:52:39.921886-04:00",
-    "trainingRows": 15973,
+    "trainedAt": "2026-09-22T01:49:11.845771-04:00",
+    "trainingRows": 15757,
     "metrics": {
-      "holdout_accuracy": 0.4573,
-      "holdout_logloss": 1.0567,
-      "holdout_rows": 3195,
+      "holdout_accuracy": 0.4607,
+      "holdout_logloss": 1.0563,
+      "holdout_rows": 3152,
       "class_counts": [
-        7143,
-        3862,
-        4968
+        7049,
+        3815,
+        4893
       ]
     }
   },
   "matches": [
+    {
+      "id": "6106057",
+      "competition": "FA Cup",
+      "competitionName": "FA Cup",
+      "competitionCountry": "Unknown",
+      "competitionCode": "SVK",
+      "competitionFlag": "🌍",
+      "home": "FK 05 Levoca",
+      "away": "Liptovský Mikuláš",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T13:30:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 2168341,
+        "division": "FA Cup",
+        "leagueId": 177,
+        "ccode": null,
+        "position": null,
+        "form": "DDDD",
+        "lastSeasonPosition": null,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 4,
+        "recentResults": [
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Liptovský Mikuláš"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Liptovský Mikuláš"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Liptovský Mikuláš"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Liptovský Mikuláš"
+          }
+        ],
+        "recentGF": 0,
+        "recentGA": 0,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 155166,
+        "division": "Liptovský Mikuláš",
+        "leagueId": 8973,
+        "ccode": null,
+        "position": 8,
+        "form": "LL",
+        "lastSeasonPosition": 3,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 0,
+        "recentResults": [
+          {
+            "date": "2026-08-30T08:30:00.000Z",
+            "result": "L",
+            "gf": 0,
+            "ga": 2,
+            "opponent": "FC Petržalka 1898",
+            "competition": "2. Liga"
+          },
+          {
+            "date": "2026-08-22T14:30:00.000Z",
+            "result": "L",
+            "gf": 0,
+            "ga": 1,
+            "opponent": "Humenne",
+            "competition": "2. Liga"
+          }
+        ],
+        "recentGF": 0,
+        "recentGA": 3,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "Not available from FotMob.",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/6106057/match-details",
+      "model": {
+        "verdict": "WIN: Liptovský Mikuláš",
+        "confidence": 48,
+        "probabilities": [
+          0.29072348016386806,
+          0.3409615867137965,
+          0.36831493312233543
+        ],
+        "projected": "1–2",
+        "modalScore": "1–2",
+        "expectedGoals": [
+          1.4,
+          1.36
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            -14.4
+          ],
+          [
+            "Recent form",
+            10.0
+          ],
+          [
+            "Recent goal difference",
+            4.5
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            59.3
+          ],
+          [
+            "League draw rate",
+            19.4
+          ],
+          [
+            "Team draw tendency",
+            50.0
+          ]
+        ],
+        "dataCompleteness": 25,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
     {
       "id": "5989699",
       "competition": "Ligue 1",
@@ -115,11 +286,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5989699/match-details",
       "model": {
         "verdict": "WIN: US Biskra",
-        "confidence": 51,
+        "confidence": 50,
         "probabilities": [
-          0.3601263692832918,
-          0.33384146231661127,
-          0.30603216840009695
+          0.35537650281768945,
+          0.3304131495379518,
+          0.31421034764435873
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -272,9 +443,9 @@
         "verdict": "WIN: MC Alger",
         "confidence": 51,
         "probabilities": [
-          0.36056382023053746,
-          0.32769110535756907,
-          0.31174507441189353
+          0.35710501472741374,
+          0.3293683968558424,
+          0.31352658841674386
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -333,363 +504,300 @@
       }
     },
     {
-      "id": "1000014577",
-      "competition": "Mexico Liga MX",
-      "competitionName": "Liga MX",
-      "competitionCountry": "Mexico",
-      "competitionCode": "MEX",
-      "competitionFlag": "🇲🇽",
-      "home": "Pachuca",
-      "away": "Tijuana",
-      "homeScore": 2,
-      "awayScore": 2,
-      "status": "FT",
-      "kickoff": "2026-09-21T00:00:00.000Z",
+      "id": "5975006",
+      "competition": "Premier League",
+      "competitionName": "Premier League",
+      "competitionCountry": "Unknown",
+      "competitionCode": "GHA",
+      "competitionFlag": "🌍",
+      "home": "Dreams FC",
+      "away": "Medeama SC",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T15:00:00.000Z",
       "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
+        "short": ""
       },
       "homeData": {
-        "id": 7848,
-        "division": "Pachuca",
-        "leagueId": 230,
-        "ccode": null,
-        "position": 11,
-        "form": "WWDDL",
-        "lastSeasonPosition": 11,
+        "id": 723961,
+        "division": "Premier League",
+        "leagueId": 522,
+        "ccode": "GHA",
+        "position": 18,
+        "form": "LL",
+        "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 11761431,
-        "lineup": [
-          {
-            "name": "Carlos Moreno",
-            "playerId": 991005,
-            "image": "https://images.fotmob.com/image_resources/playerimages/991005.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2542769
-          },
-          {
-            "name": "Carlos Sánchez",
-            "playerId": 1432143,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1432143.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Eduardo Bauermann",
-            "playerId": 641247,
-            "image": "https://images.fotmob.com/image_resources/playerimages/641247.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 994847
-          },
-          {
-            "name": "Sergio Barreto",
-            "playerId": 907723,
-            "image": "https://images.fotmob.com/image_resources/playerimages/907723.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2029042
-          },
-          {
-            "name": "Francisco Venegas",
-            "playerId": 693677,
-            "image": "https://images.fotmob.com/image_resources/playerimages/693677.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 876508
-          },
-          {
-            "name": "Sergio Rodríguez",
-            "playerId": 1789747,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1789747.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Christian Rivera",
-            "playerId": 732548,
-            "image": "https://images.fotmob.com/image_resources/playerimages/732548.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1428007
-          },
-          {
-            "name": "Alán Bautista",
-            "playerId": 1292484,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1292484.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Rodolfo Pizarro",
-            "playerId": 390785,
-            "image": "https://images.fotmob.com/image_resources/playerimages/390785.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 507114
-          },
-          {
-            "name": "Oussama Idrissi",
-            "playerId": 690188,
-            "image": "https://images.fotmob.com/image_resources/playerimages/690188.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2397004
-          },
-          {
-            "name": "José Salomon Rondon",
-            "playerId": 51545,
-            "image": "https://images.fotmob.com/image_resources/playerimages/51545.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 986140
-          }
-        ],
+        "lineupEstimatedValue": null,
+        "lineup": [],
         "injuries": [],
-        "formPoints": 8,
+        "formPoints": 0,
         "recentResults": [
           {
-            "date": "2026-09-12T03:00:00.000Z",
-            "result": "W",
-            "gf": 3,
-            "ga": 0,
-            "opponent": "Atlante",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-09-05T03:00:00.000Z",
-            "result": "W",
-            "gf": 2,
-            "ga": 0,
-            "opponent": "FC Juárez",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-29T23:00:00.000Z",
-            "result": "D",
-            "gf": 1,
-            "ga": 1,
-            "opponent": "Chivas",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-23T23:00:00.000Z",
-            "result": "D",
-            "gf": 1,
-            "ga": 1,
-            "opponent": "Atletico de San Luis",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-18T03:06:00.000Z",
+            "date": "2026-09-20T15:00:00.000Z",
             "result": "L",
             "gf": 2,
             "ga": 3,
-            "opponent": "Puebla",
-            "competition": "Liga MX"
+            "opponent": "Bibiani Gold Stars",
+            "competition": "Premier League"
+          },
+          {
+            "date": "2026-09-13T15:00:00.000Z",
+            "result": "L",
+            "gf": 1,
+            "ga": 3,
+            "opponent": "Berekum Chelsea",
+            "competition": "Premier League"
           }
         ],
-        "recentGF": 9,
-        "recentGA": 5,
-        "ratingPrior": 6.71,
+        "recentGF": 3,
+        "recentGA": 6,
+        "ratingPrior": null,
         "xgSeason": null,
-        "xiRating": null,
-        "matchXG": 2.69,
-        "xg": 2.69
+        "xg": null
       },
       "awayData": {
-        "id": 162418,
-        "division": "Tijuana",
-        "leagueId": 230,
-        "ccode": null,
-        "position": 7,
-        "form": "LWLW",
-        "lastSeasonPosition": 7,
+        "id": 106975,
+        "division": "Premier League",
+        "leagueId": 522,
+        "ccode": "GHA",
+        "position": 17,
+        "form": "D",
+        "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 21572928,
-        "lineup": [
-          {
-            "name": "José Antonio Rodriguez",
-            "playerId": 324432,
-            "image": "https://images.fotmob.com/image_resources/playerimages/324432.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 423395
-          },
-          {
-            "name": "Jackson Porozo",
-            "playerId": 1032039,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1032039.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1631278
-          },
-          {
-            "name": "Unai Bilbao",
-            "playerId": 616540,
-            "image": "https://images.fotmob.com/image_resources/playerimages/616540.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 655535
-          },
-          {
-            "name": "Alejandro Gómez",
-            "playerId": 1010407,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1010407.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2610160
-          },
-          {
-            "name": "Ramiro Árciga",
-            "playerId": 1455072,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1455072.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2374297
-          },
-          {
-            "name": "Alan Vega",
-            "playerId": 1225758,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1225758.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 720916
-          },
-          {
-            "name": "Adonis Preciado",
-            "playerId": 1072829,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1072829.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1178818
-          },
-          {
-            "name": "Ángel Zapata",
-            "playerId": 1173461,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1173461.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 541495
-          },
-          {
-            "name": "Iván Tona",
-            "playerId": 1071276,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1071276.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1385943
-          },
-          {
-            "name": "Gilberto Mora",
-            "playerId": 1670377,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1670377.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 8507926
-          },
-          {
-            "name": "Mourad El Ghezouani",
-            "playerId": 1119943,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1119943.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1543165
-          }
-        ],
+        "lineupEstimatedValue": null,
+        "lineup": [],
         "injuries": [],
-        "formPoints": 6,
+        "formPoints": 1,
         "recentResults": [
           {
-            "date": "2026-09-12T03:10:00.000Z",
-            "result": "L",
-            "gf": 0,
+            "date": "2026-09-19T15:00:00.000Z",
+            "result": "D",
+            "gf": 1,
             "ga": 1,
-            "opponent": "Querétaro FC",
-            "competition": "Liga MX"
-          },
+            "opponent": "Vision FC",
+            "competition": "Premier League"
+          }
+        ],
+        "recentGF": 1,
+        "recentGA": 1,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "7–1–4",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/5975006/match-details",
+      "model": {
+        "verdict": "WIN: Medeama SC",
+        "confidence": 51,
+        "probabilities": [
+          0.2986039920663158,
+          0.33674073242847863,
+          0.3646552755052055
+        ],
+        "projected": "1–2",
+        "modalScore": "1–2",
+        "expectedGoals": [
+          1.51,
+          1.39
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            -2.0
+          ],
+          [
+            "Last-season prior",
+            -4.8
+          ],
+          [
+            "Recent form",
+            -2.5
+          ],
+          [
+            "Recent goal difference",
+            -4.5
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            24
+          ],
+          [
+            "Machine-learning ensemble",
+            65.0
+          ],
+          [
+            "League draw rate",
+            25.0
+          ],
+          [
+            "Team draw tendency",
+            50.0
+          ]
+        ],
+        "dataCompleteness": 50,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021845",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "FC Kharkiv",
+      "away": "Torreense",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T10:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 401637,
+        "division": "Women's Champions League Qualification 2nd Round",
+        "leagueId": 10612,
+        "ccode": null,
+        "position": null,
+        "form": "WDDDW",
+        "lastSeasonPosition": null,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 9,
+        "recentResults": [
           {
-            "date": "2026-08-29T03:10:00.000Z",
             "result": "W",
-            "gf": 2,
+            "gf": 5,
             "ga": 0,
-            "opponent": "Pumas",
-            "competition": "Liga MX"
+            "opponent": "Mitrovica"
           },
           {
-            "date": "2026-08-22T23:07:00.000Z",
-            "result": "L",
-            "gf": 2,
-            "ga": 5,
-            "opponent": "Chivas",
-            "competition": "Liga MX"
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Torreense"
           },
           {
-            "date": "2026-08-17T03:00:00.000Z",
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Torreense"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Torreense"
+          },
+          {
             "result": "W",
-            "gf": 2,
+            "gf": 5,
+            "ga": 0,
+            "opponent": "Mitrovica"
+          }
+        ],
+        "recentGF": 10,
+        "recentGA": 0,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 1508200,
+        "division": "Torreense (W)",
+        "leagueId": 10449,
+        "ccode": null,
+        "position": 3,
+        "form": "WDDDW",
+        "lastSeasonPosition": 3,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 9,
+        "recentResults": [
+          {
+            "result": "W",
+            "gf": 3,
             "ga": 1,
-            "opponent": "Cruz Azul",
-            "competition": "Liga MX"
+            "opponent": "FC Kolos Kovalivka"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "FC Kharkiv"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "FC Kharkiv"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "FC Kharkiv"
+          },
+          {
+            "result": "W",
+            "gf": 3,
+            "ga": 1,
+            "opponent": "FC Kolos Kovalivka"
           }
         ],
         "recentGF": 6,
-        "recentGA": 7,
-        "ratingPrior": 6.83,
+        "recentGA": 2,
+        "ratingPrior": null,
         "xgSeason": null,
-        "xiRating": null,
-        "matchXG": 1.76,
-        "xg": 1.76
+        "xg": null
       },
-      "h2hSummary": "13–5–12",
+      "h2hSummary": "0–0–0",
       "scorers": [],
       "sofascoreEventId": null,
-      "lineupSource": "FotMob",
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000014577/match-details",
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021845/match-details",
       "model": {
-        "verdict": "WIN: Pachuca",
-        "confidence": 55,
+        "verdict": "DRAW",
+        "confidence": 47,
         "probabilities": [
-          0.3624800668539207,
-          0.32584875282167736,
-          0.311671180324402
+          0.32691754209588364,
+          0.34736676903605845,
+          0.3257156888680579
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "1–1",
+        "modalScore": "1–1",
         "expectedGoals": [
-          1.64,
-          1.41
+          1.37,
+          1.39
         ],
         "factors": [
           [
@@ -702,11 +810,1730 @@
           ],
           [
             "Last-season prior",
-            -6.4
+            -14.4
           ],
           [
             "Recent form",
-            5.0
+            0.0
+          ],
+          [
+            "Recent goal difference",
+            9.0
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            59.3
+          ],
+          [
+            "Team draw tendency",
+            60.0
+          ]
+        ],
+        "dataCompleteness": 25,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021857",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "PAOK Thessaloniki FC",
+      "away": "Spartak Myjava",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T13:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 401641,
+        "division": "Women's Champions League Qualification 1st Round",
+        "leagueId": 10612,
+        "ccode": null,
+        "position": null,
+        "form": "LDDDL",
+        "lastSeasonPosition": null,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 3,
+        "recentResults": [
+          {
+            "result": "L",
+            "gf": 2,
+            "ga": 3,
+            "opponent": "Brann (W)"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Spartak Myjava"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Spartak Myjava"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Spartak Myjava"
+          },
+          {
+            "result": "L",
+            "gf": 2,
+            "ga": 3,
+            "opponent": "Brann (W)"
+          }
+        ],
+        "recentGF": 4,
+        "recentGA": 6,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 1378255,
+        "division": "Women's Champions League Qualification 1st Round",
+        "leagueId": 10612,
+        "ccode": null,
+        "position": null,
+        "form": "LDDDL",
+        "lastSeasonPosition": null,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 3,
+        "recentResults": [
+          {
+            "result": "L",
+            "gf": 2,
+            "ga": 4,
+            "opponent": "Czarni Sosnowiec (W)"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "PAOK Thessaloniki FC"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "PAOK Thessaloniki FC"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "PAOK Thessaloniki FC"
+          },
+          {
+            "result": "L",
+            "gf": 2,
+            "ga": 4,
+            "opponent": "Czarni Sosnowiec (W)"
+          }
+        ],
+        "recentGF": 4,
+        "recentGA": 8,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021857/match-details",
+      "model": {
+        "verdict": "DRAW",
+        "confidence": 45,
+        "probabilities": [
+          0.34230070115608435,
+          0.3486328094277934,
+          0.3090664894161223
+        ],
+        "projected": "1–1",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.52,
+          1.34
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            0.0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "Recent goal difference",
+            3.0
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            24
+          ],
+          [
+            "Machine-learning ensemble",
+            59.3
+          ],
+          [
+            "Team draw tendency",
+            60.0
+          ]
+        ],
+        "dataCompleteness": 25,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021853",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Slovan Liberec",
+      "away": "Rosenborg BK",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T15:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 1804934,
+        "division": "UEFA Women's Europa Cup",
+        "leagueId": 11129,
+        "ccode": null,
+        "position": null,
+        "form": "DDDDD",
+        "lastSeasonPosition": null,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 5,
+        "recentResults": [
+          {
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "SFK 2000 Sarajevo"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Rosenborg BK"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Rosenborg BK"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Rosenborg BK"
+          },
+          {
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "SFK 2000 Sarajevo"
+          }
+        ],
+        "recentGF": 2,
+        "recentGA": 2,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 4484,
+        "division": "Rosenborg BK (W)",
+        "leagueId": 331,
+        "ccode": null,
+        "position": 3,
+        "form": "WWW",
+        "lastSeasonPosition": 3,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 9,
+        "recentResults": [
+          {
+            "date": "2026-09-17T16:00:00.000Z",
+            "result": "W",
+            "gf": 4,
+            "ga": 2,
+            "opponent": "Stabæk (W)",
+            "competition": "Toppserien"
+          },
+          {
+            "date": "2026-09-13T11:00:00.000Z",
+            "result": "W",
+            "gf": 1,
+            "ga": 0,
+            "opponent": "FK Haugesund (W)",
+            "competition": "Toppserien"
+          },
+          {
+            "date": "2026-08-20T16:00:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 2,
+            "opponent": "Lyn Fotball (W)",
+            "competition": "Toppserien"
+          }
+        ],
+        "recentGF": 8,
+        "recentGA": 4,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021853/match-details",
+      "model": {
+        "verdict": "WIN: Rosenborg BK",
+        "confidence": 60,
+        "probabilities": [
+          0.24253608091647239,
+          0.32126756437010806,
+          0.43619635471341955
+        ],
+        "projected": "1–2",
+        "modalScore": "1–2",
+        "expectedGoals": [
+          1.33,
+          1.43
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            -14.4
+          ],
+          [
+            "Recent form",
+            -10.0
+          ],
+          [
+            "Recent goal difference",
+            -6.0
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            59.3
+          ],
+          [
+            "Team draw tendency",
+            50.0
+          ]
+        ],
+        "dataCompleteness": 25,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021854",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "HJK",
+      "away": "Brann",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T15:30:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 545023,
+        "division": "HJK (W)",
+        "leagueId": 10174,
+        "ccode": null,
+        "position": 1,
+        "form": "DDDDW",
+        "lastSeasonPosition": 1,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 7,
+        "recentResults": [
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "HPS (W)"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Åland United (W)"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Ilves (W)"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Brann"
+          },
+          {
+            "result": "W",
+            "gf": 6,
+            "ga": 1,
+            "opponent": "IF Gnistan (W)"
+          }
+        ],
+        "recentGF": 6,
+        "recentGA": 1,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 4182,
+        "division": "Brann (W)",
+        "leagueId": 331,
+        "ccode": null,
+        "position": 1,
+        "form": "WWWW",
+        "lastSeasonPosition": 1,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 12,
+        "recentResults": [
+          {
+            "date": "2026-09-19T13:00:00.000Z",
+            "result": "W",
+            "gf": 4,
+            "ga": 0,
+            "opponent": "Bodø/Glimt (W)",
+            "competition": "Toppserien"
+          },
+          {
+            "date": "2026-09-13T11:00:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 0,
+            "opponent": "Lyn Fotball (W)",
+            "competition": "Toppserien"
+          },
+          {
+            "date": "2026-09-06T12:00:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 1,
+            "opponent": "Aalesund (W)",
+            "competition": "NM Kvinner"
+          },
+          {
+            "date": "2026-08-21T16:00:00.000Z",
+            "result": "W",
+            "gf": 5,
+            "ga": 1,
+            "opponent": "Røa (W)",
+            "competition": "Toppserien"
+          }
+        ],
+        "recentGF": 15,
+        "recentGA": 2,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021854/match-details",
+      "model": {
+        "verdict": "WIN: Brann",
+        "confidence": 51,
+        "probabilities": [
+          0.2711070974037154,
+          0.35035282024850123,
+          0.37854008234778336
+        ],
+        "projected": "1–2",
+        "modalScore": "1–2",
+        "expectedGoals": [
+          1.38,
+          1.38
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            0.0
+          ],
+          [
+            "Recent form",
+            -12.5
+          ],
+          [
+            "Recent goal difference",
+            -12.0
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            65.0
+          ],
+          [
+            "Team draw tendency",
+            40.0
+          ]
+        ],
+        "dataCompleteness": 50,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021848",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Sparta Prague",
+      "away": "Farul Constanța",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T16:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 401652,
+        "division": "Women's Champions League Qualification 3rd Round",
+        "leagueId": 10612,
+        "ccode": null,
+        "position": null,
+        "form": "LDDDL",
+        "lastSeasonPosition": 2,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 3,
+        "recentResults": [
+          {
+            "result": "L",
+            "gf": 0,
+            "ga": 3,
+            "opponent": "Servette (W)"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Farul Constanța"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Farul Constanța"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Farul Constanța"
+          },
+          {
+            "result": "L",
+            "gf": 0,
+            "ga": 3,
+            "opponent": "Servette (W)"
+          }
+        ],
+        "recentGF": 0,
+        "recentGA": 6,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 1658600,
+        "division": "Women's Champions League Qualification 2nd Round",
+        "leagueId": 10612,
+        "ccode": null,
+        "position": null,
+        "form": "LDDDL",
+        "lastSeasonPosition": null,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 3,
+        "recentResults": [
+          {
+            "result": "L",
+            "gf": 0,
+            "ga": 5,
+            "opponent": "Austria Wien W (W)"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Sparta Prague"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Sparta Prague"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Sparta Prague"
+          },
+          {
+            "result": "L",
+            "gf": 0,
+            "ga": 5,
+            "opponent": "Austria Wien W (W)"
+          }
+        ],
+        "recentGF": 0,
+        "recentGA": 10,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021848/match-details",
+      "model": {
+        "verdict": "DRAW",
+        "confidence": 45,
+        "probabilities": [
+          0.342303355347642,
+          0.34644141942677875,
+          0.3112552252255792
+        ],
+        "projected": "1–1",
+        "modalScore": "1–1",
+        "expectedGoals": [
+          1.47,
+          1.29
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            16.0
+          ],
+          [
+            "Recent form",
+            0.0
+          ],
+          [
+            "Recent goal difference",
+            6.0
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            59.3
+          ],
+          [
+            "Team draw tendency",
+            60.0
+          ]
+        ],
+        "dataCompleteness": 25,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021849",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Brøndby IF",
+      "away": "Sporting CP",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T16:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 8502,
+        "division": "Brøndby IF (W)",
+        "leagueId": 256,
+        "ccode": null,
+        "position": 3,
+        "form": "WWWLL",
+        "lastSeasonPosition": 2,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 9,
+        "recentResults": [
+          {
+            "date": "2026-09-19T11:00:00.000Z",
+            "result": "W",
+            "gf": 4,
+            "ga": 0,
+            "opponent": "Fortuna Hjørring (W)",
+            "competition": "A-Liga"
+          },
+          {
+            "date": "2026-09-12T11:00:00.000Z",
+            "result": "W",
+            "gf": 4,
+            "ga": 0,
+            "opponent": "OB Q (W)",
+            "competition": "A-Liga"
+          },
+          {
+            "date": "2026-09-08T17:00:00.000Z",
+            "result": "W",
+            "gf": 5,
+            "ga": 0,
+            "opponent": "Kolding IF (W)",
+            "competition": "A-Liga"
+          },
+          {
+            "date": "2026-08-29T13:30:00.000Z",
+            "result": "L",
+            "gf": 1,
+            "ga": 3,
+            "opponent": "FC København (W)",
+            "competition": "A-Liga"
+          },
+          {
+            "date": "2026-08-19T17:00:00.000Z",
+            "result": "L",
+            "gf": 1,
+            "ga": 2,
+            "opponent": "HB Køge (W)",
+            "competition": "A-Liga"
+          }
+        ],
+        "recentGF": 15,
+        "recentGA": 5,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 856729,
+        "division": "Sporting CP (W)",
+        "leagueId": 10449,
+        "ccode": null,
+        "position": 2,
+        "form": "LDDDL",
+        "lastSeasonPosition": 2,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 3,
+        "recentResults": [
+          {
+            "result": "L",
+            "gf": 2,
+            "ga": 5,
+            "opponent": "SKN St. Pölten (W)"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Brøndby IF"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Brøndby IF"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Brøndby IF"
+          },
+          {
+            "result": "L",
+            "gf": 2,
+            "ga": 5,
+            "opponent": "SKN St. Pölten (W)"
+          }
+        ],
+        "recentGF": 4,
+        "recentGA": 10,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021849/match-details",
+      "model": {
+        "verdict": "WIN: Brøndby IF",
+        "confidence": 66,
+        "probabilities": [
+          0.4519857565750981,
+          0.3121711527962754,
+          0.23584309062862663
+        ],
+        "projected": "2–1",
+        "modalScore": "2–1",
+        "expectedGoals": [
+          1.48,
+          1.28
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            0.0
+          ],
+          [
+            "Recent form",
+            15.0
+          ],
+          [
+            "Recent goal difference",
+            24.0
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            65.0
+          ],
+          [
+            "Team draw tendency",
+            30.0
+          ]
+        ],
+        "dataCompleteness": 50,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021851",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Breidablik",
+      "away": "Czarni Sosnowiec",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T16:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 768539,
+        "division": "Women's Champions League Qualification 2nd Round",
+        "leagueId": 10612,
+        "ccode": null,
+        "position": null,
+        "form": "WDDDW",
+        "lastSeasonPosition": null,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 9,
+        "recentResults": [
+          {
+            "result": "W",
+            "gf": 1,
+            "ga": 0,
+            "opponent": "Csikszereda Miercurea Ciuc"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Czarni Sosnowiec"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Czarni Sosnowiec"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Czarni Sosnowiec"
+          },
+          {
+            "result": "W",
+            "gf": 1,
+            "ga": 0,
+            "opponent": "Csikszereda Miercurea Ciuc"
+          }
+        ],
+        "recentGF": 2,
+        "recentGA": 0,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 1269306,
+        "division": "Women's Champions League Qualification 1st Round",
+        "leagueId": 10612,
+        "ccode": null,
+        "position": null,
+        "form": "LDDDL",
+        "lastSeasonPosition": null,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 3,
+        "recentResults": [
+          {
+            "result": "L",
+            "gf": 1,
+            "ga": 2,
+            "opponent": "Oud-Heverlee Leuven (W)"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Breidablik"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Breidablik"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Breidablik"
+          },
+          {
+            "result": "L",
+            "gf": 1,
+            "ga": 2,
+            "opponent": "Oud-Heverlee Leuven (W)"
+          }
+        ],
+        "recentGF": 2,
+        "recentGA": 4,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021851/match-details",
+      "model": {
+        "verdict": "WIN: Breidablik",
+        "confidence": 45,
+        "probabilities": [
+          0.3493493312518723,
+          0.345447738308503,
+          0.30520293043962476
+        ],
+        "projected": "2–1",
+        "modalScore": "2–1",
+        "expectedGoals": [
+          1.46,
+          1.3
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            0.0
+          ],
+          [
+            "Recent form",
+            15.0
+          ],
+          [
+            "Recent goal difference",
+            6.0
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            59.3
+          ],
+          [
+            "Team draw tendency",
+            60.0
+          ]
+        ],
+        "dataCompleteness": 25,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021872",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "FH Hafnarfjordur",
+      "away": "Eintracht Frankfurt",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T16:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 1155620,
+        "division": "UEFA Women's Europa Cup",
+        "leagueId": 11129,
+        "ccode": null,
+        "position": null,
+        "form": "LDDDL",
+        "lastSeasonPosition": null,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 3,
+        "recentResults": [
+          {
+            "result": "L",
+            "gf": 0,
+            "ga": 1,
+            "opponent": "Apollon Limassol LFC"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Eintracht Frankfurt"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Eintracht Frankfurt"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Eintracht Frankfurt"
+          },
+          {
+            "result": "L",
+            "gf": 0,
+            "ga": 1,
+            "opponent": "Apollon Limassol LFC"
+          }
+        ],
+        "recentGF": 0,
+        "recentGA": 2,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 294857,
+        "division": "Eintracht Frankfurt (W)",
+        "leagueId": 9676,
+        "ccode": null,
+        "position": 2,
+        "form": "WWWDW",
+        "lastSeasonPosition": 3,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 13,
+        "recentResults": [
+          {
+            "date": "2026-09-18T16:30:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 2,
+            "opponent": "Mainz 05 (W)",
+            "competition": "Frauen-Bundesliga"
+          },
+          {
+            "date": "2026-09-13T14:00:00.000Z",
+            "result": "W",
+            "gf": 4,
+            "ga": 2,
+            "opponent": "TSG 1899 Hoffenheim (W)",
+            "competition": "Frauen-Bundesliga"
+          },
+          {
+            "date": "2026-09-07T16:00:00.000Z",
+            "result": "W",
+            "gf": 1,
+            "ga": 0,
+            "opponent": "Union Berlin (W)",
+            "competition": "Frauen-Bundesliga"
+          },
+          {
+            "date": "2026-08-30T12:00:00.000Z",
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Nürnberg (W)",
+            "competition": "Frauen-Bundesliga"
+          },
+          {
+            "date": "2026-08-22T10:00:00.000Z",
+            "result": "W",
+            "gf": 2,
+            "ga": 0,
+            "opponent": "FC Köln (W)",
+            "competition": "Frauen-Bundesliga"
+          }
+        ],
+        "recentGF": 11,
+        "recentGA": 5,
+        "ratingPrior": 7.05,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021872/match-details",
+      "model": {
+        "verdict": "WIN: Eintracht Frankfurt",
+        "confidence": 58,
+        "probabilities": [
+          0.2413670425416929,
+          0.32718734454807336,
+          0.43144561291023376
+        ],
+        "projected": "1–2",
+        "modalScore": "1–2",
+        "expectedGoals": [
+          1.29,
+          1.47
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            -14.4
+          ],
+          [
+            "Recent form",
+            -25.0
+          ],
+          [
+            "Recent goal difference",
+            -12.0
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            -0.9
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            59.3
+          ],
+          [
+            "Team draw tendency",
+            40.0
+          ]
+        ],
+        "dataCompleteness": 25,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021850",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "SKN St. Pölten",
+      "away": "Malmö FF",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T16:45:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 485585,
+        "division": "Women's Champions League",
+        "leagueId": 9375,
+        "ccode": null,
+        "position": null,
+        "form": "DDDDD",
+        "lastSeasonPosition": 18,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 5,
+        "recentResults": [
+          {
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Juventus (W)"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Malmö FF"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Malmö FF"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Malmö FF"
+          },
+          {
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Juventus (W)"
+          }
+        ],
+        "recentGF": 2,
+        "recentGA": 2,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 1598854,
+        "division": "Malmö FF (W)",
+        "leagueId": 9089,
+        "ccode": null,
+        "position": 3,
+        "form": "WWDWD",
+        "lastSeasonPosition": 3,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 11,
+        "recentResults": [
+          {
+            "date": "2026-09-18T17:00:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 0,
+            "opponent": "Djurgården (W)",
+            "competition": "Damallsvenskan"
+          },
+          {
+            "date": "2026-09-12T13:00:00.000Z",
+            "result": "W",
+            "gf": 1,
+            "ga": 0,
+            "opponent": "Eskilstuna United DFF (W)",
+            "competition": "Damallsvenskan"
+          },
+          {
+            "date": "2026-09-06T13:00:00.000Z",
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "BK Häcken (W)",
+            "competition": "Damallsvenskan"
+          },
+          {
+            "date": "2026-08-29T13:00:00.000Z",
+            "result": "W",
+            "gf": 4,
+            "ga": 0,
+            "opponent": "Växjö DFF (W)",
+            "competition": "Damallsvenskan"
+          },
+          {
+            "date": "2026-08-21T16:00:00.000Z",
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Hammarby IF (W)",
+            "competition": "Damallsvenskan"
+          }
+        ],
+        "recentGF": 10,
+        "recentGA": 2,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021850/match-details",
+      "model": {
+        "verdict": "WIN: Malmö FF",
+        "confidence": 71,
+        "probabilities": [
+          0.19789748004482158,
+          0.3056035073666672,
+          0.49649901258851126
+        ],
+        "projected": "1–2",
+        "modalScore": "1–2",
+        "expectedGoals": [
+          1.29,
+          1.47
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            -24.0
+          ],
+          [
+            "Recent form",
+            -15.0
+          ],
+          [
+            "Recent goal difference",
+            -12.0
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            65.0
+          ],
+          [
+            "Team draw tendency",
+            70.0
+          ]
+        ],
+        "dataCompleteness": 38,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021847",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "VfL Wolfsburg",
+      "away": "Sturm Graz",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T17:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 394121,
+        "division": "VfL Wolfsburg (W)",
+        "leagueId": 9676,
+        "ccode": null,
+        "position": 3,
+        "form": "LWWWW",
+        "lastSeasonPosition": 2,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 12,
+        "recentResults": [
+          {
+            "date": "2026-09-18T16:30:00.000Z",
+            "result": "L",
+            "gf": 1,
+            "ga": 2,
+            "opponent": "TSG 1899 Hoffenheim (W)",
+            "competition": "Frauen-Bundesliga"
+          },
+          {
+            "date": "2026-09-13T12:00:00.000Z",
+            "result": "W",
+            "gf": 2,
+            "ga": 0,
+            "opponent": "VfB Stuttgart (W)",
+            "competition": "Frauen-Bundesliga"
+          },
+          {
+            "date": "2026-09-06T12:00:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 2,
+            "opponent": "Werder Bremen (W)",
+            "competition": "Frauen-Bundesliga"
+          },
+          {
+            "date": "2026-08-30T14:00:00.000Z",
+            "result": "W",
+            "gf": 2,
+            "ga": 1,
+            "opponent": "Bayer Leverkusen (W)",
+            "competition": "Frauen-Bundesliga"
+          },
+          {
+            "date": "2026-08-22T12:00:00.000Z",
+            "result": "W",
+            "gf": 8,
+            "ga": 2,
+            "opponent": "Nürnberg (W)",
+            "competition": "Frauen-Bundesliga"
+          }
+        ],
+        "recentGF": 16,
+        "recentGA": 7,
+        "ratingPrior": 7.08,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 644409,
+        "division": "UEFA Women's Europa Cup",
+        "leagueId": 11129,
+        "ccode": null,
+        "position": null,
+        "form": "WDDDW",
+        "lastSeasonPosition": null,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 9,
+        "recentResults": [
+          {
+            "result": "W",
+            "gf": 5,
+            "ga": 3,
+            "opponent": "FK Gintra Universitetas"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "VfL Wolfsburg"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "VfL Wolfsburg"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "VfL Wolfsburg"
+          },
+          {
+            "result": "W",
+            "gf": 5,
+            "ga": 3,
+            "opponent": "FK Gintra Universitetas"
+          }
+        ],
+        "recentGF": 10,
+        "recentGA": 6,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021847/match-details",
+      "model": {
+        "verdict": "WIN: VfL Wolfsburg",
+        "confidence": 62,
+        "probabilities": [
+          0.44415202331548465,
+          0.3144572390544659,
+          0.24139073763004956
+        ],
+        "projected": "2–1",
+        "modalScore": "2–1",
+        "expectedGoals": [
+          1.51,
+          1.25
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            16.0
+          ],
+          [
+            "Recent form",
+            7.5
           ],
           [
             "Recent goal difference",
@@ -718,11 +2545,7 @@
           ],
           [
             "Starting XI quality",
-            -2.2
-          ],
-          [
-            "XI estimated value",
-            -6.1
+            1.4
           ],
           [
             "Home advantage",
@@ -730,102 +2553,64 @@
           ],
           [
             "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            25.0
+            59.3
           ],
           [
             "Team draw tendency",
-            20.0
+            30.0
           ]
         ],
-        "dataCompleteness": 75,
+        "dataCompleteness": 25,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
     {
-      "id": "1000014578",
-      "competition": "Mexico Liga MX",
-      "competitionName": "Liga MX",
-      "competitionCountry": "Mexico",
-      "competitionCode": "MEX",
-      "competitionFlag": "🇲🇽",
-      "home": "Toluca",
-      "away": "Santos Laguna",
-      "homeScore": 2,
-      "awayScore": 3,
-      "status": "FT",
-      "kickoff": "2026-09-21T00:00:00.000Z",
+      "id": "1000021852",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Feyenoord",
+      "away": "Vålerenga",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T17:00:00.000Z",
       "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
+        "short": ""
       },
       "homeData": {
-        "id": 6618,
-        "division": "Toluca",
-        "leagueId": 230,
+        "id": 1354263,
+        "division": "Feyenoord (W)",
+        "leagueId": 10289,
         "ccode": null,
-        "position": 1,
-        "form": "WWWW",
-        "lastSeasonPosition": 1,
+        "position": 7,
+        "form": "WLLL",
+        "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 22909888,
+        "lineupEstimatedValue": null,
         "lineup": [
           {
-            "name": "Luis García",
-            "playerId": 417520,
-            "image": "https://images.fotmob.com/image_resources/playerimages/417520.png",
+            "name": "Claire Dinkla",
+            "playerId": 1214996,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1214996.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 608960
+            "starter": true
           },
           {
-            "name": "Bruno Méndez",
-            "playerId": 933574,
-            "image": "https://images.fotmob.com/image_resources/playerimages/933574.png",
+            "name": "Esmee De Graaf",
+            "playerId": 979408,
+            "image": "https://images.fotmob.com/image_resources/playerimages/979408.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 2273863
+            "starter": true
           },
           {
-            "name": "Federico Pereira",
-            "playerId": 1053836,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1053836.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 5463319
-          },
-          {
-            "name": "Everardo López",
-            "playerId": 1353113,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1353113.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1492119
-          },
-          {
-            "name": "Jesús Gallardo",
-            "playerId": 597976,
-            "image": "https://images.fotmob.com/image_resources/playerimages/597976.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1625067
-          },
-          {
-            "name": "Edher Guadalupe Segura Téllez",
+            "name": "Avani Brandt",
             "playerId": null,
             "image": null,
             "position": null,
@@ -833,681 +2618,267 @@
             "starter": true
           },
           {
-            "name": "Diego Barbosa",
-            "playerId": 766850,
-            "image": "https://images.fotmob.com/image_resources/playerimages/766850.png",
+            "name": "Tess van Bentem",
+            "playerId": null,
+            "image": null,
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 1716377
+            "starter": true
           },
           {
-            "name": "Nicolás Castro",
-            "playerId": 1099712,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1099712.png",
+            "name": "Rio Sasaki",
+            "playerId": null,
+            "image": null,
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 2404681
+            "starter": true
           },
           {
-            "name": "Alexis Vega",
-            "playerId": 728365,
-            "image": "https://images.fotmob.com/image_resources/playerimages/728365.png",
+            "name": "Kirsten van de Westeringh",
+            "playerId": null,
+            "image": null,
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 3107387
+            "starter": true
           },
           {
-            "name": "Federico Viñas",
-            "playerId": 1032811,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1032811.png",
+            "name": "Eva van Deursen",
+            "playerId": 1437285,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1437285.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 1958764
+            "starter": true
           },
           {
-            "name": "Paulinho",
-            "playerId": 361377,
-            "image": "https://images.fotmob.com/image_resources/playerimages/361377.png",
+            "name": "Sterre Gerdie Kroezen",
+            "playerId": null,
+            "image": null,
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 2259351
+            "starter": true
+          },
+          {
+            "name": "Ilayah Yazlin Dostmohamed",
+            "playerId": null,
+            "image": null,
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Romée van de Lavoir",
+            "playerId": null,
+            "image": null,
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Victoria Marie Della Peruta",
+            "playerId": null,
+            "image": null,
+            "position": null,
+            "rating": null,
+            "starter": true
           }
         ],
         "injuries": [],
-        "formPoints": 12,
+        "formPoints": 3,
         "recentResults": [
           {
-            "date": "2026-09-16T01:00:00.000Z",
+            "date": "2026-09-19T14:30:00.000Z",
             "result": "W",
+            "gf": 3,
+            "ga": 0,
+            "opponent": "FC Utrecht (W)",
+            "competition": "Eredivisie Vrouwen"
+          },
+          {
+            "date": "2026-09-13T10:15:00.000Z",
+            "result": "L",
+            "gf": 0,
+            "ga": 4,
+            "opponent": "FC Twente (W)",
+            "competition": "Eredivisie Vrouwen"
+          },
+          {
+            "date": "2026-09-06T10:15:00.000Z",
+            "result": "L",
+            "gf": 0,
+            "ga": 6,
+            "opponent": "PSV (W)",
+            "competition": "Eredivisie Vrouwen"
+          },
+          {
+            "date": "2026-08-22T14:30:00.000Z",
+            "result": "L",
             "gf": 1,
-            "ga": 0,
-            "opponent": "Puebla",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-09-12T23:05:00.000Z",
-            "result": "W",
-            "gf": 5,
             "ga": 2,
-            "opponent": "Atlas",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-31T00:00:00.000Z",
-            "result": "W",
-            "gf": 4,
-            "ga": 0,
-            "opponent": "FC Juárez",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-22T03:10:00.000Z",
-            "result": "W",
-            "gf": 2,
-            "ga": 1,
-            "opponent": "Queretaro FC",
-            "competition": "Liga MX"
-          }
-        ],
-        "recentGF": 12,
-        "recentGA": 3,
-        "ratingPrior": null,
-        "xgSeason": null,
-        "xiRating": null,
-        "matchXG": 3.45,
-        "xg": 3.45
-      },
-      "awayData": {
-        "id": 7857,
-        "division": "Santos Laguna",
-        "leagueId": 230,
-        "ccode": null,
-        "position": 17,
-        "form": "WLDLL",
-        "lastSeasonPosition": 17,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": 11169262,
-        "lineup": [
-          {
-            "name": "Carlos Acevedo",
-            "playerId": 751164,
-            "image": "https://images.fotmob.com/image_resources/playerimages/751164.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1460921
-          },
-          {
-            "name": "Jonathan Pérez",
-            "playerId": 1621323,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1621323.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Franco Pardo",
-            "playerId": 845263,
-            "image": "https://images.fotmob.com/image_resources/playerimages/845263.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1203428
-          },
-          {
-            "name": "Felipe Sánchez",
-            "playerId": 1436220,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1436220.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1034763
-          },
-          {
-            "name": "Mauricio Cuevas",
-            "playerId": 1079040,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1079040.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 279821
-          },
-          {
-            "name": "Emmanuel Echeverría",
-            "playerId": 1572473,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1572473.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1242152
-          },
-          {
-            "name": "Ezequiel Bullaude",
-            "playerId": 972098,
-            "image": "https://images.fotmob.com/image_resources/playerimages/972098.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1324733
-          },
-          {
-            "name": "Salvador Mariscal",
-            "playerId": 1239856,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1239856.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 927980
-          },
-          {
-            "name": "Facundo Cáseres",
-            "playerId": 1200721,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1200721.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2030425
-          },
-          {
-            "name": "Luis Gómez",
-            "playerId": 1621326,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1621326.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Esteban Lozano",
-            "playerId": 1172985,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1172985.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1665039
-          }
-        ],
-        "injuries": [],
-        "formPoints": 4,
-        "recentResults": [
-          {
-            "date": "2026-09-14T01:00:00.000Z",
-            "result": "W",
-            "gf": 2,
-            "ga": 1,
-            "opponent": "FC Juárez",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-09-06T23:00:00.000Z",
-            "result": "L",
-            "gf": 0,
-            "ga": 1,
-            "opponent": "Cruz Azul",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-30T03:10:00.000Z",
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Tigres",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-23T01:00:00.000Z",
-            "result": "L",
-            "gf": 2,
-            "ga": 3,
-            "opponent": "Puebla",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-17T01:10:00.000Z",
-            "result": "L",
-            "gf": 0,
-            "ga": 1,
-            "opponent": "Chivas",
-            "competition": "Liga MX"
+            "opponent": "AZ Alkmaar (W)",
+            "competition": "Eredivisie Vrouwen"
           }
         ],
         "recentGF": 4,
-        "recentGA": 6,
-        "ratingPrior": 6.69,
+        "recentGA": 12,
+        "ratingPrior": null,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.86,
-        "xg": 1.86
-      },
-      "h2hSummary": "14–9–14",
-      "scorers": [],
-      "sofascoreEventId": null,
-      "lineupSource": "FotMob",
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000014578/match-details",
-      "model": {
-        "verdict": "WIN: Toluca",
-        "confidence": 78,
-        "probabilities": [
-          0.513862020851212,
-          0.3041344531134395,
-          0.18200352603534847
-        ],
-        "projected": "2–1",
-        "modalScore": "2–1",
-        "expectedGoals": [
-          1.95,
-          1.27
-        ],
-        "factors": [
-          [
-            "Division / team strength",
-            0.0
-          ],
-          [
-            "Current table",
-            0.0
-          ],
-          [
-            "Last-season prior",
-            25.6
-          ],
-          [
-            "Recent form",
-            20.0
-          ],
-          [
-            "Recent goal difference",
-            16.5
-          ],
-          [
-            "Squad / transfer",
-            0
-          ],
-          [
-            "Starting XI quality",
-            5.6
-          ],
-          [
-            "XI estimated value",
-            7.2
-          ],
-          [
-            "Home advantage",
-            12
-          ],
-          [
-            "Machine-learning ensemble",
-            65.0
-          ],
-          [
-            "League draw rate",
-            25.0
-          ],
-          [
-            "Team draw tendency",
-            10.0
-          ]
-        ],
-        "dataCompleteness": 75,
-        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
-      }
-    },
-    {
-      "id": "1000014579",
-      "competition": "Mexico Liga MX",
-      "competitionName": "Liga MX",
-      "competitionCountry": "Mexico",
-      "competitionCode": "MEX",
-      "competitionFlag": "🇲🇽",
-      "home": "Querétaro FC",
-      "away": "León",
-      "homeScore": 1,
-      "awayScore": 1,
-      "status": "FT",
-      "kickoff": "2026-09-21T02:10:00.000Z",
-      "minute": {
-        "short": {
-          "short": "FT",
-          "shortKey": "fulltime_short",
-          "long": "Full-Time",
-          "longKey": "finished"
-        }
-      },
-      "homeData": {
-        "id": 1943,
-        "division": "Querétaro FC",
-        "leagueId": 230,
-        "ccode": null,
-        "position": 5,
-        "form": "WWL",
-        "lastSeasonPosition": 5,
-        "lastSeason": "2025/26",
-        "transferImpact": 0.0,
-        "squadEstimatedValue": null,
-        "lineupEstimatedValue": 9693349,
-        "lineup": [
-          {
-            "name": "Guillermo Allison",
-            "playerId": 207791,
-            "image": "https://images.fotmob.com/image_resources/playerimages/207791.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 355004
-          },
-          {
-            "name": "Bayron Duarte",
-            "playerId": 1554213,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1554213.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Diego Reyes",
-            "playerId": 201111,
-            "image": "https://images.fotmob.com/image_resources/playerimages/201111.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 374232
-          },
-          {
-            "name": "Lucas Abascia",
-            "playerId": 942984,
-            "image": "https://images.fotmob.com/image_resources/playerimages/942984.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1471791
-          },
-          {
-            "name": "Daniel Parra",
-            "playerId": 772312,
-            "image": "https://images.fotmob.com/image_resources/playerimages/772312.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 388026
-          },
-          {
-            "name": "Carlo García",
-            "playerId": 1198714,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1198714.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 817677
-          },
-          {
-            "name": "Santiago Homenchenko",
-            "playerId": 1436165,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1436165.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2360318
-          },
-          {
-            "name": "Enzo Giménez",
-            "playerId": 864978,
-            "image": "https://images.fotmob.com/image_resources/playerimages/864978.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 690182
-          },
-          {
-            "name": "Mateo Coronel",
-            "playerId": 884282,
-            "image": "https://images.fotmob.com/image_resources/playerimages/884282.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2363708
-          },
-          {
-            "name": "Paulo Victor",
-            "playerId": 1269652,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1269652.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 872411
-          },
-          {
-            "name": "Alí Ávila",
-            "playerId": 1109028,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1109028.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          }
-        ],
-        "injuries": [],
-        "formPoints": 6,
-        "recentResults": [
-          {
-            "date": "2026-09-12T03:10:00.000Z",
-            "result": "W",
-            "gf": 1,
-            "ga": 0,
-            "opponent": "Tijuana",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-29T23:00:00.000Z",
-            "result": "W",
-            "gf": 3,
-            "ga": 1,
-            "opponent": "Atlas",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-22T03:10:00.000Z",
-            "result": "L",
-            "gf": 1,
-            "ga": 2,
-            "opponent": "Toluca",
-            "competition": "Liga MX"
-          }
-        ],
-        "recentGF": 5,
-        "recentGA": 3,
-        "ratingPrior": 6.75,
-        "xgSeason": null,
-        "xiRating": null,
-        "matchXG": 1.82,
-        "xg": 1.82
+        "xg": null
       },
       "awayData": {
-        "id": 1841,
-        "division": "León",
-        "leagueId": 230,
+        "id": 4507,
+        "division": "Vålerenga (W)",
+        "leagueId": 331,
         "ccode": null,
-        "position": 6,
-        "form": "WLDWW",
-        "lastSeasonPosition": 6,
+        "position": 4,
+        "form": "WWW",
+        "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 19558021,
+        "lineupEstimatedValue": null,
         "lineup": [
           {
-            "name": "Óscar García",
-            "playerId": 1339704,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1339704.png",
+            "name": "Fanney Birkisdóttir",
+            "playerId": 1555517,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1555517.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 1684364
+            "starter": true
           },
           {
-            "name": "Iván Moreno",
-            "playerId": 949958,
-            "image": "https://images.fotmob.com/image_resources/playerimages/949958.png",
+            "name": "Sara Lindbak Hørte",
+            "playerId": 1031876,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1031876.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 942131
+            "starter": true
           },
           {
-            "name": "Jhohan Romaña",
-            "playerId": 1133142,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1133142.png",
+            "name": "Arna Eiríksdóttir",
+            "playerId": 1555519,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1555519.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 3908329
+            "starter": true
           },
           {
-            "name": "Juan Guevara",
-            "playerId": 1610383,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1610383.png",
+            "name": "Noor Eckhoff",
+            "playerId": 809599,
+            "image": "https://images.fotmob.com/image_resources/playerimages/809599.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 689212
+            "starter": true
           },
           {
-            "name": "Sebastián Vegas",
-            "playerId": 478454,
-            "image": "https://images.fotmob.com/image_resources/playerimages/478454.png",
+            "name": "Katariina Kosola",
+            "playerId": 1180037,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1180037.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 1103651
+            "starter": true
           },
           {
-            "name": "Rodrigo Echeverría",
-            "playerId": 517555,
-            "image": "https://images.fotmob.com/image_resources/playerimages/517555.png",
+            "name": "Naina Inauen",
+            "playerId": 1403305,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1403305.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 1821977
+            "starter": true
           },
           {
-            "name": "Jordi Cortizo",
-            "playerId": 737290,
-            "image": "https://images.fotmob.com/image_resources/playerimages/737290.png",
+            "name": "Tomine Enger",
+            "playerId": 1651902,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1651902.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 1337209
+            "starter": true
           },
           {
-            "name": "Fernando Beltrán",
-            "playerId": 861896,
-            "image": "https://images.fotmob.com/image_resources/playerimages/861896.png",
+            "name": "Stine Nybø Brekken",
+            "playerId": 1247600,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1247600.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 1859623
+            "starter": true
           },
           {
-            "name": "José Alvarado",
-            "playerId": 921579,
-            "image": "https://images.fotmob.com/image_resources/playerimages/921579.png",
+            "name": "Eline Hegg",
+            "playerId": 953546,
+            "image": "https://images.fotmob.com/image_resources/playerimages/953546.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 1114457
+            "starter": true
           },
           {
-            "name": "Daniel Arcila",
-            "playerId": 1433134,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1433134.png",
+            "name": "Ronja Arnesen",
+            "playerId": 1531803,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1531803.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 809706
+            "starter": true
           },
           {
-            "name": "Díber Cambindo",
-            "playerId": 1232523,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1232523.png",
+            "name": "Marie Moen Preus",
+            "playerId": 1623326,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1623326.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 4287362
+            "starter": true
           }
         ],
         "injuries": [],
-        "formPoints": 10,
+        "formPoints": 9,
         "recentResults": [
           {
-            "date": "2026-09-15T01:00:00.000Z",
+            "date": "2026-09-17T16:00:00.000Z",
             "result": "W",
             "gf": 2,
-            "ga": 0,
-            "opponent": "Atlético de San Luis",
-            "competition": "Liga MX"
+            "ga": 1,
+            "opponent": "FK Haugesund (W)",
+            "competition": "Toppserien"
           },
           {
-            "date": "2026-09-11T03:05:00.000Z",
-            "result": "L",
-            "gf": 1,
+            "date": "2026-09-11T16:00:00.000Z",
+            "result": "W",
+            "gf": 6,
             "ga": 3,
-            "opponent": "Pumas",
-            "competition": "Liga MX"
+            "opponent": "Røa (W)",
+            "competition": "Toppserien"
           },
           {
-            "date": "2026-08-29T02:00:00.000Z",
-            "result": "D",
-            "gf": 1,
-            "ga": 1,
-            "opponent": "Atlante",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-22T01:00:00.000Z",
-            "result": "W",
-            "gf": 2,
-            "ga": 0,
-            "opponent": "Monterrey",
-            "competition": "Liga MX"
-          },
-          {
-            "date": "2026-08-18T01:00:00.000Z",
+            "date": "2026-08-19T16:00:00.000Z",
             "result": "W",
             "gf": 2,
             "ga": 1,
-            "opponent": "Necaxa",
-            "competition": "Liga MX"
+            "opponent": "Hønefoss (W)",
+            "competition": "Toppserien"
           }
         ],
-        "recentGF": 8,
+        "recentGF": 10,
         "recentGA": 5,
-        "ratingPrior": 6.79,
+        "ratingPrior": null,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.72,
-        "xg": 1.72
+        "xg": null
       },
-      "h2hSummary": "6–6–16",
+      "h2hSummary": "0–0–0",
       "scorers": [],
       "sofascoreEventId": null,
       "lineupSource": "FotMob",
-      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000014579/match-details",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021852/match-details",
       "model": {
-        "verdict": "WIN: Querétaro FC",
-        "confidence": 52,
+        "verdict": "WIN: Vålerenga",
+        "confidence": 63,
         "probabilities": [
-          0.34574791369744984,
-          0.3295053378685359,
-          0.3247467484340142
+          0.2585332564492802,
+          0.31716455877008676,
+          0.4243021847806331
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "1–2",
+        "modalScore": "1–2",
         "expectedGoals": [
-          1.46,
+          1.35,
           1.41
         ],
         "factors": [
@@ -1525,7 +2896,585 @@
           ],
           [
             "Recent form",
-            -10.0
+            -15.0
+          ],
+          [
+            "Recent goal difference",
+            -19.5
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            65.0
+          ],
+          [
+            "Team draw tendency",
+            0.0
+          ]
+        ],
+        "dataCompleteness": 62,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021858",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Hammarby IF",
+      "away": "Rangers",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T17:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 181469,
+        "division": "Hammarby IF (W)",
+        "leagueId": 9089,
+        "ccode": null,
+        "position": 2,
+        "form": "LWWWD",
+        "lastSeasonPosition": 2,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [
+          {
+            "name": "Cajsa Andersson",
+            "playerId": 886433,
+            "image": "https://images.fotmob.com/image_resources/playerimages/886433.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Sofia Reidy",
+            "playerId": 1397294,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1397294.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Mathilde Janzen",
+            "playerId": 1241256,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1241256.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Elin Åhgren Sørum",
+            "playerId": 931584,
+            "image": "https://images.fotmob.com/image_resources/playerimages/931584.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Alice Carlsson",
+            "playerId": 1241164,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1241164.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Filippa Curmark",
+            "playerId": 961619,
+            "image": "https://images.fotmob.com/image_resources/playerimages/961619.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Gudrún Arnardóttir",
+            "playerId": 1037938,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1037938.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Fanny Peterson",
+            "playerId": 1752848,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1752848.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Svea Rehnberg",
+            "playerId": 1349360,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1349360.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Stina Lennartsson",
+            "playerId": 961799,
+            "image": "https://images.fotmob.com/image_resources/playerimages/961799.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Vilde Hasund",
+            "playerId": 583707,
+            "image": "https://images.fotmob.com/image_resources/playerimages/583707.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          }
+        ],
+        "injuries": [],
+        "formPoints": 10,
+        "recentResults": [
+          {
+            "date": "2026-09-19T11:00:00.000Z",
+            "result": "L",
+            "gf": 1,
+            "ga": 2,
+            "opponent": "AIK (W)",
+            "competition": "Damallsvenskan"
+          },
+          {
+            "date": "2026-09-13T14:00:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 0,
+            "opponent": "Växjö DFF (W)",
+            "competition": "Damallsvenskan"
+          },
+          {
+            "date": "2026-09-05T13:00:00.000Z",
+            "result": "W",
+            "gf": 2,
+            "ga": 0,
+            "opponent": "IFK Norrköping (W)",
+            "competition": "Damallsvenskan"
+          },
+          {
+            "date": "2026-08-29T13:00:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 1,
+            "opponent": "Vittsjö GIK (W)",
+            "competition": "Damallsvenskan"
+          },
+          {
+            "date": "2026-08-21T16:00:00.000Z",
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Malmö FF (W)",
+            "competition": "Damallsvenskan"
+          }
+        ],
+        "recentGF": 10,
+        "recentGA": 4,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xiRating": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 1378209,
+        "division": "Rangers (W)",
+        "leagueId": 10791,
+        "ccode": null,
+        "position": 1,
+        "form": "WWWW",
+        "lastSeasonPosition": 2,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [
+          {
+            "name": "Jenna Fife",
+            "playerId": 1055728,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1055728.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Eilidh Austin",
+            "playerId": 1716983,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1716983.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Maria Eduarda Silva",
+            "playerId": 1716262,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1716262.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Mijke Roelfsema",
+            "playerId": 1530809,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1530809.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Nicola Docherty",
+            "playerId": 887698,
+            "image": "https://images.fotmob.com/image_resources/playerimages/887698.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Brogan Hay",
+            "playerId": 1397679,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1397679.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Jodi McLeary",
+            "playerId": 1716889,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1716889.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Sophie Black",
+            "playerId": 1716981,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1716981.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Laura Berry",
+            "playerId": 1716896,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1716896.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Katie Wilkinson",
+            "playerId": 1304765,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1304765.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Calliste Brookshire",
+            "playerId": 1762932,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1762932.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          }
+        ],
+        "injuries": [],
+        "formPoints": 12,
+        "recentResults": [
+          {
+            "date": "2026-09-20T15:10:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 1,
+            "opponent": "Aberdeen",
+            "competition": "SWPL 1"
+          },
+          {
+            "date": "2026-09-06T15:00:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 0,
+            "opponent": "Motherwell",
+            "competition": "SWPL 1"
+          },
+          {
+            "date": "2026-08-30T15:10:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 0,
+            "opponent": "Heart of Midlothian",
+            "competition": "SWPL 1"
+          },
+          {
+            "date": "2026-08-23T15:00:00.000Z",
+            "result": "W",
+            "gf": 7,
+            "ga": 0,
+            "opponent": "Spartans FC",
+            "competition": "SWPL 1"
+          }
+        ],
+        "recentGF": 16,
+        "recentGA": 1,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xiRating": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": "FotMob",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021858/match-details",
+      "model": {
+        "verdict": "WIN: Hammarby IF",
+        "confidence": 53,
+        "probabilities": [
+          0.3597828137613989,
+          0.32348636114536067,
+          0.3167308250932404
+        ],
+        "projected": "2–1",
+        "modalScore": "2–1",
+        "expectedGoals": [
+          1.4,
+          1.36
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            0.0
+          ],
+          [
+            "Recent form",
+            -5.0
+          ],
+          [
+            "Recent goal difference",
+            -13.5
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            65.0
+          ],
+          [
+            "Team draw tendency",
+            10.0
+          ]
+        ],
+        "dataCompleteness": 62,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021859",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "PSV",
+      "away": "Fortuna Hjørring",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T17:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 856501,
+        "division": "PSV (W)",
+        "leagueId": 10289,
+        "ccode": null,
+        "position": 4,
+        "form": "LLWD",
+        "lastSeasonPosition": 1,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 4,
+        "recentResults": [
+          {
+            "date": "2026-09-19T12:00:00.000Z",
+            "result": "L",
+            "gf": 0,
+            "ga": 4,
+            "opponent": "FC Twente (W)",
+            "competition": "Eredivisie Vrouwen"
+          },
+          {
+            "date": "2026-09-13T14:45:00.000Z",
+            "result": "L",
+            "gf": 1,
+            "ga": 3,
+            "opponent": "AZ Alkmaar (W)",
+            "competition": "Eredivisie Vrouwen"
+          },
+          {
+            "date": "2026-09-06T10:15:00.000Z",
+            "result": "W",
+            "gf": 6,
+            "ga": 0,
+            "opponent": "Feyenoord (W)",
+            "competition": "Eredivisie Vrouwen"
+          },
+          {
+            "date": "2026-08-22T12:00:00.000Z",
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "FC Utrecht (W)",
+            "competition": "Eredivisie Vrouwen"
+          }
+        ],
+        "recentGF": 8,
+        "recentGA": 8,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 10206,
+        "division": "Fortuna Hjørring (W)",
+        "leagueId": 256,
+        "ccode": null,
+        "position": 5,
+        "form": "LLWLW",
+        "lastSeasonPosition": 3,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 6,
+        "recentResults": [
+          {
+            "date": "2026-09-19T11:00:00.000Z",
+            "result": "L",
+            "gf": 0,
+            "ga": 4,
+            "opponent": "Brøndby IF (W)",
+            "competition": "A-Liga"
+          },
+          {
+            "date": "2026-09-12T11:00:00.000Z",
+            "result": "L",
+            "gf": 1,
+            "ga": 2,
+            "opponent": "HB Køge (W)",
+            "competition": "A-Liga"
+          },
+          {
+            "date": "2026-09-06T09:30:00.000Z",
+            "result": "W",
+            "gf": 4,
+            "ga": 0,
+            "opponent": "OB Q (W)",
+            "competition": "A-Liga"
+          },
+          {
+            "date": "2026-08-29T11:00:00.000Z",
+            "result": "L",
+            "gf": 1,
+            "ga": 2,
+            "opponent": "ASA Aarhus (W)",
+            "competition": "A-Liga"
+          },
+          {
+            "date": "2026-08-19T17:00:00.000Z",
+            "result": "W",
+            "gf": 3,
+            "ga": 0,
+            "opponent": "AGF (W)",
+            "competition": "A-Liga"
+          }
+        ],
+        "recentGF": 9,
+        "recentGA": 8,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021859/match-details",
+      "model": {
+        "verdict": "WIN: Fortuna Hjørring",
+        "confidence": 52,
+        "probabilities": [
+          0.3066741601262767,
+          0.32932062266501116,
+          0.3640052172087122
+        ],
+        "projected": "1–2",
+        "modalScore": "1–2",
+        "expectedGoals": [
+          1.42,
+          1.34
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            3.2
+          ],
+          [
+            "Recent form",
+            -5.0
           ],
           [
             "Recent goal difference",
@@ -1537,11 +3486,7 @@
           ],
           [
             "Starting XI quality",
-            -0.7
-          ],
-          [
-            "XI estimated value",
-            -7.0
+            0
           ],
           [
             "Home advantage",
@@ -1552,15 +3497,571 @@
             65.0
           ],
           [
-            "League draw rate",
-            25.0
+            "Team draw tendency",
+            12.5
+          ]
+        ],
+        "dataCompleteness": 50,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021846",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Ajax",
+      "away": "Aktobe W",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T17:30:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 856500,
+        "division": "Ajax (W)",
+        "leagueId": 10289,
+        "ccode": null,
+        "position": 2,
+        "form": "WLWW",
+        "lastSeasonPosition": 2,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 9,
+        "recentResults": [
+          {
+            "date": "2026-09-19T14:30:00.000Z",
+            "result": "W",
+            "gf": 5,
+            "ga": 1,
+            "opponent": "AZ Alkmaar (W)",
+            "competition": "Eredivisie Vrouwen"
+          },
+          {
+            "date": "2026-09-13T14:45:00.000Z",
+            "result": "L",
+            "gf": 1,
+            "ga": 3,
+            "opponent": "SC Heerenveen (W)",
+            "competition": "Eredivisie Vrouwen"
+          },
+          {
+            "date": "2026-09-06T14:45:00.000Z",
+            "result": "W",
+            "gf": 1,
+            "ga": 0,
+            "opponent": "De Graafschap (W)",
+            "competition": "Eredivisie Vrouwen"
+          },
+          {
+            "date": "2026-08-22T14:30:00.000Z",
+            "result": "W",
+            "gf": 1,
+            "ga": 0,
+            "opponent": "PEC Zwolle (W)",
+            "competition": "Eredivisie Vrouwen"
+          }
+        ],
+        "recentGF": 8,
+        "recentGA": 4,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 1777849,
+        "division": "Women's Champions League Qualification 2nd Round",
+        "leagueId": 10612,
+        "ccode": null,
+        "position": null,
+        "form": "LDDDL",
+        "lastSeasonPosition": null,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [],
+        "injuries": [],
+        "formPoints": 3,
+        "recentResults": [
+          {
+            "result": "L",
+            "gf": 0,
+            "ga": 4,
+            "opponent": "Servette (W)"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Ajax"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Ajax"
+          },
+          {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Ajax"
+          },
+          {
+            "result": "L",
+            "gf": 0,
+            "ga": 4,
+            "opponent": "Servette (W)"
+          }
+        ],
+        "recentGF": 0,
+        "recentGA": 8,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": null,
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021846/match-details",
+      "model": {
+        "verdict": "WIN: Ajax",
+        "confidence": 62,
+        "probabilities": [
+          0.4431358244770434,
+          0.3126551797128518,
+          0.2442089958101048
+        ],
+        "projected": "2–1",
+        "modalScore": "2–1",
+        "expectedGoals": [
+          1.54,
+          1.22
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            16.0
+          ],
+          [
+            "Recent form",
+            15.0
+          ],
+          [
+            "Recent goal difference",
+            18.0
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            0
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            59.3
           ],
           [
             "Team draw tendency",
-            10.0
+            30.0
           ]
         ],
-        "dataCompleteness": 75,
+        "dataCompleteness": 25,
+        "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
+      }
+    },
+    {
+      "id": "1000021855",
+      "competition": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionName": "UEFA Women's Europa Cup - 2nd Qualifying Round",
+      "competitionCountry": "International",
+      "competitionCode": "INT",
+      "competitionFlag": "🌍",
+      "home": "Heart of Midlothian",
+      "away": "Real Sociedad",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "UPCOMING",
+      "kickoff": "2026-09-23T18:00:00.000Z",
+      "minute": {
+        "short": ""
+      },
+      "homeData": {
+        "id": 1716177,
+        "division": "Heart of Midlothian (W)",
+        "leagueId": 10791,
+        "ccode": null,
+        "position": 3,
+        "form": "WWLW",
+        "lastSeasonPosition": 1,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [
+          {
+            "name": "Rachael Isabella Johnstone",
+            "playerId": 1716885,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1716885.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Monica Forsyth",
+            "playerId": 1716862,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1716862.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Carly Girasoli",
+            "playerId": 1091515,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1091515.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Erin Husband",
+            "playerId": 1716855,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1716855.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Jessica Husband",
+            "playerId": 1716832,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1716832.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Mairead Fulton",
+            "playerId": 1214584,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1214584.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Erin Rennie",
+            "playerId": 1716756,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1716756.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Lauren Wade",
+            "playerId": 1178002,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1178002.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Keri Halliday",
+            "playerId": 1587007,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1587007.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Kayla Jardine",
+            "playerId": 1716859,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1716859.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Carly Johns",
+            "playerId": 1534796,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1534796.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          }
+        ],
+        "injuries": [],
+        "formPoints": 9,
+        "recentResults": [
+          {
+            "date": "2026-09-20T13:00:00.000Z",
+            "result": "W",
+            "gf": 1,
+            "ga": 0,
+            "opponent": "Spartans FC",
+            "competition": "SWPL 1"
+          },
+          {
+            "date": "2026-09-06T12:00:00.000Z",
+            "result": "W",
+            "gf": 7,
+            "ga": 0,
+            "opponent": "Montrose",
+            "competition": "SWPL 1"
+          },
+          {
+            "date": "2026-08-30T15:10:00.000Z",
+            "result": "L",
+            "gf": 0,
+            "ga": 3,
+            "opponent": "Rangers",
+            "competition": "SWPL 1"
+          },
+          {
+            "date": "2026-08-23T15:00:00.000Z",
+            "result": "W",
+            "gf": 5,
+            "ga": 0,
+            "opponent": "Motherwell",
+            "competition": "SWPL 1"
+          }
+        ],
+        "recentGF": 13,
+        "recentGA": 3,
+        "ratingPrior": null,
+        "xgSeason": null,
+        "xiRating": null,
+        "xg": null
+      },
+      "awayData": {
+        "id": 858300,
+        "division": "Real Sociedad (W)",
+        "leagueId": 9907,
+        "ccode": null,
+        "position": 14,
+        "form": "DDLL",
+        "lastSeasonPosition": 3,
+        "lastSeason": "2025/26",
+        "transferImpact": 0.0,
+        "squadEstimatedValue": null,
+        "lineupEstimatedValue": null,
+        "lineup": [
+          {
+            "name": "Julia Arrula",
+            "playerId": 1591800,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1591800.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Laura Camino",
+            "playerId": 1546575,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1546575.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Nahia Aparicio",
+            "playerId": 1345407,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1345407.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Claudia",
+            "playerId": 1050217,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1050217.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Ainhoa Vicente",
+            "playerId": 1044156,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1044156.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Klára Cahynová",
+            "playerId": 734692,
+            "image": "https://images.fotmob.com/image_resources/playerimages/734692.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Paula Fernández",
+            "playerId": 1044325,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1044325.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Ainhoa Marín",
+            "playerId": 1122046,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1122046.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Intza Eguiguren",
+            "playerId": 1652283,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1652283.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Cecilia Marcos",
+            "playerId": 1130798,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1130798.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Nerea Eizagirre",
+            "playerId": 1043815,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1043815.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          }
+        ],
+        "injuries": [],
+        "formPoints": 2,
+        "recentResults": [
+          {
+            "date": "2026-09-19T10:00:00.000Z",
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Levante Badalona (W)",
+            "competition": "Liga F"
+          },
+          {
+            "date": "2026-09-13T10:00:00.000Z",
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "UD Tenerife (W)",
+            "competition": "Liga F"
+          },
+          {
+            "date": "2026-09-07T17:30:00.000Z",
+            "result": "L",
+            "gf": 2,
+            "ga": 3,
+            "opponent": "Granada (W)",
+            "competition": "Liga F"
+          },
+          {
+            "date": "2026-08-29T10:00:00.000Z",
+            "result": "L",
+            "gf": 0,
+            "ga": 2,
+            "opponent": "Logroño United (W)",
+            "competition": "Liga F"
+          }
+        ],
+        "recentGF": 3,
+        "recentGA": 6,
+        "ratingPrior": 6.6,
+        "xgSeason": null,
+        "xiRating": null,
+        "xg": null
+      },
+      "h2hSummary": "0–0–0",
+      "scorers": [],
+      "sofascoreEventId": null,
+      "lineupSource": "FotMob",
+      "fotmobMatchUrl": "https://www.fotmob.com/matches/1000021855/match-details",
+      "model": {
+        "verdict": "WIN: Heart of Midlothian",
+        "confidence": 74,
+        "probabilities": [
+          0.4878996688467593,
+          0.299898935780295,
+          0.2122013953729457
+        ],
+        "projected": "2–1",
+        "modalScore": "2–1",
+        "expectedGoals": [
+          1.54,
+          1.22
+        ],
+        "factors": [
+          [
+            "Division / team strength",
+            0.0
+          ],
+          [
+            "Current table",
+            0.0
+          ],
+          [
+            "Last-season prior",
+            3.2
+          ],
+          [
+            "Recent form",
+            17.5
+          ],
+          [
+            "Recent goal difference",
+            19.5
+          ],
+          [
+            "Squad / transfer",
+            0
+          ],
+          [
+            "Starting XI quality",
+            7.2
+          ],
+          [
+            "Home advantage",
+            12
+          ],
+          [
+            "Machine-learning ensemble",
+            65.0
+          ],
+          [
+            "Team draw tendency",
+            25.0
+          ]
+        ],
+        "dataCompleteness": 62,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     }
