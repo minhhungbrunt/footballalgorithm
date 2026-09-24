@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-24T19:41:34.425781+00:00",
-  "updated": "2026-09-24 03:41:34 PM ET",
+  "updatedAt": "2026-09-24T22:45:12.477793+00:00",
+  "updated": "2026-09-24 06:45:12 PM ET",
   "updateMode": "AUTO",
   "refreshIntervalSeconds": 300,
   "fixtureCount": 21,
@@ -380,7 +380,7 @@
         "probabilities": [
           0.4295130112354984,
           0.3347092855043273,
-          0.23577770326017433
+          0.2357777032601743
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -2732,7 +2732,7 @@
         "probabilities": [
           0.3615475524373843,
           0.34318720325083885,
-          0.2952652443117769
+          0.295265244311777
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -2799,21 +2799,26 @@
       "competitionFlag": "🌍",
       "home": "Netherlands",
       "away": "Germany",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-09-24T18:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 6708,
         "division": "UEFA Nations League A",
         "leagueId": 9806,
         "ccode": "INT",
-        "position": 4,
-        "form": "DDDLL",
-        "lastSeasonPosition": 4,
+        "position": 3,
+        "form": "DDDDD",
+        "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -2920,7 +2925,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 3,
+        "formPoints": 5,
         "recentResults": [
           {
             "result": "D",
@@ -2941,34 +2946,34 @@
             "opponent": "Germany"
           },
           {
-            "result": "L",
+            "result": "D",
             "gf": 0,
-            "ga": 1,
-            "opponent": "Germany"
+            "ga": 0,
+            "opponent": "Serbia"
           },
           {
-            "result": "L",
-            "gf": 3,
-            "ga": 4,
-            "opponent": "Morocco"
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Germany"
           }
         ],
-        "recentGF": 3,
-        "recentGA": 5,
-        "ratingPrior": 6.15,
-        "xgSeason": 0.5,
+        "recentGF": 1,
+        "recentGA": 1,
+        "ratingPrior": 7.03,
+        "xgSeason": 3.12,
         "xiRating": null,
-        "matchXG": 0.5,
-        "xg": 0.5
+        "matchXG": 3.12,
+        "xg": 3.12
       },
       "awayData": {
         "id": 8570,
         "division": "UEFA Nations League A",
         "leagueId": 9806,
         "ccode": "INT",
-        "position": 1,
-        "form": "DDDWL",
-        "lastSeasonPosition": 1,
+        "position": 2,
+        "form": "DDDDD",
+        "lastSeasonPosition": 2,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -3075,7 +3080,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 6,
+        "formPoints": 5,
         "recentResults": [
           {
             "result": "D",
@@ -3096,25 +3101,25 @@
             "opponent": "Netherlands"
           },
           {
-            "result": "W",
-            "gf": 1,
+            "result": "D",
+            "gf": 0,
             "ga": 0,
-            "opponent": "Netherlands"
+            "opponent": "Greece"
           },
           {
-            "result": "L",
-            "gf": 4,
-            "ga": 5,
-            "opponent": "Paraguay"
+            "result": "D",
+            "gf": 1,
+            "ga": 1,
+            "opponent": "Netherlands"
           }
         ],
-        "recentGF": 5,
-        "recentGA": 5,
-        "ratingPrior": 6.05,
-        "xgSeason": 1.26,
+        "recentGF": 1,
+        "recentGA": 1,
+        "ratingPrior": 6.54,
+        "xgSeason": 1.5,
         "xiRating": null,
-        "matchXG": 1.26,
-        "xg": 1.26
+        "matchXG": 1.5,
+        "xg": 1.5
       },
       "h2hSummary": "2–5–5",
       "scorers": [],
@@ -3123,17 +3128,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181825/match-details",
       "model": {
         "verdict": "WIN: Germany",
-        "confidence": 59,
+        "confidence": 55,
         "probabilities": [
-          0.26587386156021814,
-          0.33198984234469997,
-          0.40213629609508184
+          0.30637844616251025,
+          0.32991107460421654,
+          0.3637104792332732
         ],
-        "projected": "0–1",
-        "modalScore": "0–1",
+        "projected": "1–2",
+        "modalScore": "1–2",
         "expectedGoals": [
-          1.26,
-          1.33
+          1.83,
+          1.34
         ],
         "factors": [
           [
@@ -3142,19 +3147,19 @@
           ],
           [
             "Current table",
-            -6.0
+            -2.0
           ],
           [
             "Last-season prior",
-            -4.8
+            -1.6
           ],
           [
             "Recent form",
-            -7.5
+            0.0
           ],
           [
             "Recent goal difference",
-            -3.0
+            0.0
           ],
           [
             "Squad / transfer",
@@ -3162,7 +3167,7 @@
           ],
           [
             "Starting XI quality",
-            1.8
+            8.8
           ],
           [
             "XI estimated value",
@@ -3178,7 +3183,7 @@
           ],
           [
             "Team draw tendency",
-            60.0
+            100.0
           ]
         ],
         "dataCompleteness": 75,
@@ -3195,20 +3200,25 @@
       "home": "Serbia",
       "away": "Greece",
       "homeScore": 1,
-      "awayScore": 0,
-      "status": "LIVE",
+      "awayScore": 2,
+      "status": "FT",
       "kickoff": "2026-09-24T18:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8205,
         "division": "UEFA Nations League A",
         "leagueId": 9806,
         "ccode": "INT",
-        "position": 2,
-        "form": "DDDWL",
-        "lastSeasonPosition": 2,
+        "position": 4,
+        "form": "DDDDL",
+        "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -3315,7 +3325,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 6,
+        "formPoints": 4,
         "recentResults": [
           {
             "result": "D",
@@ -3336,34 +3346,34 @@
             "opponent": "Greece"
           },
           {
-            "result": "W",
-            "gf": 1,
+            "result": "D",
+            "gf": 0,
             "ga": 0,
-            "opponent": "Greece"
+            "opponent": "Netherlands"
           },
           {
             "result": "L",
             "gf": 1,
-            "ga": 5,
-            "opponent": "Mexico"
+            "ga": 2,
+            "opponent": "Greece"
           }
         ],
-        "recentGF": 2,
-        "recentGA": 5,
-        "ratingPrior": 6.87,
-        "xgSeason": 0.74,
+        "recentGF": 1,
+        "recentGA": 2,
+        "ratingPrior": 6.6,
+        "xgSeason": 1.32,
         "xiRating": null,
-        "matchXG": 0.74,
-        "xg": 0.74
+        "matchXG": 1.32,
+        "xg": 1.32
       },
       "awayData": {
         "id": 6383,
         "division": "UEFA Nations League A",
         "leagueId": 9806,
         "ccode": "INT",
-        "position": 3,
-        "form": "DDDLL",
-        "lastSeasonPosition": 3,
+        "position": 1,
+        "form": "DDDDW",
+        "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -3470,7 +3480,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 3,
+        "formPoints": 7,
         "recentResults": [
           {
             "result": "D",
@@ -3491,25 +3501,25 @@
             "opponent": "Serbia"
           },
           {
-            "result": "L",
+            "result": "D",
             "gf": 0,
-            "ga": 1,
-            "opponent": "Serbia"
+            "ga": 0,
+            "opponent": "Germany"
           },
           {
-            "result": "L",
-            "gf": 0,
+            "result": "W",
+            "gf": 2,
             "ga": 1,
-            "opponent": "Italy"
+            "opponent": "Serbia"
           }
         ],
-        "recentGF": 0,
-        "recentGA": 2,
-        "ratingPrior": 6.19,
-        "xgSeason": 1.2,
+        "recentGF": 2,
+        "recentGA": 1,
+        "ratingPrior": 7.16,
+        "xgSeason": 2.49,
         "xiRating": null,
-        "matchXG": 1.2,
-        "xg": 1.2
+        "matchXG": 2.49,
+        "xg": 2.49
       },
       "h2hSummary": "1–0–1",
       "scorers": [],
@@ -3518,17 +3528,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181826/match-details",
       "model": {
         "verdict": "WIN: Greece",
-        "confidence": 56,
+        "confidence": 62,
         "probabilities": [
-          0.2909882758641277,
-          0.33187630910473603,
-          0.37713541503113635
+          0.26249808101880756,
+          0.3255556366138184,
+          0.4119462823673741
         ],
-        "projected": "0–1",
-        "modalScore": "0–1",
+        "projected": "1–2",
+        "modalScore": "1–2",
         "expectedGoals": [
-          1.36,
-          1.27
+          1.4,
+          1.6
         ],
         "factors": [
           [
@@ -3537,19 +3547,19 @@
           ],
           [
             "Current table",
-            2.0
+            -6.0
           ],
           [
             "Last-season prior",
-            1.6
+            -4.8
           ],
           [
             "Recent form",
-            7.5
+            -7.5
           ],
           [
             "Recent goal difference",
-            -1.5
+            -3.0
           ],
           [
             "Squad / transfer",
@@ -3557,7 +3567,7 @@
           ],
           [
             "Starting XI quality",
-            12.2
+            -10.1
           ],
           [
             "XI estimated value",
@@ -3573,7 +3583,7 @@
           ],
           [
             "Team draw tendency",
-            60.0
+            80.0
           ]
         ],
         "dataCompleteness": 75,
@@ -3589,12 +3599,17 @@
       "competitionFlag": "🌍",
       "home": "Norway",
       "away": "Denmark",
-      "homeScore": 2,
-      "awayScore": 1,
-      "status": "LIVE",
+      "homeScore": 3,
+      "awayScore": 2,
+      "status": "FT",
       "kickoff": "2026-09-24T18:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8492,
@@ -3602,7 +3617,7 @@
         "leagueId": 9806,
         "ccode": "INT",
         "position": 1,
-        "form": "DDDWL",
+        "form": "DDDDW",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -3710,7 +3725,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 6,
+        "formPoints": 7,
         "recentResults": [
           {
             "result": "D",
@@ -3731,25 +3746,25 @@
             "opponent": "Denmark"
           },
           {
-            "result": "W",
-            "gf": 2,
-            "ga": 1,
-            "opponent": "Denmark"
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Portugal"
           },
           {
-            "result": "L",
-            "gf": 1,
+            "result": "W",
+            "gf": 3,
             "ga": 2,
-            "opponent": "England"
+            "opponent": "Denmark"
           }
         ],
         "recentGF": 3,
-        "recentGA": 3,
-        "ratingPrior": 7.01,
-        "xgSeason": 0.86,
+        "recentGA": 2,
+        "ratingPrior": 7.2,
+        "xgSeason": 1.47,
         "xiRating": null,
-        "matchXG": 0.86,
-        "xg": 0.86
+        "matchXG": 1.47,
+        "xg": 1.47
       },
       "awayData": {
         "id": 8238,
@@ -3757,7 +3772,7 @@
         "leagueId": 9806,
         "ccode": "INT",
         "position": 3,
-        "form": "DDDLW",
+        "form": "DDDDL",
         "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -3865,7 +3880,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 6,
+        "formPoints": 4,
         "recentResults": [
           {
             "result": "D",
@@ -3886,25 +3901,25 @@
             "opponent": "Norway"
           },
           {
-            "result": "L",
-            "gf": 1,
-            "ga": 2,
-            "opponent": "Norway"
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Wales"
           },
           {
-            "result": "W",
+            "result": "L",
             "gf": 2,
-            "ga": 1,
-            "opponent": "Ukraine"
+            "ga": 3,
+            "opponent": "Norway"
           }
         ],
-        "recentGF": 3,
+        "recentGF": 2,
         "recentGA": 3,
-        "ratingPrior": 6.2,
-        "xgSeason": 0.23,
+        "ratingPrior": 6.76,
+        "xgSeason": 1.08,
         "xiRating": null,
-        "matchXG": 0.23,
-        "xg": 0.23
+        "matchXG": 1.08,
+        "xg": 1.08
       },
       "h2hSummary": "0–2–3",
       "scorers": [],
@@ -3913,17 +3928,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181861/match-details",
       "model": {
         "verdict": "WIN: Norway",
-        "confidence": 51,
+        "confidence": 52,
         "probabilities": [
-          0.361571709754694,
-          0.3568613491998442,
-          0.28156694104546176
+          0.3683217090117338,
+          0.35009416880060346,
+          0.2815841221876627
         ],
-        "projected": "1–0",
-        "modalScore": "1–0",
+        "projected": "2–1",
+        "modalScore": "2–1",
         "expectedGoals": [
-          1.39,
-          1.06
+          1.53,
+          1.22
         ],
         "factors": [
           [
@@ -3940,11 +3955,11 @@
           ],
           [
             "Recent form",
-            0.0
+            7.5
           ],
           [
             "Recent goal difference",
-            0.0
+            3.0
           ],
           [
             "Squad / transfer",
@@ -3952,7 +3967,7 @@
           ],
           [
             "Starting XI quality",
-            14.6
+            7.9
           ],
           [
             "XI estimated value",
@@ -3968,7 +3983,7 @@
           ],
           [
             "Team draw tendency",
-            60.0
+            80.0
           ]
         ],
         "dataCompleteness": 75,
@@ -3986,10 +4001,15 @@
       "away": "Wales",
       "homeScore": 1,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-09-24T18:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8361,
@@ -3997,7 +4017,7 @@
         "leagueId": 9806,
         "ccode": "INT",
         "position": 2,
-        "form": "DDDWL",
+        "form": "DDDDW",
         "lastSeasonPosition": 2,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -4105,7 +4125,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 6,
+        "formPoints": 7,
         "recentResults": [
           {
             "result": "D",
@@ -4126,25 +4146,25 @@
             "opponent": "Wales"
           },
           {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Norway"
+          },
+          {
             "result": "W",
             "gf": 1,
             "ga": 0,
             "opponent": "Wales"
-          },
-          {
-            "result": "L",
-            "gf": 0,
-            "ga": 1,
-            "opponent": "Spain"
           }
         ],
         "recentGF": 1,
-        "recentGA": 1,
-        "ratingPrior": 6.95,
-        "xgSeason": 2.59,
+        "recentGA": 0,
+        "ratingPrior": 7.32,
+        "xgSeason": 3.27,
         "xiRating": null,
-        "matchXG": 0.99,
-        "xg": 0.99
+        "matchXG": 2.36,
+        "xg": 2.36
       },
       "awayData": {
         "id": 5790,
@@ -4152,7 +4172,7 @@
         "leagueId": 9806,
         "ccode": "INT",
         "position": 4,
-        "form": "DDDLL",
+        "form": "DDDDL",
         "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -4260,7 +4280,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 3,
+        "formPoints": 4,
         "recentResults": [
           {
             "result": "D",
@@ -4281,25 +4301,25 @@
             "opponent": "Portugal"
           },
           {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Denmark"
+          },
+          {
             "result": "L",
             "gf": 0,
             "ga": 1,
             "opponent": "Portugal"
-          },
-          {
-            "result": "L",
-            "gf": 1,
-            "ga": 2,
-            "opponent": "Romania"
           }
         ],
-        "recentGF": 1,
-        "recentGA": 3,
-        "ratingPrior": 6.01,
-        "xgSeason": 0.03,
+        "recentGF": 0,
+        "recentGA": 1,
+        "ratingPrior": 6.31,
+        "xgSeason": 0.9,
         "xiRating": null,
-        "matchXG": 0.03,
-        "xg": 0.03
+        "matchXG": 0.9,
+        "xg": 0.9
       },
       "h2hSummary": "1–0–0",
       "scorers": [],
@@ -4308,17 +4328,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181862/match-details",
       "model": {
         "verdict": "WIN: Portugal",
-        "confidence": 60,
+        "confidence": 62,
         "probabilities": [
-          0.41782361126949674,
-          0.34546251754131735,
-          0.23671387118918588
+          0.4293181400611006,
+          0.3389929590608157,
+          0.2316889008780837
         ],
-        "projected": "1–0",
-        "modalScore": "1–0",
+        "projected": "2–1",
+        "modalScore": "2–1",
         "expectedGoals": [
-          1.44,
-          1.04
+          1.72,
+          1.17
         ],
         "factors": [
           [
@@ -4347,7 +4367,7 @@
           ],
           [
             "Starting XI quality",
-            16.9
+            18.2
           ],
           [
             "XI estimated value",
@@ -4363,7 +4383,7 @@
           ],
           [
             "Team draw tendency",
-            60.0
+            80.0
           ]
         ],
         "dataCompleteness": 75,
@@ -4704,7 +4724,7 @@
         "probabilities": [
           0.39342290343043307,
           0.34430036986799584,
-          0.26227672670157115
+          0.2622767267015711
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -5164,12 +5184,17 @@
       "competitionFlag": "🌍",
       "home": "Austria",
       "away": "Israel",
-      "homeScore": 1,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 3,
+      "awayScore": 1,
+      "status": "FT",
       "kickoff": "2026-09-24T18:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8255,
@@ -5177,7 +5202,7 @@
         "leagueId": 9807,
         "ccode": "INT",
         "position": 1,
-        "form": "DDDWL",
+        "form": "DDDDW",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -5285,7 +5310,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 6,
+        "formPoints": 7,
         "recentResults": [
           {
             "result": "D",
@@ -5306,25 +5331,25 @@
             "opponent": "Israel"
           },
           {
-            "result": "W",
-            "gf": 1,
+            "result": "D",
+            "gf": 0,
             "ga": 0,
-            "opponent": "Israel"
+            "opponent": "Kosovo"
           },
           {
-            "result": "L",
-            "gf": 0,
-            "ga": 3,
-            "opponent": "Spain"
+            "result": "W",
+            "gf": 3,
+            "ga": 1,
+            "opponent": "Israel"
           }
         ],
-        "recentGF": 1,
-        "recentGA": 3,
-        "ratingPrior": 6.92,
-        "xgSeason": 2.58,
+        "recentGF": 3,
+        "recentGA": 1,
+        "ratingPrior": 7.31,
+        "xgSeason": 3.2,
         "xiRating": null,
-        "matchXG": 1.45,
-        "xg": 1.45
+        "matchXG": 2.68,
+        "xg": 2.68
       },
       "awayData": {
         "id": 8567,
@@ -5332,7 +5357,7 @@
         "leagueId": 9807,
         "ccode": "INT",
         "position": 4,
-        "form": "DDDLW",
+        "form": "DDDDL",
         "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -5440,7 +5465,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 6,
+        "formPoints": 4,
         "recentResults": [
           {
             "result": "D",
@@ -5461,25 +5486,25 @@
             "opponent": "Austria"
           },
           {
-            "result": "L",
+            "result": "D",
             "gf": 0,
-            "ga": 1,
-            "opponent": "Austria"
+            "ga": 0,
+            "opponent": "Ireland"
           },
           {
-            "result": "W",
+            "result": "L",
             "gf": 1,
-            "ga": 0,
-            "opponent": "Albania"
+            "ga": 3,
+            "opponent": "Austria"
           }
         ],
         "recentGF": 1,
-        "recentGA": 1,
-        "ratingPrior": 6.17,
-        "xgSeason": 0.13,
+        "recentGA": 3,
+        "ratingPrior": 6.31,
+        "xgSeason": 0.21,
         "xiRating": null,
-        "matchXG": 0.13,
-        "xg": 0.13
+        "matchXG": 0.21,
+        "xg": 0.21
       },
       "h2hSummary": "2–0–2",
       "scorers": [],
@@ -5488,17 +5513,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181812/match-details",
       "model": {
         "verdict": "WIN: Austria",
-        "confidence": 52,
+        "confidence": 58,
         "probabilities": [
-          0.3626607191135831,
-          0.346427896459167,
-          0.29091138442724984
+          0.3942725186914894,
+          0.3359595215762968,
+          0.2697679597322138
         ],
-        "projected": "1–0",
-        "modalScore": "1–0",
+        "projected": "2–1",
+        "modalScore": "2–1",
         "expectedGoals": [
-          1.51,
-          1.06
+          1.79,
+          1.03
         ],
         "factors": [
           [
@@ -5515,11 +5540,11 @@
           ],
           [
             "Recent form",
-            0.0
+            7.5
           ],
           [
             "Recent goal difference",
-            -3.0
+            6.0
           ],
           [
             "Squad / transfer",
@@ -5527,7 +5552,7 @@
           ],
           [
             "Starting XI quality",
-            13.5
+            18.0
           ],
           [
             "XI estimated value",
@@ -5543,7 +5568,7 @@
           ],
           [
             "Team draw tendency",
-            60.0
+            80.0
           ]
         ],
         "dataCompleteness": 75,
@@ -5559,21 +5584,26 @@
       "competitionFlag": "🌍",
       "home": "Kosovo",
       "away": "Ireland",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-09-24T18:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 430156,
         "division": "UEFA Nations League B",
         "leagueId": 9807,
         "ccode": "INT",
-        "position": 3,
+        "position": 2,
         "form": "DDDDW",
-        "lastSeasonPosition": 3,
+        "lastSeasonPosition": 2,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -5704,31 +5734,31 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Ireland"
+            "opponent": "Austria"
           },
           {
             "result": "W",
-            "gf": 3,
+            "gf": 1,
             "ga": 0,
-            "opponent": "Andorra"
+            "opponent": "Ireland"
           }
         ],
-        "recentGF": 3,
+        "recentGF": 1,
         "recentGA": 0,
-        "ratingPrior": 6.59,
-        "xgSeason": 0.59,
+        "ratingPrior": 7.18,
+        "xgSeason": 2.22,
         "xiRating": null,
-        "matchXG": 0.59,
-        "xg": 0.59
+        "matchXG": 2.22,
+        "xg": 2.22
       },
       "awayData": {
         "id": 5791,
         "division": "UEFA Nations League B",
         "leagueId": 9807,
         "ccode": "INT",
-        "position": 2,
-        "form": "DDDDD",
-        "lastSeasonPosition": 2,
+        "position": 3,
+        "form": "DDDDL",
+        "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -5835,7 +5865,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 5,
+        "formPoints": 4,
         "recentResults": [
           {
             "result": "D",
@@ -5859,22 +5889,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Kosovo"
+            "opponent": "Israel"
           },
           {
-            "result": "D",
-            "gf": 1,
+            "result": "L",
+            "gf": 0,
             "ga": 1,
-            "opponent": "Canada"
+            "opponent": "Kosovo"
           }
         ],
-        "recentGF": 1,
+        "recentGF": 0,
         "recentGA": 1,
-        "ratingPrior": 6.57,
-        "xgSeason": 0.06,
+        "ratingPrior": 6.41,
+        "xgSeason": 0.28,
         "xiRating": null,
-        "matchXG": 0.06,
-        "xg": 0.06
+        "matchXG": 0.28,
+        "xg": 0.28
       },
       "h2hSummary": "0–0–0",
       "scorers": [],
@@ -5882,18 +5912,18 @@
       "lineupSource": "FotMob",
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181813/match-details",
       "model": {
-        "verdict": "DRAW",
-        "confidence": 51,
+        "verdict": "WIN: Kosovo",
+        "confidence": 55,
         "probabilities": [
-          0.35327531771556286,
-          0.359116398108805,
-          0.28760828417563217
+          0.38565641446750715,
+          0.3491561384156014,
+          0.2651874471168915
         ],
-        "projected": "1–1",
-        "modalScore": "1–1",
+        "projected": "1–0",
+        "modalScore": "1–0",
         "expectedGoals": [
-          1.32,
-          1.08
+          1.67,
+          1.07
         ],
         "factors": [
           [
@@ -5902,19 +5932,19 @@
           ],
           [
             "Current table",
-            -2.0
+            2.0
           ],
           [
             "Last-season prior",
-            -1.6
+            1.6
           ],
           [
             "Recent form",
-            5.0
+            7.5
           ],
           [
             "Recent goal difference",
-            4.5
+            3.0
           ],
           [
             "Squad / transfer",
@@ -5922,7 +5952,7 @@
           ],
           [
             "Starting XI quality",
-            0.4
+            13.9
           ],
           [
             "XI estimated value",
@@ -5938,7 +5968,7 @@
           ],
           [
             "Team draw tendency",
-            90.0
+            80.0
           ]
         ],
         "dataCompleteness": 75,
@@ -6280,7 +6310,7 @@
         "probabilities": [
           0.3237260157045914,
           0.3416259886838551,
-          0.3346479956115535
+          0.33464799561155356
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -7507,20 +7537,25 @@
       "home": "Liechtenstein",
       "away": "Lithuania",
       "homeScore": 0,
-      "awayScore": 0,
-      "status": "LIVE",
+      "awayScore": 2,
+      "status": "FT",
       "kickoff": "2026-09-24T18:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 5799,
         "division": "UEFA Nations League D",
         "leagueId": 9809,
         "ccode": "INT",
-        "position": 1,
+        "position": 3,
         "form": "DDDDL",
-        "lastSeasonPosition": 1,
+        "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -7646,31 +7681,31 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Lithuania"
+            "opponent": "Malta"
           },
           {
             "result": "L",
             "gf": 0,
             "ga": 2,
-            "opponent": "Cyprus"
+            "opponent": "Lithuania"
           }
         ],
         "recentGF": 0,
         "recentGA": 2,
-        "ratingPrior": 6.39,
-        "xgSeason": 0.05,
+        "ratingPrior": 6.22,
+        "xgSeason": 0.08,
         "xiRating": null,
-        "matchXG": 0.05,
-        "xg": 0.05
+        "matchXG": 0.08,
+        "xg": 0.08
       },
       "awayData": {
         "id": 8254,
         "division": "UEFA Nations League D",
         "leagueId": 9809,
         "ccode": "INT",
-        "position": 2,
-        "form": "DDDDL",
-        "lastSeasonPosition": 2,
+        "position": 1,
+        "form": "DDDDW",
+        "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -7777,7 +7812,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 4,
+        "formPoints": 7,
         "recentResults": [
           {
             "result": "D",
@@ -7801,22 +7836,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Liechtenstein"
+            "opponent": "Azerbaijan"
           },
           {
-            "result": "L",
-            "gf": 0,
-            "ga": 1,
-            "opponent": "Estonia"
+            "result": "W",
+            "gf": 2,
+            "ga": 0,
+            "opponent": "Liechtenstein"
           }
         ],
-        "recentGF": 0,
-        "recentGA": 1,
-        "ratingPrior": 6.54,
-        "xgSeason": 0.33,
+        "recentGF": 2,
+        "recentGA": 0,
+        "ratingPrior": 7.02,
+        "xgSeason": 1.38,
         "xiRating": null,
-        "matchXG": 0.33,
-        "xg": 0.33
+        "matchXG": 1.38,
+        "xg": 1.38
       },
       "h2hSummary": "1–1–2",
       "scorers": [],
@@ -7825,17 +7860,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181880/match-details",
       "model": {
         "verdict": "WIN: Lithuania",
-        "confidence": 51,
+        "confidence": 54,
         "probabilities": [
-          0.3056386607448137,
-          0.34345940175169215,
-          0.3509019375034941
+          0.281247990187128,
+          0.3427435252694737,
+          0.3760084845433983
         ],
         "projected": "0–1",
         "modalScore": "0–1",
         "expectedGoals": [
-          1.23,
-          1.12
+          1.18,
+          1.37
         ],
         "factors": [
           [
@@ -7844,19 +7879,19 @@
           ],
           [
             "Current table",
-            2.0
+            -4.0
           ],
           [
             "Last-season prior",
-            1.6
+            -3.2
           ],
           [
             "Recent form",
-            0.0
+            -7.5
           ],
           [
             "Recent goal difference",
-            -1.5
+            -6.0
           ],
           [
             "Squad / transfer",
@@ -7864,7 +7899,7 @@
           ],
           [
             "Starting XI quality",
-            -2.7
+            -14.4
           ],
           [
             "XI estimated value",
