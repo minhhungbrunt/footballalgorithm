@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-25T15:52:46.347835+00:00",
-  "updated": "2026-10-25 11:52:46 AM ET",
+  "updatedAt": "2026-10-25T18:35:54.096870+00:00",
+  "updated": "2026-10-25 02:35:54 PM ET",
   "updateMode": "AUTO",
   "refreshIntervalSeconds": 300,
   "fixtureCount": 86,
@@ -1138,19 +1138,24 @@
       "competitionFlag": "🇧🇪",
       "home": "Club Brugge",
       "away": "St.Truiden",
-      "homeScore": 2,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 3,
+      "awayScore": 2,
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8342,
         "division": "Belgian Pro League",
         "leagueId": 40,
         "ccode": null,
-        "position": 1,
+        "position": 2,
         "form": "WW",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
@@ -1280,11 +1285,11 @@
         ],
         "recentGF": 7,
         "recentGA": 1,
-        "ratingPrior": 7.18,
+        "ratingPrior": 7.2,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.13,
-        "xg": 1.13
+        "matchXG": 2.67,
+        "xg": 2.67
       },
       "awayData": {
         "id": 9997,
@@ -1421,11 +1426,11 @@
         ],
         "recentGF": 3,
         "recentGA": 6,
-        "ratingPrior": 6.73,
+        "ratingPrior": 6.74,
         "xgSeason": 4.13,
         "xiRating": null,
-        "matchXG": 0.31,
-        "xg": 0.31
+        "matchXG": 1.81,
+        "xg": 1.81
       },
       "h2hSummary": "18–6–5",
       "scorers": [],
@@ -1434,17 +1439,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5811783/match-details",
       "model": {
         "verdict": "WIN: Club Brugge",
-        "confidence": 73,
+        "confidence": 75,
         "probabilities": [
-          0.49087972262373125,
-          0.3172226533484159,
-          0.19189762402785282
+          0.49378488402895876,
+          0.3050745399654229,
+          0.20114057600561838
         ],
-        "projected": "1–0",
-        "modalScore": "1–0",
+        "projected": "2–1",
+        "modalScore": "2–1",
         "expectedGoals": [
-          1.52,
-          1.01
+          1.82,
+          1.31
         ],
         "factors": [
           [
@@ -1453,7 +1458,7 @@
           ],
           [
             "Current table",
-            24.0
+            22.0
           ],
           [
             "Last-season prior",
@@ -1473,7 +1478,7 @@
           ],
           [
             "Starting XI quality",
-            8.1
+            8.3
           ],
           [
             "XI estimated value",
@@ -1509,9 +1514,9 @@
       "competitionFlag": "🇧🇪",
       "home": "Gent",
       "away": "Anderlecht",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "LIVE",
       "kickoff": "2026-10-25T17:30:00.000Z",
       "minute": {
         "short": ""
@@ -1521,13 +1526,13 @@
         "division": "Belgian Pro League",
         "leagueId": 40,
         "ccode": null,
-        "position": 2,
+        "position": 1,
         "form": "W",
         "lastSeasonPosition": 5,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 36109493,
+        "lineupEstimatedValue": 35644945,
         "lineup": [
           {
             "name": "Davy Roef",
@@ -1566,15 +1571,6 @@
             "estimatedValue": 2136762
           },
           {
-            "name": "Tiago Araújo",
-            "playerId": 1185329,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1185329.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2018224
-          },
-          {
             "name": "Hyllarion Goore",
             "playerId": 1666324,
             "image": "https://images.fotmob.com/image_resources/playerimages/1666324.png",
@@ -1602,22 +1598,22 @@
             "estimatedValue": 8991787
           },
           {
-            "name": "Michel-Ange Balikwisha",
-            "playerId": 1173248,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1173248.png",
+            "name": "Tiago Araújo",
+            "playerId": 1185329,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1185329.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 2304465
+            "estimatedValue": 2018224
           },
           {
-            "name": "Ibrahima Cisse",
-            "playerId": 1898989,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1898989.png",
+            "name": "Abdelkahar Kadri",
+            "playerId": 1120987,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1120987.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1542381
+            "estimatedValue": 1839917
           },
           {
             "name": "Momodou Sonko",
@@ -1627,6 +1623,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 1786670
+          },
+          {
+            "name": "Ibrahima Cisse",
+            "playerId": 1898989,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1898989.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1542381
           }
         ],
         "injuries": [],
@@ -1643,10 +1648,11 @@
         ],
         "recentGF": 2,
         "recentGA": 0,
-        "ratingPrior": 7.02,
+        "ratingPrior": 7.01,
         "xgSeason": 2.69,
         "xiRating": null,
-        "xg": 2.69
+        "matchXG": 0.53,
+        "xg": 0.53
       },
       "awayData": {
         "id": 8635,
@@ -1659,7 +1665,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 36097720,
+        "lineupEstimatedValue": 33613027,
         "lineup": [
           {
             "name": "Colin Coosemans",
@@ -1707,15 +1713,6 @@
             "estimatedValue": 1371414
           },
           {
-            "name": "Lukás Ambros",
-            "playerId": 1412656,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1412656.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 4094068
-          },
-          {
             "name": "Mario Stroeykens",
             "playerId": 1219672,
             "image": "https://images.fotmob.com/image_resources/playerimages/1219672.png",
@@ -1723,15 +1720,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 5532471
-          },
-          {
-            "name": "Thelo Aasgaard",
-            "playerId": 1184468,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1184468.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1693175
           },
           {
             "name": "Marten Winkler",
@@ -1743,13 +1731,22 @@
             "estimatedValue": 1740575
           },
           {
-            "name": "Mihajlo Cvetković",
-            "playerId": 1480699,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1480699.png",
+            "name": "Enric Llansana",
+            "playerId": 1033342,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1033342.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 13680307
+            "estimatedValue": 1609375
+          },
+          {
+            "name": "Thelo Aasgaard",
+            "playerId": 1184468,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1184468.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1693175
           },
           {
             "name": "Tristan Degreef",
@@ -1759,6 +1756,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 3620598
+          },
+          {
+            "name": "Mihajlo Cvetković",
+            "playerId": 1480699,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1480699.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 13680307
           }
         ],
         "injuries": [],
@@ -1775,10 +1781,11 @@
         ],
         "recentGF": 2,
         "recentGA": 1,
-        "ratingPrior": 6.86,
+        "ratingPrior": 6.79,
         "xgSeason": 3.91,
         "xiRating": null,
-        "xg": 3.91
+        "matchXG": 0.63,
+        "xg": 0.63
       },
       "h2hSummary": "12–19–27",
       "scorers": [],
@@ -1787,17 +1794,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5811785/match-details",
       "model": {
         "verdict": "WIN: Gent",
-        "confidence": 59,
+        "confidence": 57,
         "probabilities": [
-          0.38246133945067834,
-          0.31824747892438016,
-          0.2992911816249415
+          0.38568203598824724,
+          0.3338396638703724,
+          0.2804783001413803
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "1–0",
+        "modalScore": "1–0",
         "expectedGoals": [
-          1.74,
-          1.72
+          1.31,
+          1.16
         ],
         "factors": [
           [
@@ -1806,7 +1813,7 @@
           ],
           [
             "Current table",
-            6.0
+            8.0
           ],
           [
             "Last-season prior",
@@ -1826,11 +1833,11 @@
           ],
           [
             "Starting XI quality",
-            2.9
+            4.0
           ],
           [
             "XI estimated value",
-            0.0
+            0.6
           ],
           [
             "Home advantage",
@@ -1864,7 +1871,7 @@
       "away": "Cercle Brugge",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "LIVE",
       "kickoff": "2026-10-25T18:15:00.000Z",
       "minute": {
         "short": ""
@@ -1880,8 +1887,108 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
+        "lineupEstimatedValue": 37571162,
+        "lineup": [
+          {
+            "name": "Hervé Koffi",
+            "playerId": 695405,
+            "image": "https://images.fotmob.com/image_resources/playerimages/695405.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 3567372
+          },
+          {
+            "name": "Nohim Chibani",
+            "playerId": 1668203,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1668203.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 417014
+          },
+          {
+            "name": "Massiré Sylla",
+            "playerId": 1670317,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1670317.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1106395
+          },
+          {
+            "name": "Nikki Havenaar",
+            "playerId": 430838,
+            "image": "https://images.fotmob.com/image_resources/playerimages/430838.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 469984
+          },
+          {
+            "name": "Louis Patris",
+            "playerId": 1178319,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1178319.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1934744
+          },
+          {
+            "name": "Besfort Zeneli",
+            "playerId": 1338361,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1338361.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 6405051
+          },
+          {
+            "name": "Kamiel van de Perre",
+            "playerId": 1417095,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1417095.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 10298427
+          },
+          {
+            "name": "Guilherme Smith",
+            "playerId": 1307981,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1307981.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1667528
+          },
+          {
+            "name": "Relebohile Mofokeng",
+            "playerId": 1471333,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1471333.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 3051044
+          },
+          {
+            "name": "Dylan Aquino",
+            "playerId": 1499651,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1499651.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 4872008
+          },
+          {
+            "name": "Raul Florucz",
+            "playerId": 1506829,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1506829.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 3781595
+          }
+        ],
         "injuries": [],
         "formPoints": 4,
         "recentResults": [
@@ -1906,21 +2013,122 @@
         "recentGA": 1,
         "ratingPrior": 7.2,
         "xgSeason": null,
-        "xg": null
+        "xiRating": null,
+        "matchXG": 0.0,
+        "xg": 0.0
       },
       "awayData": {
         "id": 9984,
         "division": "Belgian Pro League",
         "leagueId": 40,
         "ccode": null,
-        "position": 18,
+        "position": 17,
         "form": "L",
         "lastSeasonPosition": 2,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
+        "lineupEstimatedValue": 14760229,
+        "lineup": [
+          {
+            "name": "Gaëtan Coucke",
+            "playerId": 682696,
+            "image": "https://images.fotmob.com/image_resources/playerimages/682696.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 681375
+          },
+          {
+            "name": "Ibrahim Diakité",
+            "playerId": 1324373,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1324373.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1223600
+          },
+          {
+            "name": "Royer Caicedo",
+            "playerId": 1694373,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1694373.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1491324
+          },
+          {
+            "name": "Emmanuel Kakou",
+            "playerId": 1640208,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1640208.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1785533
+          },
+          {
+            "name": "Valy Konaté",
+            "playerId": 1651103,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1651103.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1607430
+          },
+          {
+            "name": "Luke Le Roux",
+            "playerId": 933069,
+            "image": "https://images.fotmob.com/image_resources/playerimages/933069.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 728884
+          },
+          {
+            "name": "Hannes van der Bruggen",
+            "playerId": 232299,
+            "image": "https://images.fotmob.com/image_resources/playerimages/232299.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 246810
+          },
+          {
+            "name": "Dante Vanzeir",
+            "playerId": 693675,
+            "image": "https://images.fotmob.com/image_resources/playerimages/693675.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1365034
+          },
+          {
+            "name": "Abdoulie Manneh",
+            "playerId": 1612310,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1612310.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Babatunde Akinsola",
+            "playerId": 1284404,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1284404.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 686092
+          },
+          {
+            "name": "Steve Ngoura",
+            "playerId": 1393483,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1393483.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 4944147
+          }
+        ],
         "injuries": [],
         "formPoints": 0,
         "recentResults": [
@@ -1937,26 +2145,28 @@
         "recentGA": 2,
         "ratingPrior": 6.61,
         "xgSeason": null,
-        "xg": null
+        "xiRating": null,
+        "matchXG": 0.02,
+        "xg": 0.02
       },
       "h2hSummary": "12–6–6",
       "scorers": [],
       "sofascoreEventId": null,
-      "lineupSource": null,
+      "lineupSource": "FotMob",
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5811789/match-details",
       "model": {
         "verdict": "WIN: Union St.Gilloise",
         "confidence": 83,
         "probabilities": [
-          0.5430185230780328,
-          0.27999184369602514,
-          0.1769896332259421
+          0.5339851860806761,
+          0.2923243304853569,
+          0.17369048343396706
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "1–0",
+        "modalScore": "1–0",
         "expectedGoals": [
-          1.58,
-          1.22
+          1.31,
+          1.01
         ],
         "factors": [
           [
@@ -1965,7 +2175,7 @@
           ],
           [
             "Current table",
-            28.0
+            26.0
           ],
           [
             "Last-season prior",
@@ -1988,6 +2198,10 @@
             10.6
           ],
           [
+            "XI estimated value",
+            9.3
+          ],
+          [
             "Home advantage",
             24
           ],
@@ -2004,7 +2218,7 @@
             25.0
           ]
         ],
-        "dataCompleteness": 50,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -4093,10 +4307,15 @@
       "away": "Newcastle United",
       "homeScore": 0,
       "awayScore": 2,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T14:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 9826,
@@ -4249,18 +4468,18 @@
         ],
         "recentGF": 3,
         "recentGA": 8,
-        "ratingPrior": 6.49,
+        "ratingPrior": 6.54,
         "xgSeason": 4.23,
         "xiRating": null,
-        "matchXG": 1.67,
-        "xg": 1.67
+        "matchXG": 1.69,
+        "xg": 1.69
       },
       "awayData": {
         "id": 10261,
         "division": "England Premier League",
         "leagueId": 47,
         "ccode": "ENG",
-        "position": 7,
+        "position": 8,
         "form": "LL",
         "lastSeasonPosition": 12,
         "lastSeason": "2025/26",
@@ -4390,7 +4609,7 @@
         ],
         "recentGF": 1,
         "recentGA": 5,
-        "ratingPrior": 6.76,
+        "ratingPrior": 6.78,
         "xgSeason": null,
         "xiRating": null,
         "matchXG": 0.98,
@@ -4405,15 +4624,15 @@
         "verdict": "WIN: Newcastle United",
         "confidence": 50,
         "probabilities": [
-          0.33611939233988386,
-          0.3241686478760738,
-          0.33971195978404245
+          0.3369695170276462,
+          0.3240244996525017,
+          0.33900598331985216
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.54,
-          1.31
+          1.55,
+          1.3
         ],
         "factors": [
           [
@@ -4422,7 +4641,7 @@
           ],
           [
             "Current table",
-            -20.0
+            -18.0
           ],
           [
             "Last-season prior",
@@ -4442,7 +4661,7 @@
           ],
           [
             "Starting XI quality",
-            -4.9
+            -4.3
           ],
           [
             "XI estimated value",
@@ -4480,10 +4699,15 @@
       "away": "Brentford",
       "homeScore": 1,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T14:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8667,
@@ -4620,11 +4844,11 @@
         ],
         "recentGF": 2,
         "recentGA": 3,
-        "ratingPrior": 6.63,
+        "ratingPrior": 6.64,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.9,
-        "xg": 1.9
+        "matchXG": 1.84,
+        "xg": 1.84
       },
       "awayData": {
         "id": 9937,
@@ -4776,14 +5000,14 @@
         "verdict": "WIN: Brentford",
         "confidence": 51,
         "probabilities": [
-          0.3196013556667755,
-          0.3370533615594984,
-          0.34334528277372617
+          0.31878024844170805,
+          0.3371998387111055,
+          0.3440199128471866
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.58,
+          1.57,
           1.48
         ],
         "factors": [
@@ -4813,7 +5037,7 @@
           ],
           [
             "Starting XI quality",
-            -4.1
+            -4.0
           ],
           [
             "XI estimated value",
@@ -4851,10 +5075,15 @@
       "away": "Brighton & Hove Albion",
       "homeScore": 2,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T14:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8650,
@@ -4999,7 +5228,7 @@
         ],
         "recentGF": 3,
         "recentGA": 4,
-        "ratingPrior": 6.86,
+        "ratingPrior": 6.89,
         "xgSeason": null,
         "xiRating": null,
         "matchXG": 0.87,
@@ -5140,11 +5369,11 @@
         ],
         "recentGF": 7,
         "recentGA": 0,
-        "ratingPrior": 6.95,
+        "ratingPrior": 6.93,
         "xgSeason": 5.58,
         "xiRating": null,
-        "matchXG": 1.34,
-        "xg": 1.34
+        "matchXG": 1.35,
+        "xg": 1.35
       },
       "h2hSummary": "14–4–5",
       "scorers": [],
@@ -5155,9 +5384,9 @@
         "verdict": "WIN: Brighton & Hove Albion",
         "confidence": 57,
         "probabilities": [
-          0.3216935089617351,
-          0.3080766397848105,
-          0.3702298512534544
+          0.3217694904270984,
+          0.30803161601938195,
+          0.3701988935535196
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -5192,7 +5421,7 @@
           ],
           [
             "Starting XI quality",
-            -1.6
+            -0.7
           ],
           [
             "XI estimated value",
@@ -5230,10 +5459,15 @@
       "away": "AFC Bournemouth",
       "homeScore": 0,
       "awayScore": 3,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T14:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 10260,
@@ -5378,11 +5612,11 @@
         ],
         "recentGF": 3,
         "recentGA": 3,
-        "ratingPrior": 6.81,
+        "ratingPrior": 6.82,
         "xgSeason": 5.52,
         "xiRating": null,
-        "matchXG": 0.9,
-        "xg": 0.9
+        "matchXG": 1.18,
+        "xg": 1.18
       },
       "awayData": {
         "id": 8678,
@@ -5530,8 +5764,8 @@
         "ratingPrior": 6.62,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 2.2,
-        "xg": 2.2
+        "matchXG": 2.18,
+        "xg": 2.18
       },
       "h2hSummary": "10–5–4",
       "scorers": [],
@@ -5540,16 +5774,16 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5795493/match-details",
       "model": {
         "verdict": "WIN: Manchester United",
-        "confidence": 52,
+        "confidence": 53,
         "probabilities": [
-          0.3598579734107704,
-          0.3450780971351829,
-          0.2950639294540467
+          0.3640269797924664,
+          0.34496458621221837,
+          0.2910084339953153
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.43,
+          1.48,
           1.51
         ],
         "factors": [
@@ -5579,7 +5813,7 @@
           ],
           [
             "Starting XI quality",
-            3.4
+            3.6
           ],
           [
             "XI estimated value",
@@ -5617,10 +5851,15 @@
       "away": "Leeds United",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "FT",
       "kickoff": "2026-10-25T16:30:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8472,
@@ -5699,15 +5938,6 @@
             "estimatedValue": 45745156
           },
           {
-            "name": "Nilson Angulo",
-            "playerId": 1287010,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1287010.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 12619104
-          },
-          {
             "name": "Chris Rigg",
             "playerId": 1327319,
             "image": "https://images.fotmob.com/image_resources/playerimages/1327319.png",
@@ -5723,6 +5953,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 36496289
+          },
+          {
+            "name": "Nilson Angulo",
+            "playerId": 1287010,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1287010.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 12619104
           },
           {
             "name": "Brian Brobbey",
@@ -5764,17 +6003,18 @@
         ],
         "recentGF": 3,
         "recentGA": 9,
-        "ratingPrior": 6.45,
+        "ratingPrior": 6.52,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.91,
+        "xg": 0.91
       },
       "awayData": {
         "id": 8463,
         "division": "England Premier League",
         "leagueId": 47,
         "ccode": "ENG",
-        "position": 9,
+        "position": 7,
         "form": "DLD",
         "lastSeasonPosition": 14,
         "lastSeason": "2025/26",
@@ -5912,10 +6152,11 @@
         ],
         "recentGF": 2,
         "recentGA": 3,
-        "ratingPrior": 6.8,
+        "ratingPrior": 6.79,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.57,
+        "xg": 0.57
       },
       "h2hSummary": "3–4–3",
       "scorers": [],
@@ -5924,17 +6165,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5795494/match-details",
       "model": {
         "verdict": "WIN: Leeds United",
-        "confidence": 56,
+        "confidence": 57,
         "probabilities": [
-          0.2800676519082412,
-          0.33186580704879093,
-          0.38806654104296795
+          0.2833364622142468,
+          0.3328903112852143,
+          0.3837732265005389
         ],
-        "projected": "1–2",
-        "modalScore": "1–2",
+        "projected": "0–1",
+        "modalScore": "0–1",
         "expectedGoals": [
-          1.5,
-          1.4
+          1.38,
+          1.24
         ],
         "factors": [
           [
@@ -5943,7 +6184,7 @@
           ],
           [
             "Current table",
-            -22.0
+            -26.0
           ],
           [
             "Last-season prior",
@@ -5963,7 +6204,7 @@
           ],
           [
             "Starting XI quality",
-            -6.3
+            -4.9
           ],
           [
             "XI estimated value",
@@ -5986,7 +6227,7 @@
             33.3
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -6001,17 +6242,22 @@
       "away": "Lille",
       "homeScore": 1,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T14:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 9829,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 2,
+        "position": 3,
         "form": "LD",
         "lastSeasonPosition": 7,
         "lastSeason": "2025/26",
@@ -6141,18 +6387,18 @@
         ],
         "recentGF": 2,
         "recentGA": 3,
-        "ratingPrior": 6.77,
+        "ratingPrior": 6.85,
         "xgSeason": 2.35,
         "xiRating": null,
-        "matchXG": 1.94,
-        "xg": 1.94
+        "matchXG": 2.35,
+        "xg": 2.35
       },
       "awayData": {
         "id": 8639,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 1,
+        "position": 2,
         "form": "DWL",
         "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
@@ -6290,11 +6536,11 @@
         ],
         "recentGF": 3,
         "recentGA": 3,
-        "ratingPrior": 6.88,
+        "ratingPrior": 6.8,
         "xgSeason": 3.2,
         "xiRating": null,
-        "matchXG": 0.68,
-        "xg": 0.68
+        "matchXG": 0.75,
+        "xg": 0.75
       },
       "h2hSummary": "11–8–10",
       "scorers": [],
@@ -6303,17 +6549,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5802969/match-details",
       "model": {
         "verdict": "WIN: Monaco",
-        "confidence": 51,
+        "confidence": 52,
         "probabilities": [
-          0.3422413280009356,
-          0.3318481592005225,
-          0.32591051279854183
+          0.3476938041288413,
+          0.3312150221102723,
+          0.3210911737608863
         ],
-        "projected": "1–0",
-        "modalScore": "1–0",
+        "projected": "2–1",
+        "modalScore": "2–1",
         "expectedGoals": [
-          1.5,
-          1.16
+          1.59,
+          1.17
         ],
         "factors": [
           [
@@ -6342,7 +6588,7 @@
           ],
           [
             "Starting XI quality",
-            -2.0
+            0.9
           ],
           [
             "XI estimated value",
@@ -6380,17 +6626,22 @@
       "away": "Lorient",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "FT",
       "kickoff": "2026-10-25T16:15:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8121,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 15,
+        "position": 14,
         "form": "LL",
         "lastSeasonPosition": 13,
         "lastSeason": "2025/26",
@@ -6435,6 +6686,15 @@
             "estimatedValue": 1260685
           },
           {
+            "name": "Lilian Rao-Lisoa",
+            "playerId": 1431818,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1431818.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 2664457
+          },
+          {
             "name": "Joseph Kalulu",
             "playerId": 1610106,
             "image": "https://images.fotmob.com/image_resources/playerimages/1610106.png",
@@ -6461,24 +6721,6 @@
             "estimatedValue": 1741492
           },
           {
-            "name": "Lilian Rao-Lisoa",
-            "playerId": 1431818,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1431818.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2664457
-          },
-          {
-            "name": "Prosper Peter",
-            "playerId": 1748405,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1748405.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 13413306
-          },
-          {
             "name": "Amine Sbaï",
             "playerId": 1242587,
             "image": "https://images.fotmob.com/image_resources/playerimages/1242587.png",
@@ -6495,6 +6737,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 2568898
+          },
+          {
+            "name": "Prosper Peter",
+            "playerId": 1748405,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1748405.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 13413306
           }
         ],
         "injuries": [],
@@ -6519,17 +6770,18 @@
         ],
         "recentGF": 3,
         "recentGA": 10,
-        "ratingPrior": 6.46,
+        "ratingPrior": 6.47,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.28,
+        "xg": 0.28
       },
       "awayData": {
         "id": 8689,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 8,
+        "position": 9,
         "form": "WW",
         "lastSeasonPosition": 10,
         "lastSeason": "2025/26",
@@ -6658,10 +6910,11 @@
         ],
         "recentGF": 2,
         "recentGA": 0,
-        "ratingPrior": 6.86,
+        "ratingPrior": 6.8,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.54,
+        "xg": 0.54
       },
       "h2hSummary": "4–7–7",
       "scorers": [],
@@ -6672,15 +6925,15 @@
         "verdict": "WIN: Lorient",
         "confidence": 65,
         "probabilities": [
-          0.2660656846243697,
-          0.3048748238587112,
-          0.4290594915169192
+          0.2580774138047657,
+          0.31462822218899916,
+          0.4272943640062352
         ],
         "projected": "0–1",
         "modalScore": "0–1",
         "expectedGoals": [
-          1.33,
-          1.35
+          1.13,
+          1.18
         ],
         "factors": [
           [
@@ -6689,7 +6942,7 @@
           ],
           [
             "Current table",
-            -14.0
+            -10.0
           ],
           [
             "Last-season prior",
@@ -6709,7 +6962,7 @@
           ],
           [
             "Starting XI quality",
-            -7.2
+            -5.9
           ],
           [
             "XI estimated value",
@@ -6732,7 +6985,7 @@
             0.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -6745,19 +6998,24 @@
       "competitionFlag": "🇫🇷",
       "home": "Auxerre",
       "away": "Le Mans",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "FT",
       "kickoff": "2026-10-25T16:15:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8583,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 13,
+        "position": 12,
         "form": "WLW",
         "lastSeasonPosition": 15,
         "lastSeason": "2025/26",
@@ -6895,19 +7153,20 @@
         ],
         "recentGF": 6,
         "recentGA": 6,
-        "ratingPrior": 6.74,
+        "ratingPrior": 6.71,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.87,
+        "xg": 0.87
       },
       "awayData": {
         "id": 8682,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 16,
+        "position": 15,
         "form": "LL",
-        "lastSeasonPosition": 16,
+        "lastSeasonPosition": 15,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -6986,15 +7245,6 @@
             "estimatedValue": 1454815
           },
           {
-            "name": "Louis Mafouta",
-            "playerId": 807955,
-            "image": "https://images.fotmob.com/image_resources/playerimages/807955.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1074789
-          },
-          {
             "name": "Antoine Rabillard",
             "playerId": 717270,
             "image": "https://images.fotmob.com/image_resources/playerimages/717270.png",
@@ -7002,6 +7252,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 396545
+          },
+          {
+            "name": "Louis Mafouta",
+            "playerId": 807955,
+            "image": "https://images.fotmob.com/image_resources/playerimages/807955.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1074789
           },
           {
             "name": "Habibou Mouhamadou Diallo",
@@ -7035,10 +7294,11 @@
         ],
         "recentGF": 1,
         "recentGA": 6,
-        "ratingPrior": 6.6,
+        "ratingPrior": 6.62,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 1.41,
+        "xg": 1.41
       },
       "h2hSummary": "2–1–1",
       "scorers": [],
@@ -7047,17 +7307,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5802965/match-details",
       "model": {
         "verdict": "WIN: Auxerre",
-        "confidence": 51,
+        "confidence": 50,
         "probabilities": [
-          0.3509123642069386,
-          0.3298615986423097,
-          0.31922603715075165
+          0.33510169235306614,
+          0.3329395169119526,
+          0.3319587907349812
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
-          1.5,
-          1.18
+          1.37,
+          1.23
         ],
         "factors": [
           [
@@ -7070,7 +7330,7 @@
           ],
           [
             "Last-season prior",
-            1.6
+            0.0
           ],
           [
             "Recent form",
@@ -7086,7 +7346,7 @@
           ],
           [
             "Starting XI quality",
-            2.5
+            1.6
           ],
           [
             "XI estimated value",
@@ -7109,7 +7369,7 @@
             0.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -7122,19 +7382,24 @@
       "competitionFlag": "🇫🇷",
       "home": "Marseille",
       "away": "Le Havre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "homeScore": 4,
+      "awayScore": 3,
+      "status": "FT",
       "kickoff": "2026-10-25T16:15:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8592,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 10,
+        "position": 8,
         "form": "WWL",
         "lastSeasonPosition": 5,
         "lastSeason": "2025/26",
@@ -7188,15 +7453,6 @@
             "estimatedValue": 4195800
           },
           {
-            "name": "Pierre-Emile Højbjerg",
-            "playerId": 266523,
-            "image": "https://images.fotmob.com/image_resources/playerimages/266523.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 14020317
-          },
-          {
             "name": "Tochukwu Nnadi",
             "playerId": 1353104,
             "image": "https://images.fotmob.com/image_resources/playerimages/1353104.png",
@@ -7204,6 +7460,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 5060315
+          },
+          {
+            "name": "Pierre-Emile Højbjerg",
+            "playerId": 266523,
+            "image": "https://images.fotmob.com/image_resources/playerimages/266523.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 14020317
           },
           {
             "name": "Amine Harit",
@@ -7272,10 +7537,11 @@
         ],
         "recentGF": 8,
         "recentGA": 4,
-        "ratingPrior": 6.99,
+        "ratingPrior": 6.92,
         "xgSeason": 2.88,
         "xiRating": null,
-        "xg": 2.88
+        "matchXG": 1.55,
+        "xg": 1.55
       },
       "awayData": {
         "id": 9746,
@@ -7300,14 +7566,6 @@
             "estimatedValue": 219689
           },
           {
-            "name": "Djibril Ouziad",
-            "playerId": 2156004,
-            "image": "https://images.fotmob.com/image_resources/playerimages/2156004.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
             "name": "Ayumu Seko",
             "playerId": 857120,
             "image": "https://images.fotmob.com/image_resources/playerimages/857120.png",
@@ -7315,32 +7573,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 3762270
-          },
-          {
-            "name": "Ahmed Touba",
-            "playerId": 792653,
-            "image": "https://images.fotmob.com/image_resources/playerimages/792653.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1572243
-          },
-          {
-            "name": "Enzo Koffi",
-            "playerId": 1816726,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1816726.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Simon Ebonog",
-            "playerId": 1469758,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1469758.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 5256441
           },
           {
             "name": "Junior Mwanga",
@@ -7352,6 +7584,31 @@
             "estimatedValue": 7691601
           },
           {
+            "name": "Ahmed Touba",
+            "playerId": 792653,
+            "image": "https://images.fotmob.com/image_resources/playerimages/792653.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1572243
+          },
+          {
+            "name": "Djibril Ouziad",
+            "playerId": 2156004,
+            "image": "https://images.fotmob.com/image_resources/playerimages/2156004.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Enzo Koffi",
+            "playerId": 1816726,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1816726.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
             "name": "Rassoul Ndiaye",
             "playerId": 1073905,
             "image": "https://images.fotmob.com/image_resources/playerimages/1073905.png",
@@ -7359,6 +7616,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 5246028
+          },
+          {
+            "name": "Simon Ebonog",
+            "playerId": 1469758,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1469758.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 5256441
           },
           {
             "name": "Amir Richardson",
@@ -7410,10 +7676,11 @@
         ],
         "recentGF": 1,
         "recentGA": 4,
-        "ratingPrior": 6.77,
+        "ratingPrior": 6.75,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 3.04,
+        "xg": 3.04
       },
       "h2hSummary": "7–0–0",
       "scorers": [],
@@ -7422,17 +7689,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5802968/match-details",
       "model": {
         "verdict": "WIN: Marseille",
-        "confidence": 73,
+        "confidence": 72,
         "probabilities": [
-          0.4952837233762758,
-          0.31305771860126047,
-          0.19165855802246376
+          0.4681150638099884,
+          0.3075161332473096,
+          0.22436880294270203
         ],
-        "projected": "1–0",
-        "modalScore": "1–0",
+        "projected": "2–1",
+        "modalScore": "2–1",
         "expectedGoals": [
-          1.55,
-          1.13
+          1.56,
+          1.51
         ],
         "factors": [
           [
@@ -7441,7 +7708,7 @@
           ],
           [
             "Current table",
-            16.0
+            20.0
           ],
           [
             "Last-season prior",
@@ -7461,7 +7728,7 @@
           ],
           [
             "Starting XI quality",
-            4.0
+            3.1
           ],
           [
             "XI estimated value",
@@ -7484,7 +7751,7 @@
             0.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -7497,19 +7764,24 @@
       "competitionFlag": "🇫🇷",
       "home": "Rennes",
       "away": "Strasbourg",
-      "homeScore": 0,
+      "homeScore": 3,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "FT",
       "kickoff": "2026-10-25T16:15:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 9851,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 7,
+        "position": 1,
         "form": "LW",
         "lastSeasonPosition": 6,
         "lastSeason": "2025/26",
@@ -7639,17 +7911,18 @@
         ],
         "recentGF": 7,
         "recentGA": 5,
-        "ratingPrior": 6.83,
+        "ratingPrior": 6.88,
         "xgSeason": 4.86,
         "xiRating": null,
-        "xg": 4.86
+        "matchXG": 1.59,
+        "xg": 1.59
       },
       "awayData": {
         "id": 9848,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 14,
+        "position": 16,
         "form": "LL",
         "lastSeasonPosition": 8,
         "lastSeason": "2025/26",
@@ -7778,10 +8051,11 @@
         ],
         "recentGF": 2,
         "recentGA": 5,
-        "ratingPrior": 6.62,
+        "ratingPrior": 6.47,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.87,
+        "xg": 0.87
       },
       "h2hSummary": "10–2–5",
       "scorers": [],
@@ -7790,17 +8064,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5802970/match-details",
       "model": {
         "verdict": "WIN: Rennes",
-        "confidence": 67,
+        "confidence": 70,
         "probabilities": [
-          0.4539988829038818,
-          0.3196538672860153,
-          0.226347249810103
+          0.46473137790626506,
+          0.31933898961441515,
+          0.2159296324793198
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
-          1.49,
-          1.19
+          1.53,
+          1.1
         ],
         "factors": [
           [
@@ -7809,7 +8083,7 @@
           ],
           [
             "Current table",
-            14.0
+            30.0
           ],
           [
             "Last-season prior",
@@ -7829,7 +8103,7 @@
           ],
           [
             "Starting XI quality",
-            3.8
+            7.4
           ],
           [
             "XI estimated value",
@@ -7852,7 +8126,7 @@
             0.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -7867,17 +8141,22 @@
       "away": "Troyes",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "FT",
       "kickoff": "2026-10-25T16:15:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 9941,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 12,
+        "position": 11,
         "form": "WD",
         "lastSeasonPosition": 9,
         "lastSeason": "2025/26",
@@ -7904,15 +8183,6 @@
             "estimatedValue": 1597919
           },
           {
-            "name": "Rasmus Nicolaisen",
-            "playerId": 656491,
-            "image": "https://images.fotmob.com/image_resources/playerimages/656491.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 4603150
-          },
-          {
             "name": "Mark McKenzie",
             "playerId": 924485,
             "image": "https://images.fotmob.com/image_resources/playerimages/924485.png",
@@ -7920,6 +8190,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 4743222
+          },
+          {
+            "name": "Rasmus Nicolaisen",
+            "playerId": 656491,
+            "image": "https://images.fotmob.com/image_resources/playerimages/656491.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 4603150
           },
           {
             "name": "Christ Tapé",
@@ -8007,10 +8286,11 @@
         ],
         "recentGF": 5,
         "recentGA": 2,
-        "ratingPrior": 6.9,
+        "ratingPrior": 6.81,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.65,
+        "xg": 0.65
       },
       "awayData": {
         "id": 10242,
@@ -8098,13 +8378,13 @@
             "estimatedValue": 2639138
           },
           {
-            "name": "Timothé Nkada",
-            "playerId": 1038058,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1038058.png",
+            "name": "Merwan Ifnaou",
+            "playerId": 1523321,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1523321.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1566985
+            "estimatedValue": 1410068
           },
           {
             "name": "Renaud Ripart",
@@ -8116,13 +8396,13 @@
             "estimatedValue": 366139
           },
           {
-            "name": "Merwan Ifnaou",
-            "playerId": 1523321,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1523321.png",
+            "name": "Timothé Nkada",
+            "playerId": 1038058,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1038058.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1410068
+            "estimatedValue": 1566985
           }
         ],
         "injuries": [],
@@ -8147,10 +8427,11 @@
         ],
         "recentGF": 1,
         "recentGA": 5,
-        "ratingPrior": 6.54,
+        "ratingPrior": 6.62,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.36,
+        "xg": 0.36
       },
       "h2hSummary": "7–4–0",
       "scorers": [],
@@ -8161,15 +8442,15 @@
         "verdict": "WIN: Toulouse",
         "confidence": 67,
         "probabilities": [
-          0.44918082822874034,
-          0.3104102664665912,
-          0.2404089053046685
+          0.4446139173177463,
+          0.31899731293383954,
+          0.23638876974841422
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
-          1.53,
-          1.15
+          1.35,
+          0.99
         ],
         "factors": [
           [
@@ -8178,7 +8459,7 @@
           ],
           [
             "Current table",
-            10.0
+            12.0
           ],
           [
             "Last-season prior",
@@ -8198,7 +8479,7 @@
           ],
           [
             "Starting XI quality",
-            6.5
+            3.4
           ],
           [
             "XI estimated value",
@@ -8221,7 +8502,7 @@
             25.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -8246,7 +8527,7 @@
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 4,
+        "position": 5,
         "form": "WWW",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
@@ -8394,7 +8675,7 @@
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 3,
+        "position": 4,
         "form": "WL",
         "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
@@ -10825,7 +11106,7 @@
         "probabilities": [
           0.533195439941801,
           0.2952272182850645,
-          0.17157734177313452
+          0.1715773417731345
         ],
         "projected": "2–0",
         "modalScore": "2–0",
@@ -10898,10 +11179,15 @@
       "away": "Frosinone",
       "homeScore": 4,
       "awayScore": 4,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T14:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8524,
@@ -11046,7 +11332,7 @@
         ],
         "recentGF": 5,
         "recentGA": 6,
-        "ratingPrior": 6.74,
+        "ratingPrior": 6.7,
         "xgSeason": 4.08,
         "xiRating": null,
         "matchXG": 3.85,
@@ -11195,11 +11481,11 @@
         ],
         "recentGF": 6,
         "recentGA": 5,
-        "ratingPrior": 6.82,
+        "ratingPrior": 6.87,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.76,
-        "xg": 1.76
+        "matchXG": 1.8,
+        "xg": 1.8
       },
       "h2hSummary": "5–2–1",
       "scorers": [],
@@ -11210,15 +11496,15 @@
         "verdict": "WIN: Atalanta",
         "confidence": 60,
         "probabilities": [
-          0.38558679962462494,
-          0.3111786922368073,
-          0.30323450813856784
+          0.38462731663883276,
+          0.3111759651413452,
+          0.30419671821982214
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.85,
-          1.37
+          1.84,
+          1.38
         ],
         "factors": [
           [
@@ -11247,7 +11533,7 @@
           ],
           [
             "Starting XI quality",
-            -1.4
+            -3.1
           ],
           [
             "XI estimated value",
@@ -11285,10 +11571,15 @@
       "away": "Venezia",
       "homeScore": 1,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T14:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 10233,
@@ -11433,7 +11724,7 @@
         ],
         "recentGF": 3,
         "recentGA": 5,
-        "ratingPrior": 6.49,
+        "ratingPrior": 6.52,
         "xgSeason": null,
         "xiRating": null,
         "matchXG": 0.33,
@@ -11574,11 +11865,11 @@
         ],
         "recentGF": 2,
         "recentGA": 3,
-        "ratingPrior": 6.44,
+        "ratingPrior": 6.53,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.71,
-        "xg": 1.71
+        "matchXG": 1.77,
+        "xg": 1.77
       },
       "h2hSummary": "4–2–2",
       "scorers": [],
@@ -11587,17 +11878,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5749713/match-details",
       "model": {
         "verdict": "WIN: Genoa",
-        "confidence": 51,
+        "confidence": 50,
         "probabilities": [
-          0.3411543858781245,
-          0.3237568904385605,
-          0.335088723683315
+          0.3401061204781848,
+          0.3234131502329148,
+          0.3364807292889005
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
           1.23,
-          1.32
+          1.33
         ],
         "factors": [
           [
@@ -11626,7 +11917,7 @@
           ],
           [
             "Starting XI quality",
-            0.9
+            -0.2
           ],
           [
             "XI estimated value",
@@ -11663,9 +11954,9 @@
       "home": "Lecce",
       "away": "Juventus",
       "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
-      "kickoff": "2026-10-25T17:00:00.000Z",
+      "awayScore": 2,
+      "status": "LIVE",
+      "kickoff": "2026-10-25T17:05:00.000Z",
       "minute": {
         "short": ""
       },
@@ -11811,17 +12102,18 @@
         ],
         "recentGF": 4,
         "recentGA": 5,
-        "ratingPrior": 6.55,
+        "ratingPrior": 6.49,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.6,
+        "xg": 0.6
       },
       "awayData": {
         "id": 9885,
         "division": "Italy Serie A",
         "leagueId": 55,
         "ccode": "ITA",
-        "position": 10,
+        "position": 7,
         "form": "LDLW",
         "lastSeasonPosition": 6,
         "lastSeason": "2025/26",
@@ -11875,6 +12167,15 @@
             "estimatedValue": 37438586
           },
           {
+            "name": "Weston McKennie",
+            "playerId": 848266,
+            "image": "https://images.fotmob.com/image_resources/playerimages/848266.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 27948434
+          },
+          {
             "name": "Douglas Luiz",
             "playerId": 787350,
             "image": "https://images.fotmob.com/image_resources/playerimages/787350.png",
@@ -11900,15 +12201,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 23846981
-          },
-          {
-            "name": "Weston McKennie",
-            "playerId": 848266,
-            "image": "https://images.fotmob.com/image_resources/playerimages/848266.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 27948434
           },
           {
             "name": "Nick Woltemade",
@@ -11967,10 +12259,11 @@
         ],
         "recentGF": 3,
         "recentGA": 5,
-        "ratingPrior": 6.97,
+        "ratingPrior": 7.05,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.83,
+        "xg": 0.83
       },
       "h2hSummary": "1–4–9",
       "scorers": [],
@@ -11979,17 +12272,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5749716/match-details",
       "model": {
         "verdict": "WIN: Juventus",
-        "confidence": 66,
+        "confidence": 67,
         "probabilities": [
-          0.2630471760167631,
-          0.3027750571657017,
-          0.4341777668175352
+          0.254139446752078,
+          0.3090415919776157,
+          0.4368189612703063
         ],
         "projected": "0–1",
         "modalScore": "0–1",
         "expectedGoals": [
-          1.35,
-          1.33
+          1.19,
+          1.24
         ],
         "factors": [
           [
@@ -11998,7 +12291,7 @@
           ],
           [
             "Current table",
-            -4.0
+            -10.0
           ],
           [
             "Last-season prior",
@@ -12018,7 +12311,7 @@
           ],
           [
             "Starting XI quality",
-            -7.6
+            -10.1
           ],
           [
             "XI estimated value",
@@ -12041,7 +12334,7 @@
             12.5
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -12433,10 +12726,15 @@
       "away": "Carrarese",
       "homeScore": 2,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T14:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8540,
@@ -12573,7 +12871,7 @@
         ],
         "recentGF": 6,
         "recentGA": 2,
-        "ratingPrior": 7.01,
+        "ratingPrior": 7.02,
         "xgSeason": null,
         "xiRating": null,
         "matchXG": 1.85,
@@ -12714,7 +13012,7 @@
         ],
         "recentGF": 4,
         "recentGA": 1,
-        "ratingPrior": 6.68,
+        "ratingPrior": 6.69,
         "xgSeason": null,
         "xiRating": null,
         "matchXG": 1.26,
@@ -12802,19 +13100,24 @@
       "competitionFlag": "🇮🇹",
       "home": "Hellas Verona",
       "away": "Pisa",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "FT",
       "kickoff": "2026-10-25T16:15:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 9876,
         "division": "Serie A",
         "leagueId": 55,
         "ccode": null,
-        "position": 13,
+        "position": 11,
         "form": "DLW",
         "lastSeasonPosition": 19,
         "lastSeason": "2025/26",
@@ -12841,15 +13144,6 @@
             "estimatedValue": 2387547
           },
           {
-            "name": "Tobias Slotsager",
-            "playerId": 1367915,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1367915.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 3833127
-          },
-          {
             "name": "Andrias Edmundsson",
             "playerId": 846006,
             "image": "https://images.fotmob.com/image_resources/playerimages/846006.png",
@@ -12857,6 +13151,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 1924737
+          },
+          {
+            "name": "Tobias Slotsager",
+            "playerId": 1367915,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1367915.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 3833127
           },
           {
             "name": "Davide De Battisti",
@@ -12952,10 +13255,11 @@
         ],
         "recentGF": 6,
         "recentGA": 6,
-        "ratingPrior": 6.9,
+        "ratingPrior": 6.83,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.61,
+        "xg": 0.61
       },
       "awayData": {
         "id": 6479,
@@ -13103,7 +13407,8 @@
         "ratingPrior": 6.83,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 1.49,
+        "xg": 1.49
       },
       "h2hSummary": "0–4–0",
       "scorers": [],
@@ -13114,15 +13419,15 @@
         "verdict": "DRAW",
         "confidence": 51,
         "probabilities": [
-          0.328744240704068,
-          0.34482987727556313,
-          0.32642588202036893
+          0.31417343646346824,
+          0.3461615391806583,
+          0.33966502435587353
         ],
         "projected": "1–1",
         "modalScore": "1–1",
         "expectedGoals": [
-          1.45,
-          1.35
+          1.28,
+          1.38
         ],
         "factors": [
           [
@@ -13131,7 +13436,7 @@
           ],
           [
             "Current table",
-            -14.0
+            -10.0
           ],
           [
             "Last-season prior",
@@ -13151,7 +13456,7 @@
           ],
           [
             "Starting XI quality",
-            1.3
+            0.0
           ],
           [
             "XI estimated value",
@@ -13174,7 +13479,7 @@
             33.3
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -14760,8 +15065,8 @@
         "confidence": 52,
         "probabilities": [
           0.28814559712143417,
-          0.34414834693159346,
-          0.36770605594697237
+          0.3441483469315935,
+          0.3677060559469724
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -15591,7 +15896,7 @@
         "confidence": 50,
         "probabilities": [
           0.2964552706909228,
-          0.34591230477716284,
+          0.3459123047771629,
           0.35763242453191435
         ],
         "projected": "1–2",
@@ -16349,7 +16654,7 @@
         "verdict": "DRAW",
         "confidence": 53,
         "probabilities": [
-          0.3328609371731576,
+          0.33286093717315757,
           0.35272071692967877,
           0.31441834589716366
         ],
@@ -16439,7 +16744,7 @@
         "division": "Netherlands Eredivisie",
         "leagueId": 57,
         "ccode": "NED",
-        "position": 3,
+        "position": 4,
         "form": "LWL",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
@@ -16741,9 +17046,9 @@
         "verdict": "WIN: Feyenoord",
         "confidence": 63,
         "probabilities": [
-          0.2889626282256248,
-          0.306231576940191,
-          0.40480579483418433
+          0.28859972326078975,
+          0.30625369600240715,
+          0.4051465807368031
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -16758,7 +17063,7 @@
           ],
           [
             "Current table",
-            -4.0
+            -6.0
           ],
           [
             "Last-season prior",
@@ -16814,12 +17119,17 @@
       "competitionFlag": "🇳🇱",
       "home": "Sparta Rotterdam",
       "away": "Ajax",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 1,
+      "awayScore": 2,
+      "status": "FT",
       "kickoff": "2026-10-25T15:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8614,
@@ -16898,15 +17208,6 @@
             "estimatedValue": 2500000
           },
           {
-            "name": "Cedric Hatenboer",
-            "playerId": 1603786,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1603786.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1818560
-          },
-          {
             "name": "Jens Toornstra",
             "playerId": 188557,
             "image": "https://images.fotmob.com/image_resources/playerimages/188557.png",
@@ -16914,6 +17215,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 245767
+          },
+          {
+            "name": "Cedric Hatenboer",
+            "playerId": 1603786,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1603786.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1818560
           },
           {
             "name": "Isaac Babadi",
@@ -16956,18 +17266,18 @@
         ],
         "recentGF": 6,
         "recentGA": 5,
-        "ratingPrior": 6.64,
+        "ratingPrior": 6.63,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.0,
-        "xg": 0.0
+        "matchXG": 0.85,
+        "xg": 0.85
       },
       "awayData": {
         "id": 8593,
         "division": "Netherlands Eredivisie",
         "leagueId": 57,
         "ccode": "NED",
-        "position": 4,
+        "position": 2,
         "form": "WD",
         "lastSeasonPosition": 5,
         "lastSeason": "2025/26",
@@ -17021,13 +17331,13 @@
             "estimatedValue": 20891126
           },
           {
-            "name": "Julian Brandt",
-            "playerId": 516846,
-            "image": "https://images.fotmob.com/image_resources/playerimages/516846.png",
+            "name": "Jorthy Mokio",
+            "playerId": 1617161,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1617161.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 15903698
+            "estimatedValue": 11638452
           },
           {
             "name": "Sofyan Amrabat",
@@ -17039,13 +17349,13 @@
             "estimatedValue": 7852644
           },
           {
-            "name": "Jorthy Mokio",
-            "playerId": 1617161,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1617161.png",
+            "name": "Julian Brandt",
+            "playerId": 516846,
+            "image": "https://images.fotmob.com/image_resources/playerimages/516846.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 11638452
+            "estimatedValue": 15903698
           },
           {
             "name": "Viktor Tsigankov",
@@ -17097,11 +17407,11 @@
         ],
         "recentGF": 6,
         "recentGA": 3,
-        "ratingPrior": 7.16,
+        "ratingPrior": 7.12,
         "xgSeason": 3.28,
         "xiRating": null,
-        "matchXG": 0.04,
-        "xg": 0.04
+        "matchXG": 1.37,
+        "xg": 1.37
       },
       "h2hSummary": "0–3–15",
       "scorers": [],
@@ -17110,17 +17420,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5781778/match-details",
       "model": {
         "verdict": "WIN: Ajax",
-        "confidence": 70,
+        "confidence": 72,
         "probabilities": [
-          0.23484845103165897,
-          0.3069986321153295,
-          0.4581529168530115
+          0.22864197379221107,
+          0.303164429075834,
+          0.46819359713195496
         ],
-        "projected": "0–1",
-        "modalScore": "0–1",
+        "projected": "1–2",
+        "modalScore": "1–2",
         "expectedGoals": [
-          1.2,
-          1.2
+          1.33,
+          1.43
         ],
         "factors": [
           [
@@ -17129,7 +17439,7 @@
           ],
           [
             "Current table",
-            -20.0
+            -24.0
           ],
           [
             "Last-season prior",
@@ -17149,7 +17459,7 @@
           ],
           [
             "Starting XI quality",
-            -9.4
+            -8.8
           ],
           [
             "XI estimated value",
@@ -17197,13 +17507,13 @@
         "division": "Netherlands Eredivisie",
         "leagueId": 57,
         "ccode": "NED",
-        "position": 2,
+        "position": 3,
         "form": "DLW",
         "lastSeasonPosition": 7,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 66342363,
+        "lineupEstimatedValue": 50434623,
         "lineup": [
           {
             "name": "Jari De Busser",
@@ -17224,15 +17534,6 @@
             "estimatedValue": 4267329
           },
           {
-            "name": "Wouter Goes",
-            "playerId": 1307387,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1307387.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 19325813
-          },
-          {
             "name": "Lewis Schouten",
             "playerId": 1329774,
             "image": "https://images.fotmob.com/image_resources/playerimages/1329774.png",
@@ -17240,6 +17541,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 990520
+          },
+          {
+            "name": "Wesley Hoedt",
+            "playerId": 465628,
+            "image": "https://images.fotmob.com/image_resources/playerimages/465628.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 568578
           },
           {
             "name": "Mateo Chávez",
@@ -17251,13 +17561,13 @@
             "estimatedValue": 4829945
           },
           {
-            "name": "Jordy Clasie",
-            "playerId": 209384,
-            "image": "https://images.fotmob.com/image_resources/playerimages/209384.png",
+            "name": "Dave Kwakman",
+            "playerId": 1389199,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1389199.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 660553
+            "estimatedValue": 1585826
           },
           {
             "name": "Peer Koopmeiners",
@@ -17269,22 +17579,22 @@
             "estimatedValue": 13559765
           },
           {
-            "name": "Ayoub Oufkir",
-            "playerId": 1656600,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1656600.png",
+            "name": "Weslley Pinto",
+            "playerId": 1383534,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1383534.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 3131528
+            "estimatedValue": 5109024
           },
           {
-            "name": "Calvin Stengs",
-            "playerId": 800624,
-            "image": "https://images.fotmob.com/image_resources/playerimages/800624.png",
+            "name": "Valdemar Byskov",
+            "playerId": 1332217,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1332217.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 2241669
+            "estimatedValue": 2188395
           },
           {
             "name": "Ro-Zangelo Daal",
@@ -17351,7 +17661,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 53311135,
+        "lineupEstimatedValue": 60394026,
         "lineup": [
           {
             "name": "Joël Drommel",
@@ -17426,22 +17736,22 @@
             "estimatedValue": 3542093
           },
           {
-            "name": "Kristian Hlynsson",
-            "playerId": 1098086,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1098086.png",
+            "name": "Younes Taha",
+            "playerId": 1298600,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1298600.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 7874871
+            "estimatedValue": 6500000
           },
           {
-            "name": "Marko Pjaca",
-            "playerId": 307235,
-            "image": "https://images.fotmob.com/image_resources/playerimages/307235.png",
+            "name": "Sondre Ørjasæter",
+            "playerId": 1353293,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1353293.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 832676
+            "estimatedValue": 9290438
           },
           {
             "name": "Wout Weghorst",
@@ -17497,9 +17807,9 @@
         "verdict": "WIN: AZ Alkmaar",
         "confidence": 50,
         "probabilities": [
-          0.3653819226507255,
-          0.35296658232926986,
-          0.28165149502000464
+          0.3645295872617129,
+          0.3528059327511649,
+          0.2826644799871222
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -17514,7 +17824,7 @@
           ],
           [
             "Current table",
-            8.0
+            6.0
           ],
           [
             "Last-season prior",
@@ -17538,7 +17848,7 @@
           ],
           [
             "XI estimated value",
-            2.2
+            -1.8
           ],
           [
             "Home advantage",
@@ -17678,7 +17988,7 @@
         "confidence": 58,
         "probabilities": [
           0.3031006346873333,
-          0.3075044439250257,
+          0.30750444392502574,
           0.389394921387641
         ],
         "projected": "1–2",
@@ -18222,7 +18532,7 @@
         "verdict": "WIN: Lokomotiv Moscow",
         "confidence": 55,
         "probabilities": [
-          0.28618278435702477,
+          0.2861827843570248,
           0.33832175202173814,
           0.37549546362123715
         ],
@@ -20852,10 +21162,15 @@
       "away": "Qarabağ FK",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T14:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 951893,
@@ -20946,7 +21261,7 @@
         "probabilities": [
           0.38331418139443246,
           0.34318027712226384,
-          0.2735055414833037
+          0.27350554148330375
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -21015,10 +21330,15 @@
       "away": "Kaisar Kyzylorda",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T14:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 166865,
@@ -21184,12 +21504,17 @@
       "competitionFlag": "🌍",
       "home": "07 Vestur",
       "away": "B68 Toftir",
-      "homeScore": 1,
+      "homeScore": 2,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 167964,
@@ -21549,11 +21874,16 @@
       "home": "B36 Tórshavn",
       "away": "Klaksvik",
       "homeScore": 0,
-      "awayScore": 1,
-      "status": "LIVE",
+      "awayScore": 3,
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8002,
@@ -21914,12 +22244,17 @@
       "competitionFlag": "🌍",
       "home": "NSÍ Runavík",
       "away": "HB Tórshavn",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8110,
@@ -22211,8 +22546,8 @@
         "confidence": 49,
         "probabilities": [
           0.34280531058376623,
-          0.3163269518698111,
-          0.34086773754642274
+          0.316326951869811,
+          0.3408677375464227
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -22283,21 +22618,26 @@
       "competitionFlag": "🌍",
       "home": "Skála",
       "away": "AB Argir",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 2228,
         "division": "Premier League",
         "leagueId": 250,
         "ccode": "FRO",
-        "position": 8,
+        "position": 7,
         "form": "DL",
-        "lastSeasonPosition": 8,
+        "lastSeasonPosition": 7,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -22427,9 +22767,9 @@
         "division": "Premier League",
         "leagueId": 250,
         "ccode": "FRO",
-        "position": 7,
+        "position": 8,
         "form": "LL",
-        "lastSeasonPosition": 7,
+        "lastSeasonPosition": 8,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -22563,17 +22903,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5136436/match-details",
       "model": {
         "verdict": "WIN: Skála",
-        "confidence": 59,
+        "confidence": 60,
         "probabilities": [
-          0.4081520436724234,
-          0.3296570200569891,
-          0.26219093627058754
+          0.4108292961792987,
+          0.32834242173863887,
+          0.26082828208206243
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.54,
-          1.36
+          1.56,
+          1.34
         ],
         "factors": [
           [
@@ -22582,11 +22922,11 @@
           ],
           [
             "Current table",
-            -2.0
+            2.0
           ],
           [
             "Last-season prior",
-            -1.6
+            1.6
           ],
           [
             "Recent form",
@@ -22640,10 +22980,15 @@
       "away": "EB/Streymur",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 4666,
@@ -23003,21 +23348,26 @@
       "competitionFlag": "🌍",
       "home": "Ashanti Gold",
       "away": "Asante Kotoko SC",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 102017,
         "division": "Premier League",
         "leagueId": 522,
         "ccode": "GHA",
-        "position": 5,
+        "position": 10,
         "form": "LWLWL",
-        "lastSeasonPosition": 5,
+        "lastSeasonPosition": 10,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -23078,7 +23428,7 @@
         "division": "Premier League",
         "leagueId": 522,
         "ccode": "GHA",
-        "position": 11,
+        "position": 8,
         "form": "WLWLD",
         "lastSeasonPosition": 8,
         "lastSeason": "2025/26",
@@ -23145,15 +23495,15 @@
         "verdict": "WIN: Ashanti Gold",
         "confidence": 52,
         "probabilities": [
-          0.3622035410873737,
-          0.321857527281212,
-          0.3159389316314143
+          0.35566604852814365,
+          0.3222348209652642,
+          0.3220991305065922
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.56,
-          1.34
+          1.52,
+          1.38
         ],
         "factors": [
           [
@@ -23162,11 +23512,11 @@
           ],
           [
             "Current table",
-            12.0
+            -4.0
           ],
           [
             "Last-season prior",
-            4.8
+            -3.2
           ],
           [
             "Recent form",
@@ -23214,12 +23564,17 @@
       "competitionFlag": "🌍",
       "home": "Bechem United",
       "away": "Debibi",
-      "homeScore": 1,
+      "homeScore": 3,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 289802,
@@ -23427,17 +23782,22 @@
       "away": "Samartex",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 159949,
         "division": "Premier League",
         "leagueId": 522,
         "ccode": "GHA",
-        "position": 10,
+        "position": 11,
         "form": "WWLDL",
         "lastSeasonPosition": 6,
         "lastSeason": "2025/26",
@@ -23567,9 +23927,9 @@
         "verdict": "WIN: Samartex",
         "confidence": 51,
         "probabilities": [
-          0.31613891218193246,
-          0.3268364879532339,
-          0.3570245998648336
+          0.3158586269789933,
+          0.32657624996483675,
+          0.35756512305617005
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -23584,7 +23944,7 @@
           ],
           [
             "Current table",
-            -14.0
+            -16.0
           ],
           [
             "Last-season prior",
@@ -23636,12 +23996,17 @@
       "competitionFlag": "🌍",
       "home": "Bibiani Gold Stars",
       "away": "Heart of Lions",
-      "homeScore": 1,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 2,
+      "awayScore": 1,
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 1300594,
@@ -23839,12 +24204,17 @@
       "competitionFlag": "🌍",
       "home": "Dreams FC",
       "away": "Vision FC",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 3,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 723961,
@@ -23914,7 +24284,7 @@
         "division": "Premier League",
         "leagueId": 522,
         "ccode": "GHA",
-        "position": 14,
+        "position": 13,
         "form": "LLDD",
         "lastSeasonPosition": 10,
         "lastSeason": "2025/26",
@@ -23973,15 +24343,15 @@
         "verdict": "DRAW",
         "confidence": 48,
         "probabilities": [
-          0.3187868622682445,
-          0.34582137597923496,
-          0.3353917617525206
+          0.3183953576200704,
+          0.3458249867797383,
+          0.3357796556001914
         ],
         "projected": "1–1",
         "modalScore": "1–1",
         "expectedGoals": [
-          1.56,
-          1.34
+          1.55,
+          1.35
         ],
         "factors": [
           [
@@ -23990,7 +24360,7 @@
           ],
           [
             "Current table",
-            -8.0
+            -10.0
           ],
           [
             "Last-season prior",
@@ -24042,19 +24412,24 @@
       "competitionFlag": "🌍",
       "home": "Karela United",
       "away": "Port City",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 1,
+      "awayScore": 2,
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 1194060,
         "division": "Premier League",
         "leagueId": 522,
         "ccode": "GHA",
-        "position": 13,
+        "position": 14,
         "form": "LWLWL",
         "lastSeasonPosition": 9,
         "lastSeason": "2025/26",
@@ -24117,9 +24492,9 @@
         "division": "Premier League",
         "leagueId": 522,
         "ccode": "GHA",
-        "position": 7,
+        "position": 4,
         "form": "DLWLW",
-        "lastSeasonPosition": 7,
+        "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -24182,17 +24557,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5975073/match-details",
       "model": {
         "verdict": "WIN: Port City",
-        "confidence": 52,
+        "confidence": 53,
         "probabilities": [
-          0.3217632740206021,
-          0.31638969125835265,
-          0.36184703472104524
+          0.3182527187640275,
+          0.31647779694689193,
+          0.36526948428908057
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.5,
-          1.4
+          1.48,
+          1.42
         ],
         "factors": [
           [
@@ -24201,11 +24576,11 @@
           ],
           [
             "Current table",
-            -12.0
+            -20.0
           ],
           [
             "Last-season prior",
-            -3.2
+            -8.0
           ],
           [
             "Recent form",
@@ -24253,19 +24628,24 @@
       "competitionFlag": "🌍",
       "home": "Medeama SC",
       "away": "Aduana Stars",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 106975,
         "division": "Premier League",
         "leagueId": 522,
         "ccode": "GHA",
-        "position": 2,
+        "position": 1,
         "form": "LWWWW",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
@@ -24328,7 +24708,7 @@
         "division": "Premier League",
         "leagueId": 522,
         "ccode": "GHA",
-        "position": 4,
+        "position": 7,
         "form": "WLWWW",
         "lastSeasonPosition": 5,
         "lastSeason": "2025/26",
@@ -24395,15 +24775,15 @@
         "verdict": "WIN: Medeama SC",
         "confidence": 54,
         "probabilities": [
-          0.373362078027883,
-          0.32308819746562173,
-          0.30354972450649526
+          0.3751974579309939,
+          0.32295121682438105,
+          0.30185132524462516
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.57,
-          1.33
+          1.58,
+          1.32
         ],
         "factors": [
           [
@@ -24412,7 +24792,7 @@
           ],
           [
             "Current table",
-            4.0
+            12.0
           ],
           [
             "Last-season prior",
@@ -24464,12 +24844,17 @@
       "competitionFlag": "🌍",
       "home": "Young Apostles",
       "away": "All Blacks",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 1,
+      "awayScore": 2,
+      "status": "FT",
       "kickoff": "2026-10-25T15:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 1665706,
@@ -24539,7 +24924,7 @@
         "division": "Premier League",
         "leagueId": 522,
         "ccode": "GHA",
-        "position": 8,
+        "position": 5,
         "form": "WWLD",
         "lastSeasonPosition": 14,
         "lastSeason": "2025/26",
@@ -24598,9 +24983,9 @@
         "verdict": "WIN: All Blacks",
         "confidence": 59,
         "probabilities": [
-          0.2918309042230533,
-          0.3088398588252837,
-          0.39932923695166306
+          0.29048834035478455,
+          0.3088569332491153,
+          0.4006547263961001
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -24615,7 +25000,7 @@
           ],
           [
             "Current table",
-            -18.0
+            -24.0
           ],
           [
             "Last-season prior",
@@ -24667,12 +25052,17 @@
       "competitionFlag": "🌍",
       "home": "Zenit St. Petersburg",
       "away": "Dynamo Makhachkala",
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T15:30:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8698,
@@ -24825,18 +25215,18 @@
         ],
         "recentGF": 7,
         "recentGA": 4,
-        "ratingPrior": 6.96,
+        "ratingPrior": 6.92,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.08,
-        "xg": 0.08
+        "matchXG": 3.7,
+        "xg": 3.7
       },
       "awayData": {
         "id": 1068353,
         "division": "Premier League",
         "leagueId": 63,
         "ccode": "RUS",
-        "position": 9,
+        "position": 10,
         "form": "DL",
         "lastSeasonPosition": 14,
         "lastSeason": "2025/26",
@@ -24966,11 +25356,11 @@
         ],
         "recentGF": 1,
         "recentGA": 5,
-        "ratingPrior": 6.66,
+        "ratingPrior": 6.63,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.8,
-        "xg": 0.8
+        "matchXG": 0.92,
+        "xg": 0.92
       },
       "h2hSummary": "9–1–0",
       "scorers": [],
@@ -24979,17 +25369,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5847214/match-details",
       "model": {
         "verdict": "WIN: Zenit St. Petersburg",
-        "confidence": 79,
+        "confidence": 89,
         "probabilities": [
-          0.5196777217273921,
-          0.3018043228147851,
-          0.1785179554578228
+          0.5712213334253221,
+          0.2840742843496117,
+          0.14470438222506615
         ],
-        "projected": "1–0",
-        "modalScore": "1–0",
+        "projected": "2–1",
+        "modalScore": "2–1",
         "expectedGoals": [
-          1.4,
-          1.12
+          2.09,
+          1.14
         ],
         "factors": [
           [
@@ -24998,7 +25388,7 @@
           ],
           [
             "Current table",
-            16.0
+            18.0
           ],
           [
             "Last-season prior",
@@ -25018,7 +25408,7 @@
           ],
           [
             "Starting XI quality",
-            5.4
+            5.2
           ],
           [
             "XI estimated value",
@@ -25054,12 +25444,17 @@
       "competitionFlag": "🌍",
       "home": "Borac Banja Luka",
       "away": "Sloga Doboj",
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "FT",
       "kickoff": "2026-10-25T16:30:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 10116,
@@ -25646,7 +26041,7 @@
         "confidence": 49,
         "probabilities": [
           0.3084405042165038,
-          0.33904762949189216,
+          0.3390476294918922,
           0.352511866291604
         ],
         "projected": "1–2",
@@ -26279,10 +26674,15 @@
       "away": "Real Betis",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-10-25T15:15:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 9910,
@@ -26421,8 +26821,8 @@
         "ratingPrior": 6.73,
         "xgSeason": 3.76,
         "xiRating": null,
-        "matchXG": 0.42,
-        "xg": 0.42
+        "matchXG": 0.84,
+        "xg": 0.84
       },
       "awayData": {
         "id": 8603,
@@ -26567,11 +26967,11 @@
         ],
         "recentGF": 8,
         "recentGA": 8,
-        "ratingPrior": 7.02,
+        "ratingPrior": 7.01,
         "xgSeason": 5.62,
         "xiRating": null,
-        "matchXG": 0.24,
-        "xg": 0.24
+        "matchXG": 1.09,
+        "xg": 1.09
       },
       "h2hSummary": "8–11–9",
       "scorers": [],
@@ -26580,17 +26980,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5868104/match-details",
       "model": {
         "verdict": "WIN: Real Betis",
-        "confidence": 53,
+        "confidence": 54,
         "probabilities": [
-          0.29294165214086754,
-          0.3412636792054935,
-          0.3657946686536391
+          0.2863772046898501,
+          0.3407577861401573,
+          0.37286500916999266
         ],
         "projected": "0–1",
         "modalScore": "0–1",
         "expectedGoals": [
-          1.25,
-          1.12
+          1.33,
+          1.29
         ],
         "factors": [
           [
@@ -26619,7 +27019,7 @@
           ],
           [
             "Starting XI quality",
-            -5.2
+            -5.0
           ],
           [
             "XI estimated value",
@@ -26655,9 +27055,9 @@
       "competitionFlag": "🇪🇸",
       "home": "Real Sociedad",
       "away": "Levante",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "homeScore": 2,
+      "awayScore": 1,
+      "status": "LIVE",
       "kickoff": "2026-10-25T17:30:00.000Z",
       "minute": {
         "short": ""
@@ -26673,7 +27073,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 198302666,
+        "lineupEstimatedValue": 181163562,
         "lineup": [
           {
             "name": "Alex Remiro",
@@ -26721,13 +27121,22 @@
             "estimatedValue": 17059320
           },
           {
-            "name": "Takefusa Kubo",
-            "playerId": 848289,
-            "image": "https://images.fotmob.com/image_resources/playerimages/848289.png",
+            "name": "Luka Sučić",
+            "playerId": 959597,
+            "image": "https://images.fotmob.com/image_resources/playerimages/959597.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 21480692
+            "estimatedValue": 13731055
+          },
+          {
+            "name": "Jon Gorrotxategi",
+            "playerId": 1323827,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1323827.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 11510728
           },
           {
             "name": "Beñat Turrientes",
@@ -26739,31 +27148,13 @@
             "estimatedValue": 11522358
           },
           {
-            "name": "Carlos Soler",
-            "playerId": 708890,
-            "image": "https://images.fotmob.com/image_resources/playerimages/708890.png",
+            "name": "Gonçalo Guedes",
+            "playerId": 536455,
+            "image": "https://images.fotmob.com/image_resources/playerimages/536455.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 6612601
-          },
-          {
-            "name": "Ander Barrenetxea",
-            "playerId": 1002618,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1002618.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 19299256
-          },
-          {
-            "name": "Mikel Oyarzabal",
-            "playerId": 678234,
-            "image": "https://images.fotmob.com/image_resources/playerimages/678234.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 22588238
+            "estimatedValue": 5011662
           },
           {
             "name": "Orri Óskarsson",
@@ -26773,6 +27164,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 22425770
+          },
+          {
+            "name": "Mikel Oyarzabal",
+            "playerId": 678234,
+            "image": "https://images.fotmob.com/image_resources/playerimages/678234.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 22588238
           }
         ],
         "injuries": [],
@@ -26813,10 +27213,11 @@
         ],
         "recentGF": 11,
         "recentGA": 7,
-        "ratingPrior": 6.76,
+        "ratingPrior": 6.75,
         "xgSeason": 4.52,
         "xiRating": null,
-        "xg": 4.52
+        "matchXG": 1.53,
+        "xg": 1.53
       },
       "awayData": {
         "id": 8581,
@@ -26829,7 +27230,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 35626906,
+        "lineupEstimatedValue": 45132996,
         "lineup": [
           {
             "name": "Mathew Ryan",
@@ -26841,13 +27242,13 @@
             "estimatedValue": 1193242
           },
           {
-            "name": "Jeremy Toljan",
-            "playerId": 443966,
-            "image": "https://images.fotmob.com/image_resources/playerimages/443966.png",
+            "name": "Nacho Pérez",
+            "playerId": 1800611,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1800611.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1463518
+            "estimatedValue": 1180638
           },
           {
             "name": "Aïssa Mandi",
@@ -26877,24 +27278,6 @@
             "estimatedValue": 7091832
           },
           {
-            "name": "Jon Olasagasti",
-            "playerId": 1131957,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1131957.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2097167
-          },
-          {
-            "name": "Oriol Rey",
-            "playerId": 914401,
-            "image": "https://images.fotmob.com/image_resources/playerimages/914401.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1007879
-          },
-          {
             "name": "Roger Brugué",
             "playerId": 1286471,
             "image": "https://images.fotmob.com/image_resources/playerimages/1286471.png",
@@ -26902,6 +27285,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 1519475
+          },
+          {
+            "name": "Jon Olasagasti",
+            "playerId": 1131957,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1131957.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 2097167
           },
           {
             "name": "Dani Requena",
@@ -26929,6 +27321,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 8770525
+          },
+          {
+            "name": "Petar Ratkov",
+            "playerId": 1302821,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1302821.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 10796849
           }
         ],
         "injuries": [],
@@ -26969,10 +27370,11 @@
         ],
         "recentGF": 8,
         "recentGA": 8,
-        "ratingPrior": 6.61,
+        "ratingPrior": 6.56,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.35,
+        "xg": 0.35
       },
       "h2hSummary": "7–9–8",
       "scorers": [],
@@ -26981,17 +27383,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5868108/match-details",
       "model": {
         "verdict": "WIN: Real Sociedad",
-        "confidence": 58,
+        "confidence": 61,
         "probabilities": [
-          0.40851537572343555,
-          0.3384815859818832,
-          0.2530030382946812
+          0.4211763601642078,
+          0.33901365621080387,
+          0.23980998362498843
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "1–0",
+        "modalScore": "1–0",
         "expectedGoals": [
-          1.59,
-          1.21
+          1.58,
+          1.04
         ],
         "factors": [
           [
@@ -27020,11 +27422,11 @@
           ],
           [
             "Starting XI quality",
-            2.7
+            3.4
           ],
           [
             "XI estimated value",
-            17.2
+            13.9
           ],
           [
             "Home advantage",
@@ -27043,7 +27445,7 @@
             25.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
