@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-30T06:02:45.805981+00:00",
-  "updated": "2026-10-30 02:02:45 AM ET",
+  "updatedAt": "2026-10-30T12:25:55.568470+00:00",
+  "updated": "2026-10-30 08:25:55 AM ET",
   "updateMode": "AUTO",
   "refreshIntervalSeconds": 300,
   "fixtureCount": 185,
@@ -31,19 +31,24 @@
       "competitionFlag": "🇦🇺",
       "home": "Brisbane Roar FC",
       "away": "Auckland FC",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "FT",
       "kickoff": "2026-10-30T09:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8118,
         "division": "Australia A-League",
         "leagueId": 113,
         "ccode": "AUS",
-        "position": 5,
+        "position": 4,
         "form": "W",
         "lastSeasonPosition": 11,
         "lastSeason": "2025/26",
@@ -132,15 +137,6 @@
             "estimatedValue": 321040
           },
           {
-            "name": "Virgiliu Postolachi",
-            "playerId": 949215,
-            "image": "https://images.fotmob.com/image_resources/playerimages/949215.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 422714
-          },
-          {
             "name": "Justin Vidić",
             "playerId": 1565863,
             "image": "https://images.fotmob.com/image_resources/playerimages/1565863.png",
@@ -148,6 +144,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 266728
+          },
+          {
+            "name": "Virgiliu Postolachi",
+            "playerId": 949215,
+            "image": "https://images.fotmob.com/image_resources/playerimages/949215.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 422714
           }
         ],
         "injuries": [],
@@ -165,9 +170,10 @@
         "recentGF": 2,
         "recentGA": 1,
         "ratingPrior": 6.94,
-        "xgSeason": 1.95,
+        "xgSeason": 3.22,
         "xiRating": null,
-        "xg": 1.95
+        "matchXG": 1.27,
+        "xg": 1.27
       },
       "awayData": {
         "id": 1642068,
@@ -180,7 +186,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 2837931,
+        "lineupEstimatedValue": 3043257,
         "lineup": [
           {
             "name": "Michael Woud",
@@ -201,12 +207,13 @@
             "estimatedValue": 111465
           },
           {
-            "name": "Luka Vicelich",
-            "playerId": 1853363,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1853363.png",
+            "name": "Ronan Wynne",
+            "playerId": 1201124,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1201124.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 384000
           },
           {
             "name": "Nando Pijnaker",
@@ -263,13 +270,13 @@
             "estimatedValue": 188176
           },
           {
-            "name": "Sam Cosgrove",
-            "playerId": 609501,
-            "image": "https://images.fotmob.com/image_resources/playerimages/609501.png",
+            "name": "Jonty Bidois",
+            "playerId": 1580225,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1580225.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 389409
+            "estimatedValue": 210735
           },
           {
             "name": "Lachlan Bayliss",
@@ -304,9 +311,10 @@
         "recentGF": 5,
         "recentGA": 6,
         "ratingPrior": 6.82,
-        "xgSeason": 1.39,
+        "xgSeason": 2.08,
         "xiRating": null,
-        "xg": 1.39
+        "matchXG": 0.69,
+        "xg": 0.69
       },
       "h2hSummary": "0–1–3",
       "scorers": [],
@@ -315,17 +323,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/1000017569/match-details",
       "model": {
         "verdict": "WIN: Brisbane Roar FC",
-        "confidence": 62,
+        "confidence": 61,
         "probabilities": [
-          0.40832811648307044,
-          0.31653201796550334,
-          0.27513986555142633
+          0.40677412301414884,
+          0.3224841688129945,
+          0.2707417081728567
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "1–0",
+        "modalScore": "1–0",
         "expectedGoals": [
-          1.57,
-          1.34
+          1.43,
+          1.2
         ],
         "factors": [
           [
@@ -334,7 +342,7 @@
           ],
           [
             "Current table",
-            2.0
+            4.0
           ],
           [
             "Last-season prior",
@@ -358,7 +366,7 @@
           ],
           [
             "XI estimated value",
-            -0.0
+            -0.7
           ],
           [
             "Home advantage",
@@ -910,7 +918,7 @@
         "division": "Australia A-League",
         "leagueId": 113,
         "ccode": "AUS",
-        "position": 4,
+        "position": 5,
         "form": "WD",
         "lastSeasonPosition": 5,
         "lastSeason": "2025/26",
@@ -1054,15 +1062,15 @@
         "verdict": "WIN: Sydney FC",
         "confidence": 54,
         "probabilities": [
-          0.28253836216937334,
-          0.3440927238589423,
-          0.37336891397168437
+          0.28263654621160617,
+          0.3444821671173379,
+          0.3728812866710559
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
           1.64,
-          1.62
+          1.61
         ],
         "factors": [
           [
@@ -1071,7 +1079,7 @@
           ],
           [
             "Current table",
-            -10.0
+            -8.0
           ],
           [
             "Last-season prior",
@@ -4788,7 +4796,7 @@
         "verdict": "WIN: Smouha SC",
         "confidence": 50,
         "probabilities": [
-          0.3173363967503382,
+          0.3173363967503381,
           0.3350017260325954,
           0.34766187721706643
         ],
@@ -7942,7 +7950,7 @@
         "confidence": 48,
         "probabilities": [
           0.3448434737715358,
-          0.3508540079233905,
+          0.35085400792339044,
           0.30430251830507377
         ],
         "projected": "1–1",
@@ -9947,8 +9955,8 @@
         "confidence": 50,
         "probabilities": [
           0.294511918662222,
-          0.34690977625603464,
-          0.3585783050817433
+          0.3469097762560347,
+          0.3585783050817434
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -11194,9 +11202,9 @@
         "verdict": "WIN: Oxford United",
         "confidence": 78,
         "probabilities": [
-          0.21406815228976311,
+          0.21406815228976314,
           0.2850574297939483,
-          0.5008744179162885
+          0.5008744179162886
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -12027,7 +12035,7 @@
         "verdict": "WIN: Mansfield Town",
         "confidence": 54,
         "probabilities": [
-          0.3684057108786101,
+          0.36840571087861007,
           0.3297925111757094,
           0.3018017779456806
         ],
@@ -12443,7 +12451,7 @@
         "verdict": "WIN: Milton Keynes Dons",
         "confidence": 60,
         "probabilities": [
-          0.4193370052519576,
+          0.4193370052519575,
           0.33298611975632214,
           0.2476768749917203
         ],
@@ -12858,7 +12866,7 @@
         "confidence": 60,
         "probabilities": [
           0.2795021739146276,
-          0.3174913719724666,
+          0.3174913719724665,
           0.4030064541129058
         ],
         "projected": "1–2",
@@ -13269,7 +13277,7 @@
         "confidence": 75,
         "probabilities": [
           0.5003347923306369,
-          0.3063827440372624,
+          0.30638274403726234,
           0.19328246363210072
         ],
         "projected": "2–1",
@@ -14515,8 +14523,8 @@
         "confidence": 50,
         "probabilities": [
           0.3063174635272233,
-          0.35178933062710904,
-          0.3418932058456676
+          0.3517893306271091,
+          0.3418932058456677
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -15754,7 +15762,7 @@
         "probabilities": [
           0.4237903606429769,
           0.35567778936275285,
-          0.22053184999427028
+          0.2205318499942703
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -17409,9 +17417,9 @@
         "verdict": "WIN: Oldham Athletic",
         "confidence": 55,
         "probabilities": [
-          0.40805501343887723,
+          0.4080550134388772,
           0.35859609885993554,
-          0.23334888770118725
+          0.23334888770118728
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -18648,8 +18656,8 @@
         "confidence": 51,
         "probabilities": [
           0.3675040276995508,
-          0.34826524821042487,
-          0.28423072409002426
+          0.3482652482104249,
+          0.2842307240900243
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -19152,7 +19160,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 685490578,
+        "lineupEstimatedValue": 592270480,
         "lineup": [
           {
             "name": "Mike Penders",
@@ -19173,15 +19181,6 @@
             "estimatedValue": 29169410
           },
           {
-            "name": "Maxence Lacroix",
-            "playerId": 950485,
-            "image": "https://images.fotmob.com/image_resources/playerimages/950485.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 61125128
-          },
-          {
             "name": "Levi Colwill",
             "playerId": 1096400,
             "image": "https://images.fotmob.com/image_resources/playerimages/1096400.png",
@@ -19189,6 +19188,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 62745559
+          },
+          {
+            "name": "Jorrel Hato",
+            "playerId": 1413846,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1413846.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 54453612
           },
           {
             "name": "Pedro Neto",
@@ -19218,13 +19226,13 @@
             "estimatedValue": 1360603
           },
           {
-            "name": "Jorrel Hato",
-            "playerId": 1413846,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1413846.png",
+            "name": "Marco Palestra",
+            "playerId": 1473806,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1473806.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 54453612
+            "estimatedValue": 18385458
           },
           {
             "name": "Cole Palmer",
@@ -19236,15 +19244,6 @@
             "estimatedValue": 101952390
           },
           {
-            "name": "Geovany Quenda",
-            "playerId": 1530314,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1530314.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 54942760
-          },
-          {
             "name": "Morgan Rogers",
             "playerId": 883080,
             "image": "https://images.fotmob.com/image_resources/playerimages/883080.png",
@@ -19252,6 +19251,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 105981682
+          },
+          {
+            "name": "Danny Welbeck",
+            "playerId": 113836,
+            "image": "https://images.fotmob.com/image_resources/playerimages/113836.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 4462332
           }
         ],
         "injuries": [],
@@ -19300,7 +19308,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 473671934,
+        "lineupEstimatedValue": 534186052,
         "lineup": [
           {
             "name": "Senne Lammens",
@@ -19330,13 +19338,13 @@
             "estimatedValue": 5811328
           },
           {
-            "name": "Ayden Heaven",
-            "playerId": 1559639,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1559639.png",
+            "name": "Lisandro Martínez",
+            "playerId": 847983,
+            "image": "https://images.fotmob.com/image_resources/playerimages/847983.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 28962303
+            "estimatedValue": 29269722
           },
           {
             "name": "Diogo Dalot",
@@ -19348,13 +19356,13 @@
             "estimatedValue": 33062873
           },
           {
-            "name": "Andrey Santos",
-            "playerId": 1372921,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1372921.png",
+            "name": "Kobbie Mainoo",
+            "playerId": 1292810,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1292810.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 50721856
+            "estimatedValue": 79664956
           },
           {
             "name": "Carlos Baleba",
@@ -19375,22 +19383,22 @@
             "estimatedValue": 55380731
           },
           {
-            "name": "Youri Tielemans",
-            "playerId": 465960,
-            "image": "https://images.fotmob.com/image_resources/playerimages/465960.png",
+            "name": "Bruno Fernandes",
+            "playerId": 422685,
+            "image": "https://images.fotmob.com/image_resources/playerimages/422685.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 47631944
+            "estimatedValue": 27178733
           },
           {
-            "name": "Mason Mount",
-            "playerId": 750032,
-            "image": "https://images.fotmob.com/image_resources/playerimages/750032.png",
+            "name": "Matheus Cunha",
+            "playerId": 863098,
+            "image": "https://images.fotmob.com/image_resources/playerimages/863098.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 24297394
+            "estimatedValue": 76014204
           },
           {
             "name": "Bryan Mbeumo",
@@ -19446,15 +19454,15 @@
         "verdict": "WIN: Chelsea",
         "confidence": 59,
         "probabilities": [
-          0.4134884508508496,
-          0.33732432894493336,
-          0.24918722020421696
+          0.41286328781484233,
+          0.3377411366543985,
+          0.2493955755307592
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.59,
-          1.31
+          1.58,
+          1.32
         ],
         "factors": [
           [
@@ -19487,7 +19495,7 @@
           ],
           [
             "XI estimated value",
-            3.7
+            1.0
           ],
           [
             "Home advantage",
@@ -20602,7 +20610,7 @@
         "probabilities": [
           0.32407377747018684,
           0.32364685317299663,
-          0.35227936935681653
+          0.3522793693568165
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -22155,7 +22163,7 @@
         "verdict": "WIN: Aston Villa",
         "confidence": 60,
         "probabilities": [
-          0.40625063221611635,
+          0.4062506322161163,
           0.3209018630178465,
           0.2728475047660372
         ],
@@ -22924,7 +22932,7 @@
         "probabilities": [
           0.32076410392118815,
           0.32754876214811446,
-          0.3516871339306974
+          0.35168713393069745
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -24460,7 +24468,7 @@
         "probabilities": [
           0.2778716942096457,
           0.3495027928099545,
-          0.37262551298039975
+          0.3726255129803998
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -25224,8 +25232,8 @@
         "verdict": "WIN: Nantes",
         "confidence": 48,
         "probabilities": [
-          0.34621296067333307,
-          0.34193316827613585,
+          0.346212960673333,
+          0.3419331682761358,
           0.3118538710505312
         ],
         "projected": "2–1",
@@ -25992,7 +26000,7 @@
         "confidence": 64,
         "probabilities": [
           0.25381824114201107,
-          0.3084428377091441,
+          0.30844283770914416,
           0.43773892114884483
         ],
         "projected": "0–1",
@@ -26377,7 +26385,7 @@
         "confidence": 70,
         "probabilities": [
           0.25882236563250116,
-          0.28435934376727917,
+          0.2843593437672792,
           0.4568182906002197
         ],
         "projected": "1–2",
@@ -27155,8 +27163,8 @@
         "confidence": 54,
         "probabilities": [
           0.2928771749289991,
-          0.3280551616279152,
-          0.3790676634430856
+          0.32805516162791526,
+          0.3790676634430857
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -28792,7 +28800,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 94873413,
+        "lineupEstimatedValue": 89704272,
         "lineup": [
           {
             "name": "Łukasz Skorupski",
@@ -28840,15 +28848,6 @@
             "estimatedValue": 7080174
           },
           {
-            "name": "Lewis Ferguson",
-            "playerId": 888921,
-            "image": "https://images.fotmob.com/image_resources/playerimages/888921.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 13152786
-          },
-          {
             "name": "Tommaso Pobega",
             "playerId": 790732,
             "image": "https://images.fotmob.com/image_resources/playerimages/790732.png",
@@ -28856,6 +28855,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 7457290
+          },
+          {
+            "name": "Lewis Ferguson",
+            "playerId": 888921,
+            "image": "https://images.fotmob.com/image_resources/playerimages/888921.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 13152786
           },
           {
             "name": "Juan Miranda",
@@ -28885,13 +28893,13 @@
             "estimatedValue": 13356620
           },
           {
-            "name": "Nicolò Cambiaghi",
-            "playerId": 1044029,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1044029.png",
+            "name": "Samuel Mbangula",
+            "playerId": 1402900,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1402900.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 15386509
+            "estimatedValue": 10217368
           }
         ],
         "injuries": [],
@@ -29110,9 +29118,9 @@
         "verdict": "WIN: Bologna",
         "confidence": 57,
         "probabilities": [
-          0.39323243380396344,
-          0.33329795584313465,
-          0.27346961035290196
+          0.3931388765940578,
+          0.3333091023801091,
+          0.2735520210258332
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -29151,7 +29159,7 @@
           ],
           [
             "XI estimated value",
-            7.5
+            6.9
           ],
           [
             "Home advantage",
@@ -29201,7 +29209,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 59922637,
+        "lineupEstimatedValue": 73179476,
         "lineup": [
           {
             "name": "Maduka Okoye",
@@ -29276,6 +29284,15 @@
             "estimatedValue": 2300868
           },
           {
+            "name": "Nicolò Zaniolo",
+            "playerId": 818893,
+            "image": "https://images.fotmob.com/image_resources/playerimages/818893.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 16703875
+          },
+          {
             "name": "Jurgen Ekkelenkamp",
             "playerId": 934156,
             "image": "https://images.fotmob.com/image_resources/playerimages/934156.png",
@@ -29283,15 +29300,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 11506230
-          },
-          {
-            "name": "Giorgi Chakvetadze",
-            "playerId": 837847,
-            "image": "https://images.fotmob.com/image_resources/playerimages/837847.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 3447036
           },
           {
             "name": "Keinan Davis",
@@ -29357,7 +29365,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 213945104,
+        "lineupEstimatedValue": 225890582,
         "lineup": [
           {
             "name": "Pierluigi Gollini",
@@ -29369,13 +29377,13 @@
             "estimatedValue": 380588
           },
           {
-            "name": "Gianluca Mancini",
-            "playerId": 588687,
-            "image": "https://images.fotmob.com/image_resources/playerimages/588687.png",
+            "name": "Daniele Ghilardi",
+            "playerId": 1386006,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1386006.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 17855568
+            "estimatedValue": 14266497
           },
           {
             "name": "Evan N'Dicka",
@@ -29387,13 +29395,13 @@
             "estimatedValue": 34709740
           },
           {
-            "name": "Konstantinos Koulierakis",
-            "playerId": 1337884,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1337884.png",
+            "name": "Leonardo Balerdi",
+            "playerId": 958464,
+            "image": "https://images.fotmob.com/image_resources/playerimages/958464.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 26514230
+            "estimatedValue": 15641990
           },
           {
             "name": "Emanuele Lulli",
@@ -29412,15 +29420,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 6594315
-          },
-          {
-            "name": "Marten de Roon",
-            "playerId": 198559,
-            "image": "https://images.fotmob.com/image_resources/playerimages/198559.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2175484
           },
           {
             "name": "Niccolò Pisilli",
@@ -29450,13 +29449,22 @@
             "estimatedValue": 40588001
           },
           {
-            "name": "Santiago Castro",
-            "playerId": 1282008,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1282008.png",
+            "name": "Rodrigo Mora",
+            "playerId": 1525065,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1525065.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 41698579
+            "estimatedValue": 31876822
+          },
+          {
+            "name": "Donyell Malen",
+            "playerId": 660301,
+            "image": "https://images.fotmob.com/image_resources/playerimages/660301.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 38404030
           }
         ],
         "injuries": [],
@@ -29511,9 +29519,9 @@
         "verdict": "WIN: Roma",
         "confidence": 70,
         "probabilities": [
-          0.26257559125082497,
-          0.28815297401334516,
-          0.44927143473583
+          0.26279948951493975,
+          0.2881671856374438,
+          0.4490333248476164
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -29552,7 +29560,7 @@
           ],
           [
             "XI estimated value",
-            -12.7
+            -11.3
           ],
           [
             "Home advantage",
@@ -29602,7 +29610,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 256689487,
+        "lineupEstimatedValue": 277428366,
         "lineup": [
           {
             "name": "Mike Maignan",
@@ -29614,13 +29622,13 @@
             "estimatedValue": 20225627
           },
           {
-            "name": "Fikayo Tomori",
-            "playerId": 749662,
-            "image": "https://images.fotmob.com/image_resources/playerimages/749662.png",
+            "name": "Mario Gila",
+            "playerId": 1106074,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1106074.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 11392535
+            "estimatedValue": 32318693
           },
           {
             "name": "Koni De Winter",
@@ -29659,13 +29667,22 @@
             "estimatedValue": 15960702
           },
           {
-            "name": "Ardon Jashari",
-            "playerId": 1163219,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1163219.png",
+            "name": "Luka Modrić",
+            "playerId": 31097,
+            "image": "https://images.fotmob.com/image_resources/playerimages/31097.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 25996906
+            "estimatedValue": 1859263
+          },
+          {
+            "name": "Adrien Rabiot",
+            "playerId": 352879,
+            "image": "https://images.fotmob.com/image_resources/playerimages/352879.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 14865100
           },
           {
             "name": "Omari Hutchinson",
@@ -29677,24 +29694,6 @@
             "estimatedValue": 39013857
           },
           {
-            "name": "Alphadjo Cissè",
-            "playerId": 1445650,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1445650.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 6605000
-          },
-          {
-            "name": "Davide Bartesaghi",
-            "playerId": 1385856,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1385856.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 13544273
-          },
-          {
             "name": "Gonçalo Ramos",
             "playerId": 940087,
             "image": "https://images.fotmob.com/image_resources/playerimages/940087.png",
@@ -29702,6 +29701,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 49403020
+          },
+          {
+            "name": "Christian Pulisic",
+            "playerId": 688295,
+            "image": "https://images.fotmob.com/image_resources/playerimages/688295.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 29234537
           }
         ],
         "injuries": [],
@@ -29758,7 +29766,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 367930823,
+        "lineupEstimatedValue": 340562755,
         "lineup": [
           {
             "name": "Ivan Provedel",
@@ -29779,6 +29787,15 @@
             "estimatedValue": 56227872
           },
           {
+            "name": "Manuel Akanji",
+            "playerId": 521318,
+            "image": "https://images.fotmob.com/image_resources/playerimages/521318.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 11883846
+          },
+          {
             "name": "Alessandro Bastoni",
             "playerId": 805451,
             "image": "https://images.fotmob.com/image_resources/playerimages/805451.png",
@@ -29786,15 +29803,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 58220687
-          },
-          {
-            "name": "Carlos Augusto",
-            "playerId": 940829,
-            "image": "https://images.fotmob.com/image_resources/playerimages/940829.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 17450712
           },
           {
             "name": "Andy Diouf",
@@ -29806,22 +29814,22 @@
             "estimatedValue": 23842465
           },
           {
-            "name": "Petar Sučić",
-            "playerId": 1382000,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1382000.png",
+            "name": "Nicolò Barella",
+            "playerId": 541820,
+            "image": "https://images.fotmob.com/image_resources/playerimages/541820.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 47019944
+            "estimatedValue": 56295708
           },
           {
-            "name": "Aleksandar Stanković",
-            "playerId": 1410437,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1410437.png",
+            "name": "Hakan Çalhanoglu",
+            "playerId": 304733,
+            "image": "https://images.fotmob.com/image_resources/playerimages/304733.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 32955567
+            "estimatedValue": 9039467
           },
           {
             "name": "Piotr Zieliński",
@@ -29842,13 +29850,13 @@
             "estimatedValue": 34799911
           },
           {
-            "name": "Ange-Yoan Bonny",
-            "playerId": 1199383,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1199383.png",
+            "name": "Francesco Pio Esposito",
+            "playerId": 1367618,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1367618.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 41492236
+            "estimatedValue": 34331370
           },
           {
             "name": "Marcus Thuram",
@@ -29912,9 +29920,9 @@
         "verdict": "WIN: Inter",
         "confidence": 61,
         "probabilities": [
-          0.2769054742712981,
-          0.31564390975177625,
-          0.40745061597692567
+          0.27715371994408466,
+          0.3156423149556476,
+          0.4072039651002678
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -29953,7 +29961,7 @@
           ],
           [
             "XI estimated value",
-            -3.6
+            -2.1
           ],
           [
             "Home advantage",
@@ -32453,7 +32461,7 @@
         "confidence": 65,
         "probabilities": [
           0.4423647443538484,
-          0.30562106817869134,
+          0.3056210681786914,
           0.25201418746746024
         ],
         "projected": "2–1",
@@ -33093,7 +33101,7 @@
       "homeScore": 0,
       "awayScore": 0,
       "status": "UPCOMING",
-      "kickoff": "2026-10-31T15:00:00.000Z",
+      "kickoff": "2026-10-31T14:00:00.000Z",
       "minute": {
         "short": ""
       },
@@ -34564,7 +34572,7 @@
         "confidence": 51,
         "probabilities": [
           0.327091482817216,
-          0.35455539064389346,
+          0.35455539064389335,
           0.3183531265388906
         ],
         "projected": "1–1",
@@ -34947,9 +34955,9 @@
         "verdict": "WIN: MC Oran",
         "confidence": 64,
         "probabilities": [
-          0.46157114282064754,
+          0.4615711428206476,
           0.3324017761991402,
-          0.20602708098021222
+          0.20602708098021225
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -37179,7 +37187,7 @@
         "probabilities": [
           0.5209127830066287,
           0.30028756284435626,
-          0.17879965414901502
+          0.17879965414901505
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -38715,7 +38723,7 @@
         "verdict": "DRAW",
         "confidence": 52,
         "probabilities": [
-          0.31984288197822813,
+          0.3198428819782282,
           0.3524997342202918,
           0.3276573838014801
         ],
@@ -38788,9 +38796,9 @@
       "competitionFlag": "🌍",
       "home": "Sardarapat",
       "away": "Van",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "LIVE",
       "kickoff": "2026-10-30T11:30:00.000Z",
       "minute": {
         "short": ""
@@ -38800,9 +38808,9 @@
         "division": "Premier League",
         "leagueId": 118,
         "ccode": "ARM",
-        "position": 6,
+        "position": 5,
         "form": "DWL",
-        "lastSeasonPosition": 6,
+        "lastSeasonPosition": 5,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -38847,7 +38855,7 @@
         "division": "Premier League",
         "leagueId": 118,
         "ccode": "ARM",
-        "position": 9,
+        "position": 8,
         "form": "WLW",
         "lastSeasonPosition": 6,
         "lastSeason": "2025/26",
@@ -38898,15 +38906,15 @@
         "verdict": "WIN: Sardarapat",
         "confidence": 66,
         "probabilities": [
-          0.4399074820351828,
-          0.29850659160260834,
-          0.2615859263622088
+          0.44031920646032485,
+          0.2987740757892753,
+          0.2609067177503998
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.53,
-          1.37
+          1.54,
+          1.36
         ],
         "factors": [
           [
@@ -38919,7 +38927,7 @@
           ],
           [
             "Last-season prior",
-            0.0
+            1.6
           ],
           [
             "Recent form",
@@ -38969,7 +38977,7 @@
       "away": "FC Jurong",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "LIVE",
       "kickoff": "2026-10-30T11:30:00.000Z",
       "minute": {
         "short": ""
@@ -39026,7 +39034,7 @@
         "division": "Premier League",
         "leagueId": 461,
         "ccode": "SIN",
-        "position": 5,
+        "position": 4,
         "form": "LLL",
         "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
@@ -39077,15 +39085,15 @@
         "verdict": "WIN: FC Jurong",
         "confidence": 54,
         "probabilities": [
-          0.3185301170492575,
-          0.3111422987388872,
-          0.3703275842118553
+          0.3180757791990537,
+          0.31116384630500327,
+          0.370760374495943
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.53,
-          1.37
+          1.52,
+          1.38
         ],
         "factors": [
           [
@@ -39094,7 +39102,7 @@
           ],
           [
             "Current table",
-            -2.0
+            -4.0
           ],
           [
             "Last-season prior",
@@ -39587,7 +39595,7 @@
         "division": "Premier League",
         "leagueId": 118,
         "ccode": "ARM",
-        "position": 5,
+        "position": 6,
         "form": "DWD",
         "lastSeasonPosition": 5,
         "lastSeason": "2025/26",
@@ -39638,15 +39646,15 @@
         "verdict": "WIN: Pyunik",
         "confidence": 60,
         "probabilities": [
-          0.43718980638588456,
-          0.33930984263071606,
-          0.22350035098339932
+          0.43780675602309316,
+          0.3389161610858813,
+          0.22327708289102555
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.57,
-          1.33
+          1.58,
+          1.32
         ],
         "factors": [
           [
@@ -39655,7 +39663,7 @@
           ],
           [
             "Current table",
-            4.0
+            6.0
           ],
           [
             "Last-season prior",
@@ -42254,7 +42262,7 @@
         "verdict": "WIN: Veres Rivne",
         "confidence": 56,
         "probabilities": [
-          0.3780843006174716,
+          0.37808430061747156,
           0.32504173444269324,
           0.2968739649398352
         ],
@@ -42976,7 +42984,7 @@
         "probabilities": [
           0.30667239257928414,
           0.3458321598999499,
-          0.34749544752076605
+          0.347495447520766
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -44075,7 +44083,7 @@
         "verdict": "WIN: NSÍ Runavík",
         "confidence": 69,
         "probabilities": [
-          0.2565011434469263,
+          0.25650114344692637,
           0.28875954726480463,
           0.4547393092882691
         ],
@@ -45931,7 +45939,7 @@
         "confidence": 51,
         "probabilities": [
           0.3235069801925934,
-          0.321802962446962,
+          0.32180296244696205,
           0.35469005736044457
         ],
         "projected": "1–2",
@@ -46011,7 +46019,7 @@
         "division": "Premier League",
         "leagueId": 118,
         "ccode": "ARM",
-        "position": 8,
+        "position": 9,
         "form": "LDD",
         "lastSeasonPosition": 9,
         "lastSeason": "2025/26",
@@ -46109,9 +46117,9 @@
         "verdict": "WIN: Alashkert FC",
         "confidence": 67,
         "probabilities": [
-          0.23939603846286261,
-          0.3077892243225891,
-          0.4528147372145483
+          0.23915724679872258,
+          0.30747093464650477,
+          0.45337181855477277
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -46126,7 +46134,7 @@
           ],
           [
             "Current table",
-            -8.0
+            -10.0
           ],
           [
             "Last-season prior",
@@ -46498,8 +46506,8 @@
         "verdict": "WIN: FC Krasnodar",
         "confidence": 67,
         "probabilities": [
-          0.24033628636153193,
-          0.31097084673872394,
+          0.24033628636153195,
+          0.310970846738724,
           0.4486928668997441
         ],
         "projected": "1–2",
@@ -46947,7 +46955,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 5845667,
+        "lineupEstimatedValue": 3365692,
         "lineup": [
           {
             "name": "Donovan Léon",
@@ -46986,30 +46994,12 @@
             "estimatedValue": 116549
           },
           {
-            "name": "Khaled Al Shamrani",
-            "playerId": 1911181,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1911181.png",
+            "name": "Mohammed Al Zaid",
+            "playerId": 1578426,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1578426.png",
             "position": null,
             "rating": null,
             "starter": true
-          },
-          {
-            "name": "Nasser Al Daajani",
-            "playerId": 1019226,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1019226.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 111363
-          },
-          {
-            "name": "Feras Al Ghamdi",
-            "playerId": 980972,
-            "image": "https://images.fotmob.com/image_resources/playerimages/980972.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 275065
           },
           {
             "name": "Alimami Gory",
@@ -47021,22 +47011,31 @@
             "estimatedValue": 806196
           },
           {
-            "name": "Nabil Fekir",
-            "playerId": 469852,
-            "image": "https://images.fotmob.com/image_resources/playerimages/469852.png",
+            "name": "Nasser Al Daajani",
+            "playerId": 1019226,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1019226.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1810394
+            "estimatedValue": 111363
           },
           {
-            "name": "Georges-Kévin N'Koudou",
-            "playerId": 473855,
-            "image": "https://images.fotmob.com/image_resources/playerimages/473855.png",
+            "name": "Loreintz Rosier",
+            "playerId": 955808,
+            "image": "https://images.fotmob.com/image_resources/playerimages/955808.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1410689
+            "estimatedValue": 448226
+          },
+          {
+            "name": "Feras Al Ghamdi",
+            "playerId": 980972,
+            "image": "https://images.fotmob.com/image_resources/playerimages/980972.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 275065
           },
           {
             "name": "Abdulkarim Darisi",
@@ -47046,6 +47045,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 344168
+          },
+          {
+            "name": "Keshim Al Qahtani",
+            "playerId": 1900349,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1900349.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 292882
           }
         ],
         "injuries": [],
@@ -47094,7 +47102,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 57371403,
+        "lineupEstimatedValue": 50087986,
         "lineup": [
           {
             "name": "Predrag Rajković",
@@ -47106,12 +47114,22 @@
             "estimatedValue": 4957141
           },
           {
-            "name": "Saad Al-Mousa",
+            "name": "Muhannad Al Shanqiti",
+            "playerId": 873530,
+            "image": "https://images.fotmob.com/image_resources/playerimages/873530.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 758298
+          },
+          {
+            "name": "Saad Al Mosa",
             "playerId": 1291611,
             "image": "https://images.fotmob.com/image_resources/playerimages/1291611.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 704520
           },
           {
             "name": "Danilo Pereira",
@@ -47123,50 +47141,6 @@
             "estimatedValue": 1675161
           },
           {
-            "name": "Dion Lopy",
-            "playerId": 1053685,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1053685.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 7581481
-          },
-          {
-            "name": "Muhannad Shanqeeti",
-            "playerId": 873530,
-            "image": "https://images.fotmob.com/image_resources/playerimages/873530.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Georginio Wijnaldum",
-            "playerId": 108038,
-            "image": "https://images.fotmob.com/image_resources/playerimages/108038.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1067234
-          },
-          {
-            "name": "Steven Bergwijn",
-            "playerId": 564818,
-            "image": "https://images.fotmob.com/image_resources/playerimages/564818.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 6569421
-          },
-          {
-            "name": "Richard Ríos",
-            "playerId": 1174630,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1174630.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 15119438
-          },
-          {
             "name": "Faris Abdi",
             "playerId": 1078013,
             "image": "https://images.fotmob.com/image_resources/playerimages/1078013.png",
@@ -47174,6 +47148,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 366128
+          },
+          {
+            "name": "Mukhtar Ali",
+            "playerId": 759808,
+            "image": "https://images.fotmob.com/image_resources/playerimages/759808.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 435805
           },
           {
             "name": "Houssem Aouar",
@@ -47185,13 +47168,40 @@
             "estimatedValue": 7578344
           },
           {
-            "name": "George Ilenikhena",
-            "playerId": 1431516,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1431516.png",
+            "name": "Richard Ríos",
+            "playerId": 1174630,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1174630.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 12457055
+            "estimatedValue": 15119438
+          },
+          {
+            "name": "Georginio Wijnaldum",
+            "playerId": 108038,
+            "image": "https://images.fotmob.com/image_resources/playerimages/108038.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1067234
+          },
+          {
+            "name": "Youssef En-Nesyri",
+            "playerId": 788555,
+            "image": "https://images.fotmob.com/image_resources/playerimages/788555.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 10856496
+          },
+          {
+            "name": "Steven Bergwijn",
+            "playerId": 564818,
+            "image": "https://images.fotmob.com/image_resources/playerimages/564818.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 6569421
           }
         ],
         "injuries": [],
@@ -47238,9 +47248,9 @@
         "verdict": "WIN: Al Ittihad",
         "confidence": 84,
         "probabilities": [
-          0.21043167926748246,
-          0.26429016361014124,
-          0.5252781571223764
+          0.21063759036703325,
+          0.2643025289064333,
+          0.5250598807265335
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -47279,7 +47289,7 @@
           ],
           [
             "XI estimated value",
-            -22.8
+            -27.0
           ],
           [
             "Home advantage",
@@ -48815,7 +48825,7 @@
         "confidence": 50,
         "probabilities": [
           0.3176967680107338,
-          0.3366167680591736,
+          0.33661676805917357,
           0.3456864639300926
         ],
         "projected": "1–2",
@@ -50961,8 +50971,8 @@
         "verdict": "DRAW",
         "confidence": 48,
         "probabilities": [
-          0.3457576406615033,
-          0.35336565561860944,
+          0.34575764066150333,
+          0.3533656556186095,
           0.30087670371988723
         ],
         "projected": "1–1",
@@ -54680,9 +54690,9 @@
         "verdict": "WIN: Spartans FC",
         "confidence": 61,
         "probabilities": [
-          0.43281841248672365,
-          0.33092470760327275,
-          0.23625687991000363
+          0.4328184124867236,
+          0.3309247076032727,
+          0.23625687991000366
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -54859,9 +54869,9 @@
         "verdict": "WIN: Stirling Albion",
         "confidence": 53,
         "probabilities": [
-          0.37631969647111746,
+          0.3763196964711175,
           0.3294108091825977,
-          0.2942694943462849
+          0.29426949434628485
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -55435,9 +55445,9 @@
         "verdict": "WIN: Villarreal",
         "confidence": 57,
         "probabilities": [
-          0.4021193688760947,
-          0.340049599705075,
-          0.25783103141883035
+          0.4029724171502258,
+          0.33868660876639245,
+          0.25834097408338186
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -55488,7 +55498,7 @@
           ],
           [
             "League draw rate",
-            35.5
+            33.3
           ],
           [
             "Team draw tendency",
@@ -55526,7 +55536,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 46506667,
+        "lineupEstimatedValue": 35344026,
         "lineup": [
           {
             "name": "Mathew Ryan",
@@ -55574,15 +55584,6 @@
             "estimatedValue": 7091832
           },
           {
-            "name": "Paco Cortés",
-            "playerId": 1649293,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1649293.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2893146
-          },
-          {
             "name": "Jon Olasagasti",
             "playerId": 1131957,
             "image": "https://images.fotmob.com/image_resources/playerimages/1131957.png",
@@ -55590,6 +55591,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 2097167
+          },
+          {
+            "name": "Oriol Rey",
+            "playerId": 914401,
+            "image": "https://images.fotmob.com/image_resources/playerimages/914401.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1007879
           },
           {
             "name": "Dani Requena",
@@ -55601,13 +55611,13 @@
             "estimatedValue": 1231302
           },
           {
-            "name": "Thiago Fernández",
-            "playerId": 1460063,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1460063.png",
+            "name": "Roger Brugué",
+            "playerId": 1286471,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1286471.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 6381726
+            "estimatedValue": 1519475
           },
           {
             "name": "Iván Romero",
@@ -55619,13 +55629,13 @@
             "estimatedValue": 8770525
           },
           {
-            "name": "Petar Ratkov",
-            "playerId": 1302821,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1302821.png",
+            "name": "Thiago Fernández",
+            "playerId": 1460063,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1460063.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 10796849
+            "estimatedValue": 6381726
           }
         ],
         "injuries": [],
@@ -55682,7 +55692,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 444576486,
+        "lineupEstimatedValue": 468766296,
         "lineup": [
           {
             "name": "Jan Oblak",
@@ -55694,15 +55704,6 @@
             "estimatedValue": 13156307
           },
           {
-            "name": "Marcos Llorente",
-            "playerId": 602563,
-            "image": "https://images.fotmob.com/image_resources/playerimages/602563.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 12713837
-          },
-          {
             "name": "Marc Pubill",
             "playerId": 1323897,
             "image": "https://images.fotmob.com/image_resources/playerimages/1323897.png",
@@ -55710,6 +55711,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 32674865
+          },
+          {
+            "name": "Cristian Romero",
+            "playerId": 789066,
+            "image": "https://images.fotmob.com/image_resources/playerimages/789066.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 56787269
           },
           {
             "name": "Dávid Hancko",
@@ -55730,6 +55740,24 @@
             "estimatedValue": 21328861
           },
           {
+            "name": "Giuliano Simeone",
+            "playerId": 1226147,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1226147.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 46816961
+          },
+          {
+            "name": "Marcos Llorente",
+            "playerId": 602563,
+            "image": "https://images.fotmob.com/image_resources/playerimages/602563.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 12713837
+          },
+          {
             "name": "Pablo Barrios",
             "playerId": 1338192,
             "image": "https://images.fotmob.com/image_resources/playerimages/1338192.png",
@@ -55737,24 +55765,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 57020541
-          },
-          {
-            "name": "Morten Hjulmand",
-            "playerId": 950199,
-            "image": "https://images.fotmob.com/image_resources/playerimages/950199.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 41599877
-          },
-          {
-            "name": "Kang-In Lee",
-            "playerId": 940976,
-            "image": "https://images.fotmob.com/image_resources/playerimages/940976.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 30951441
           },
           {
             "name": "Álex Baena",
@@ -55766,13 +55776,13 @@
             "estimatedValue": 42607920
           },
           {
-            "name": "Ademola Lookman",
-            "playerId": 690516,
-            "image": "https://images.fotmob.com/image_resources/playerimages/690516.png",
+            "name": "Jonathan David",
+            "playerId": 939569,
+            "image": "https://images.fotmob.com/image_resources/playerimages/939569.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 40177676
+            "estimatedValue": 33314574
           },
           {
             "name": "Julián Álvarez",
@@ -55826,17 +55836,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5868117/match-details",
       "model": {
         "verdict": "WIN: Atlético Madrid",
-        "confidence": 70,
+        "confidence": 71,
         "probabilities": [
-          0.24069758885111803,
-          0.2992562811090836,
-          0.46004613003979844
+          0.24078359505378227,
+          0.29799085019692784,
+          0.4612255547492899
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.35,
-          1.45
+          1.34,
+          1.46
         ],
         "factors": [
           [
@@ -55869,7 +55879,7 @@
           ],
           [
             "XI estimated value",
-            -22.6
+            -25.8
           ],
           [
             "Home advantage",
@@ -55881,7 +55891,7 @@
           ],
           [
             "League draw rate",
-            35.5
+            33.3
           ],
           [
             "Team draw tendency",
@@ -55914,12 +55924,12 @@
         "leagueId": 87,
         "ccode": "ESP",
         "position": 16,
-        "form": "WLDD",
+        "form": "WLD",
         "lastSeasonPosition": 8,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 31734952,
+        "lineupEstimatedValue": 31548810,
         "lineup": [
           {
             "name": "Emil Audero",
@@ -55967,15 +55977,6 @@
             "estimatedValue": 1989287
           },
           {
-            "name": "Pedro Díaz",
-            "playerId": 715069,
-            "image": "https://images.fotmob.com/image_resources/playerimages/715069.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2140962
-          },
-          {
             "name": "Óscar Valentín",
             "playerId": 956622,
             "image": "https://images.fotmob.com/image_resources/playerimages/956622.png",
@@ -56003,13 +56004,13 @@
             "estimatedValue": 11516032
           },
           {
-            "name": "Sergio Camello",
-            "playerId": 980422,
-            "image": "https://images.fotmob.com/image_resources/playerimages/980422.png",
+            "name": "Isi Palazón",
+            "playerId": 638010,
+            "image": "https://images.fotmob.com/image_resources/playerimages/638010.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 2355372
+            "estimatedValue": 1954820
           },
           {
             "name": "Álvaro Garcia",
@@ -56019,10 +56020,19 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 1366117
+          },
+          {
+            "name": "Sergio Camello",
+            "playerId": 980422,
+            "image": "https://images.fotmob.com/image_resources/playerimages/980422.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 2355372
           }
         ],
         "injuries": [],
-        "formPoints": 5,
+        "formPoints": 4,
         "recentResults": [
           {
             "date": "2026-10-27T20:00:00.000Z",
@@ -56047,14 +56057,6 @@
             "ga": 1,
             "opponent": "Getafe",
             "competition": "LaLiga"
-          },
-          {
-            "date": "2026-10-10T12:00:00.000Z",
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Athletic Club",
-            "competition": "LaLiga"
           }
         ],
         "recentGF": 4,
@@ -56075,7 +56077,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 64835954,
+        "lineupEstimatedValue": 74119937,
         "lineup": [
           {
             "name": "Ionuț Radu",
@@ -56140,13 +56142,13 @@
             "estimatedValue": 19176746
           },
           {
-            "name": "Javi Galán",
-            "playerId": 695062,
-            "image": "https://images.fotmob.com/image_resources/playerimages/695062.png",
+            "name": "Sergio Carreira",
+            "playerId": 1106742,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1106742.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1420097
+            "estimatedValue": 4299297
           },
           {
             "name": "Hugo González",
@@ -56158,13 +56160,13 @@
             "estimatedValue": 734780
           },
           {
-            "name": "Pablo Durán",
-            "playerId": 1322858,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1322858.png",
+            "name": "Ferrán Jutglà",
+            "playerId": 1102732,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1102732.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 4693143
+            "estimatedValue": 11097926
           },
           {
             "name": "Hugo Álvarez",
@@ -56218,17 +56220,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5868119/match-details",
       "model": {
         "verdict": "WIN: Celta Vigo",
-        "confidence": 57,
+        "confidence": 56,
         "probabilities": [
-          0.2719549654093891,
-          0.33258492587667543,
-          0.39546010871393544
+          0.26965941595962345,
+          0.338185704272487,
+          0.39215487976788954
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.44,
-          1.36
+          1.43,
+          1.37
         ],
         "factors": [
           [
@@ -56245,7 +56247,7 @@
           ],
           [
             "Recent form",
-            0.0
+            -2.5
           ],
           [
             "Recent goal difference",
@@ -56261,7 +56263,7 @@
           ],
           [
             "XI estimated value",
-            -7.1
+            -8.5
           ],
           [
             "Home advantage",
@@ -56273,11 +56275,11 @@
           ],
           [
             "League draw rate",
-            35.5
+            33.3
           ],
           [
             "Team draw tendency",
-            58.3
+            50.0
           ]
         ],
         "dataCompleteness": 62,
@@ -56311,7 +56313,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 141404207,
+        "lineupEstimatedValue": 157658689,
         "lineup": [
           {
             "name": "Álvaro Vallés",
@@ -56323,13 +56325,13 @@
             "estimatedValue": 5979398
           },
           {
-            "name": "Ángel Ortiz",
-            "playerId": 1580522,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1580522.png",
+            "name": "Héctor Bellerín",
+            "playerId": 427438,
+            "image": "https://images.fotmob.com/image_resources/playerimages/427438.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 5392641
+            "estimatedValue": 2055805
           },
           {
             "name": "Diego Llorente",
@@ -56350,13 +56352,13 @@
             "estimatedValue": 26430353
           },
           {
-            "name": "Valentín Gómez",
-            "playerId": 1338016,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1338016.png",
+            "name": "Fran García",
+            "playerId": 750028,
+            "image": "https://images.fotmob.com/image_resources/playerimages/750028.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 16366894
+            "estimatedValue": 11451098
           },
           {
             "name": "Marc Roca",
@@ -56404,13 +56406,13 @@
             "estimatedValue": 26270725
           },
           {
-            "name": "Nelson Deossa",
-            "playerId": 1315711,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1315711.png",
+            "name": "Troy Parrott",
+            "playerId": 942365,
+            "image": "https://images.fotmob.com/image_resources/playerimages/942365.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 10053386
+            "estimatedValue": 34560500
           }
         ],
         "injuries": [],
@@ -56459,7 +56461,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 25730026,
+        "lineupEstimatedValue": 26310033,
         "lineup": [
           {
             "name": "Alfonso Herrero",
@@ -56471,22 +56473,13 @@
             "estimatedValue": 654220
           },
           {
-            "name": "Carlos Puga",
-            "playerId": 1668274,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1668274.png",
+            "name": "Fernando Calero",
+            "playerId": 839232,
+            "image": "https://images.fotmob.com/image_resources/playerimages/839232.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1056655
-          },
-          {
-            "name": "Ángel Recio",
-            "playerId": 1260010,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1260010.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 696019
+            "estimatedValue": 1276026
           },
           {
             "name": "Einar Galilea",
@@ -56507,13 +56500,22 @@
             "estimatedValue": 1134082
           },
           {
-            "name": "Ramón Enríquez",
-            "playerId": 1082957,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1082957.png",
+            "name": "Carlos Puga",
+            "playerId": 1668274,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1668274.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 363054
+            "estimatedValue": 1056655
+          },
+          {
+            "name": "Adam Aznou",
+            "playerId": 1573563,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1573563.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 14216652
           },
           {
             "name": "David Larrubia",
@@ -56534,6 +56536,15 @@
             "estimatedValue": 1156407
           },
           {
+            "name": "Ramón Enríquez",
+            "playerId": 1082957,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1082957.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 363054
+          },
+          {
             "name": "Dani Lorenzo",
             "playerId": 1317624,
             "image": "https://images.fotmob.com/image_resources/playerimages/1317624.png",
@@ -56541,15 +56552,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 1807067
-          },
-          {
-            "name": "Adam Aznou",
-            "playerId": 1573563,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1573563.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 14216652
           },
           {
             "name": "Adrián Niño",
@@ -56612,9 +56614,9 @@
         "verdict": "WIN: Real Betis",
         "confidence": 74,
         "probabilities": [
-          0.4998345846912288,
-          0.3089769858886182,
-          0.19118842942015302
+          0.5000522092854309,
+          0.3088279349844992,
+          0.1911198557300699
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -56653,7 +56655,7 @@
           ],
           [
             "XI estimated value",
-            17.0
+            17.9
           ],
           [
             "Home advantage",
@@ -56665,7 +56667,7 @@
           ],
           [
             "League draw rate",
-            35.5
+            33.3
           ],
           [
             "Team draw tendency",
@@ -56997,9 +56999,9 @@
         "verdict": "WIN: Barcelona",
         "confidence": 82,
         "probabilities": [
-          0.5351271796702374,
-          0.29049713266617405,
-          0.17437568766358863
+          0.5356250913078556,
+          0.2897277732997428,
+          0.17464713539240162
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -57050,7 +57052,7 @@
           ],
           [
             "League draw rate",
-            35.5
+            33.3
           ],
           [
             "Team draw tendency",
@@ -57596,7 +57598,7 @@
         "probabilities": [
           0.5045157528482691,
           0.28651483803307404,
-          0.20896940911865694
+          0.2089694091186569
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -57984,7 +57986,7 @@
         "verdict": "WIN: Colwyn Bay",
         "confidence": 65,
         "probabilities": [
-          0.44983271931418933,
+          0.4498327193141892,
           0.31423036526282666,
           0.2359369154229841
         ],
@@ -58366,8 +58368,8 @@
         "verdict": "WIN: Penybont",
         "confidence": 56,
         "probabilities": [
-          0.31417435775692815,
-          0.3084628943104183,
+          0.3141743577569282,
+          0.30846289431041835,
           0.3773627479326535
         ],
         "projected": "1–2",
