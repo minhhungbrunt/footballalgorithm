@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-08T20:29:54.700776+00:00",
-  "updated": "2026-11-08 03:29:54 PM ET",
+  "updatedAt": "2026-11-08T23:55:44.655599+00:00",
+  "updated": "2026-11-08 06:55:44 PM ET",
   "updateMode": "AUTO",
   "refreshIntervalSeconds": 300,
   "fixtureCount": 81,
@@ -8,7 +8,7 @@
   "sourceErrors": [],
   "mlModel": {
     "version": 1,
-    "trainedAt": "2026-11-08T04:29:59.519997-05:00",
+    "trainedAt": "2026-11-08T18:54:39.629824-05:00",
     "trainingRows": 21952,
     "metrics": {
       "holdout_accuracy": 0.4598,
@@ -340,8 +340,8 @@
         "verdict": "DRAW",
         "confidence": 53,
         "probabilities": [
-          0.33102471809719214,
-          0.35590721930885966,
+          0.3310247180971921,
+          0.3559072193088597,
           0.31306806259394826
         ],
         "projected": "1–1",
@@ -722,8 +722,8 @@
         "confidence": 51,
         "probabilities": [
           0.2941467289992088,
-          0.35735748512618776,
-          0.3484957858746034
+          0.3573574851261878,
+          0.34849578587460334
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -1506,7 +1506,7 @@
         "probabilities": [
           0.5877101522568886,
           0.2526611680852272,
-          0.15962867965788424
+          0.1596286796578842
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -1897,8 +1897,8 @@
         "confidence": 80,
         "probabilities": [
           0.5053741240314545,
-          0.28590987555070024,
-          0.20871600041784522
+          0.2859098755507003,
+          0.2087160004178451
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -2289,7 +2289,7 @@
         "probabilities": [
           0.3354074769340998,
           0.3174716828677808,
-          0.3471208401981194
+          0.3471208401981195
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -2360,12 +2360,17 @@
       "competitionFlag": "🇧🇷",
       "home": "Vasco da Gama",
       "away": "Palmeiras",
-      "homeScore": 1,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 2,
+      "awayScore": 1,
+      "status": "FT",
       "kickoff": "2026-11-08T20:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "Pen",
+          "shortKey": "penalties_short",
+          "long": "After penalties",
+          "longKey": "afterpenalties"
+        }
       },
       "homeData": {
         "id": 10276,
@@ -2704,7 +2709,7 @@
         "verdict": "WIN: Palmeiras",
         "confidence": 66,
         "probabilities": [
-          0.2495363232933387,
+          0.2495363232933386,
           0.31105136174007736,
           0.43941231496658395
         ],
@@ -3105,9 +3110,9 @@
         "verdict": "WIN: Grimsby Town",
         "confidence": 79,
         "probabilities": [
-          0.24800240616895342,
+          0.24800240616895347,
           0.2647521376944563,
-          0.48724545613659026
+          0.4872454561365902
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -3488,7 +3493,7 @@
         "verdict": "WIN: Stockport County",
         "confidence": 78,
         "probabilities": [
-          0.2406491728372071,
+          0.24064917283720713,
           0.2771885798815976,
           0.4821622472811952
         ],
@@ -3895,9 +3900,9 @@
         "verdict": "WIN: Wimborne Town",
         "confidence": 78,
         "probabilities": [
-          0.5124497538283137,
+          0.5124497538283138,
           0.3030660526861652,
-          0.18448419348552103
+          0.18448419348552098
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -4314,9 +4319,9 @@
         "verdict": "WIN: Sheffield Wednesday",
         "confidence": 54,
         "probabilities": [
-          0.30157216623029276,
-          0.333513896256346,
-          0.3649139375133613
+          0.30157216623029265,
+          0.3335138962563459,
+          0.36491393751336143
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -4523,7 +4528,7 @@
         "probabilities": [
           0.4405475145158393,
           0.3207501979517907,
-          0.23870228753237005
+          0.23870228753237
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -4925,8 +4930,8 @@
         "verdict": "WIN: Brighton & Hove Albion",
         "confidence": 62,
         "probabilities": [
-          0.42329242627787356,
-          0.33240439303209784,
+          0.4232924262778736,
+          0.3324043930320978,
           0.2443031806900286
         ],
         "projected": "2–1",
@@ -5333,9 +5338,9 @@
         "verdict": "WIN: Liverpool",
         "confidence": 77,
         "probabilities": [
-          0.2429135814013016,
-          0.2779905195735485,
-          0.47909589902514993
+          0.24291358140130156,
+          0.2779905195735483,
+          0.47909589902515015
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -5571,8 +5576,8 @@
         "ratingPrior": 6.63,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.24,
-        "xg": 1.24
+        "matchXG": 1.26,
+        "xg": 1.26
       },
       "awayData": {
         "id": 8678,
@@ -5728,8 +5733,8 @@
         "ratingPrior": 6.69,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 2.12,
-        "xg": 2.12
+        "matchXG": 2.23,
+        "xg": 2.23
       },
       "h2hSummary": "1–4–1",
       "scorers": [],
@@ -5737,18 +5742,18 @@
       "lineupSource": "FotMob",
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5795510/match-details",
       "model": {
-        "verdict": "WIN: Ipswich Town",
+        "verdict": "WIN: AFC Bournemouth",
         "confidence": 50,
         "probabilities": [
-          0.34386727360225294,
-          0.3136801775917718,
-          0.3424525488059752
+          0.34274113510963533,
+          0.3133567952784121,
+          0.3439020696119527
         ],
-        "projected": "2–1",
-        "modalScore": "2–1",
+        "projected": "1–2",
+        "modalScore": "1–2",
         "expectedGoals": [
-          1.41,
-          1.58
+          1.42,
+          1.6
         ],
         "factors": [
           [
@@ -5979,8 +5984,8 @@
         "ratingPrior": 6.56,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 2.55,
-        "xg": 2.55
+        "matchXG": 2.38,
+        "xg": 2.38
       },
       "awayData": {
         "id": 8455,
@@ -6136,8 +6141,8 @@
         "ratingPrior": 6.92,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.53,
-        "xg": 0.53
+        "matchXG": 0.66,
+        "xg": 0.66
       },
       "h2hSummary": "6–1–10",
       "scorers": [],
@@ -6146,17 +6151,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5795514/match-details",
       "model": {
         "verdict": "WIN: Chelsea",
-        "confidence": 60,
+        "confidence": 61,
         "probabilities": [
-          0.31346222585431294,
-          0.30089884666812583,
-          0.38563892747756123
+          0.30862836877364397,
+          0.3015329023365019,
+          0.3898387288898542
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.65,
-          1.29
+          1.61,
+          1.31
         ],
         "factors": [
           [
@@ -6557,8 +6562,8 @@
         "confidence": 52,
         "probabilities": [
           0.3158206128711407,
-          0.3345778707671856,
-          0.34960151636167375
+          0.33457787076718554,
+          0.3496015163616738
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -6795,8 +6800,8 @@
         "ratingPrior": 6.78,
         "xgSeason": 5.39,
         "xiRating": null,
-        "matchXG": 1.5,
-        "xg": 1.5
+        "matchXG": 1.53,
+        "xg": 1.53
       },
       "awayData": {
         "id": 8639,
@@ -6952,8 +6957,8 @@
         "ratingPrior": 6.84,
         "xgSeason": 3.79,
         "xiRating": null,
-        "matchXG": 0.38,
-        "xg": 0.38
+        "matchXG": 0.36,
+        "xg": 0.36
       },
       "h2hSummary": "9–13–14",
       "scorers": [],
@@ -6964,15 +6969,15 @@
         "verdict": "DRAW",
         "confidence": 51,
         "probabilities": [
-          0.3320505591384514,
-          0.3387532012124431,
-          0.32919623964910544
+          0.3329196310869702,
+          0.3386129726122413,
+          0.3284673963007885
         ],
         "projected": "1–1",
         "modalScore": "1–1",
         "expectedGoals": [
-          1.41,
-          1.11
+          1.42,
+          1.1
         ],
         "factors": [
           [
@@ -7202,15 +7207,15 @@
         "ratingPrior": 6.43,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.94,
-        "xg": 0.94
+        "matchXG": 0.85,
+        "xg": 0.85
       },
       "awayData": {
         "id": 9831,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 5,
+        "position": 6,
         "form": "WWLW",
         "lastSeasonPosition": 16,
         "lastSeason": "2025/26",
@@ -7359,8 +7364,8 @@
         "ratingPrior": 6.8,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.96,
-        "xg": 1.96
+        "matchXG": 2.13,
+        "xg": 2.13
       },
       "h2hSummary": "4–6–10",
       "scorers": [],
@@ -7369,17 +7374,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5802982/match-details",
       "model": {
         "verdict": "WIN: Nice",
-        "confidence": 75,
+        "confidence": 76,
         "probabilities": [
-          0.22461461874728483,
-          0.29510426439938886,
-          0.4802811168533264
+          0.2212913305544993,
+          0.29442214478049467,
+          0.484286524665006
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.24,
-          1.48
+          1.23,
+          1.51
         ],
         "factors": [
           [
@@ -7388,7 +7393,7 @@
           ],
           [
             "Current table",
-            -22.0
+            -20.0
           ],
           [
             "Last-season prior",
@@ -7610,15 +7615,15 @@
         "ratingPrior": 6.78,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.91,
-        "xg": 1.91
+        "matchXG": 1.84,
+        "xg": 1.84
       },
       "awayData": {
         "id": 9748,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 4,
+        "position": 5,
         "form": "WLWL",
         "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
@@ -7767,8 +7772,8 @@
         "ratingPrior": 6.85,
         "xgSeason": 5.1,
         "xiRating": null,
-        "matchXG": 0.66,
-        "xg": 0.66
+        "matchXG": 0.64,
+        "xg": 0.64
       },
       "h2hSummary": "3–9–8",
       "scorers": [],
@@ -7779,14 +7784,14 @@
         "verdict": "WIN: Lyon",
         "confidence": 51,
         "probabilities": [
-          0.3363812126429054,
-          0.3182132006250597,
-          0.34540558673203503
+          0.3357970097075991,
+          0.31867632245772143,
+          0.34552666783467945
         ],
         "projected": "0–1",
         "modalScore": "0–1",
         "expectedGoals": [
-          1.5,
+          1.48,
           1.16
         ],
         "factors": [
@@ -7796,7 +7801,7 @@
           ],
           [
             "Current table",
-            -10.0
+            -8.0
           ],
           [
             "Last-season prior",
@@ -8184,9 +8189,9 @@
         "verdict": "WIN: Lorient",
         "confidence": 76,
         "probabilities": [
-          0.2359181068601951,
-          0.2874923685407094,
-          0.47658952459909554
+          0.235918106860195,
+          0.2874923685407093,
+          0.47658952459909576
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -8423,8 +8428,8 @@
         "ratingPrior": 6.59,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.47,
-        "xg": 1.47
+        "matchXG": 1.45,
+        "xg": 1.45
       },
       "awayData": {
         "id": 9829,
@@ -8580,8 +8585,8 @@
         "ratingPrior": 6.81,
         "xgSeason": 5.07,
         "xiRating": null,
-        "matchXG": 0.76,
-        "xg": 0.76
+        "matchXG": 0.96,
+        "xg": 0.96
       },
       "h2hSummary": "0–1–3",
       "scorers": [],
@@ -8590,17 +8595,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5802986/match-details",
       "model": {
         "verdict": "WIN: Monaco",
-        "confidence": 53,
+        "confidence": 54,
         "probabilities": [
-          0.3126949142115476,
-          0.33107525780555064,
-          0.35622982798290176
+          0.30921588741996675,
+          0.33086638925146283,
+          0.3599177233285704
         ],
         "projected": "0–1",
         "modalScore": "0–1",
         "expectedGoals": [
-          1.36,
-          1.23
+          1.35,
+          1.27
         ],
         "factors": [
           [
@@ -8666,11 +8671,16 @@
       "home": "Lens",
       "away": "Marseille",
       "homeScore": 1,
-      "awayScore": 1,
-      "status": "LIVE",
+      "awayScore": 2,
+      "status": "FT",
       "kickoff": "2026-11-08T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8588,
@@ -8823,18 +8833,18 @@
         ],
         "recentGF": 7,
         "recentGA": 4,
-        "ratingPrior": 6.74,
+        "ratingPrior": 6.77,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.91,
-        "xg": 0.91
+        "matchXG": 1.92,
+        "xg": 1.92
       },
       "awayData": {
         "id": 8592,
         "division": "France Ligue 1",
         "leagueId": 53,
         "ccode": "FRA",
-        "position": 6,
+        "position": 4,
         "form": "WWWW",
         "lastSeasonPosition": 5,
         "lastSeason": "2025/26",
@@ -8888,15 +8898,6 @@
             "estimatedValue": 2033918
           },
           {
-            "name": "Tochukwu Nnadi",
-            "playerId": 1353104,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1353104.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 5060315
-          },
-          {
             "name": "Pierre-Emile Højbjerg",
             "playerId": 266523,
             "image": "https://images.fotmob.com/image_resources/playerimages/266523.png",
@@ -8904,6 +8905,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 12503712
+          },
+          {
+            "name": "Tochukwu Nnadi",
+            "playerId": 1353104,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1353104.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 5060315
           },
           {
             "name": "Amine Harit",
@@ -8980,11 +8990,11 @@
         ],
         "recentGF": 13,
         "recentGA": 5,
-        "ratingPrior": 6.96,
+        "ratingPrior": 7.03,
         "xgSeason": 3.99,
         "xiRating": null,
-        "matchXG": 1.09,
-        "xg": 1.09
+        "matchXG": 2.16,
+        "xg": 2.16
       },
       "h2hSummary": "7–2–9",
       "scorers": [],
@@ -8993,17 +9003,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5802990/match-details",
       "model": {
         "verdict": "WIN: Marseille",
-        "confidence": 60,
+        "confidence": 62,
         "probabilities": [
-          0.2888699167679818,
-          0.318297087838749,
-          0.39283299539326927
+          0.2915048544637182,
+          0.30901006663126407,
+          0.3994850789050178
         ],
-        "projected": "0–1",
-        "modalScore": "0–1",
+        "projected": "1–2",
+        "modalScore": "1–2",
         "expectedGoals": [
-          1.29,
-          1.25
+          1.49,
+          1.47
         ],
         "factors": [
           [
@@ -9012,7 +9022,7 @@
           ],
           [
             "Current table",
-            -10.0
+            -14.0
           ],
           [
             "Last-season prior",
@@ -9032,7 +9042,7 @@
           ],
           [
             "Starting XI quality",
-            -4.0
+            -4.7
           ],
           [
             "XI estimated value",
@@ -9405,7 +9415,7 @@
         "probabilities": [
           0.40857148191594717,
           0.310151670923629,
-          0.28127684716042384
+          0.2812768471604239
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -9811,8 +9821,8 @@
         "verdict": "WIN: FC Heidenheim",
         "confidence": 51,
         "probabilities": [
-          0.3647514694564383,
-          0.34626649904422374,
+          0.36475146945643827,
+          0.3462664990442238,
           0.2889820314993379
         ],
         "projected": "2–1",
@@ -10219,9 +10229,9 @@
         "verdict": "WIN: Magdeburg",
         "confidence": 57,
         "probabilities": [
-          0.3846723396634836,
-          0.3325685907082694,
-          0.28275906962824704
+          0.38467233966348363,
+          0.33256859070826944,
+          0.282759069628247
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -10643,9 +10653,9 @@
         "verdict": "WIN: Lazio",
         "confidence": 67,
         "probabilities": [
-          0.29153888969681263,
-          0.29308809546113596,
-          0.41537301484205136
+          0.2915388896968125,
+          0.29308809546113584,
+          0.4153730148420516
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -11052,7 +11062,7 @@
         ],
         "recentGF": 11,
         "recentGA": 8,
-        "ratingPrior": 6.9,
+        "ratingPrior": 6.89,
         "xgSeason": 5.75,
         "xiRating": null,
         "matchXG": 0.63,
@@ -11067,9 +11077,9 @@
         "verdict": "DRAW",
         "confidence": 50,
         "probabilities": [
-          0.33120240495127984,
-          0.33479925097641006,
-          0.33399834407231016
+          0.3312474463155053,
+          0.334797224217096,
+          0.33395532946739875
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -11104,7 +11114,7 @@
           ],
           [
             "Starting XI quality",
-            -5.4
+            -5.2
           ],
           [
             "XI estimated value",
@@ -11314,8 +11324,8 @@
         "ratingPrior": 6.59,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.34,
-        "xg": 1.34
+        "matchXG": 1.35,
+        "xg": 1.35
       },
       "awayData": {
         "id": 8524,
@@ -11479,8 +11489,8 @@
         "ratingPrior": 6.74,
         "xgSeason": 5.91,
         "xiRating": null,
-        "matchXG": 1.27,
-        "xg": 1.27
+        "matchXG": 1.36,
+        "xg": 1.36
       },
       "h2hSummary": "1–0–6",
       "scorers": [],
@@ -11491,15 +11501,15 @@
         "verdict": "WIN: Atalanta",
         "confidence": 55,
         "probabilities": [
-          0.31566567315126637,
-          0.3243034046801926,
-          0.36003092216854105
+          0.31462159291737535,
+          0.3238385979615165,
+          0.36153980912110817
         ],
-        "projected": "0–1",
-        "modalScore": "0–1",
+        "projected": "1–2",
+        "modalScore": "1–2",
         "expectedGoals": [
           1.34,
-          1.33
+          1.34
         ],
         "factors": [
           [
@@ -11915,9 +11925,9 @@
         "verdict": "WIN: Inter",
         "confidence": 65,
         "probabilities": [
-          0.4428059795396221,
+          0.4428059795396222,
           0.3294003499913916,
-          0.22779367046898635
+          0.22779367046898624
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -11988,12 +11998,17 @@
       "competitionFlag": "🇮🇹",
       "home": "Fiorentina",
       "away": "Juventus",
-      "homeScore": 1,
-      "awayScore": 1,
-      "status": "LIVE",
+      "homeScore": 2,
+      "awayScore": 2,
+      "status": "FT",
       "kickoff": "2026-11-08T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8535,
@@ -12154,11 +12169,11 @@
         ],
         "recentGF": 9,
         "recentGA": 11,
-        "ratingPrior": 6.57,
+        "ratingPrior": 6.59,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.47,
-        "xg": 0.47
+        "matchXG": 2.11,
+        "xg": 2.11
       },
       "awayData": {
         "id": 9885,
@@ -12319,11 +12334,11 @@
         ],
         "recentGF": 5,
         "recentGA": 6,
-        "ratingPrior": 6.94,
+        "ratingPrior": 6.96,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.09,
-        "xg": 1.09
+        "matchXG": 2.42,
+        "xg": 2.42
       },
       "h2hSummary": "7–10–21",
       "scorers": [],
@@ -12332,17 +12347,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5749742/match-details",
       "model": {
         "verdict": "WIN: Juventus",
-        "confidence": 59,
+        "confidence": 60,
         "probabilities": [
-          0.29083207588937043,
-          0.32306252087374543,
-          0.38610540323688425
+          0.302953301216299,
+          0.3099100987429572,
+          0.3871366000407438
         ],
-        "projected": "0–1",
-        "modalScore": "0–1",
+        "projected": "1–2",
+        "modalScore": "1–2",
         "expectedGoals": [
-          1.17,
-          1.29
+          1.49,
+          1.56
         ],
         "factors": [
           [
@@ -12758,9 +12773,9 @@
         "verdict": "WIN: Modena",
         "confidence": 61,
         "probabilities": [
-          0.2564329982158031,
+          0.256432998215803,
           0.3326623862825403,
-          0.4109046155016566
+          0.41090461550165663
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -13181,9 +13196,9 @@
         "verdict": "WIN: Sampdoria",
         "confidence": 51,
         "probabilities": [
-          0.2963852532066143,
-          0.34258253382095943,
-          0.3610322129724263
+          0.29638525320661424,
+          0.3425825338209594,
+          0.3610322129724264
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -13605,9 +13620,9 @@
         "verdict": "WIN: Cremonese",
         "confidence": 71,
         "probabilities": [
-          0.21614212887644596,
-          0.31256238283259635,
-          0.4712954882909577
+          0.2161421288764459,
+          0.3125623828325963,
+          0.4712954882909578
         ],
         "projected": "0–2",
         "modalScore": "0–2",
@@ -13793,8 +13808,8 @@
         "verdict": "WIN: Kazma",
         "confidence": 50,
         "probabilities": [
-          0.30531259741413164,
-          0.3349999704352313,
+          0.3053125974141316,
+          0.33499997043523133,
           0.35968743215063714
         ],
         "projected": "1–2",
@@ -13977,8 +13992,8 @@
         "verdict": "WIN: Kuwait SC",
         "confidence": 87,
         "probabilities": [
-          0.20238586481843418,
-          0.25137891361816767,
+          0.20238586481843412,
+          0.2513789136181677,
           0.5462352215633981
         ],
         "projected": "1–2",
@@ -14193,9 +14208,9 @@
         "verdict": "WIN: MC Alger",
         "confidence": 60,
         "probabilities": [
-          0.269290964182696,
+          0.2692909641826959,
           0.3163496605832077,
-          0.4143593752340963
+          0.4143593752340965
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -14626,8 +14641,8 @@
         "confidence": 48,
         "probabilities": [
           0.3167547584216567,
-          0.33917806463819933,
-          0.3440671769401441
+          0.3391780646381992,
+          0.34406717694014416
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -14825,9 +14840,9 @@
         "verdict": "WIN: CR Bélouizdad",
         "confidence": 54,
         "probabilities": [
-          0.27503241136238343,
+          0.2750324113623834,
           0.3354198235798827,
-          0.3895477650577338
+          0.3895477650577339
         ],
         "projected": "0–1",
         "modalScore": "0–1",
@@ -15459,9 +15474,9 @@
         "verdict": "WIN: Cruz Azul",
         "confidence": 69,
         "probabilities": [
-          0.2506600908548349,
-          0.3034210711071142,
-          0.4459188380380509
+          0.2506600908548348,
+          0.30342107110711414,
+          0.445918838038051
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -15885,7 +15900,7 @@
         "probabilities": [
           0.3713919518012594,
           0.3484710246675585,
-          0.28013702353118214
+          0.2801370235311821
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -16307,9 +16322,9 @@
         "verdict": "WIN: CF América",
         "confidence": 59,
         "probabilities": [
-          0.26331703585969723,
-          0.3362079704662493,
-          0.40047499367405354
+          0.2633170358596972,
+          0.33620797046624923,
+          0.40047499367405365
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -16398,7 +16413,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 10692018,
+        "lineupEstimatedValue": 11659991,
         "lineup": [
           {
             "name": "Guillermo Allison",
@@ -16410,13 +16425,12 @@
             "estimatedValue": 412216
           },
           {
-            "name": "Enzo Giménez",
-            "playerId": 864978,
-            "image": "https://images.fotmob.com/image_resources/playerimages/864978.png",
+            "name": "Bayron Duarte",
+            "playerId": 1554213,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1554213.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 1192633
+            "starter": true
           },
           {
             "name": "Diego Reyes",
@@ -16455,13 +16469,13 @@
             "estimatedValue": 1343368
           },
           {
-            "name": "Bernardo Parra",
-            "playerId": 1470112,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1470112.png",
+            "name": "Santiago Homenchenko",
+            "playerId": 1436165,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1436165.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1791434
+            "estimatedValue": 3952040
           },
           {
             "name": "Denilson Muñoz",
@@ -16560,7 +16574,7 @@
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 9620944,
+        "lineupEstimatedValue": 8931663,
         "lineup": [
           {
             "name": "Ricardo Gutiérrez",
@@ -16569,6 +16583,15 @@
             "position": null,
             "rating": null,
             "starter": true
+          },
+          {
+            "name": "Iker Moreno",
+            "playerId": 1352812,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1352812.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 720991
           },
           {
             "name": "Facundo Almada",
@@ -16589,22 +16612,13 @@
             "estimatedValue": 992452
           },
           {
-            "name": "José Pachuca",
-            "playerId": 1504613,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1504613.png",
+            "name": "Óscar Villa",
+            "playerId": 1199210,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1199210.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1590308
-          },
-          {
-            "name": "Iker Moreno",
-            "playerId": 1352812,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1352812.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 720991
+            "estimatedValue": 423641
           },
           {
             "name": "Alejandro Organista",
@@ -16625,31 +16639,22 @@
             "estimatedValue": 621331
           },
           {
-            "name": "Fernando Monárrez",
-            "playerId": 1399027,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1399027.png",
+            "name": "Kevin Velasco",
+            "playerId": 978252,
+            "image": "https://images.fotmob.com/image_resources/playerimages/978252.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 770795
+            "estimatedValue": 1120635
           },
           {
-            "name": "Brayan Garnica",
-            "playerId": 684129,
-            "image": "https://images.fotmob.com/image_resources/playerimages/684129.png",
+            "name": "Mathías Tomás",
+            "playerId": 1325351,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1325351.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1127597
-          },
-          {
-            "name": "Luifer Hernández",
-            "playerId": 1199711,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1199711.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 858406
+            "estimatedValue": 1255143
           },
           {
             "name": "Omar Moreno",
@@ -16659,6 +16664,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 1073326
+          },
+          {
+            "name": "Luifer Hernández",
+            "playerId": 1199711,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1199711.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 858406
           }
         ],
         "injuries": [],
@@ -16719,11 +16733,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/1000014641/match-details",
       "model": {
         "verdict": "WIN: Querétaro FC",
-        "confidence": 52,
+        "confidence": 53,
         "probabilities": [
-          0.3720645471306564,
-          0.3424476448013362,
-          0.28548780806800744
+          0.37239065397579885,
+          0.342296110303004,
+          0.2853132357211972
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -16762,7 +16776,7 @@
           ],
           [
             "XI estimated value",
-            1.1
+            2.7
           ],
           [
             "Home advantage",
@@ -17139,8 +17153,8 @@
         "confidence": 55,
         "probabilities": [
           0.2771939379248875,
-          0.33858205433385485,
-          0.3842240077412577
+          0.3385820543338548,
+          0.38422400774125776
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -17546,9 +17560,9 @@
         "verdict": "WIN: Feyenoord",
         "confidence": 60,
         "probabilities": [
-          0.2651409518042368,
-          0.3298058523059309,
-          0.40505319588983235
+          0.2651409518042367,
+          0.3298058523059308,
+          0.40505319588983246
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -17954,9 +17968,9 @@
         "verdict": "WIN: FC Twente",
         "confidence": 51,
         "probabilities": [
-          0.34313199967895325,
+          0.3431319996789532,
           0.3370574954906684,
-          0.3198105048303783
+          0.3198105048303784
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -18362,9 +18376,9 @@
         "verdict": "WIN: AZ Alkmaar",
         "confidence": 62,
         "probabilities": [
-          0.4217090631790343,
-          0.32985281506184316,
-          0.2484381217591225
+          0.4217090631790344,
+          0.3298528150618432,
+          0.24843812175912242
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -18769,9 +18783,9 @@
         "verdict": "WIN: PSV Eindhoven",
         "confidence": 71,
         "probabilities": [
-          0.22968704193256703,
-          0.3076584771143801,
-          0.4626544809530529
+          0.22968704193256695,
+          0.30765847711438005,
+          0.462654480953053
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -18844,10 +18858,15 @@
       "away": "NEC Nijmegen",
       "homeScore": 2,
       "awayScore": 3,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-11-08T19:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 9908,
@@ -19000,11 +19019,11 @@
         ],
         "recentGF": 8,
         "recentGA": 7,
-        "ratingPrior": 6.56,
+        "ratingPrior": 6.6,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.37,
-        "xg": 1.37
+        "matchXG": 2.02,
+        "xg": 2.02
       },
       "awayData": {
         "id": 8464,
@@ -19156,11 +19175,11 @@
         ],
         "recentGF": 5,
         "recentGA": 6,
-        "ratingPrior": 6.88,
+        "ratingPrior": 6.87,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 2.07,
-        "xg": 2.07
+        "matchXG": 2.25,
+        "xg": 2.25
       },
       "h2hSummary": "10–6–7",
       "scorers": [],
@@ -19169,17 +19188,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5781795/match-details",
       "model": {
         "verdict": "DRAW",
-        "confidence": 52,
+        "confidence": 53,
         "probabilities": [
-          0.28876149381859473,
-          0.36312999487098896,
-          0.34810851131041637
+          0.2952023140019271,
+          0.3627531603822994,
+          0.3420445256157735
         ],
         "projected": "1–1",
         "modalScore": "1–1",
         "expectedGoals": [
-          1.5,
-          1.51
+          1.63,
+          1.54
         ],
         "factors": [
           [
@@ -19208,7 +19227,7 @@
           ],
           [
             "Starting XI quality",
-            -5.8
+            -4.9
           ],
           [
             "XI estimated value",
@@ -19383,9 +19402,9 @@
         "verdict": "WIN: Slavia Mozyr",
         "confidence": 50,
         "probabilities": [
-          0.34630736451714106,
-          0.32714386121676037,
-          0.32654877426609863
+          0.34630736451714095,
+          0.3271438612167603,
+          0.32654877426609874
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -19786,9 +19805,9 @@
         "verdict": "WIN: Krylya Sovetov Samara",
         "confidence": 53,
         "probabilities": [
-          0.3542805576238052,
-          0.3324393283620491,
-          0.3132801140141457
+          0.3542805576238053,
+          0.33243932836204904,
+          0.31328011401414574
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -20180,7 +20199,7 @@
         "verdict": "WIN: Bukovyna Chernivtsi",
         "confidence": 52,
         "probabilities": [
-          0.349275305926581,
+          0.34927530592658096,
           0.3254943439359493,
           0.32523035013746976
         ],
@@ -20980,7 +20999,7 @@
         "verdict": "WIN: Syunik",
         "confidence": 59,
         "probabilities": [
-          0.4204018837548961,
+          0.4204018837548962,
           0.33010097289224005,
           0.24949714335286377
         ],
@@ -21188,9 +21207,9 @@
         "verdict": "WIN: Neman Grodno",
         "confidence": 70,
         "probabilities": [
-          0.47861257824653786,
-          0.307141472843656,
-          0.21424594890980617
+          0.478612578246538,
+          0.30714147284365595,
+          0.21424594890980608
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -21389,7 +21408,7 @@
         "confidence": 53,
         "probabilities": [
           0.3091554607395328,
-          0.32473153161011153,
+          0.3247315316101115,
           0.3661130076503557
         ],
         "projected": "1–2",
@@ -21792,9 +21811,9 @@
         "verdict": "WIN: Spartak Moscow",
         "confidence": 81,
         "probabilities": [
-          0.5124455311307619,
+          0.512445531130762,
           0.2863315857593924,
-          0.20122288310984576
+          0.2012228831098457
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -21998,7 +22017,7 @@
         "probabilities": [
           0.4503873273499486,
           0.31375198151330946,
-          0.23586069113674207
+          0.23586069113674205
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -22196,9 +22215,9 @@
         "verdict": "WIN: Dynamo Brest",
         "confidence": 80,
         "probabilities": [
-          0.2356733406745508,
-          0.2594209712017241,
-          0.5049056881237252
+          0.23567334067455076,
+          0.25942097120172397,
+          0.5049056881237253
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -22388,9 +22407,9 @@
         "verdict": "WIN: Borac Banja Luka",
         "confidence": 78,
         "probabilities": [
-          0.5123995702432748,
-          0.28477531619809343,
-          0.20282511355863186
+          0.5123995702432749,
+          0.2847753161980934,
+          0.20282511355863175
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -22605,8 +22624,8 @@
         "confidence": 67,
         "probabilities": [
           0.4563154730047787,
-          0.309250457796931,
-          0.2344340691982903
+          0.30925045779693106,
+          0.23443406919829024
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -22821,8 +22840,8 @@
         "confidence": 54,
         "probabilities": [
           0.3183175425953999,
-          0.3134975515413717,
-          0.3681849058632284
+          0.31349755154137166,
+          0.36818490586322844
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -23029,8 +23048,8 @@
         "confidence": 49,
         "probabilities": [
           0.33905185163160967,
-          0.3505548481412113,
-          0.3103933002271791
+          0.35055484814121124,
+          0.31039330022717915
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -23236,8 +23255,8 @@
         "verdict": "WIN: Aduana Stars",
         "confidence": 55,
         "probabilities": [
-          0.3158985166667094,
-          0.3104639356905118,
+          0.3158985166667093,
+          0.31046393569051167,
           0.37363754764277896
         ],
         "projected": "1–2",
@@ -23444,9 +23463,9 @@
         "verdict": "WIN: Debibi",
         "confidence": 47,
         "probabilities": [
-          0.3397733110122564,
+          0.33977331101225633,
           0.3178496480563523,
-          0.3423770409313913
+          0.3423770409313914
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -23868,8 +23887,8 @@
         "verdict": "WIN: Medeama SC",
         "confidence": 60,
         "probabilities": [
-          0.4184942311376827,
-          0.32023721233834235,
+          0.41849423113768275,
+          0.3202372123383423,
           0.2612685565239749
         ],
         "projected": "2–1",
@@ -24085,7 +24104,7 @@
         "confidence": 62,
         "probabilities": [
           0.4280906597982744,
-          0.3171404808930586,
+          0.31714048089305846,
           0.25476885930866716
         ],
         "projected": "2–1",
@@ -24496,8 +24515,8 @@
         "confidence": 84,
         "probabilities": [
           0.5378638655125216,
-          0.28584102447093523,
-          0.17629511001654313
+          0.2858410244709353,
+          0.17629511001654308
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -25105,9 +25124,9 @@
         "verdict": "WIN: Ararat Armenia",
         "confidence": 57,
         "probabilities": [
-          0.278527354424354,
-          0.32457818361445706,
-          0.396894461961189
+          0.2785273544243539,
+          0.324578183614457,
+          0.39689446196118916
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -25305,9 +25324,9 @@
         "verdict": "WIN: Zrinjski Mostar",
         "confidence": 78,
         "probabilities": [
-          0.5146852598644795,
-          0.28729074006884037,
-          0.19802400006668008
+          0.5146852598644798,
+          0.2872907400688403,
+          0.19802400006668003
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -25709,8 +25728,8 @@
         "confidence": 66,
         "probabilities": [
           0.4510269848524856,
-          0.3312143662910253,
-          0.21775864885648913
+          0.33121436629102524,
+          0.21775864885648916
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -25954,8 +25973,8 @@
         "ratingPrior": 6.62,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.21,
-        "xg": 1.21
+        "matchXG": 0.84,
+        "xg": 0.84
       },
       "awayData": {
         "id": 8603,
@@ -26111,8 +26130,8 @@
         "ratingPrior": 7.0,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 2.03,
-        "xg": 2.03
+        "matchXG": 1.78,
+        "xg": 1.78
       },
       "h2hSummary": "4–3–7",
       "scorers": [],
@@ -26123,15 +26142,15 @@
         "verdict": "WIN: Real Betis",
         "confidence": 70,
         "probabilities": [
-          0.2282212393088479,
-          0.3109697083345819,
-          0.4608090523565702
+          0.2255827822953413,
+          0.3120080689269387,
+          0.46240914877772
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.36,
-          1.53
+          1.28,
+          1.48
         ],
         "factors": [
           [
@@ -26946,9 +26965,9 @@
         "verdict": "WIN: Celta Vigo",
         "confidence": 65,
         "probabilities": [
-          0.44707320975966325,
-          0.33947369468490285,
-          0.21345309555543385
+          0.4470732097596633,
+          0.3394736946849029,
+          0.21345309555543382
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -27370,8 +27389,8 @@
         "verdict": "WIN: Villarreal",
         "confidence": 65,
         "probabilities": [
-          0.43484660831313793,
-          0.3206396455119128,
+          0.4348466083131378,
+          0.3206396455119129,
           0.2445137461749493
         ],
         "projected": "2–1",
@@ -27444,18 +27463,23 @@
       "home": "Atlético Madrid",
       "away": "Barcelona",
       "homeScore": 1,
-      "awayScore": 0,
-      "status": "LIVE",
+      "awayScore": 2,
+      "status": "FT",
       "kickoff": "2026-11-08T20:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 9906,
         "division": "Spain LaLiga",
         "leagueId": 87,
         "ccode": "ESP",
-        "position": 1,
+        "position": 3,
         "form": "WWWW",
         "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
@@ -27601,18 +27625,18 @@
         ],
         "recentGF": 6,
         "recentGA": 1,
-        "ratingPrior": 7.08,
+        "ratingPrior": 7.07,
         "xgSeason": 4.29,
         "xiRating": null,
-        "matchXG": 0.92,
-        "xg": 0.92
+        "matchXG": 1.53,
+        "xg": 1.53
       },
       "awayData": {
         "id": 8634,
         "division": "Spain LaLiga",
         "leagueId": 87,
         "ccode": "ESP",
-        "position": 2,
+        "position": 1,
         "form": "WLWW",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
@@ -27757,11 +27781,11 @@
         ],
         "recentGF": 15,
         "recentGA": 5,
-        "ratingPrior": 7.28,
+        "ratingPrior": 7.36,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.2,
-        "xg": 0.2
+        "matchXG": 1.6,
+        "xg": 1.6
       },
       "h2hSummary": "8–12–29",
       "scorers": [],
@@ -27770,17 +27794,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5868121/match-details",
       "model": {
         "verdict": "WIN: Barcelona",
-        "confidence": 54,
+        "confidence": 58,
         "probabilities": [
-          0.31200394803849185,
-          0.3280544582422813,
-          0.3599415937192268
+          0.3013690520024593,
+          0.31950272153952874,
+          0.37912822645801203
         ],
-        "projected": "0–1",
-        "modalScore": "0–1",
+        "projected": "1–2",
+        "modalScore": "1–2",
         "expectedGoals": [
-          1.36,
-          1.1
+          1.47,
+          1.39
         ],
         "factors": [
           [
@@ -27789,7 +27813,7 @@
           ],
           [
             "Current table",
-            2.0
+            -4.0
           ],
           [
             "Last-season prior",
@@ -27809,7 +27833,7 @@
           ],
           [
             "Starting XI quality",
-            -3.6
+            -5.2
           ],
           [
             "XI estimated value",
