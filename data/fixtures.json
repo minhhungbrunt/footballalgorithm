@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-13T18:41:00.563197+00:00",
-  "updated": "2026-11-13 01:41:00 PM ET",
+  "updatedAt": "2026-11-13T23:53:05.922212+00:00",
+  "updated": "2026-11-13 06:53:05 PM ET",
   "updateMode": "AUTO",
   "refreshIntervalSeconds": 300,
   "fixtureCount": 58,
@@ -1218,7 +1218,7 @@
         "confidence": 50,
         "probabilities": [
           0.34193674939011653,
-          0.3289321399568891,
+          0.328932139956889,
           0.3291311106529944
         ],
         "projected": "2–1",
@@ -1635,9 +1635,9 @@
         "verdict": "DRAW",
         "confidence": 53,
         "probabilities": [
-          0.3245786463231265,
-          0.3566437307619228,
-          0.3187776229149507
+          0.32457864632312644,
+          0.35664373076192285,
+          0.31877762291495076
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -2877,8 +2877,8 @@
         "confidence": 56,
         "probabilities": [
           0.4005743985793089,
-          0.34487534545062376,
-          0.2545502559700673
+          0.3448753454506238,
+          0.25455025597006736
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -3278,9 +3278,9 @@
         "verdict": "WIN: Stockport County",
         "confidence": 56,
         "probabilities": [
-          0.3987624197420073,
+          0.39876241974200727,
           0.34542406225840405,
-          0.2558135179995887
+          0.25581351799958874
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -5752,7 +5752,7 @@
         "confidence": 50,
         "probabilities": [
           0.36449023803113934,
-          0.35393745310425184,
+          0.3539374531042518,
           0.2815723088646089
         ],
         "projected": "2–1",
@@ -6166,7 +6166,7 @@
         "probabilities": [
           0.3144021103191752,
           0.34162912705749965,
-          0.3439687626233251
+          0.34396876262332515
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -9324,10 +9324,15 @@
       "away": "USM Khenchela",
       "homeScore": 1,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-11-13T17:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 316399,
@@ -9464,7 +9469,7 @@
         "verdict": "WIN: JS Saoura",
         "confidence": 50,
         "probabilities": [
-          0.3555812057318302,
+          0.35558120573183016,
           0.3364452568379758,
           0.307973537430194
         ],
@@ -12457,7 +12462,7 @@
         "verdict": "DRAW",
         "confidence": 50,
         "probabilities": [
-          0.32021399911860365,
+          0.3202139991186036,
           0.34620834363760317,
           0.3335776572437932
         ],
@@ -12857,9 +12862,9 @@
         "verdict": "WIN: East Fife",
         "confidence": 57,
         "probabilities": [
-          0.39682302789478713,
+          0.3968230278947871,
           0.33515291837392686,
-          0.26802405373128607
+          0.268024053731286
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -15660,12 +15665,17 @@
       "competitionFlag": "🌍",
       "home": "Netherlands",
       "away": "Greece",
-      "homeScore": 0,
+      "homeScore": 7,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "FT",
       "kickoff": "2026-11-13T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 6708,
@@ -15673,7 +15683,7 @@
         "leagueId": 9806,
         "ccode": "INT",
         "position": 1,
-        "form": "WDDDW",
+        "form": "WWDDW",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -15735,15 +15745,6 @@
             "estimatedValue": 24991328
           },
           {
-            "name": "Tijjani Reijnders",
-            "playerId": 868344,
-            "image": "https://images.fotmob.com/image_resources/playerimages/868344.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 23976336
-          },
-          {
             "name": "Frenkie de Jong",
             "playerId": 638622,
             "image": "https://images.fotmob.com/image_resources/playerimages/638622.png",
@@ -15762,13 +15763,13 @@
             "estimatedValue": 31436559
           },
           {
-            "name": "Donyell Malen",
-            "playerId": 660301,
-            "image": "https://images.fotmob.com/image_resources/playerimages/660301.png",
+            "name": "Tijjani Reijnders",
+            "playerId": 868344,
+            "image": "https://images.fotmob.com/image_resources/playerimages/868344.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 54377160
+            "estimatedValue": 23976336
           },
           {
             "name": "Cody Gakpo",
@@ -15778,10 +15779,19 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 74912371
+          },
+          {
+            "name": "Donyell Malen",
+            "playerId": 660301,
+            "image": "https://images.fotmob.com/image_resources/playerimages/660301.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 54377160
           }
         ],
         "injuries": [],
-        "formPoints": 9,
+        "formPoints": 11,
         "recentResults": [
           {
             "result": "W",
@@ -15790,8 +15800,8 @@
             "opponent": "Serbia"
           },
           {
-            "result": "D",
-            "gf": 0,
+            "result": "W",
+            "gf": 7,
             "ga": 0,
             "opponent": "Greece"
           },
@@ -15805,21 +15815,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Greece"
+            "opponent": "Germany"
           },
           {
             "result": "W",
-            "gf": 2,
-            "ga": 1,
-            "opponent": "Serbia"
+            "gf": 7,
+            "ga": 0,
+            "opponent": "Greece"
           }
         ],
-        "recentGF": 4,
-        "recentGA": 2,
-        "ratingPrior": 7.16,
+        "recentGF": 16,
+        "recentGA": 1,
+        "ratingPrior": 7.26,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 4.39,
+        "xg": 4.39
       },
       "awayData": {
         "id": 6383,
@@ -15827,12 +15838,12 @@
         "leagueId": 9806,
         "ccode": "INT",
         "position": 2,
-        "form": "DDDDD",
+        "form": "DLDDL",
         "lastSeasonPosition": 2,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 200604567,
+        "lineupEstimatedValue": 206523632,
         "lineup": [
           {
             "name": "Konstantinos Tzolakis",
@@ -15849,7 +15860,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/949866.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 2342663
           },
           {
             "name": "Konstantinos Mavropanos",
@@ -15888,13 +15900,13 @@
             "estimatedValue": 44938122
           },
           {
-            "name": "Dimitrios Kourbelis",
-            "playerId": 260750,
-            "image": "https://images.fotmob.com/image_resources/playerimages/260750.png",
+            "name": "Nectarios Triantis",
+            "playerId": 1338086,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1338086.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 480055
+            "estimatedValue": 4056457
           },
           {
             "name": "Thanasis Androutsos",
@@ -15934,7 +15946,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 5,
+        "formPoints": 3,
         "recentResults": [
           {
             "result": "D",
@@ -15943,9 +15955,9 @@
             "opponent": "Germany"
           },
           {
-            "result": "D",
+            "result": "L",
             "gf": 0,
-            "ga": 0,
+            "ga": 7,
             "opponent": "Netherlands"
           },
           {
@@ -15958,21 +15970,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Netherlands"
+            "opponent": "Serbia"
           },
           {
-            "result": "D",
+            "result": "L",
             "gf": 0,
-            "ga": 0,
-            "opponent": "Germany"
+            "ga": 7,
+            "opponent": "Netherlands"
           }
         ],
         "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": 6.91,
-        "xgSeason": 4.87,
+        "recentGA": 14,
+        "ratingPrior": 6.62,
+        "xgSeason": 5.31,
         "xiRating": null,
-        "xg": 4.87
+        "matchXG": 0.44,
+        "xg": 0.44
       },
       "h2hSummary": "2–1–1",
       "scorers": [],
@@ -15980,18 +15993,18 @@
       "lineupSource": "FotMob",
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181833/match-details",
       "model": {
-        "verdict": "DRAW",
-        "confidence": 50,
+        "verdict": "WIN: Netherlands",
+        "confidence": 59,
         "probabilities": [
-          0.3527530878424058,
-          0.36624662317118206,
-          0.28100028898641216
+          0.409581944391987,
+          0.34661273591271846,
+          0.24380531969529454
         ],
-        "projected": "1–1",
-        "modalScore": "1–1",
+        "projected": "2–1",
+        "modalScore": "2–1",
         "expectedGoals": [
-          1.54,
-          1.26
+          2.01,
+          1.04
         ],
         "factors": [
           [
@@ -16008,11 +16021,11 @@
           ],
           [
             "Recent form",
-            10.0
+            20.0
           ],
           [
             "Recent goal difference",
-            3.0
+            43.5
           ],
           [
             "Squad / transfer",
@@ -16020,11 +16033,11 @@
           ],
           [
             "Starting XI quality",
-            4.5
+            11.5
           ],
           [
             "XI estimated value",
-            8.5
+            8.2
           ],
           [
             "Home advantage",
@@ -16036,10 +16049,10 @@
           ],
           [
             "Team draw tendency",
-            80.0
+            50.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -16052,12 +16065,17 @@
       "competitionFlag": "🌍",
       "home": "Serbia",
       "away": "Germany",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "homeScore": 1,
+      "awayScore": 3,
+      "status": "FT",
       "kickoff": "2026-11-13T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8205,
@@ -16065,7 +16083,7 @@
         "leagueId": 9806,
         "ccode": "INT",
         "position": 4,
-        "form": "LDDDL",
+        "form": "LLDDL",
         "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -16091,15 +16109,6 @@
             "estimatedValue": 1896531
           },
           {
-            "name": "Srdjan Babić",
-            "playerId": 540967,
-            "image": "https://images.fotmob.com/image_resources/playerimages/540967.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1808999
-          },
-          {
             "name": "Nikola Milenković",
             "playerId": 766611,
             "image": "https://images.fotmob.com/image_resources/playerimages/766611.png",
@@ -16107,6 +16116,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 34450208
+          },
+          {
+            "name": "Srdjan Babić",
+            "playerId": 540967,
+            "image": "https://images.fotmob.com/image_resources/playerimages/540967.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1808999
           },
           {
             "name": "Kosta Nedeljković",
@@ -16136,15 +16154,6 @@
             "estimatedValue": 16936368
           },
           {
-            "name": "Milinković-Savić",
-            "playerId": 463301,
-            "image": "https://images.fotmob.com/image_resources/playerimages/463301.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 10322338
-          },
-          {
             "name": "Stefan Džodić",
             "playerId": 1670188,
             "image": "https://images.fotmob.com/image_resources/playerimages/1670188.png",
@@ -16152,6 +16161,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 14464873
+          },
+          {
+            "name": "Milinković-Savić",
+            "playerId": 463301,
+            "image": "https://images.fotmob.com/image_resources/playerimages/463301.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 10322338
           },
           {
             "name": "Mihajlo Cvetković",
@@ -16173,7 +16191,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 3,
+        "formPoints": 2,
         "recentResults": [
           {
             "result": "L",
@@ -16182,9 +16200,9 @@
             "opponent": "Netherlands"
           },
           {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
+            "result": "L",
+            "gf": 1,
+            "ga": 3,
             "opponent": "Germany"
           },
           {
@@ -16197,21 +16215,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Germany"
+            "opponent": "Greece"
           },
           {
             "result": "L",
             "gf": 1,
-            "ga": 2,
-            "opponent": "Netherlands"
+            "ga": 3,
+            "opponent": "Germany"
           }
         ],
-        "recentGF": 2,
-        "recentGA": 4,
-        "ratingPrior": 6.5,
-        "xgSeason": 4.64,
+        "recentGF": 3,
+        "recentGA": 8,
+        "ratingPrior": 6.22,
+        "xgSeason": 5.92,
         "xiRating": null,
-        "xg": 4.64
+        "matchXG": 1.28,
+        "xg": 1.28
       },
       "awayData": {
         "id": 8570,
@@ -16219,7 +16238,7 @@
         "leagueId": 9806,
         "ccode": "INT",
         "position": 3,
-        "form": "DDDDD",
+        "form": "DWDDW",
         "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -16245,15 +16264,6 @@
             "estimatedValue": 14467905
           },
           {
-            "name": "Jonathan Tah",
-            "playerId": 469700,
-            "image": "https://images.fotmob.com/image_resources/playerimages/469700.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 28702645
-          },
-          {
             "name": "Malick Thiaw",
             "playerId": 1137407,
             "image": "https://images.fotmob.com/image_resources/playerimages/1137407.png",
@@ -16261,6 +16271,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 61027165
+          },
+          {
+            "name": "Jonathan Tah",
+            "playerId": 469700,
+            "image": "https://images.fotmob.com/image_resources/playerimages/469700.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 28702645
           },
           {
             "name": "Maximilian Mittelstädt",
@@ -16272,15 +16291,6 @@
             "estimatedValue": 15163360
           },
           {
-            "name": "Aleksandar Pavlović",
-            "playerId": 1473580,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1473580.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 93771825
-          },
-          {
             "name": "Joshua Kimmich",
             "playerId": 460632,
             "image": "https://images.fotmob.com/image_resources/playerimages/460632.png",
@@ -16288,6 +16298,15 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 36659722
+          },
+          {
+            "name": "Aleksandar Pavlović",
+            "playerId": 1473580,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1473580.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 93771825
           },
           {
             "name": "Brajan Gruda",
@@ -16327,7 +16346,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 5,
+        "formPoints": 9,
         "recentResults": [
           {
             "result": "D",
@@ -16336,9 +16355,9 @@
             "opponent": "Greece"
           },
           {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
+            "result": "W",
+            "gf": 3,
+            "ga": 1,
             "opponent": "Serbia"
           },
           {
@@ -16351,21 +16370,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Serbia"
+            "opponent": "Netherlands"
           },
           {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
-            "opponent": "Greece"
+            "result": "W",
+            "gf": 3,
+            "ga": 1,
+            "opponent": "Serbia"
           }
         ],
-        "recentGF": 0,
-        "recentGA": 0,
-        "ratingPrior": 7.23,
+        "recentGF": 6,
+        "recentGA": 2,
+        "ratingPrior": 7.17,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 2.71,
+        "xg": 2.71
       },
       "h2hSummary": "1–1–1",
       "scorers": [],
@@ -16374,17 +16394,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181834/match-details",
       "model": {
         "verdict": "WIN: Germany",
-        "confidence": 52,
+        "confidence": 62,
         "probabilities": [
-          0.26343026380278584,
-          0.3535602853747517,
-          0.3830094508224624
+          0.24406380116197357,
+          0.3341636117611208,
+          0.42177258707690557
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.43,
-          1.37
+          1.37,
+          1.67
         ],
         "factors": [
           [
@@ -16401,11 +16421,11 @@
           ],
           [
             "Recent form",
-            -5.0
+            -17.5
           ],
           [
             "Recent goal difference",
-            -3.0
+            -13.5
           ],
           [
             "Squad / transfer",
@@ -16413,7 +16433,7 @@
           ],
           [
             "Starting XI quality",
-            -13.1
+            -17.1
           ],
           [
             "XI estimated value",
@@ -16429,10 +16449,10 @@
           ],
           [
             "Team draw tendency",
-            80.0
+            50.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -17162,8 +17182,8 @@
         "verdict": "WIN: Portugal",
         "confidence": 59,
         "probabilities": [
-          0.42133798422274715,
-          0.3434065570738597,
+          0.4213379842227471,
+          0.34340655707385975,
           0.23525545870339315
         ],
         "projected": "2–1",
@@ -17231,12 +17251,17 @@
       "competitionFlag": "🌍",
       "home": "Scotland",
       "away": "North Macedonia",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "homeScore": 2,
+      "awayScore": 1,
+      "status": "FT",
       "kickoff": "2026-11-13T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8498,
@@ -17244,12 +17269,12 @@
         "leagueId": 9807,
         "ccode": "INT",
         "position": 3,
-        "form": "LDDDL",
+        "form": "LWDDW",
         "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 122546058,
+        "lineupEstimatedValue": 124397701,
         "lineup": [
           {
             "name": "Angus Gunn",
@@ -17266,7 +17291,8 @@
             "image": "https://images.fotmob.com/image_resources/playerimages/770998.png",
             "position": null,
             "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 1851643
           },
           {
             "name": "Luke Graham",
@@ -17332,15 +17358,6 @@
             "estimatedValue": 12475415
           },
           {
-            "name": "Scott McTominay",
-            "playerId": 843099,
-            "image": "https://images.fotmob.com/image_resources/playerimages/843099.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 34635169
-          },
-          {
             "name": "Ché Adams",
             "playerId": 599353,
             "image": "https://images.fotmob.com/image_resources/playerimages/599353.png",
@@ -17348,10 +17365,19 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 2368169
+          },
+          {
+            "name": "Scott McTominay",
+            "playerId": 843099,
+            "image": "https://images.fotmob.com/image_resources/playerimages/843099.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 34635169
           }
         ],
         "injuries": [],
-        "formPoints": 3,
+        "formPoints": 8,
         "recentResults": [
           {
             "result": "L",
@@ -17360,9 +17386,9 @@
             "opponent": "Slovenia"
           },
           {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
+            "result": "W",
+            "gf": 2,
+            "ga": 1,
             "opponent": "North Macedonia"
           },
           {
@@ -17375,21 +17401,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "North Macedonia"
+            "opponent": "Switzerland"
           },
           {
-            "result": "L",
-            "gf": 1,
-            "ga": 2,
-            "opponent": "Slovenia"
+            "result": "W",
+            "gf": 2,
+            "ga": 1,
+            "opponent": "North Macedonia"
           }
         ],
-        "recentGF": 2,
+        "recentGF": 5,
         "recentGA": 4,
-        "ratingPrior": 6.65,
+        "ratingPrior": 6.89,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 3.58,
+        "xg": 3.58
       },
       "awayData": {
         "id": 8260,
@@ -17397,7 +17424,7 @@
         "leagueId": 9807,
         "ccode": "INT",
         "position": 4,
-        "form": "LDDDL",
+        "form": "LLDDL",
         "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -17505,7 +17532,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 3,
+        "formPoints": 2,
         "recentResults": [
           {
             "result": "L",
@@ -17514,9 +17541,9 @@
             "opponent": "Switzerland"
           },
           {
-            "result": "D",
-            "gf": 0,
-            "ga": 0,
+            "result": "L",
+            "gf": 1,
+            "ga": 2,
             "opponent": "Scotland"
           },
           {
@@ -17529,21 +17556,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Scotland"
+            "opponent": "Slovenia"
           },
           {
             "result": "L",
-            "gf": 0,
-            "ga": 3,
-            "opponent": "Switzerland"
+            "gf": 1,
+            "ga": 2,
+            "opponent": "Scotland"
           }
         ],
-        "recentGF": 0,
-        "recentGA": 6,
-        "ratingPrior": 6.22,
-        "xgSeason": 1.43,
+        "recentGF": 2,
+        "recentGA": 7,
+        "ratingPrior": 6.31,
+        "xgSeason": 1.68,
         "xiRating": null,
-        "xg": 1.43
+        "matchXG": 0.26,
+        "xg": 0.26
       },
       "h2hSummary": "2–1–0",
       "scorers": [],
@@ -17552,17 +17580,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181784/match-details",
       "model": {
         "verdict": "WIN: Scotland",
-        "confidence": 61,
+        "confidence": 70,
         "probabilities": [
-          0.42850456481370097,
-          0.33521505863654466,
-          0.2362803765497543
+          0.47694755068993444,
+          0.32784424526700945,
+          0.19520820404305617
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.53,
-          1.27
+          1.97,
+          1.03
         ],
         "factors": [
           [
@@ -17579,11 +17607,11 @@
           ],
           [
             "Recent form",
-            0.0
+            15.0
           ],
           [
             "Recent goal difference",
-            6.0
+            9.0
           ],
           [
             "Squad / transfer",
@@ -17591,11 +17619,11 @@
           ],
           [
             "Starting XI quality",
-            7.7
+            10.4
           ],
           [
             "XI estimated value",
-            15.9
+            16.1
           ],
           [
             "Home advantage",
@@ -17607,10 +17635,10 @@
           ],
           [
             "Team draw tendency",
-            60.0
+            40.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -17625,10 +17653,15 @@
       "away": "Switzerland",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "FT",
       "kickoff": "2026-11-13T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 5787,
@@ -17636,7 +17669,7 @@
         "leagueId": 9807,
         "ccode": "INT",
         "position": 2,
-        "form": "WDDDW",
+        "form": "WDDDD",
         "lastSeasonPosition": 2,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -17651,15 +17684,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 11774497
-          },
-          {
-            "name": "Žan Zaletel",
-            "playerId": 1050895,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1050895.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1163897
           },
           {
             "name": "Vanja Drkušić",
@@ -17680,6 +17704,15 @@
             "estimatedValue": 23468249
           },
           {
+            "name": "Žan Zaletel",
+            "playerId": 1050895,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1050895.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1163897
+          },
+          {
             "name": "Srdjan Kuzmić",
             "playerId": 1382364,
             "image": "https://images.fotmob.com/image_resources/playerimages/1382364.png",
@@ -17698,6 +17731,15 @@
             "estimatedValue": 371769
           },
           {
+            "name": "Aljoša Matko",
+            "playerId": 1072535,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1072535.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1192655
+          },
+          {
             "name": "Mark Zabukovnik",
             "playerId": 1283000,
             "image": "https://images.fotmob.com/image_resources/playerimages/1283000.png",
@@ -17705,15 +17747,6 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 356527
-          },
-          {
-            "name": "Danijel Šturm",
-            "playerId": 1270718,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1270718.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1857285
           },
           {
             "name": "Adam Gnezda Čerin",
@@ -17725,13 +17758,13 @@
             "estimatedValue": 2467663
           },
           {
-            "name": "Aljoša Matko",
-            "playerId": 1072535,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1072535.png",
+            "name": "Danijel Šturm",
+            "playerId": 1270718,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1270718.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 1192655
+            "estimatedValue": 1857285
           },
           {
             "name": "Žan Vipotnik",
@@ -17744,7 +17777,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 9,
+        "formPoints": 7,
         "recentResults": [
           {
             "result": "W",
@@ -17768,21 +17801,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Switzerland"
+            "opponent": "North Macedonia"
           },
           {
-            "result": "W",
-            "gf": 2,
-            "ga": 1,
-            "opponent": "Scotland"
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Switzerland"
           }
         ],
-        "recentGF": 4,
-        "recentGA": 2,
-        "ratingPrior": 6.73,
-        "xgSeason": 4.08,
+        "recentGF": 2,
+        "recentGA": 1,
+        "ratingPrior": 6.82,
+        "xgSeason": 4.39,
         "xiRating": null,
-        "xg": 4.08
+        "matchXG": 0.31,
+        "xg": 0.31
       },
       "awayData": {
         "id": 6717,
@@ -17790,12 +17824,12 @@
         "leagueId": 9807,
         "ccode": "INT",
         "position": 1,
-        "form": "WDDDW",
+        "form": "WDDDD",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": 157241367,
+        "lineupEstimatedValue": 193151938,
         "lineup": [
           {
             "name": "Gregor Kobel",
@@ -17843,23 +17877,6 @@
             "estimatedValue": 14386810
           },
           {
-            "name": "Michel Aebischer",
-            "playerId": 792756,
-            "image": "https://images.fotmob.com/image_resources/playerimages/792756.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 2119784
-          },
-          {
-            "name": "Denis Zakaria",
-            "playerId": 598355,
-            "image": "https://images.fotmob.com/image_resources/playerimages/598355.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
             "name": "Remo Freuler",
             "playerId": 201704,
             "image": "https://images.fotmob.com/image_resources/playerimages/201704.png",
@@ -17867,6 +17884,24 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 1889042
+          },
+          {
+            "name": "Denis Zakaria",
+            "playerId": 598355,
+            "image": "https://images.fotmob.com/image_resources/playerimages/598355.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 20365062
+          },
+          {
+            "name": "Dan Ndoye",
+            "playerId": 1022649,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1022649.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 41224467
           },
           {
             "name": "Fabian Rieder",
@@ -17878,25 +17913,26 @@
             "estimatedValue": 17407349
           },
           {
+            "name": "Michel Aebischer",
+            "playerId": 792756,
+            "image": "https://images.fotmob.com/image_resources/playerimages/792756.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 2119784
+          },
+          {
             "name": "Breel Embolo",
             "playerId": 527103,
             "image": "https://images.fotmob.com/image_resources/playerimages/527103.png",
             "position": null,
             "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Dan Ndoye",
-            "playerId": 1022649,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1022649.png",
-            "position": null,
-            "rating": null,
             "starter": true,
-            "estimatedValue": 41224467
+            "estimatedValue": 15545509
           }
         ],
         "injuries": [],
-        "formPoints": 9,
+        "formPoints": 7,
         "recentResults": [
           {
             "result": "W",
@@ -17920,21 +17956,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Slovenia"
+            "opponent": "Scotland"
           },
           {
-            "result": "W",
-            "gf": 3,
+            "result": "D",
+            "gf": 0,
             "ga": 0,
-            "opponent": "North Macedonia"
+            "opponent": "Slovenia"
           }
         ],
-        "recentGF": 6,
+        "recentGF": 3,
         "recentGA": 0,
-        "ratingPrior": 7.12,
+        "ratingPrior": 7.06,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 0.56,
+        "xg": 0.56
       },
       "h2hSummary": "1–1–5",
       "scorers": [],
@@ -17943,17 +17980,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181785/match-details",
       "model": {
         "verdict": "WIN: Switzerland",
-        "confidence": 53,
+        "confidence": 54,
         "probabilities": [
-          0.27132965114567326,
-          0.34895896634037993,
-          0.37971138251394676
+          0.26649096494016367,
+          0.3510226433349568,
+          0.3824863917248795
         ],
-        "projected": "1–2",
-        "modalScore": "1–2",
+        "projected": "0–1",
+        "modalScore": "0–1",
         "expectedGoals": [
-          1.45,
-          1.35
+          1.23,
+          1.18
         ],
         "factors": [
           [
@@ -17974,7 +18011,7 @@
           ],
           [
             "Recent goal difference",
-            -6.0
+            -3.0
           ],
           [
             "Squad / transfer",
@@ -17982,11 +18019,11 @@
           ],
           [
             "Starting XI quality",
-            -7.0
+            -4.3
           ],
           [
             "XI estimated value",
-            -7.4
+            -9.4
           ],
           [
             "Home advantage",
@@ -17998,10 +18035,10 @@
           ],
           [
             "Team draw tendency",
-            60.0
+            80.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -18731,9 +18768,9 @@
         "verdict": "WIN: Northern Ireland",
         "confidence": 61,
         "probabilities": [
-          0.42057237546945786,
+          0.4205723754694578,
           0.3385996624992374,
-          0.2408279620313048
+          0.24082796203130477
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -20374,10 +20411,15 @@
       "away": "Kazakhstan",
       "homeScore": 2,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-11-13T17:00:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 5794,
@@ -20385,7 +20427,7 @@
         "leagueId": 9808,
         "ccode": "INT",
         "position": 2,
-        "form": "LWDWL",
+        "form": "LWDDW",
         "lastSeasonPosition": 2,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -20492,7 +20534,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 7,
+        "formPoints": 8,
         "recentResults": [
           {
             "result": "L",
@@ -20513,25 +20555,25 @@
             "opponent": "Faroe Islands"
           },
           {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Faroe Islands"
+          },
+          {
             "result": "W",
             "gf": 2,
             "ga": 1,
             "opponent": "Kazakhstan"
-          },
-          {
-            "result": "L",
-            "gf": 0,
-            "ga": 4,
-            "opponent": "Slovakia"
           }
         ],
         "recentGF": 4,
-        "recentGA": 10,
-        "ratingPrior": 6.71,
-        "xgSeason": 4.99,
+        "recentGA": 6,
+        "ratingPrior": 6.73,
+        "xgSeason": 4.96,
         "xiRating": null,
-        "matchXG": 0.78,
-        "xg": 0.78
+        "matchXG": 0.75,
+        "xg": 0.75
       },
       "awayData": {
         "id": 8265,
@@ -20539,7 +20581,7 @@
         "leagueId": 9808,
         "ccode": "INT",
         "position": 4,
-        "form": "DLDLD",
+        "form": "DLDDL",
         "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -20667,25 +20709,25 @@
             "opponent": "Slovakia"
           },
           {
+            "result": "D",
+            "gf": 0,
+            "ga": 0,
+            "opponent": "Slovakia"
+          },
+          {
             "result": "L",
             "gf": 1,
             "ga": 2,
             "opponent": "Moldova"
-          },
-          {
-            "result": "D",
-            "gf": 2,
-            "ga": 2,
-            "opponent": "Faroe Islands"
           }
         ],
-        "recentGF": 6,
-        "recentGA": 8,
-        "ratingPrior": 6.68,
-        "xgSeason": 4.32,
+        "recentGF": 4,
+        "recentGA": 6,
+        "ratingPrior": 6.63,
+        "xgSeason": 4.43,
         "xiRating": null,
-        "matchXG": 0.38,
-        "xg": 0.38
+        "matchXG": 0.49,
+        "xg": 0.49
       },
       "h2hSummary": "2–1–3",
       "scorers": [],
@@ -20696,15 +20738,15 @@
         "verdict": "DRAW",
         "confidence": 53,
         "probabilities": [
-          0.3393833265927839,
-          0.3632049739579728,
-          0.2974116994492434
+          0.3386565388890273,
+          0.36361304215098283,
+          0.29773041895998986
         ],
         "projected": "1–1",
         "modalScore": "1–1",
         "expectedGoals": [
           1.37,
-          1.11
+          1.12
         ],
         "factors": [
           [
@@ -20721,11 +20763,11 @@
           ],
           [
             "Recent form",
-            10.0
+            12.5
           ],
           [
             "Recent goal difference",
-            -6.0
+            0.0
           ],
           [
             "Squad / transfer",
@@ -20733,7 +20775,7 @@
           ],
           [
             "Starting XI quality",
-            0.5
+            1.8
           ],
           [
             "XI estimated value",
@@ -20749,7 +20791,7 @@
           ],
           [
             "Team draw tendency",
-            40.0
+            50.0
           ]
         ],
         "dataCompleteness": 75,
@@ -20765,12 +20807,17 @@
       "competitionFlag": "🌍",
       "home": "Slovakia",
       "away": "Faroe Islands",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "homeScore": 2,
+      "awayScore": 2,
+      "status": "FT",
       "kickoff": "2026-11-13T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8497,
@@ -20778,7 +20825,7 @@
         "leagueId": 9808,
         "ccode": "INT",
         "position": 1,
-        "form": "WDDDW",
+        "form": "WDDDD",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -20886,7 +20933,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 9,
+        "formPoints": 7,
         "recentResults": [
           {
             "result": "W",
@@ -20896,8 +20943,8 @@
           },
           {
             "result": "D",
-            "gf": 0,
-            "ga": 0,
+            "gf": 2,
+            "ga": 2,
             "opponent": "Faroe Islands"
           },
           {
@@ -20910,21 +20957,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Faroe Islands"
+            "opponent": "Kazakhstan"
           },
           {
-            "result": "W",
-            "gf": 4,
-            "ga": 0,
-            "opponent": "Moldova"
+            "result": "D",
+            "gf": 2,
+            "ga": 2,
+            "opponent": "Faroe Islands"
           }
         ],
         "recentGF": 8,
-        "recentGA": 0,
-        "ratingPrior": 7.04,
-        "xgSeason": 5.95,
+        "recentGA": 4,
+        "ratingPrior": 7.15,
+        "xgSeason": null,
         "xiRating": null,
-        "xg": 5.95
+        "matchXG": 1.63,
+        "xg": 1.63
       },
       "awayData": {
         "id": 8269,
@@ -21050,8 +21098,8 @@
           },
           {
             "result": "D",
-            "gf": 0,
-            "ga": 0,
+            "gf": 2,
+            "ga": 2,
             "opponent": "Slovakia"
           },
           {
@@ -21064,21 +21112,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Slovakia"
+            "opponent": "Moldova"
           },
           {
             "result": "D",
             "gf": 2,
             "ga": 2,
-            "opponent": "Kazakhstan"
+            "opponent": "Slovakia"
           }
         ],
-        "recentGF": 4,
-        "recentGA": 4,
-        "ratingPrior": 6.66,
-        "xgSeason": 5.24,
+        "recentGF": 6,
+        "recentGA": 6,
+        "ratingPrior": 6.69,
+        "xgSeason": null,
         "xiRating": null,
-        "xg": 5.24
+        "matchXG": 2.06,
+        "xg": 2.06
       },
       "h2hSummary": "0–1–0",
       "scorers": [],
@@ -21087,17 +21136,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181942/match-details",
       "model": {
         "verdict": "WIN: Slovakia",
-        "confidence": 64,
+        "confidence": 61,
         "probabilities": [
-          0.43333651619348723,
-          0.3323950494065133,
-          0.23426843439999956
+          0.4207227201126128,
+          0.3389458734519891,
+          0.2403314064353981
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
-          1.98,
-          1.66
+          1.58,
+          1.4
         ],
         "factors": [
           [
@@ -21114,11 +21163,11 @@
           ],
           [
             "Recent form",
-            10.0
+            5.0
           ],
           [
             "Recent goal difference",
-            12.0
+            6.0
           ],
           [
             "Squad / transfer",
@@ -21126,7 +21175,7 @@
           ],
           [
             "Starting XI quality",
-            6.8
+            8.3
           ],
           [
             "XI estimated value",
@@ -21142,7 +21191,7 @@
           ],
           [
             "Team draw tendency",
-            80.0
+            90.0
           ]
         ],
         "dataCompleteness": 75,
@@ -21159,11 +21208,16 @@
       "home": "Bulgaria",
       "away": "Iceland",
       "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "awayScore": 5,
+      "status": "FT",
       "kickoff": "2026-11-13T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 10150,
@@ -21171,7 +21225,7 @@
         "leagueId": 9808,
         "ccode": "INT",
         "position": 3,
-        "form": "WDDDW",
+        "form": "WLDDL",
         "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -21278,7 +21332,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 9,
+        "formPoints": 5,
         "recentResults": [
           {
             "result": "W",
@@ -21287,9 +21341,9 @@
             "opponent": "Luxembourg"
           },
           {
-            "result": "D",
+            "result": "L",
             "gf": 0,
-            "ga": 0,
+            "ga": 5,
             "opponent": "Iceland"
           },
           {
@@ -21302,21 +21356,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Iceland"
+            "opponent": "Estonia"
           },
           {
-            "result": "W",
-            "gf": 2,
-            "ga": 0,
-            "opponent": "Luxembourg"
+            "result": "L",
+            "gf": 0,
+            "ga": 5,
+            "opponent": "Iceland"
           }
         ],
-        "recentGF": 4,
-        "recentGA": 0,
-        "ratingPrior": 6.88,
-        "xgSeason": 4.5,
+        "recentGF": 2,
+        "recentGA": 10,
+        "ratingPrior": 6.57,
+        "xgSeason": 5.42,
         "xiRating": null,
-        "xg": 4.5
+        "matchXG": 0.92,
+        "xg": 0.92
       },
       "awayData": {
         "id": 8536,
@@ -21324,7 +21379,7 @@
         "leagueId": 9808,
         "ccode": "INT",
         "position": 1,
-        "form": "DDDDD",
+        "form": "DWDDW",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -21377,6 +21432,15 @@
             "estimatedValue": 2537476
           },
           {
+            "name": "Mikael Egill Ellertsson",
+            "playerId": 942193,
+            "image": "https://images.fotmob.com/image_resources/playerimages/942193.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 7239034
+          },
+          {
             "name": "Hákon Arnar Haraldsson",
             "playerId": 1044470,
             "image": "https://images.fotmob.com/image_resources/playerimages/1044470.png",
@@ -21420,19 +21484,10 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 23858948
-          },
-          {
-            "name": "Mikael Egill Ellertsson",
-            "playerId": 942193,
-            "image": "https://images.fotmob.com/image_resources/playerimages/942193.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 7239034
           }
         ],
         "injuries": [],
-        "formPoints": 5,
+        "formPoints": 9,
         "recentResults": [
           {
             "result": "D",
@@ -21441,8 +21496,8 @@
             "opponent": "Estonia"
           },
           {
-            "result": "D",
-            "gf": 0,
+            "result": "W",
+            "gf": 5,
             "ga": 0,
             "opponent": "Bulgaria"
           },
@@ -21456,21 +21511,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Bulgaria"
+            "opponent": "Luxembourg"
           },
           {
-            "result": "D",
-            "gf": 0,
+            "result": "W",
+            "gf": 5,
             "ga": 0,
-            "opponent": "Estonia"
+            "opponent": "Bulgaria"
           }
         ],
-        "recentGF": 0,
+        "recentGF": 10,
         "recentGA": 0,
-        "ratingPrior": 7.15,
+        "ratingPrior": 7.18,
         "xgSeason": null,
         "xiRating": null,
-        "xg": null
+        "matchXG": 2.89,
+        "xg": 2.89
       },
       "h2hSummary": "0–0–1",
       "scorers": [],
@@ -21479,17 +21535,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181957/match-details",
       "model": {
         "verdict": "WIN: Iceland",
-        "confidence": 49,
+        "confidence": 61,
         "probabilities": [
-          0.2718506137053653,
-          0.362792131990839,
-          0.36535725430379573
+          0.2422692714634294,
+          0.33670670755470805,
+          0.4210240209818626
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.48,
-          1.32
+          1.29,
+          1.71
         ],
         "factors": [
           [
@@ -21506,11 +21562,11 @@
           ],
           [
             "Recent form",
-            10.0
+            -10.0
           ],
           [
             "Recent goal difference",
-            6.0
+            -27.0
           ],
           [
             "Squad / transfer",
@@ -21518,7 +21574,7 @@
           ],
           [
             "Starting XI quality",
-            -4.9
+            -11.0
           ],
           [
             "XI estimated value",
@@ -21534,10 +21590,10 @@
           ],
           [
             "Team draw tendency",
-            80.0
+            50.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -21551,11 +21607,16 @@
       "home": "Luxembourg",
       "away": "Estonia",
       "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "awayScore": 1,
+      "status": "FT",
       "kickoff": "2026-11-13T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 5792,
@@ -21563,7 +21624,7 @@
         "leagueId": 9808,
         "ccode": "INT",
         "position": 4,
-        "form": "LDDDL",
+        "form": "LLDDL",
         "lastSeasonPosition": 4,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -21670,7 +21731,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 3,
+        "formPoints": 2,
         "recentResults": [
           {
             "result": "L",
@@ -21679,9 +21740,9 @@
             "opponent": "Bulgaria"
           },
           {
-            "result": "D",
+            "result": "L",
             "gf": 0,
-            "ga": 0,
+            "ga": 1,
             "opponent": "Estonia"
           },
           {
@@ -21694,21 +21755,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Estonia"
+            "opponent": "Iceland"
           },
           {
             "result": "L",
             "gf": 0,
-            "ga": 2,
-            "opponent": "Bulgaria"
+            "ga": 1,
+            "opponent": "Estonia"
           }
         ],
         "recentGF": 0,
         "recentGA": 4,
-        "ratingPrior": 6.49,
-        "xgSeason": 4.24,
+        "ratingPrior": 6.46,
+        "xgSeason": 4.88,
         "xiRating": null,
-        "xg": 4.24
+        "matchXG": 0.64,
+        "xg": 0.64
       },
       "awayData": {
         "id": 8261,
@@ -21716,7 +21778,7 @@
         "leagueId": 9808,
         "ccode": "INT",
         "position": 2,
-        "form": "DDDDD",
+        "form": "DWDDW",
         "lastSeasonPosition": 2,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -21778,15 +21840,6 @@
             "estimatedValue": 378954
           },
           {
-            "name": "Patrik Kristal",
-            "playerId": 1512735,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1512735.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 688866
-          },
-          {
             "name": "Mattias Käit",
             "playerId": 695067,
             "image": "https://images.fotmob.com/image_resources/playerimages/695067.png",
@@ -21821,10 +21874,19 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 173623
+          },
+          {
+            "name": "Patrik Kristal",
+            "playerId": 1512735,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1512735.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 688866
           }
         ],
         "injuries": [],
-        "formPoints": 5,
+        "formPoints": 9,
         "recentResults": [
           {
             "result": "D",
@@ -21833,8 +21895,8 @@
             "opponent": "Iceland"
           },
           {
-            "result": "D",
-            "gf": 0,
+            "result": "W",
+            "gf": 1,
             "ga": 0,
             "opponent": "Luxembourg"
           },
@@ -21848,21 +21910,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Luxembourg"
+            "opponent": "Bulgaria"
           },
           {
-            "result": "D",
-            "gf": 0,
+            "result": "W",
+            "gf": 1,
             "ga": 0,
-            "opponent": "Iceland"
+            "opponent": "Luxembourg"
           }
         ],
-        "recentGF": 0,
+        "recentGF": 2,
         "recentGA": 0,
-        "ratingPrior": 6.65,
-        "xgSeason": 4.5,
+        "ratingPrior": 6.78,
+        "xgSeason": 5.26,
         "xiRating": null,
-        "xg": 4.5
+        "matchXG": 0.76,
+        "xg": 0.76
       },
       "h2hSummary": "0–0–1",
       "scorers": [],
@@ -21871,17 +21934,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181958/match-details",
       "model": {
         "verdict": "WIN: Estonia",
-        "confidence": 52,
+        "confidence": 55,
         "probabilities": [
-          0.2745841989318113,
-          0.354178161858488,
-          0.37123763920970076
+          0.2679513495756934,
+          0.34658716411965623,
+          0.38546148630465044
         ],
-        "projected": "1–2",
-        "modalScore": "1–2",
+        "projected": "0–1",
+        "modalScore": "0–1",
         "expectedGoals": [
-          1.88,
-          1.76
+          1.26,
+          1.26
         ],
         "factors": [
           [
@@ -21898,11 +21961,11 @@
           ],
           [
             "Recent form",
-            -5.0
+            -17.5
           ],
           [
             "Recent goal difference",
-            -6.0
+            -9.0
           ],
           [
             "Squad / transfer",
@@ -21910,7 +21973,7 @@
           ],
           [
             "Starting XI quality",
-            -2.9
+            -5.8
           ],
           [
             "XI estimated value",
@@ -21926,7 +21989,7 @@
           ],
           [
             "Team draw tendency",
-            80.0
+            50.0
           ]
         ],
         "dataCompleteness": 75,
@@ -21942,28 +22005,126 @@
       "competitionFlag": "🌍",
       "home": "Andorra",
       "away": "Gibraltar",
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "FT",
       "kickoff": "2026-11-13T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 10045,
         "division": "UEFA Nations League D",
         "leagueId": 9809,
         "ccode": "INT",
-        "position": 3,
-        "form": "LDDDL",
-        "lastSeasonPosition": 3,
+        "position": 2,
+        "form": "LWDDW",
+        "lastSeasonPosition": 2,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
+        "lineupEstimatedValue": 1164490,
+        "lineup": [
+          {
+            "name": "Iker Álvarez",
+            "playerId": 1101270,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1101270.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 673800
+          },
+          {
+            "name": "Biel Borrà",
+            "playerId": 1677239,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1677239.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Max Llovera",
+            "playerId": 674240,
+            "image": "https://images.fotmob.com/image_resources/playerimages/674240.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Ian Olivera",
+            "playerId": 1581138,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1581138.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Moisés San Nicolás",
+            "playerId": 388024,
+            "image": "https://images.fotmob.com/image_resources/playerimages/388024.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 124253
+          },
+          {
+            "name": "Nil Linares",
+            "playerId": 2020629,
+            "image": "https://images.fotmob.com/image_resources/playerimages/2020629.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Ot Remolins",
+            "playerId": 1564542,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1564542.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Éric Izquierdo",
+            "playerId": 1423594,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1423594.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Arón Rodrigo",
+            "playerId": 1499307,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1499307.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Guillaume López",
+            "playerId": 1177220,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1177220.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 158257
+          },
+          {
+            "name": "Albert Rosas",
+            "playerId": 1091359,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1091359.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 208180
+          }
+        ],
         "injuries": [],
-        "formPoints": 3,
+        "formPoints": 8,
         "recentResults": [
           {
             "result": "L",
@@ -21972,8 +22133,8 @@
             "opponent": "Malta"
           },
           {
-            "result": "D",
-            "gf": 0,
+            "result": "W",
+            "gf": 2,
             "ga": 0,
             "opponent": "Gibraltar"
           },
@@ -21987,36 +22148,135 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Gibraltar"
+            "opponent": "Azerbaijan"
           },
           {
-            "result": "L",
-            "gf": 0,
-            "ga": 1,
-            "opponent": "Malta"
+            "result": "W",
+            "gf": 2,
+            "ga": 0,
+            "opponent": "Gibraltar"
           }
         ],
-        "recentGF": 0,
-        "recentGA": 2,
-        "ratingPrior": 6.46,
-        "xgSeason": 2.06,
-        "xg": 2.06
+        "recentGF": 4,
+        "recentGA": 1,
+        "ratingPrior": 6.58,
+        "xgSeason": 3.14,
+        "xiRating": null,
+        "matchXG": 1.08,
+        "xg": 1.08
       },
       "awayData": {
         "id": 507764,
         "division": "UEFA Nations League D",
         "leagueId": 9809,
         "ccode": "INT",
-        "position": 2,
-        "form": "WDDDW",
-        "lastSeasonPosition": 2,
+        "position": 3,
+        "form": "WLDDL",
+        "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
-        "lineupEstimatedValue": null,
-        "lineup": [],
+        "lineupEstimatedValue": 1598059,
+        "lineup": [
+          {
+            "name": "Jaylan Hankins",
+            "playerId": 762381,
+            "image": "https://images.fotmob.com/image_resources/playerimages/762381.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 186758
+          },
+          {
+            "name": "Carlos Richards",
+            "playerId": 1301994,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1301994.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Bernardo Lopes",
+            "playerId": 581716,
+            "image": "https://images.fotmob.com/image_resources/playerimages/581716.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 87098
+          },
+          {
+            "name": "Ethan Jolley",
+            "playerId": 550721,
+            "image": "https://images.fotmob.com/image_resources/playerimages/550721.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 124283
+          },
+          {
+            "name": "Julian Valarino",
+            "playerId": 1180799,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1180799.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 209355
+          },
+          {
+            "name": "Kian Ronan",
+            "playerId": 1180805,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1180805.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Nicholas Pozo",
+            "playerId": 1369640,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1369640.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Dan Bent",
+            "playerId": 1379843,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1379843.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 50000
+          },
+          {
+            "name": "James Scanlon",
+            "playerId": 1435434,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1435434.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 485096
+          },
+          {
+            "name": "Dylan Borge",
+            "playerId": 1239953,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1239953.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 207712
+          },
+          {
+            "name": "Tjay De Barr",
+            "playerId": 833687,
+            "image": "https://images.fotmob.com/image_resources/playerimages/833687.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 247757
+          }
+        ],
         "injuries": [],
-        "formPoints": 9,
+        "formPoints": 5,
         "recentResults": [
           {
             "result": "W",
@@ -22025,9 +22285,9 @@
             "opponent": "Liechtenstein"
           },
           {
-            "result": "D",
+            "result": "L",
             "gf": 0,
-            "ga": 0,
+            "ga": 2,
             "opponent": "Andorra"
           },
           {
@@ -22040,38 +22300,40 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Andorra"
+            "opponent": "Malta"
           },
           {
-            "result": "W",
-            "gf": 2,
-            "ga": 0,
-            "opponent": "Liechtenstein"
+            "result": "L",
+            "gf": 0,
+            "ga": 2,
+            "opponent": "Andorra"
           }
         ],
-        "recentGF": 4,
-        "recentGA": 0,
-        "ratingPrior": 6.79,
-        "xgSeason": 0.57,
-        "xg": 0.57
+        "recentGF": 2,
+        "recentGA": 4,
+        "ratingPrior": 6.54,
+        "xgSeason": 1.54,
+        "xiRating": null,
+        "matchXG": 0.96,
+        "xg": 0.96
       },
       "h2hSummary": "0–2–2",
       "scorers": [],
       "sofascoreEventId": null,
-      "lineupSource": null,
+      "lineupSource": "FotMob",
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181878/match-details",
       "model": {
         "verdict": "WIN: Gibraltar",
-        "confidence": 51,
+        "confidence": 52,
         "probabilities": [
-          0.2855834414963998,
-          0.34666540499098075,
-          0.3677511535126195
+          0.2737752653882326,
+          0.35509504944400133,
+          0.371129685167766
         ],
-        "projected": "1–2",
-        "modalScore": "1–2",
+        "projected": "0–1",
+        "modalScore": "0–1",
         "expectedGoals": [
-          1.56,
+          1.44,
           1.21
         ],
         "factors": [
@@ -22081,19 +22343,19 @@
           ],
           [
             "Current table",
-            -2.0
+            2.0
           ],
           [
             "Last-season prior",
-            -1.6
+            1.6
           ],
           [
             "Recent form",
-            -15.0
+            7.5
           ],
           [
             "Recent goal difference",
-            -9.0
+            7.5
           ],
           [
             "Squad / transfer",
@@ -22101,7 +22363,11 @@
           ],
           [
             "Starting XI quality",
-            -5.9
+            0.7
+          ],
+          [
+            "XI estimated value",
+            -3.2
           ],
           [
             "Home advantage",
@@ -22113,10 +22379,10 @@
           ],
           [
             "Team draw tendency",
-            60.0
+            40.0
           ]
         ],
-        "dataCompleteness": 62,
+        "dataCompleteness": 75,
         "decisionNote": "Division strength + opponent-aware form + last-season prior + squad/XI evidence + restrained home advantage + evidence-based draw calibration"
       }
     },
@@ -22130,11 +22396,16 @@
       "home": "Liechtenstein",
       "away": "Azerbaijan",
       "homeScore": 0,
-      "awayScore": 0,
-      "status": "UPCOMING",
+      "awayScore": 1,
+      "status": "FT",
       "kickoff": "2026-11-13T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 5799,
@@ -22142,7 +22413,7 @@
         "leagueId": 9809,
         "ccode": "INT",
         "position": 3,
-        "form": "LDDDL",
+        "form": "LLDDL",
         "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -22159,6 +22430,14 @@
             "estimatedValue": 50000
           },
           {
+            "name": "Livio Meier",
+            "playerId": 851887,
+            "image": "https://images.fotmob.com/image_resources/playerimages/851887.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
             "name": "Jens Hofer",
             "playerId": 833698,
             "image": "https://images.fotmob.com/image_resources/playerimages/833698.png",
@@ -22167,9 +22446,17 @@
             "starter": true
           },
           {
-            "name": "Livio Meier",
-            "playerId": 851887,
-            "image": "https://images.fotmob.com/image_resources/playerimages/851887.png",
+            "name": "Severin Schlegel",
+            "playerId": 1421540,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1421540.png",
+            "position": null,
+            "rating": null,
+            "starter": true
+          },
+          {
+            "name": "Emanuel Zünd",
+            "playerId": 1626065,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1626065.png",
             "position": null,
             "rating": null,
             "starter": true
@@ -22183,26 +22470,9 @@
             "starter": true
           },
           {
-            "name": "Alessio Hasler",
-            "playerId": 1421538,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1421538.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 163873
-          },
-          {
             "name": "Aron Sele",
             "playerId": 756916,
             "image": "https://images.fotmob.com/image_resources/playerimages/756916.png",
-            "position": null,
-            "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Emanuel Zünd",
-            "playerId": 1626065,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1626065.png",
             "position": null,
             "rating": null,
             "starter": true
@@ -22217,20 +22487,13 @@
             "estimatedValue": 128983
           },
           {
-            "name": "Severin Schlegel",
-            "playerId": 1421540,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1421540.png",
+            "name": "Alessio Hasler",
+            "playerId": 1421538,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1421538.png",
             "position": null,
             "rating": null,
-            "starter": true
-          },
-          {
-            "name": "Alessandro Lo Russo",
-            "playerId": 2280245,
-            "image": "https://images.fotmob.com/image_resources/playerimages/2280245.png",
-            "position": null,
-            "rating": null,
-            "starter": true
+            "starter": true,
+            "estimatedValue": 163873
           },
           {
             "name": "Fabio Luque Notaro",
@@ -22240,10 +22503,18 @@
             "rating": null,
             "starter": true,
             "estimatedValue": 206968
+          },
+          {
+            "name": "Alessandro Lo Russo",
+            "playerId": 2280245,
+            "image": "https://images.fotmob.com/image_resources/playerimages/2280245.png",
+            "position": null,
+            "rating": null,
+            "starter": true
           }
         ],
         "injuries": [],
-        "formPoints": 3,
+        "formPoints": 2,
         "recentResults": [
           {
             "result": "L",
@@ -22252,9 +22523,9 @@
             "opponent": "Gibraltar"
           },
           {
-            "result": "D",
+            "result": "L",
             "gf": 0,
-            "ga": 0,
+            "ga": 1,
             "opponent": "Azerbaijan"
           },
           {
@@ -22267,21 +22538,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Azerbaijan"
+            "opponent": "Lithuania"
           },
           {
             "result": "L",
             "gf": 0,
-            "ga": 2,
-            "opponent": "Gibraltar"
+            "ga": 1,
+            "opponent": "Azerbaijan"
           }
         ],
         "recentGF": 0,
         "recentGA": 4,
-        "ratingPrior": 6.4,
-        "xgSeason": 0.26,
+        "ratingPrior": 6.49,
+        "xgSeason": 0.53,
         "xiRating": null,
-        "xg": 0.26
+        "matchXG": 0.27,
+        "xg": 0.27
       },
       "awayData": {
         "id": 8566,
@@ -22289,7 +22561,7 @@
         "leagueId": 9809,
         "ccode": "INT",
         "position": 1,
-        "form": "WDDDW",
+        "form": "WWDDW",
         "lastSeasonPosition": 1,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
@@ -22306,13 +22578,13 @@
             "estimatedValue": 231652
           },
           {
-            "name": "Bədavi Hüseynov",
-            "playerId": 251855,
-            "image": "https://images.fotmob.com/image_resources/playerimages/251855.png",
+            "name": "Qismət Alıyev",
+            "playerId": 672833,
+            "image": "https://images.fotmob.com/image_resources/playerimages/672833.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 98141
+            "estimatedValue": 786245
           },
           {
             "name": "Rahil Məmmədov",
@@ -22324,6 +22596,15 @@
             "estimatedValue": 137570
           },
           {
+            "name": "Bədavi Hüseynov",
+            "playerId": 251855,
+            "image": "https://images.fotmob.com/image_resources/playerimages/251855.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 98141
+          },
+          {
             "name": "Rəhman Daşdəmirov",
             "playerId": 1441450,
             "image": "https://images.fotmob.com/image_resources/playerimages/1441450.png",
@@ -22333,22 +22614,12 @@
             "estimatedValue": 212454
           },
           {
-            "name": "Rüfat Abbasov",
-            "playerId": 1387408,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1387408.png",
+            "name": "Oruc Mammadov",
+            "playerId": 1863490,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1863490.png",
             "position": null,
             "rating": null,
-            "starter": true,
-            "estimatedValue": 1115576
-          },
-          {
-            "name": "Tural Bayramov",
-            "playerId": 1119168,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1119168.png",
-            "position": null,
-            "rating": null,
-            "starter": true,
-            "estimatedValue": 1172672
+            "starter": true
           },
           {
             "name": "Abdulakh Khaybulaev",
@@ -22360,6 +22631,15 @@
             "estimatedValue": 201543
           },
           {
+            "name": "Tural Bayramov",
+            "playerId": 1119168,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1119168.png",
+            "position": null,
+            "rating": null,
+            "starter": true,
+            "estimatedValue": 1172672
+          },
+          {
             "name": "Aleksey Isaev",
             "playerId": 688887,
             "image": "https://images.fotmob.com/image_resources/playerimages/688887.png",
@@ -22369,21 +22649,13 @@
             "estimatedValue": 554698
           },
           {
-            "name": "Qismət Alıyev",
-            "playerId": 672833,
-            "image": "https://images.fotmob.com/image_resources/playerimages/672833.png",
+            "name": "Rüfat Abbasov",
+            "playerId": 1387408,
+            "image": "https://images.fotmob.com/image_resources/playerimages/1387408.png",
             "position": null,
             "rating": null,
             "starter": true,
-            "estimatedValue": 786245
-          },
-          {
-            "name": "Oruc Mammadov",
-            "playerId": 1863490,
-            "image": "https://images.fotmob.com/image_resources/playerimages/1863490.png",
-            "position": null,
-            "rating": null,
-            "starter": true
+            "estimatedValue": 1115576
           },
           {
             "name": "Mahir Emreli",
@@ -22396,7 +22668,7 @@
           }
         ],
         "injuries": [],
-        "formPoints": 9,
+        "formPoints": 11,
         "recentResults": [
           {
             "result": "W",
@@ -22405,8 +22677,8 @@
             "opponent": "Lithuania"
           },
           {
-            "result": "D",
-            "gf": 0,
+            "result": "W",
+            "gf": 1,
             "ga": 0,
             "opponent": "Liechtenstein"
           },
@@ -22420,21 +22692,22 @@
             "result": "D",
             "gf": 0,
             "ga": 0,
-            "opponent": "Liechtenstein"
+            "opponent": "Andorra"
           },
           {
             "result": "W",
             "gf": 1,
             "ga": 0,
-            "opponent": "Lithuania"
+            "opponent": "Liechtenstein"
           }
         ],
-        "recentGF": 2,
+        "recentGF": 3,
         "recentGA": 0,
-        "ratingPrior": 6.94,
-        "xgSeason": 5.18,
+        "ratingPrior": 6.98,
+        "xgSeason": null,
         "xiRating": null,
-        "xg": 5.18
+        "matchXG": 1.75,
+        "xg": 1.75
       },
       "h2hSummary": "0–1–1",
       "scorers": [],
@@ -22443,17 +22716,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181884/match-details",
       "model": {
         "verdict": "WIN: Azerbaijan",
-        "confidence": 68,
+        "confidence": 67,
         "probabilities": [
-          0.20989870278523542,
-          0.32783883885195214,
-          0.46226245836281254
+          0.2249046583913457,
+          0.32428550680256657,
+          0.45080983480608783
         ],
-        "projected": "1–2",
-        "modalScore": "1–2",
+        "projected": "0–1",
+        "modalScore": "0–1",
         "expectedGoals": [
-          1.19,
-          1.79
+          1.17,
+          1.47
         ],
         "factors": [
           [
@@ -22470,11 +22743,11 @@
           ],
           [
             "Recent form",
-            -15.0
+            -22.5
           ],
           [
             "Recent goal difference",
-            -9.0
+            -10.5
           ],
           [
             "Squad / transfer",
@@ -22482,7 +22755,7 @@
           ],
           [
             "Starting XI quality",
-            -9.7
+            -8.8
           ],
           [
             "XI estimated value",
@@ -22498,7 +22771,7 @@
           ],
           [
             "Team draw tendency",
-            60.0
+            40.0
           ]
         ],
         "dataCompleteness": 75,
