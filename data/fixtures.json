@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-17T21:16:07.202555+00:00",
-  "updated": "2026-11-17 04:16:07 PM ET",
+  "updatedAt": "2026-11-18T02:56:25.460565+00:00",
+  "updated": "2026-11-17 09:56:25 PM ET",
   "updateMode": "AUTO",
   "refreshIntervalSeconds": 300,
   "fixtureCount": 10,
@@ -8,7 +8,7 @@
   "sourceErrors": [],
   "mlModel": {
     "version": 1,
-    "trainedAt": "2026-11-17T07:30:49.582913-05:00",
+    "trainedAt": "2026-11-17T21:55:48.781474-05:00",
     "trainingRows": 22479,
     "metrics": {
       "holdout_accuracy": 0.4615,
@@ -430,20 +430,25 @@
       "home": "Denmark",
       "away": "Norway",
       "homeScore": 2,
-      "awayScore": 1,
-      "status": "LIVE",
+      "awayScore": 3,
+      "status": "FT",
       "kickoff": "2026-11-17T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8238,
         "division": "UEFA Nations League A",
         "leagueId": 9806,
         "ccode": "INT",
-        "position": 2,
+        "position": 3,
         "form": "W",
-        "lastSeasonPosition": 2,
+        "lastSeasonPosition": 3,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -563,20 +568,20 @@
         ],
         "recentGF": 4,
         "recentGA": 1,
-        "ratingPrior": 6.89,
+        "ratingPrior": 6.8,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.55,
-        "xg": 1.55
+        "matchXG": 1.61,
+        "xg": 1.61
       },
       "awayData": {
         "id": 8492,
         "division": "UEFA Nations League A",
         "leagueId": 9806,
         "ccode": "INT",
-        "position": 3,
+        "position": 2,
         "form": "W",
-        "lastSeasonPosition": 3,
+        "lastSeasonPosition": 2,
         "lastSeason": "2025/26",
         "transferImpact": 0.0,
         "squadEstimatedValue": null,
@@ -696,11 +701,11 @@
         ],
         "recentGF": 3,
         "recentGA": 1,
-        "ratingPrior": 6.64,
+        "ratingPrior": 6.72,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 2.21,
-        "xg": 2.21
+        "matchXG": 3.89,
+        "xg": 3.89
       },
       "h2hSummary": "3–2–1",
       "scorers": [],
@@ -709,17 +714,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181871/match-details",
       "model": {
         "verdict": "WIN: Denmark",
-        "confidence": 57,
+        "confidence": 56,
         "probabilities": [
-          0.38217923864196823,
-          0.32734600726466573,
-          0.290474754093366
+          0.36542424929962375,
+          0.32321707607777905,
+          0.3113586746225972
         ],
         "projected": "2–1",
         "modalScore": "2–1",
         "expectedGoals": [
           1.51,
-          1.48
+          1.73
         ],
         "factors": [
           [
@@ -728,11 +733,11 @@
           ],
           [
             "Current table",
-            2.0
+            -2.0
           ],
           [
             "Last-season prior",
-            1.6
+            -1.6
           ],
           [
             "Recent form",
@@ -748,7 +753,7 @@
           ],
           [
             "Starting XI quality",
-            4.5
+            1.4
           ],
           [
             "XI estimated value",
@@ -786,10 +791,15 @@
       "away": "Portugal",
       "homeScore": 2,
       "awayScore": 3,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-11-17T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 5790,
@@ -918,11 +928,11 @@
         ],
         "recentGF": 1,
         "recentGA": 3,
-        "ratingPrior": 6.53,
-        "xgSeason": 5.03,
+        "ratingPrior": 6.54,
+        "xgSeason": 5.64,
         "xiRating": null,
-        "matchXG": 1.3,
-        "xg": 1.3
+        "matchXG": 1.91,
+        "xg": 1.91
       },
       "awayData": {
         "id": 8361,
@@ -1051,11 +1061,11 @@
         ],
         "recentGF": 1,
         "recentGA": 4,
-        "ratingPrior": 6.87,
+        "ratingPrior": 6.97,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.4,
-        "xg": 1.4
+        "matchXG": 1.59,
+        "xg": 1.59
       },
       "h2hSummary": "0–0–2",
       "scorers": [],
@@ -1066,15 +1076,15 @@
         "verdict": "WIN: Portugal",
         "confidence": 63,
         "probabilities": [
-          0.26696119799453716,
-          0.31884314858768054,
-          0.41419565341778236
+          0.27468786544242385,
+          0.3153232981379974,
+          0.40998883641957873
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.42,
-          1.36
+          1.54,
+          1.4
         ],
         "factors": [
           [
@@ -1103,7 +1113,7 @@
           ],
           [
             "Starting XI quality",
-            -6.1
+            -7.7
           ],
           [
             "XI estimated value",
@@ -1141,10 +1151,15 @@
       "away": "Northern Ireland",
       "homeScore": 1,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-11-17T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8565,
@@ -1273,11 +1288,11 @@
         ],
         "recentGF": 2,
         "recentGA": 0,
-        "ratingPrior": 6.93,
+        "ratingPrior": 6.81,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.76,
-        "xg": 0.76
+        "matchXG": 1.26,
+        "xg": 1.26
       },
       "awayData": {
         "id": 10259,
@@ -1406,11 +1421,11 @@
         ],
         "recentGF": 1,
         "recentGA": 0,
-        "ratingPrior": 6.9,
+        "ratingPrior": 6.93,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.57,
-        "xg": 0.57
+        "matchXG": 0.63,
+        "xg": 0.63
       },
       "h2hSummary": "1–2–1",
       "scorers": [],
@@ -1419,17 +1434,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181810/match-details",
       "model": {
         "verdict": "WIN: Hungary",
-        "confidence": 51,
+        "confidence": 52,
         "probabilities": [
-          0.3397347467412114,
-          0.332981399020709,
-          0.32728385423807965
+          0.34750282886837947,
+          0.3296966909455751,
+          0.32280048018604546
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
-          1.34,
-          1.16
+          1.44,
+          1.18
         ],
         "factors": [
           [
@@ -1458,7 +1473,7 @@
           ],
           [
             "Starting XI quality",
-            0.5
+            -2.2
           ],
           [
             "XI estimated value",
@@ -1496,10 +1511,15 @@
       "away": "Georgia",
       "homeScore": 1,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-11-17T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 6718,
@@ -1628,8 +1648,8 @@
         ],
         "recentGF": 0,
         "recentGA": 1,
-        "ratingPrior": 6.55,
-        "xgSeason": 5.15,
+        "ratingPrior": 6.61,
+        "xgSeason": 5.16,
         "xiRating": null,
         "matchXG": 1.15,
         "xg": 1.15
@@ -1761,11 +1781,11 @@
         ],
         "recentGF": 0,
         "recentGA": 2,
-        "ratingPrior": 6.46,
-        "xgSeason": 4.63,
+        "ratingPrior": 6.44,
+        "xgSeason": 4.62,
         "xiRating": null,
-        "matchXG": 0.48,
-        "xg": 0.48
+        "matchXG": 0.47,
+        "xg": 0.47
       },
       "h2hSummary": "2–2–0",
       "scorers": [],
@@ -1776,14 +1796,14 @@
         "verdict": "WIN: Ukraine",
         "confidence": 55,
         "probabilities": [
-          0.3685647567874931,
-          0.3317608258299876,
-          0.2996744173825192
+          0.36908143599521703,
+          0.33175397244048854,
+          0.2991645915642944
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
-          1.43,
+          1.44,
           1.13
         ],
         "factors": [
@@ -1813,7 +1833,7 @@
           ],
           [
             "Starting XI quality",
-            1.6
+            3.1
           ],
           [
             "XI estimated value",
@@ -1849,12 +1869,17 @@
       "competitionFlag": "🌍",
       "home": "Ireland",
       "away": "Kosovo",
-      "homeScore": 2,
+      "homeScore": 3,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-11-17T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 5791,
@@ -1983,11 +2008,11 @@
         ],
         "recentGF": 0,
         "recentGA": 1,
-        "ratingPrior": 6.76,
+        "ratingPrior": 6.87,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 3.61,
-        "xg": 3.61
+        "matchXG": 4.61,
+        "xg": 4.61
       },
       "awayData": {
         "id": 430156,
@@ -2116,7 +2141,7 @@
         ],
         "recentGF": 0,
         "recentGA": 0,
-        "ratingPrior": 6.68,
+        "ratingPrior": 6.58,
         "xgSeason": null,
         "xiRating": null,
         "matchXG": 0.21,
@@ -2131,9 +2156,9 @@
         "verdict": "WIN: Ireland",
         "confidence": 56,
         "probabilities": [
-          0.39431108178226526,
-          0.35258125808643503,
-          0.25310766013129976
+          0.39584856521632006,
+          0.35135855630900004,
+          0.25279287847467996
         ],
         "projected": "2–1",
         "modalScore": "2–1",
@@ -2168,7 +2193,7 @@
           ],
           [
             "Starting XI quality",
-            1.4
+            5.2
           ],
           [
             "XI estimated value",
@@ -2206,10 +2231,15 @@
       "away": "Austria",
       "homeScore": 1,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-11-17T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8567,
@@ -2338,11 +2368,11 @@
         ],
         "recentGF": 0,
         "recentGA": 0,
-        "ratingPrior": 6.56,
-        "xgSeason": 3.03,
+        "ratingPrior": 6.58,
+        "xgSeason": 2.97,
         "xiRating": null,
-        "matchXG": 0.47,
-        "xg": 0.47
+        "matchXG": 0.41,
+        "xg": 0.41
       },
       "awayData": {
         "id": 8255,
@@ -2471,11 +2501,11 @@
         ],
         "recentGF": 1,
         "recentGA": 0,
-        "ratingPrior": 6.98,
+        "ratingPrior": 6.96,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 2.16,
-        "xg": 2.16
+        "matchXG": 2.44,
+        "xg": 2.44
       },
       "h2hSummary": "2–0–3",
       "scorers": [],
@@ -2486,15 +2516,15 @@
         "verdict": "WIN: Austria",
         "confidence": 65,
         "probabilities": [
-          0.21932666423852903,
-          0.33619470111753824,
-          0.4444786346439328
+          0.21519575371796235,
+          0.33567411908083966,
+          0.4491301272011981
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.24,
-          1.52
+          1.23,
+          1.58
         ],
         "factors": [
           [
@@ -2523,7 +2553,7 @@
           ],
           [
             "Starting XI quality",
-            -7.6
+            -6.8
           ],
           [
             "XI estimated value",
@@ -2559,12 +2589,17 @@
       "competitionFlag": "🌍",
       "home": "Bosnia and Herzegovina",
       "away": "Romania",
-      "homeScore": 1,
+      "homeScore": 2,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-11-17T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 10106,
@@ -2693,11 +2728,11 @@
         ],
         "recentGF": 2,
         "recentGA": 3,
-        "ratingPrior": 6.68,
+        "ratingPrior": 6.76,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 0.75,
-        "xg": 0.75
+        "matchXG": 1.3,
+        "xg": 1.3
       },
       "awayData": {
         "id": 9730,
@@ -2826,11 +2861,11 @@
         ],
         "recentGF": 2,
         "recentGA": 1,
-        "ratingPrior": 6.52,
-        "xgSeason": 3.95,
+        "ratingPrior": 6.54,
+        "xgSeason": 4.15,
         "xiRating": null,
-        "matchXG": 0.39,
-        "xg": 0.39
+        "matchXG": 0.59,
+        "xg": 0.59
       },
       "h2hSummary": "5–0–2",
       "scorers": [],
@@ -2839,17 +2874,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181847/match-details",
       "model": {
         "verdict": "WIN: Bosnia and Herzegovina",
-        "confidence": 70,
+        "confidence": 72,
         "probabilities": [
-          0.4554508192620552,
-          0.3080116668189157,
-          0.23653751391902908
+          0.46299615772266545,
+          0.30371057473966856,
+          0.233293267537666
         ],
         "projected": "1–0",
         "modalScore": "1–0",
         "expectedGoals": [
-          1.35,
-          1.12
+          1.46,
+          1.16
         ],
         "factors": [
           [
@@ -2878,7 +2913,7 @@
           ],
           [
             "Starting XI quality",
-            2.9
+            4.0
           ],
           [
             "XI estimated value",
@@ -2916,10 +2951,15 @@
       "away": "Sweden",
       "homeScore": 1,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoff": "2026-11-17T19:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 8568,
@@ -3048,11 +3088,11 @@
         ],
         "recentGF": 1,
         "recentGA": 2,
-        "ratingPrior": 6.78,
+        "ratingPrior": 6.81,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.27,
-        "xg": 1.27
+        "matchXG": 1.82,
+        "xg": 1.82
       },
       "awayData": {
         "id": 8520,
@@ -3181,11 +3221,11 @@
         ],
         "recentGF": 3,
         "recentGA": 2,
-        "ratingPrior": 6.98,
+        "ratingPrior": 6.96,
         "xgSeason": null,
         "xiRating": null,
-        "matchXG": 1.05,
-        "xg": 1.05
+        "matchXG": 2.25,
+        "xg": 2.25
       },
       "h2hSummary": "2–0–3",
       "scorers": [],
@@ -3194,17 +3234,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5181848/match-details",
       "model": {
         "verdict": "WIN: Sweden",
-        "confidence": 60,
+        "confidence": 63,
         "probabilities": [
-          0.29299571153033926,
-          0.31628849823897176,
-          0.39071579023068903
+          0.28647110018929806,
+          0.3092182382297252,
+          0.40431066158097684
         ],
         "projected": "1–2",
         "modalScore": "1–2",
         "expectedGoals": [
-          1.41,
-          1.29
+          1.52,
+          1.53
         ],
         "factors": [
           [
@@ -3233,7 +3273,7 @@
           ],
           [
             "Starting XI quality",
-            -3.6
+            -2.7
           ],
           [
             "XI estimated value",
