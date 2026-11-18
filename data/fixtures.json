@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-18T10:56:56.003059+00:00",
-  "updated": "2026-11-18 05:56:56 AM ET",
+  "updatedAt": "2026-11-18T19:14:07.626482+00:00",
+  "updated": "2026-11-18 02:14:07 PM ET",
   "updateMode": "AUTO",
   "refreshIntervalSeconds": 300,
   "fixtureCount": 6,
@@ -8,16 +8,16 @@
   "sourceErrors": [],
   "mlModel": {
     "version": 1,
-    "trainedAt": "2026-11-17T21:55:48.781474-05:00",
-    "trainingRows": 22479,
+    "trainedAt": "2026-11-18T14:13:33.537274-05:00",
+    "trainingRows": 22515,
     "metrics": {
-      "holdout_accuracy": 0.4615,
-      "holdout_logloss": 1.0403,
-      "holdout_rows": 4496,
+      "holdout_accuracy": 0.463,
+      "holdout_logloss": 1.0392,
+      "holdout_rows": 4503,
       "class_counts": [
-        10035,
-        5367,
-        7077
+        10047,
+        5379,
+        7089
       ]
     }
   },
@@ -161,11 +161,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/6486794/match-details",
       "model": {
         "verdict": "WIN: FC Košice",
-        "confidence": 68,
+        "confidence": 71,
         "probabilities": [
-          0.23458269562449394,
-          0.30443203169011757,
-          0.4609852726853886
+          0.22740299347829324,
+          0.29658019628480453,
+          0.47601681023690223
         ],
         "projected": "1–2",
         "modalScore": "1–2",
@@ -234,10 +234,15 @@
       "away": "JS El Biar",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "FT",
       "kickoff": "2026-11-18T16:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 319205,
@@ -366,9 +371,9 @@
         "verdict": "DRAW",
         "confidence": 50,
         "probabilities": [
-          0.32515445430720563,
-          0.3481364162716451,
-          0.32670912942114927
+          0.3237450311811794,
+          0.3503980565276687,
+          0.3258569122911519
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -435,19 +440,24 @@
       "competitionFlag": "🌍",
       "home": "CS Constantine",
       "away": "ES Ben Aknoun",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
-      "status": "UPCOMING",
+      "status": "FT",
       "kickoff": "2026-11-18T16:45:00.000Z",
       "minute": {
-        "short": ""
+        "short": {
+          "short": "FT",
+          "shortKey": "fulltime_short",
+          "long": "Full-Time",
+          "longKey": "finished"
+        }
       },
       "homeData": {
         "id": 277392,
         "division": "Ligue 1",
         "leagueId": 516,
         "ccode": "ALG",
-        "position": 14,
+        "position": 10,
         "form": "LLLL",
         "lastSeasonPosition": 8,
         "lastSeason": "2025/26",
@@ -502,7 +512,7 @@
         "division": "Ligue 1",
         "leagueId": 516,
         "ccode": "ALG",
-        "position": 11,
+        "position": 12,
         "form": "LDDL",
         "lastSeasonPosition": 9,
         "lastSeason": "2025/26",
@@ -559,17 +569,17 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5989879/match-details",
       "model": {
         "verdict": "DRAW",
-        "confidence": 49,
+        "confidence": 50,
         "probabilities": [
-          0.30781763244466553,
-          0.3531184480308255,
-          0.3390639195245089
+          0.31105596014144665,
+          0.35542127320169326,
+          0.33352276665686004
         ],
         "projected": "1–1",
         "modalScore": "1–1",
         "expectedGoals": [
-          1.4,
-          1.28
+          1.42,
+          1.26
         ],
         "factors": [
           [
@@ -578,7 +588,7 @@
           ],
           [
             "Current table",
-            -6.0
+            4.0
           ],
           [
             "Last-season prior",
@@ -754,11 +764,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5989878/match-details",
       "model": {
         "verdict": "DRAW",
-        "confidence": 50,
+        "confidence": 51,
         "probabilities": [
-          0.3086275362395273,
-          0.358365584640121,
-          0.33300687912035165
+          0.3063496918242078,
+          0.363074633197877,
+          0.33057567497791523
         ],
         "projected": "1–1",
         "modalScore": "1–1",
@@ -949,11 +959,11 @@
       "fotmobMatchUrl": "https://www.fotmob.com/matches/5989882/match-details",
       "model": {
         "verdict": "WIN: MC Alger",
-        "confidence": 52,
+        "confidence": 51,
         "probabilities": [
-          0.3891910318233282,
-          0.3540092621978762,
-          0.2567997059787956
+          0.3849007322796419,
+          0.35616390889738275,
+          0.2589353588229754
         ],
         "projected": "1–0",
         "modalScore": "1–0",
@@ -1138,9 +1148,9 @@
         "verdict": "WIN: JS Kabylie",
         "confidence": 49,
         "probabilities": [
-          0.3786503602694885,
-          0.36386403191406536,
-          0.25748560781644625
+          0.37849048664861856,
+          0.36238053506778994,
+          0.25912897828359155
         ],
         "projected": "1–0",
         "modalScore": "1–0",
